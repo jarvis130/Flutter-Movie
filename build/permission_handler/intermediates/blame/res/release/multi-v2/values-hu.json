@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/res/merged/release/values-hu/values-hu.xml",
+            "map": [
+                {
+                    "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/values-hu/values-hu.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/incremental/mergeReleaseResources/merged.dir/values-hu/values-hu.xml",
+            "map": [
+                {
+                    "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/values-hu/values-hu.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

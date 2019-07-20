@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/res/merged/release/drawable/notification_bg.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/res/merged/release/drawable/notification_bg_low.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/res/merged/release/drawable/notification_icon_background.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/res/merged/release/drawable/notification_tile_bg.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_tile_bg.xml"
+    }
+]
