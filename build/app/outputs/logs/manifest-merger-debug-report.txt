@@ -12,10 +12,12 @@ MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movi
 MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-dash-2.9.6.aar/88a18e97bffa9b5c1fe971b43fad6c8c/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-smoothstreaming-2.9.6.aar/92853f261e72c4d91bf2b0998c3ed79a/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-core-2.9.6.aar/7691ce8831f51badea81d87009381319/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:17:1-25:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/3fb09e03e24b02c7ff6e957c1978a3b2/AndroidManifest.xml:17:1-22:12
@@ -140,6 +142,8 @@ MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqf
 MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-dash-2.9.6.aar/88a18e97bffa9b5c1fe971b43fad6c8c/AndroidManifest.xml:20:5-22:41
@@ -148,6 +152,8 @@ MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] /User
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-smoothstreaming-2.9.6.aar/92853f261e72c4d91bf2b0998c3ed79a/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-core-2.9.6.aar/7691ce8831f51badea81d87009381319/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-core-2.9.6.aar/7691ce8831f51badea81d87009381319/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:20:5-44
