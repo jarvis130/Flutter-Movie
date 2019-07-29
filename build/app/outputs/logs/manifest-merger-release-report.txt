@@ -5,21 +5,31 @@ INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/ma
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:1:1-29:12
 MERGED from [:video_player] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/video_player/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:2:1-14:12
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:2:1-19:12
+MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:screen] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/screen/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
-MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
-MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:2:1-14:12
-MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
-MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
-MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-dash-2.9.6.aar/88a18e97bffa9b5c1fe971b43fad6c8c/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-smoothstreaming:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-smoothstreaming-2.9.6.aar/92853f261e72c4d91bf2b0998c3ed79a/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-core-2.9.6.aar/7691ce8831f51badea81d87009381319/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/b73e5ee2338999ad0b46a0cb9e92618f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/96d2e9d226f06ff7dd0bcc04a4598e11/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/142a3c21891aecd54fb5520d9e6d8dfb/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/1d17529fcf4fc18f54e5cd8aba27f72c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/87965690bc65b25408ba8ae1469cae0f/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:17:1-25:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/3fb09e03e24b02c7ff6e957c1978a3b2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/c8c00242549f4530dd84fe80650e6743/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/7ad22095b9c94b9b324b15c7a0ab2aa5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/d1018076df65c41735ab08e670fd7698/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/600015dd4f0797fe50eae6e3266f43c6/AndroidManifest.xml:17:1-22:12
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:1:1-29:12
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:1:1-29:12
@@ -79,6 +89,8 @@ application
 ADDED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml:16:5-28:19
 MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
 MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
+MERGED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
+MERGED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:22:5-89
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:22:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:22:5-23:19
@@ -127,20 +139,22 @@ INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/ma
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
 MERGED from [:video_player] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/video_player/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:video_player] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/video_player/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:screen] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/screen/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
 MERGED from [:screen] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/screen/intermediates/library_manifest/release/AndroidManifest.xml:7:5-9:41
-MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:permission_handler] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:sqflite] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:path_provider] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:webview_flutter] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/webview_flutter/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-hls:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-hls-2.9.6.aar/cde4193cd2840fbb4ae5ad6616690922/AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.exoplayer:exoplayer-dash:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-dash-2.9.6.aar/88a18e97bffa9b5c1fe971b43fad6c8c/AndroidManifest.xml:20:5-22:41
@@ -151,12 +165,30 @@ MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/
 MERGED from [com.google.android.exoplayer:exoplayer-core:2.9.6] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/jetified-exoplayer-core-2.9.6.aar/7691ce8831f51badea81d87009381319/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:20:5-44
 MERGED from [androidx.webkit:webkit:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/webkit-1.0.0.aar/3fb7812e3260c7b5f4ae4c3ebfa1a5cc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/b73e5ee2338999ad0b46a0cb9e92618f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/b73e5ee2338999ad0b46a0cb9e92618f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/96d2e9d226f06ff7dd0bcc04a4598e11/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/96d2e9d226f06ff7dd0bcc04a4598e11/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.0.2] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/142a3c21891aecd54fb5520d9e6d8dfb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/142a3c21891aecd54fb5520d9e6d8dfb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/1d17529fcf4fc18f54e5cd8aba27f72c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/1d17529fcf4fc18f54e5cd8aba27f72c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/87965690bc65b25408ba8ae1469cae0f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/87965690bc65b25408ba8ae1469cae0f/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/7956825dcb1d74ff0ac11033022aed8c/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/3fb09e03e24b02c7ff6e957c1978a3b2/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/3fb09e03e24b02c7ff6e957c1978a3b2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/c8c00242549f4530dd84fe80650e6743/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/c8c00242549f4530dd84fe80650e6743/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/7ad22095b9c94b9b324b15c7a0ab2aa5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/7ad22095b9c94b9b324b15c7a0ab2aa5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/d1018076df65c41735ab08e670fd7698/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/d1018076df65c41735ab08e670fd7698/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/600015dd4f0797fe50eae6e3266f43c6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/600015dd4f0797fe50eae6e3266f43c6/AndroidManifest.xml:20:5-44
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
@@ -175,3 +207,19 @@ ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build
 		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
 	android:name
 		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-92
+provider#com.zt.shareextend.ShareExtendProvider
+ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
+	android:grantUriPermissions
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:12:13-47
+	android:authorities
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:10:13-76
+	android:exported
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:11:13-37
+	android:name
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:9:13-66
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:13:13-15:70
+	android:resource
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:15:17-67
+	android:name
+		ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:14:17-67

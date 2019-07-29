@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/b37389b087842578d825d131b9c46457/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/b37389b087842578d825d131b9c46457/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/b37389b087842578d825d131b9c46457/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/b37389b087842578d825d131b9c46457/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/b37389b087842578d825d131b9c46457/res/layout/notification_template_icon_group.xml"
+    }
+]

@@ -32,12 +32,12 @@
         "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png"
     },
     {
-        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/drawable_notification_bg.xml.flat",
-        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_bg.xml"
-    },
-    {
         "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/drawable-xhdpi-v4_notification_bg_normal.9.png.flat",
         "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable-xhdpi-v4/notification_bg_normal.9.png"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/drawable_notification_bg.xml.flat",
+        "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_bg.xml"
     },
     {
         "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/drawable_notification_bg_low.xml.flat",
@@ -46,6 +46,10 @@
     {
         "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/drawable_notification_tile_bg.xml.flat",
         "source": "/Users/hezhibin/.gradle/caches/transforms-1/files-1.1/core-1.0.2.aar/582c84b0922477be41bf84203e85d955/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/xml_share_extend_provider_path.xml.flat",
+        "source": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/packaged_res/debug/xml/share_extend_provider_path.xml"
     },
     {
         "merged": "/Users/hezhibin/Projects/o1298098/Flutter-Movie/build/app/intermediates/res/merged/debug/layout_notification_action.xml.flat",
