@@ -199,14 +199,14 @@ INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/ma
 		INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
 		ADDED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/hezhibin/Projects/o1298098/Flutter-Movie/android/app/src/main/AndroidManifest.xml
-activity#io.flutter.plugins.urllauncher.UrlLauncherPlugin$WebViewActivity
+activity#io.flutter.plugins.urllauncher.WebViewActivity
 ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
 	android:exported
 		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
 	android:theme
 		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
 	android:name
-		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-92
+		ADDED from [:url_launcher] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
 provider#com.zt.shareextend.ShareExtendProvider
 ADDED from [:share_extend] /Users/hezhibin/Projects/o1298098/Flutter-Movie/build/share_extend/intermediates/library_manifest/release/AndroidManifest.xml:8:9-16:20
 	android:grantUriPermissions
