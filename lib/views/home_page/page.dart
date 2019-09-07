@@ -3,6 +3,8 @@ import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/views/home_page/components/movie_component/component.dart';
 import 'package:movie/views/home_page/components/popular_cpmponent/component.dart';
 import 'package:movie/views/home_page/components/searchbar_component/component.dart';
+import 'package:movie/views/home_page/components/swiper_component/component.dart';
+import 'package:movie/views/home_page/components/swiper_component/state.dart';
 
 import 'components/movie_component/state.dart';
 import 'components/popular_cpmponent/state.dart';
@@ -30,6 +32,7 @@ class HomePage extends Page<HomePageState, Map<String, dynamic>> {
               adapter: null,
               slots: <String, Dependent<HomePageState>>{
                 'searchbar': SearchBarConnector() + SearchBarComponent(),
+                'swiper': SwiperConnector() + SwiperComponent(),
                 'moviecells': MovieCellsConnector() + MovieCellsComponent(),
                 'tvcells': TVCellsConnector() + TVCellsComponent(),
                 'popular': PopularConnector() + PopularComponent(),

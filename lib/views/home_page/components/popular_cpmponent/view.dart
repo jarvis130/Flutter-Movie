@@ -119,6 +119,7 @@ Widget buildView(
         switchOutCurve: Curves.easeOut,
         duration: Duration(milliseconds: 300),
         child: Container(
+          margin: EdgeInsets.only(bottom: Adapt.px(30)),
           key: ValueKey(model),
           height: Adapt.px(225),
           child: ListView(
