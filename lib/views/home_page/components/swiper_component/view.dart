@@ -9,12 +9,14 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(SwiperState state, Dispatch dispatch, ViewService viewService) {
+  var objState = state.swiper;
+
   return SliverToBoxAdapter(
     child: Stack(
       children: <Widget>[
         Container(
             height: Adapt.px(350),
-            child: Swiper(
+            child: objState.results.length == 0 ? Container() : Swiper(
               pagination: new SwiperPagination(
                 alignment: Alignment.bottomLeft,
                 builder: new DotSwiperPaginationBuilder(
@@ -31,7 +33,7 @@ Widget buildView(SwiperState state, Dispatch dispatch, ViewService viewService) 
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
                               ImageUrl.getUrl(
-                                  state.movie.results[index]
+                                  objState.results[index]
                                       .backdrop_path,
                                   ImageSize.w500)))),
                   child: Container(
@@ -42,7 +44,7 @@ Widget buildView(SwiperState state, Dispatch dispatch, ViewService viewService) 
                         Adapt.px(30),
                         0),
                     child: Text(
-                      state.movie.results[index].title,
+                      objState.results[index].title,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

@@ -69,6 +69,9 @@ class I18n implements WidgetsLocalizations {
   String get tags => "Tags";
   /// "Recommendations"
   String get recommendations => "Recommendations";
+  /// "new movie"
+  @override
+  String get newMovie => "new movie";
   /// "Biography"
   String get biography => "Biography";
   /// "Known For"
@@ -222,7 +225,10 @@ class _I18n_zh_CN extends I18n {
   String get tags => "标签";
   /// "推荐"
   @override
-  String get recommendations => "推荐";
+  String get recommendations => "推荐视频";
+  /// "新片发布"
+  @override
+  String get newMovie => "新片发布";
   /// "经历"
   @override
   String get biography => "经历";
@@ -279,7 +285,7 @@ class _I18n_zh_CN extends I18n {
   String get ratingsReviews => "评分";
   /// "热门"
   @override
-  String get popular => "热门";
+  String get popular => "热播视频";
   /// "更多"
   @override
   String get more => "更多";

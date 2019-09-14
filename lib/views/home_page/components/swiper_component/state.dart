@@ -4,12 +4,12 @@ import '../../state.dart';
 
 class SwiperState implements Cloneable<SwiperState> {
 
-  VideoListModel movie;
+  VideoListModel swiper;
 
   @override
   SwiperState clone() {
     return SwiperState()
-    ..movie = movie;
+    ..swiper = swiper;
   }
 }
 
@@ -17,7 +17,7 @@ class SwiperConnector extends ConnOp<HomePageState, SwiperState> {
   @override
   SwiperState get(HomePageState state) {
     SwiperState mstate = SwiperState();
-    mstate.movie = state.movie;
+    mstate.swiper = state.swiper;
     return mstate;
   }
 }

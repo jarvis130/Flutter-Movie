@@ -5,6 +5,7 @@ import 'package:movie/models/searchresult.dart';
 import 'package:movie/models/videolist.dart';
 
 class HomePageState implements Cloneable<HomePageState> {
+  VideoListModel swiper;
   VideoListModel movie;
   VideoListModel tv;
   VideoListModel popularMovies;
@@ -18,6 +19,7 @@ class HomePageState implements Cloneable<HomePageState> {
   @override
   HomePageState clone() {
     return HomePageState()
+      ..swiper = swiper
       ..tv = tv
       ..movie = movie
       ..popularMovies = popularMovies
@@ -32,13 +34,21 @@ class HomePageState implements Cloneable<HomePageState> {
 
 HomePageState initState(Map<String, dynamic> args) {
   var state = HomePageState();
+
+  state.swiper = new VideoListModel.fromParams(results: List<VideoListResult>());
+
   state.movie = new VideoListModel.fromParams(results: List<VideoListResult>());
+
   state.tv = new VideoListModel.fromParams(results: List<VideoListResult>());
+
   state.popularMovies =
       new VideoListModel.fromParams(results: List<VideoListResult>());
+
   state.popularTVShows =
       new VideoListModel.fromParams(results: List<VideoListResult>());
+
   state.trending = SearchResultModel.fromParams(results: []);
+
   state.showPopMovie = true;
   state.showHeaderMovie = true;
   return state;

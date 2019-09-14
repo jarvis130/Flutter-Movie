@@ -10,6 +10,7 @@ Reducer<HomePageState> buildReducer() {
   return asReducer(
     <Object, Reducer<HomePageState>>{
       HomePageAction.action: _onAction,
+      HomePageAction.initSwiper: _onInitSwiper,//初始化轮播图
       HomePageAction.initMovie: _onInitMovie,
       HomePageAction.initTV: _onInitTV,
       HomePageAction.initPopularMovies: _onInitPopularMovie,
@@ -23,6 +24,13 @@ Reducer<HomePageState> buildReducer() {
 
 HomePageState _onAction(HomePageState state, Action action) {
   final HomePageState newState = state.clone();
+  return newState;
+}
+
+HomePageState _onInitSwiper(HomePageState state, Action action) {
+  final VideoListModel model = action.payload ?? null;
+  final HomePageState newState = state.clone();
+  newState.swiper = model;
   return newState;
 }
 

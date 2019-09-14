@@ -9,7 +9,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/backdrop.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/imagesize.dart';
@@ -463,6 +462,161 @@ Widget buildView(
         ));
   }
 
+  Widget _buildPopularposter() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(Adapt.px(30)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  I18n.of(viewService.context).popular,
+                  style: state.showPopMovie
+                      ? _selectPopStyle
+                      : _unselectPopStyle,
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                GestureDetector(
+                  onTap: () => dispatch(
+                      HomePageActionCreator.onPopularFilterChanged(true)),
+                  child: Text(I18n.of(viewService.context).movies,
+                      style: state.showPopMovie
+                          ? _unselectPopStyle
+                          : _selectPopStyle),
+                ),
+                SizedBox(
+                  width: Adapt.px(20),
+                ),
+                GestureDetector(
+                  onTap: () => dispatch(
+                      HomePageActionCreator.onPopularFilterChanged(
+                          false)),
+                  child: Text(I18n.of(viewService.context).tvShows,
+                      style: TextStyle(
+                          fontSize: Adapt.px(24),
+                          fontWeight: state.showPopMovie
+                              ? FontWeight.normal
+                              : FontWeight.bold,
+                          color: state.showPopMovie
+                              ? Colors.grey
+                              : Colors.black)),
+                )
+              ],
+            ),
+          ),
+          viewService.buildComponent('popularposter'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPopular() {
+    return SliverToBoxAdapter(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(Adapt.px(30)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    I18n.of(viewService.context).recommendations,
+                    style: state.showPopMovie
+                        ? _selectPopStyle
+                        : _unselectPopStyle,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  GestureDetector(
+                    onTap: () => dispatch(
+                        HomePageActionCreator.onPopularFilterChanged(true)),
+                    child: Text(I18n.of(viewService.context).movies,
+                        style: state.showPopMovie
+                            ? _unselectPopStyle
+                            : _selectPopStyle),
+                  ),
+                  SizedBox(
+                    width: Adapt.px(20),
+                  ),
+                  GestureDetector(
+                    onTap: () => dispatch(
+                        HomePageActionCreator.onPopularFilterChanged(
+                            false)),
+                    child: Text(I18n.of(viewService.context).tvShows,
+                        style: TextStyle(
+                            fontSize: Adapt.px(24),
+                            fontWeight: state.showPopMovie
+                                ? FontWeight.normal
+                                : FontWeight.bold,
+                            color: state.showPopMovie
+                                ? Colors.grey
+                                : Colors.black)),
+                  )
+                ],
+              ),
+            ),
+            viewService.buildComponent('popular'),
+          ],
+        )
+    );
+  }
+
+  Widget _buildNewMovieHeader() {
+    return SliverToBoxAdapter(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(left: Adapt.px(30), right: Adapt.px(30), top: Adapt.px(30), bottom: Adapt.px(5)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    I18n.of(viewService.context).recommendations,
+                    style: state.showPopMovie
+                        ? _selectPopStyle
+                        : _unselectPopStyle,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  GestureDetector(
+                    onTap: () => dispatch(
+                        HomePageActionCreator.onPopularFilterChanged(true)),
+                    child: Text(I18n.of(viewService.context).movies,
+                        style: state.showPopMovie
+                            ? _unselectPopStyle
+                            : _selectPopStyle),
+                  ),
+                  SizedBox(
+                    width: Adapt.px(20),
+                  ),
+                  GestureDetector(
+                    onTap: () => dispatch(
+                        HomePageActionCreator.onPopularFilterChanged(
+                            false)),
+                    child: Text(I18n.of(viewService.context).tvShows,
+                        style: TextStyle(
+                            fontSize: Adapt.px(24),
+                            fontWeight: state.showPopMovie
+                                ? FontWeight.normal
+                                : FontWeight.bold,
+                            color: state.showPopMovie
+                                ? Colors.grey
+                                : Colors.black)),
+                  )
+                ],
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
   Widget _getStyle4() {
     return Scaffold(
       backgroundColor: Color.fromRGBO(45, 45, 48, 1),
@@ -506,104 +660,10 @@ Widget buildView(
 //              ),
 //            ),
 //          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(Adapt.px(30)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        I18n.of(viewService.context).popular,
-                        style: state.showPopMovie
-                            ? _selectPopStyle
-                            : _unselectPopStyle,
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      GestureDetector(
-                        onTap: () => dispatch(
-                            HomePageActionCreator.onPopularFilterChanged(true)),
-                        child: Text(I18n.of(viewService.context).movies,
-                            style: state.showPopMovie
-                                ? _unselectPopStyle
-                                : _selectPopStyle),
-                      ),
-                      SizedBox(
-                        width: Adapt.px(20),
-                      ),
-                      GestureDetector(
-                        onTap: () => dispatch(
-                            HomePageActionCreator.onPopularFilterChanged(
-                                false)),
-                        child: Text(I18n.of(viewService.context).tvShows,
-                            style: TextStyle(
-                                fontSize: Adapt.px(24),
-                                fontWeight: state.showPopMovie
-                                    ? FontWeight.normal
-                                    : FontWeight.bold,
-                                color: state.showPopMovie
-                                    ? Colors.grey
-                                    : Colors.black)),
-                      )
-                    ],
-                  ),
-                ),
-                viewService.buildComponent('popularposter'),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(Adapt.px(30)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        I18n.of(viewService.context).popular,
-                        style: state.showPopMovie
-                            ? _selectPopStyle
-                            : _unselectPopStyle,
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      GestureDetector(
-                        onTap: () => dispatch(
-                            HomePageActionCreator.onPopularFilterChanged(true)),
-                        child: Text(I18n.of(viewService.context).movies,
-                            style: state.showPopMovie
-                                ? _unselectPopStyle
-                                : _selectPopStyle),
-                      ),
-                      SizedBox(
-                        width: Adapt.px(20),
-                      ),
-                      GestureDetector(
-                        onTap: () => dispatch(
-                            HomePageActionCreator.onPopularFilterChanged(
-                                false)),
-                        child: Text(I18n.of(viewService.context).tvShows,
-                            style: TextStyle(
-                                fontSize: Adapt.px(24),
-                                fontWeight: state.showPopMovie
-                                    ? FontWeight.normal
-                                    : FontWeight.bold,
-                                color: state.showPopMovie
-                                    ? Colors.grey
-                                    : Colors.black)),
-                      )
-                    ],
-                  ),
-                ),
-                viewService.buildComponent('popular'),
-              ],
-            )
-          )
+          _buildPopularposter(),
+          _buildPopular(),
+          _buildNewMovieHeader(),
+          viewService.buildComponent('newmovie'),
         ],
       ),
     );

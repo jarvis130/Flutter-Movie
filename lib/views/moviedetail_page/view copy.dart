@@ -29,7 +29,6 @@ import 'state.dart';
 
 Widget buildView(
     MovieDetailPageState state, Dispatch dispatch, ViewService viewService) {
-
   Random random = new Random(DateTime.now().millisecondsSinceEpoch);
   var s = state.movieDetailModel;
   //var dominantColor = state.palette?.dominantColor?.color ?? Colors.black38;
@@ -630,103 +629,99 @@ Widget buildView(
               ],
             ),
           ),
-          // Container(
-          //   alignment: Alignment.bottomLeft,
-          //   padding: EdgeInsets.only(bottom: Adapt.px(120)),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //     children: <Widget>[
-          //       Container(
-          //         child: Row(
-          //           children: <Widget>[
-          //             AnimatedBuilder(
-          //               animation: state.animationController,
-          //               builder: (ctx, widget) {
-          //                 var animate = Tween<double>(
-          //                         begin: 0.0, end: s.vote_average ?? evote)
-          //                     .animate(CurvedAnimation(
-          //                       parent: state.animationController,
-          //                       curve: Curves.ease,
-          //                     ))
-          //                     .value;
-          //                 return Stack(
-          //                   children: <Widget>[
-          //                     Container(
-          //                         width: Adapt.px(80),
-          //                         height: Adapt.px(80),
-          //                         decoration: BoxDecoration(
-          //                             borderRadius:
-          //                                 BorderRadius.circular(Adapt.px(40))),
-          //                         child: CircularProgressIndicator(
-          //                           strokeWidth: 6.0,
-          //                           valueColor:
-          //                               new AlwaysStoppedAnimation<Color>(
-          //                                   VoteColorHelper.getColor(
-          //                                       animate)),
-          //                           backgroundColor: Colors.grey,
-          //                           value: animate / 10,
-          //                         )),
-          //                     Container(
-          //                         width: Adapt.px(80),
-          //                         height: Adapt.px(80),
-          //                         child: Center(
-          //                           child: Text(
-          //                             (animate * 10).floor().toString() + '%',
-          //                             style: TextStyle(
-          //                                 fontWeight: FontWeight.w700,
-          //                                 fontSize: Adapt.px(28),
-          //                                 color: Colors.white),
-          //                           ),
-          //                         ))
-          //                   ],
-          //                 );
-          //               },
-          //             ),
-          //             SizedBox(
-          //               width: Adapt.px(30),
-          //             ),
-          //             Text(I18n.of(viewService.context).userScore,
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.w700,
-          //                     fontSize: Adapt.px(30),
-          //                     color: Colors.white))
-          //           ],
-          //         ),
-          //       ),
-          //       Container(
-          //         width: 1,
-          //         height: Adapt.px(40),
-          //         color: Colors.grey[400],
-          //       ),
-          //       Container(
-          //         child: Row(
-          //           children: <Widget>[
-          //             Icon(Icons.play_arrow, color: Colors.white),
-          //             Text(I18n.of(viewService.context).playTraller,
-          //                 style: TextStyle(
-          //                     fontWeight: FontWeight.w500,
-          //                     fontSize: Adapt.px(30),
-          //                     color: Colors.white))
-          //           ],
-          //         ),
-          //       )
-          //     ],
-          //   ),
-          // )
+          Container(
+            alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.only(bottom: Adapt.px(120)),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      AnimatedBuilder(
+                        animation: state.animationController,
+                        builder: (ctx, widget) {
+                          var animate = Tween<double>(
+                                  begin: 0.0, end: s.vote_average ?? evote)
+                              .animate(CurvedAnimation(
+                                parent: state.animationController,
+                                curve: Curves.ease,
+                              ))
+                              .value;
+                          return Stack(
+                            children: <Widget>[
+                              Container(
+                                  width: Adapt.px(80),
+                                  height: Adapt.px(80),
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.circular(Adapt.px(40))),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 6.0,
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            VoteColorHelper.getColor(
+                                                animate)),
+                                    backgroundColor: Colors.grey,
+                                    value: animate / 10,
+                                  )),
+                              Container(
+                                  width: Adapt.px(80),
+                                  height: Adapt.px(80),
+                                  child: Center(
+                                    child: Text(
+                                      (animate * 10).floor().toString() + '%',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: Adapt.px(28),
+                                          color: Colors.white),
+                                    ),
+                                  ))
+                            ],
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        width: Adapt.px(30),
+                      ),
+                      Text(I18n.of(viewService.context).userScore,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: Adapt.px(30),
+                              color: Colors.white))
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 1,
+                  height: Adapt.px(40),
+                  color: Colors.grey[400],
+                ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.play_arrow, color: Colors.white),
+                      Text(I18n.of(viewService.context).playTraller,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: Adapt.px(30),
+                              color: Colors.white))
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
   }
 
-  // Widget _buildMovie(){
-
-  // }
-
   return Scaffold(
     key: state.scaffoldkey,
     body: DefaultTabController(
-        length: 3,
+        length: 4,
         child: NestedScrollView(
             controller: state.scrollController,
             headerSliverBuilder: (BuildContext context, bool de) {
@@ -734,12 +729,13 @@ Widget buildView(
                 SliverOverlapAbsorber(
                   handle:
                       NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  child: SliverAppBar( 
+                  child: SliverAppBar(
                       pinned: true,
-                      backgroundColor: Colors.black,
+                      /*backgroundColor: state.palette.darkVibrantColor?.color ??
+                          Colors.black87,*/
+                      backgroundColor: dominantColor,
                       expandedHeight: Adapt.px(700),
-                      floating: false,
-                      centerTitle: true,
+                      centerTitle: false,
                       title: Text(de ? state.title ?? '' : ''),
                       actions: <Widget>[
                         IconButton(
@@ -769,15 +765,14 @@ Widget buildView(
                               tabs: <Widget>[
                                 Tab(text: I18n.of(viewService.context).main),
                                 Tab(text: I18n.of(viewService.context).videos),
-//                                Tab(text: I18n.of(viewService.context).images),
+                                Tab(text: I18n.of(viewService.context).images),
                                 Tab(text: I18n.of(viewService.context).reviews),
                               ],
                             )),
                       ),
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: false,
-                        // background: _buildHeader(),
-                        background: viewService.buildComponent('play'),
+                        background: _buildHeader(),
                       )),
                 )
               ];
@@ -789,47 +784,6 @@ Widget buildView(
                     SliverOverlapInjector(
                       handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
                           context),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            width: Adapt.screenW(),
-                            height: Adapt.px(400),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    colorFilter:
-                                        ColorFilter.mode(dominantColor, BlendMode.color),
-                                    image: CachedNetworkImageProvider(state.backdropPic == null
-                                        ? ImageUrl.emptyimage
-                                        : ImageUrl.getUrl(state.backdropPic, ImageSize.w500)),
-                                    fit: BoxFit.cover)),
-                          ), 
-                          Container(
-                            width: Adapt.screenW(),
-                            height: Adapt.px(401),
-                            color: dominantColor.withOpacity(.8),
-                          ),
-                          Container(
-                            alignment: Alignment.bottomLeft,
-                            padding: EdgeInsets.fromLTRB(
-                                Adapt.px(30), Adapt.px(50), Adapt.px(30), Adapt.px(10)),
-                            child: Row(
-                              children: <Widget>[
-                                _getPosterPic(),
-                                SizedBox(
-                                  width: Adapt.px(20),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(top: Adapt.px(150)),
-                                  width: Adapt.screenW() * 0.6,
-                                  child: _getTitle(),
-                                ),
-                              ],
-                            ),
-                          ),   
-                        ],
-                      ),
                     ),
                     SliverToBoxAdapter(
                       child: Padding(
@@ -916,15 +870,15 @@ Widget buildView(
                     _getVideoBody()
                   ]);
                 })),
-//                Container(child: Builder(builder: (BuildContext context) {
-//                  return CustomScrollView(slivers: <Widget>[
-//                    SliverOverlapInjector(
-//                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-//                          context),
-//                    ),
-//                    _getImageBody()
-//                  ]);
-//                })),
+                Container(child: Builder(builder: (BuildContext context) {
+                  return CustomScrollView(slivers: <Widget>[
+                    SliverOverlapInjector(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+                    ),
+                    _getImageBody()
+                  ]);
+                })),
                 Container(child: Builder(builder: (BuildContext context) {
                   return CustomScrollView(slivers: <Widget>[
                     SliverOverlapInjector(

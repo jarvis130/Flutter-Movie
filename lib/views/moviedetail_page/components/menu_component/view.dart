@@ -14,6 +14,7 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
+
   Widget _buildListTitel(IconData icon, String title, void onTap(),
       {Color iconColor = const Color.fromRGBO(50, 50, 50, 1)}) {
     TextStyle titleStyle =
@@ -169,42 +170,42 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
         Divider(
           height: 1,
         ),
-        _buildListTitel(Icons.format_list_bulleted, 'Add to List', _addToList),
-        Divider(
-          height: Adapt.px(10),
-        ),
+//        _buildListTitel(Icons.format_list_bulleted, '加入播放清单', _addToList),
+//        Divider(
+//          height: Adapt.px(10),
+//        ),
         _buildListTitel(
             state.accountState.favorite
                 ? Icons.favorite
                 : Icons.favorite_border,
-            'Mark as Favorite', () {
+            '收藏', () {
           Navigator.of(viewService.context).pop();
           dispatch(MenuActionCreator.setFavorite(!state.accountState.favorite));
         },
             iconColor: state.accountState.favorite
                 ? Colors.pink[400]
                 : Color.fromRGBO(50, 50, 50, 1)),
-        Divider(
-          height: Adapt.px(10),
-        ),
-        _buildListTitel(
-          Icons.flag,
-          'Add to your Watchlist',
-          () {
-            Navigator.of(viewService.context).pop();
-            dispatch(
-                MenuActionCreator.setWatchlist(!state.accountState.watchlist));
-          },
-          iconColor: state.accountState.watchlist
-              ? Colors.red
-              : Color.fromRGBO(50, 50, 50, 1),
-        ),
+//        Divider(
+//          height: Adapt.px(10),
+//        ),
+//        _buildListTitel(
+//          Icons.flag,
+//          'Add to your Watchlist',
+//          () {
+//            Navigator.of(viewService.context).pop();
+//            dispatch(
+//                MenuActionCreator.setWatchlist(!state.accountState.watchlist));
+//          },
+//          iconColor: state.accountState.watchlist
+//              ? Colors.red
+//              : Color.fromRGBO(50, 50, 50, 1),
+//        ),
         Divider(
           height: Adapt.px(10),
         ),
         _buildListTitel(
             state.accountState.isRated == true ? Icons.star : Icons.star_border,
-            'Rate It',
+            '评分',
             _rateIt,
             iconColor: state.accountState.isRated == true
                 ? Colors.amber
@@ -212,7 +213,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
         Divider(
           height: Adapt.px(10),
         ),
-        _buildListTitel(Icons.share, 'Share', _share),
+        _buildListTitel(Icons.share, '分享', _share),
         Divider(
           height: Adapt.px(10),
         ),

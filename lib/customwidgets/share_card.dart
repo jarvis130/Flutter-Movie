@@ -184,7 +184,7 @@ class ShareCardState extends State<ShareCard> {
                               children: <Widget>[
                                 Icon(Icons.file_download),
                                 Text(
-                                  'DownLoad',
+                                  '下载',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: Adapt.px(30),
@@ -204,7 +204,7 @@ class ShareCardState extends State<ShareCard> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Icon(Icons.share),
-                                  Text('Share',
+                                  Text('分享',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: Adapt.px(30),

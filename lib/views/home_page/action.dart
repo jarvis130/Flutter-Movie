@@ -7,6 +7,7 @@ import 'package:movie/models/videolist.dart';
 //TODO replace with your own action
 enum HomePageAction {
   action,
+  initSwiper,
   initMovie,
   initTV,
   initPopularMovies,
@@ -22,6 +23,10 @@ enum HomePageAction {
 class HomePageActionCreator {
   static Action onAction() {
     return const Action(HomePageAction.action);
+  }
+
+  static Action onInitSwiper(VideoListModel swiper) {
+    return Action(HomePageAction.initSwiper, payload: swiper);
   }
 
   static Action onInitMovie(VideoListModel movie) {

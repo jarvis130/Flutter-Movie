@@ -26,18 +26,29 @@ void _onAction(Action action, Context<HomePageState> ctx) {}
 
 Future _onInit(Action action, Context<HomePageState> ctx) async {
   final ticker = ctx.stfState as CustomstfState;
+
   ctx.state.animatedController =
       AnimationController(vsync: ticker, duration: Duration(milliseconds: 600));
+
   ctx.state.scrollController = new ScrollController();
+
+  //初始化轮播图
+  var swiper = await ApiHelper.getNowPlayingMovie();
+  if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
+
   var r = await ApiHelper.getNowPlayingMovie();
   if (r != null) ctx.dispatch(HomePageActionCreator.onInitMovie(r));
+
   var s = await ApiHelper.getTVOnTheAir();
   if (s != null) ctx.dispatch(HomePageActionCreator.onInitTV(s));
+
   var trending = await ApiHelper.getTrending(MediaType.all, TimeWindow.day);
   if (trending != null)
     ctx.dispatch(HomePageActionCreator.initTrending(trending));
+
   var p = await ApiHelper.getPopularMovies();
   if (p != null) ctx.dispatch(HomePageActionCreator.onInitPopularMovie(p));
+
   var t = await ApiHelper.getPopularTVShows();
   if (t != null) ctx.dispatch(HomePageActionCreator.onInitPopularTV(t));
 }
