@@ -30,11 +30,12 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiHelper {
-  static final String _apihost = 'https://api.themoviedb.org/3';
+//  static final String _apihost = 'https://api.themoviedb.org/3';
+  static final String _apihost = 'http://221.229.197.4:8000/api/public?';
   static final String _apikey = 'd7ff494718186ed94ee75cf73c1a3214';
   static final String _apihostV4 = 'https://api.themoviedb.org/4';
-  static final String _apikeyV4 =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
+//  static final String _apikeyV4 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
+  static final String _apikeyV4 = '';
   static String _requestToken;
   static String accessTokenV4;
   static DateTime _requestTokenExpiresTime;
@@ -51,6 +52,35 @@ class ApiHelper {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     _appDocPath = appDocDir.path;
     _cj = new PersistCookieJar(dir: "$_appDocPath/cookies");
+  }
+
+  //根据设备编码获取token
+  static Future createGuestSessionByMobileDevice(String code) async {
+    String param = 'service=Login.UserLoginByDevice&code=$code';
+    var r = await httpGet(param, cached: false);
+    if (r != null) {
+      var jsonobject = json.decode(r);
+      if (jsonobject['data'] !=null ) {
+        var data = jsonobject['data']['info'];
+        prefs.setString('accessTokenV4', data['token']);
+//        var data = jsonobject['data']['info'];
+//        session = jsonobject['guest_session_id'];
+//        _sessionExpiresTime = DateTime.parse(jsonobject['expires_at']
+//            .toString()
+//            .replaceFirst(new RegExp(' UTC'), ''));
+//        var date = DateTime.utc(
+//            _sessionExpiresTime.year,
+//            _sessionExpiresTime.month,
+//            _sessionExpiresTime.day,
+//            _sessionExpiresTime.hour,
+//            _sessionExpiresTime.minute,
+//            _sessionExpiresTime.second,
+//            _sessionExpiresTime.millisecond,
+//            _sessionExpiresTime.microsecond);
+//        prefs.setString('guestSession', session);
+//        prefs.setString('guestSessionExpires', date.toIso8601String());
+      }
+    }
   }
 
   static Future createGuestSession() async {
@@ -887,6 +917,7 @@ class ApiHelper {
     return model;
   }
 
+  // get method
   static Future<String> httpGet(String param,
       {bool cached = true,
       cacheDuration = const Duration(days: 1),
@@ -898,6 +929,7 @@ class ApiHelper {
       var dio = new Dio();
       if (cached)
         dio.interceptors.add(DioCacheManager(CacheConfig()).interceptor);
+
       dio.options.cookies = _cj.loadForRequest(Uri.parse(_apihost));
       var response = await dio.get(
         _apihost + param,

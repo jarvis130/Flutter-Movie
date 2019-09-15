@@ -1,13 +1,16 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/moviechange.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/searchresult.dart';
+import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 //TODO replace with your own action
 enum HomePageAction {
   action,
   initSwiper,
+  initHot,
   initMovie,
   initTV,
   initPopularMovies,
@@ -25,8 +28,12 @@ class HomePageActionCreator {
     return const Action(HomePageAction.action);
   }
 
-  static Action onInitSwiper(VideoListModel swiper) {
+  static Action onInitSwiper(SwiperListModel swiper) {
     return Action(HomePageAction.initSwiper, payload: swiper);
+  }
+
+  static Action onInitHot(MovieListModel hot) {
+    return Action(HomePageAction.initHot, payload: hot);
   }
 
   static Action onInitMovie(VideoListModel movie) {

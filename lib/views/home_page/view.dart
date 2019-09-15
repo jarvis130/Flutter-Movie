@@ -617,6 +617,58 @@ Widget buildView(
     );
   }
 
+  Widget _buildHotMovie() {
+    return SliverToBoxAdapter(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(Adapt.px(30)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  I18n.of(viewService.context).popular,
+                  style: state.showPopMovie
+                      ? _selectPopStyle
+                      : _unselectPopStyle,
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                GestureDetector(
+                  onTap: () => dispatch(
+                      HomePageActionCreator.onPopularFilterChanged(true)),
+                  child: Text(I18n.of(viewService.context).movies,
+                      style: state.showPopMovie
+                          ? _unselectPopStyle
+                          : _selectPopStyle),
+                ),
+                SizedBox(
+                  width: Adapt.px(20),
+                ),
+                GestureDetector(
+                  onTap: () => dispatch(
+                      HomePageActionCreator.onPopularFilterChanged(
+                          false)),
+                  child: Text(I18n.of(viewService.context).tvShows,
+                      style: TextStyle(
+                          fontSize: Adapt.px(24),
+                          fontWeight: state.showPopMovie
+                              ? FontWeight.normal
+                              : FontWeight.bold,
+                          color: state.showPopMovie
+                              ? Colors.grey
+                              : Colors.black)),
+                )
+              ],
+            ),
+          ),
+          viewService.buildComponent('hotMovie'),
+        ],
+      ),
+    );
+  }
+
   Widget _getStyle4() {
     return Scaffold(
       backgroundColor: Color.fromRGBO(45, 45, 48, 1),
@@ -660,8 +712,8 @@ Widget buildView(
 //              ),
 //            ),
 //          ),
-          _buildPopularposter(),
-          _buildPopular(),
+          _buildHotMovie(),//热门
+          _buildPopular(),//推荐
           _buildNewMovieHeader(),
           viewService.buildComponent('newmovie'),
         ],

@@ -1,10 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/swiperlist.dart';
 import '../../state.dart';
 
 class SwiperState implements Cloneable<SwiperState> {
 
-  VideoListModel swiper;
+  SwiperListModel swiper;
 
   @override
   SwiperState clone() {

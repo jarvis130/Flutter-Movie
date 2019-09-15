@@ -20,6 +20,7 @@ import 'package:movie/views/seasons_page/page.dart';
 import 'package:movie/views/tvdetail_page/page.dart';
 import 'package:movie/views/watchlist_page/page.dart';
 import 'package:movie/views/watchlistdetail_page/page.dart';
+import 'package:movie/views/classify_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'actions/timeline.dart';
@@ -30,21 +31,35 @@ import 'views/moremedia_page/page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:movie/views/detail_page/page.dart' as detail;
+import 'package:device_info/device_info.dart';
 
 Future _init() async {
   if (Platform.isAndroid)
     Map<PermissionGroup, PermissionStatus> permissions =
         await PermissionHandler()
             .requestPermissions([PermissionGroup.contacts]);
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  var session = prefs.getString('loginsession');
+//  var session = prefs.getString('loginsession');
   String accessToken = prefs.getString('accessTokenV4');
-  if (session == null) {
-    await ApiHelper.createGuestSession();
+  if (accessToken == null) {
+    //获取设备信息
+    String uuid;
+    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
+    if(Platform.isIOS){
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      uuid = iosDeviceInfo.identifierForVendor;
+    }else if(Platform.isAndroid){
+      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+      uuid = androidDeviceInfo.id;
+    }
+    await ApiHelper.createGuestSessionByMobileDevice(uuid);
   } else {
-    ApiHelper.session = session;
+    ApiHelper.accessTokenV4 = accessToken;
   }
-  if (accessToken != null) ApiHelper.accessTokenV4 = accessToken;
+
+//  if (accessToken != null) ApiHelper.accessTokenV4 = accessToken;
+
   setLocaleInfo('zh', TimelineInfoCN());
   setLocaleInfo('en', TimelineInfoEN());
   setLocaleInfo('Ja', TimelineInfoJA());
@@ -69,6 +84,7 @@ Future<Widget> createApp() async {
       'WatchlistPage': WatchlistPage(),
       'WatchlistDetailPage': WatchlistDetailPage(),
       'detailpage': detail.MovieDetailPage(),
+      'classifypage': ClassifyPage(),
       'GalleryPage': GalleryPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
@@ -114,6 +130,7 @@ Future<Widget> createApp() async {
   );
 
   await _init();
+
   return MaterialApp(
     title: 'Movie',
     debugShowCheckedModeBanner: false,

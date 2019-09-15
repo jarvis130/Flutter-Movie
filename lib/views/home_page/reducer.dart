@@ -1,6 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/moviedetail.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/searchresult.dart';
+import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 import 'action.dart';
@@ -11,6 +13,7 @@ Reducer<HomePageState> buildReducer() {
     <Object, Reducer<HomePageState>>{
       HomePageAction.action: _onAction,
       HomePageAction.initSwiper: _onInitSwiper,//初始化轮播图
+      HomePageAction.initHot: _onInitHot,//初始化热门视频
       HomePageAction.initMovie: _onInitMovie,
       HomePageAction.initTV: _onInitTV,
       HomePageAction.initPopularMovies: _onInitPopularMovie,
@@ -28,9 +31,16 @@ HomePageState _onAction(HomePageState state, Action action) {
 }
 
 HomePageState _onInitSwiper(HomePageState state, Action action) {
-  final VideoListModel model = action.payload ?? null;
+  final SwiperListModel model = action.payload ?? null;
   final HomePageState newState = state.clone();
   newState.swiper = model;
+  return newState;
+}
+
+HomePageState _onInitHot(HomePageState state, Action action) {
+  final MovieListModel model = action.payload ?? null;
+  final HomePageState newState = state.clone();
+  newState.hotMovie = model;
   return newState;
 }
 

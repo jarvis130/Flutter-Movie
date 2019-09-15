@@ -1,11 +1,14 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/searchresult.dart';
+import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 class HomePageState implements Cloneable<HomePageState> {
-  VideoListModel swiper;
+  SwiperListModel swiper;
+  MovieListModel hotMovie;
   VideoListModel movie;
   VideoListModel tv;
   VideoListModel popularMovies;
@@ -20,6 +23,7 @@ class HomePageState implements Cloneable<HomePageState> {
   HomePageState clone() {
     return HomePageState()
       ..swiper = swiper
+      ..hotMovie = hotMovie
       ..tv = tv
       ..movie = movie
       ..popularMovies = popularMovies
@@ -35,7 +39,9 @@ class HomePageState implements Cloneable<HomePageState> {
 HomePageState initState(Map<String, dynamic> args) {
   var state = HomePageState();
 
-  state.swiper = new VideoListModel.fromParams(results: List<VideoListResult>());
+  state.swiper = new SwiperListModel.fromParams(results: List<SwiperListResult>());
+
+  state.hotMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
 
   state.movie = new VideoListModel.fromParams(results: List<VideoListResult>());
 

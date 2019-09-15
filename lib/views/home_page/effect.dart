@@ -8,6 +8,7 @@ import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/enums/time_window.dart';
 import 'package:movie/views/detail_page/page.dart';
 import 'package:movie/views/tvdetail_page/page.dart';
+import 'package:movie/api/home_api.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -33,24 +34,28 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
   ctx.state.scrollController = new ScrollController();
 
   //初始化轮播图
-  var swiper = await ApiHelper.getNowPlayingMovie();
+  var swiper = await HomeApi.getSwiperList();
   if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
-
-  var r = await ApiHelper.getNowPlayingMovie();
-  if (r != null) ctx.dispatch(HomePageActionCreator.onInitMovie(r));
-
-  var s = await ApiHelper.getTVOnTheAir();
-  if (s != null) ctx.dispatch(HomePageActionCreator.onInitTV(s));
-
-  var trending = await ApiHelper.getTrending(MediaType.all, TimeWindow.day);
-  if (trending != null)
-    ctx.dispatch(HomePageActionCreator.initTrending(trending));
-
-  var p = await ApiHelper.getPopularMovies();
-  if (p != null) ctx.dispatch(HomePageActionCreator.onInitPopularMovie(p));
-
-  var t = await ApiHelper.getPopularTVShows();
-  if (t != null) ctx.dispatch(HomePageActionCreator.onInitPopularTV(t));
+  
+  //热门视频
+  var hot = await HomeApi.getHotMovieList('');
+  if (hot != null) ctx.dispatch(HomePageActionCreator.onInitHot(hot));
+//
+//  var r = await ApiHelper.getNowPlayingMovie();
+//  if (r != null) ctx.dispatch(HomePageActionCreator.onInitMovie(r));
+//
+//  var s = await ApiHelper.getTVOnTheAir();
+//  if (s != null) ctx.dispatch(HomePageActionCreator.onInitTV(s));
+//
+//  var trending = await ApiHelper.getTrending(MediaType.all, TimeWindow.day);
+//  if (trending != null)
+//    ctx.dispatch(HomePageActionCreator.initTrending(trending));
+//
+//  var p = await ApiHelper.getPopularMovies();
+//  if (p != null) ctx.dispatch(HomePageActionCreator.onInitPopularMovie(p));
+//
+//  var t = await ApiHelper.getPopularTVShows();
+//  if (t != null) ctx.dispatch(HomePageActionCreator.onInitPopularTV(t));
 }
 
 void _onDispose(Action action, Context<HomePageState> ctx) {
