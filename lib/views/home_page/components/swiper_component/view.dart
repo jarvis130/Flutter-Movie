@@ -28,39 +28,36 @@ Widget buildView(SwiperState state, Dispatch dispatch, ViewService viewService) 
               autoplayDelay: 10000,
               duration: 1000,
               itemBuilder: (ctx, index) {
-                return Image.network(
-                  results[index].url,
-                  fit: BoxFit.fill
-                );
-//                return Container(
-//                  decoration: BoxDecoration(
-//                      image: DecorationImage(
-//                          fit: BoxFit.cover,
-//                          image: CachedNetworkImageProvider(
-//                              ImageUrl.getUrl( results[index].url, ImageSize.w500)
-//                          )
-//                      )
-//                  ),
-//                  child: Container(
-//                    color: Colors.black26,
-//                    padding: EdgeInsets.fromLTRB(
-//                        Adapt.px(30),
-//                        Adapt.px(100) + Adapt.padTopH(),
-//                        Adapt.px(30),
-//                        0),
-//                    child: Text(
-////                      objState.results[index].title,
-//                      '123',
-//                      style: TextStyle(
-//                          color: Colors.white,
-//                          fontWeight: FontWeight.bold,
-//                          fontSize: Adapt.px(60),
-//                          shadows: <Shadow>[
-//                            Shadow(offset: Offset(1, 1))
-//                          ]),
-//                    ),
-//                  ),
-//                );
+               return Container(
+                 decoration: BoxDecoration(
+                     image: DecorationImage(
+                         fit: BoxFit.cover,
+                         image: CachedNetworkImageProvider(
+                            //  ImageUrl.getUrl( results[index].url, ImageSize.w500)
+                            results[index].url
+                         )
+                     )
+                 ),
+                 child: Container(
+                   color: Colors.black26,
+                   padding: EdgeInsets.fromLTRB(
+                       Adapt.px(30),
+                       Adapt.px(100) + Adapt.padTopH(),
+                       Adapt.px(30),
+                       0),
+                   child: Text(
+//                      objState.results[index].title,
+                     '',
+                     style: TextStyle(
+                         color: Colors.white,
+                         fontWeight: FontWeight.bold,
+                         fontSize: Adapt.px(60),
+                         shadows: <Shadow>[
+                           Shadow(offset: Offset(1, 1))
+                         ]),
+                   ),
+                 ),
+               );
               },
             )
         ),
