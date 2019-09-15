@@ -3,11 +3,9 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -60,7 +58,8 @@ Widget buildView(
                 width: Adapt.px(250),
                 height: Adapt.px(350),
                 fit: BoxFit.cover,
-                imageUrl: ImageUrl.getUrl(d.thumb_s, ImageSize.w400),
+                // imageUrl: ImageUrl.getUrl(d.thumb_s, ImageSize.w400),
+                imageUrl: d.thumb_s,
                 placeholder: (ctx, s) {
                   return Image.asset(
                     'images/CacheBG.jpg',
@@ -76,7 +75,7 @@ Widget buildView(
                 width: Adapt.px(250),
                 padding: EdgeInsets.all(Adapt.px(10)),
                 child: Text(
-                  '',
+                  d.title,
                   maxLines: 2,
                   //textAlign: TextAlign.center,
                   style: TextStyle(
