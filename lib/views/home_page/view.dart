@@ -649,6 +649,37 @@ Widget buildView(
     );
   }
 
+  Widget _buildRecommend() {
+    return SliverToBoxAdapter(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.all(Adapt.px(30)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    I18n.of(viewService.context).recommendations,
+                    style: _selectPopStyle,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  GestureDetector(
+                    onTap: () => dispatch(
+                        HomePageActionCreator.onPopularFilterChanged(true)),
+                    child: Text(I18n.of(viewService.context).movies,
+                        style: _unselectPopStyle),
+                  ),
+                ],
+              ),
+            ),
+            viewService.buildComponent('popular'),
+          ],
+        )
+    );
+  }
+
   Widget _getStyle4() {
     return Scaffold(
       backgroundColor: Color.fromRGBO(45, 45, 48, 1),
@@ -693,7 +724,7 @@ Widget buildView(
 //            ),
 //          ),
           _buildHotMovie(),//热门
-          _buildPopular(),//推荐
+          _buildRecommend(),//推荐
           _buildNewMovieHeader(),
           viewService.buildComponent('newmovie'),
         ],
