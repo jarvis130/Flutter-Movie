@@ -10,12 +10,11 @@ class MovieListModel {
   List< MovieListResult> results;
   DateString dates;
 
-  MovieListModel.fromParams({this.page, this.total_pages, this.total_results, this.results, this.dates});
+  MovieListModel.fromParams({this.results});
 
-  factory MovieListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new MovieListResult.fromJson(json.decode(jsonStr)) : new MovieListModel.fromJson(jsonStr);
+  factory MovieListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new MovieListModel.fromJson(json.decode(jsonStr)) : new MovieListModel.fromJson(jsonStr);
 
   MovieListModel.fromJson(jsonRes) {
-    println('1111');
 //    page = jsonRes['page'];
 //    total_pages = jsonRes['total_pages'];
 //    total_results = jsonRes['total_results'];
@@ -25,7 +24,6 @@ class MovieListModel {
             results.add(resultsItem == null ? null : new MovieListResult.fromJson(resultsItem));
     }
 
-    dates = jsonRes['dates'] == null ? null : new DateString.fromJson(jsonRes['dates']);
   }
 
   @override
@@ -46,45 +44,139 @@ class DateString {
     minimum = jsonRes['minimum'];
   }
 
-  @override
-  String toString() {
-    return '{"maximum": ${maximum != null?'${json.encode(maximum)}':'null'},"minimum": ${minimum != null?'${json.encode(minimum)}':'null'}}';
-  }
+  // @override
+  // String toString() {
+  //   return '{"maximum": ${maximum != null?'${json.encode(maximum)}':'null'},"minimum": ${minimum != null?'${json.encode(minimum)}':'null'}}';
+  // }
 }
 
 class MovieListResult {
 
   int id;
-  String datetime;
-  String islike;
-  String iscollect;
-  String isattent;
+  String uid;
+  String title;
+  String thumb;
   String thumb_s;
-  String comments;
+  String href;
   String likes;
+  String views;
+  String comments;
+  String steps;
+  String shares;
+  String addtime;
+  String lat;
+  String lng;
+  String city;
+  String isdel;
+  String status;
+  String music_id;
+  String xiajia_reason;
+  String show_val;
+  String nopass_time;
+  String watch_ok;
+  String is_ad;
+  String ad_endtime;
+  String ad_url;
+  String orderno;
+  String wmk_thumb;
+  String wmk_href;
+  String classify_id;
   String collects;
+  String description;
+  String datetime;
+  int islike;
+  int isstep;
+  int isattent;
+  int iscollect;
+// 37: "musicinfo" -> Map 
+// String userinfo" -> Map (16 items)
 
-  MovieListResult.fromParams({this.id, this.datetime, this.islike, this.iscollect, this.isattent, this.thumb_s, this.comments, this.likes, this.collects});
+
+  MovieListResult.fromParams({
+    this.id,
+    this.uid,
+    this.title,
+    this.thumb,
+    this.thumb_s,
+    this.href,
+    this.likes,
+    this.views,
+    this.comments,
+    this.steps,
+    this.shares,
+    this.addtime,
+    this.lat,
+    this.lng,
+    this.city,
+    this.isdel,
+    this.status,
+    this.music_id,
+    this.xiajia_reason,
+    this.show_val,
+    this.nopass_time,
+    this.watch_ok,
+    this.is_ad,
+    this.ad_endtime,
+    this.ad_url,
+    this.orderno,
+    this.wmk_thumb,
+    this.wmk_href,
+    this.classify_id,
+    this.collects,
+    this.description,
+    this.datetime,
+    this.islike,
+    this.isstep,
+    this.isattent,
+    this.iscollect,
+  });
 
   MovieListResult.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    datetime = jsonRes['datetime'];
-    islike = jsonRes['islike'];
-    iscollect = jsonRes['iscollect'];
-    isattent = jsonRes['isattent'];
-    thumb_s = jsonRes['thumb_s'];
-    comments = jsonRes['comments'];
-    likes = jsonRes['likes'];
-    collects = jsonRes['collects'];
+    this.id = int.parse(jsonRes['id']);
+    this.uid = jsonRes['uid'];
+    this.title = jsonRes['title'];
+    this.thumb = jsonRes['thumb'];
+    this.thumb_s = jsonRes['thumb_s'];
+    this.href = jsonRes['href'];
+    this.likes = jsonRes['likes'];
+    this.views = jsonRes['views'];
+    this.comments = jsonRes['comments'];
+    this.steps = jsonRes['steps'];
+    this.shares = jsonRes['shares'];
+    this.addtime = jsonRes['addtime'];
+    this.lat = jsonRes['lat'];
+    this.lng = jsonRes['lng'];
+    this.city = jsonRes['city'];
+    this.isdel = jsonRes['isdel'];
+    this.status = jsonRes['status'];
+    this.music_id = jsonRes['music_id'];
+    this.xiajia_reason = jsonRes['xiajia_reason'];
+    this.show_val = jsonRes['show_val'];
+    this.nopass_time = jsonRes['nopass_time'];
+    this.watch_ok = jsonRes['watch_ok'];
+    this.is_ad = jsonRes['is_ad'];
+    this.ad_endtime = jsonRes['ad_endtime'];
+    this.ad_url = jsonRes['ad_url'];
+    this.orderno = jsonRes['orderno'];
+    this.wmk_thumb = jsonRes['wmk_thumb'];
+    this.wmk_href = jsonRes['wmk_href'];
+    this.classify_id = jsonRes['classify_id'];
+    this.collects = jsonRes['collects'];
+    this.description = jsonRes['description'];
+    this.datetime = jsonRes['datetime'];
+    this.islike = jsonRes['islike'];
+    this.isstep = jsonRes['isstep'];
+    this.isattent = jsonRes['isattent'];
+    this.iscollect = jsonRes['iscollect'];
 
 //    for (var genre_idsItem in genre_ids == null ? [] : jsonRes['genre_ids']){
 //            genre_ids.add(genre_idsItem);
 //    }
   }
 
-  @override
-  String toString() {
-    return '{"id": $id, "datetime": $datetime, "islike": $islike, "iscollect":$iscollect, "isattent": $isattent, "thumb_s": $thumb_s, "comments": $comments, "likes": $likes, "collects": $collects}';
-  }
+  // @override
+  // String toString() {
+  //   return '{"id": $id, "datetime": $datetime, "islike": $islike, "iscollect":$iscollect, "isattent": $isattent, "thumb_s": $thumb_s, "comments": $comments, "likes": $likes, "collects": $collects}';
+  // }
 }
 
