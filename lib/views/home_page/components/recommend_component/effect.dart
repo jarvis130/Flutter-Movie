@@ -3,17 +3,17 @@ import 'package:flutter/widgets.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
 
-Effect<RecommendState> buildEffect() {
-  return combineEffects(<Object, Effect<RecommendState>>{
+Effect<RecommendMovieState> buildEffect() {
+  return combineEffects(<Object, Effect<RecommendMovieState>>{
     RecommendMovieAction.action: _onAction,
     RecommendMovieAction.cellTapped: _onCellTapped
   });
 }
 
-void _onAction(Action action, Context<RecommendState> ctx) {
+void _onAction(Action action, Context<RecommendMovieState> ctx) {
 }
 
-Future _onCellTapped(Action action, Context<RecommendState> ctx) async {
+Future _onCellTapped(Action action, Context<RecommendMovieState> ctx) async {
 
     await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
       'movieid': action.payload[0],

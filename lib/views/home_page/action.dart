@@ -11,6 +11,7 @@ enum HomePageAction {
   action,
   initSwiper,
   initHot,
+  initRecommend,
   initMovie,
   initTV,
   initPopularMovies,
@@ -34,6 +35,10 @@ class HomePageActionCreator {
 
   static Action onInitHot(MovieListModel hot) {
     return Action(HomePageAction.initHot, payload: hot);
+  }
+
+  static Action onInitRecommend(MovieListModel hot) {
+    return Action(HomePageAction.initRecommend, payload: hot);
   }
 
   static Action onInitMovie(VideoListModel movie) {

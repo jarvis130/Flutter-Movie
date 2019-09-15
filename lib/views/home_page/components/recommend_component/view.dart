@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
-import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';

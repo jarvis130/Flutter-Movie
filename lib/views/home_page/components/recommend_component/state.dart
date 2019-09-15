@@ -13,10 +13,9 @@ class RecommendMovieState implements Cloneable<RecommendMovieState> {
 
 class RecommendMovieConnector extends ConnOp<HomePageState, RecommendMovieState> {
   @override
-  RecommendMovieState get(RecommendMovieState state) {
+  RecommendMovieState get(HomePageState state) {
     RecommendMovieState mstate = RecommendMovieState();
     mstate.recommendMovie = state.recommendMovie;
-
     return mstate;
   }
 }

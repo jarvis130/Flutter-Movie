@@ -2,21 +2,21 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/views/home_page/components/hot_component/component.dart';
 import 'package:movie/views/home_page/components/hot_component/state.dart';
-import 'package:movie/views/home_page/components/movie_component/component.dart';
-import 'package:movie/views/home_page/components/popular_cpmponent/component.dart';
+// import 'package:movie/views/home_page/components/movie_component/component.dart';
+// import 'package:movie/views/home_page/components/popular_cpmponent/component.dart';
 import 'package:movie/views/home_page/components/searchbar_component/component.dart';
 import 'package:movie/views/home_page/components/swiper_component/component.dart';
 import 'package:movie/views/home_page/components/newmovie_component/component.dart';
 
 import 'components/newmovie_component/state.dart';
 import 'components/swiper_component/state.dart';
-import 'components/movie_component/state.dart';
-import 'components/popular_cpmponent/state.dart';
-import 'components/popularposter_cpmponent/component.dart';
-import 'components/popularposter_cpmponent/state.dart';
+// import 'components/movie_component/state.dart';
+// import 'components/popular_cpmponent/state.dart';
+// import 'components/popularposter_cpmponent/component.dart';
+// import 'components/popularposter_cpmponent/state.dart';
 import 'components/searchbar_component/state.dart';
-import 'components/tv_component/component.dart';
-import 'components/tv_component/state.dart';
+// import 'components/tv_component/component.dart';
+// import 'components/tv_component/state.dart';
 import 'components/recommend_component/component.dart';
 import 'components/recommend_component/state.dart';
 import 'effect.dart';
@@ -43,7 +43,7 @@ class HomePage extends Page<HomePageState, Map<String, dynamic>> {
                 'recommendMovie': RecommendMovieConnector() + RecommendMovieComponent(),
 //                'moviecells': MovieCellsConnector() + MovieCellsComponent(),
 //                'tvcells': TVCellsConnector() + TVCellsComponent(),
-                'popular': PopularConnector() + PopularComponent(),
+                // 'popular': PopularConnector() + PopularComponent(),
                 'newmovie': NewMovieConnector() + NewMovieComponent(),
 //                'popularposter':
 //                    PopularPosterConnector() + PopularPosterComponent()

@@ -40,6 +40,11 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
   //热门视频
   var hot = await HomeApi.getHotMovieList('');
   if (hot != null) ctx.dispatch(HomePageActionCreator.onInitHot(hot));
+
+  //热门视频
+  var recommend = await HomeApi.getRecommendMovieList('');
+  if (recommend != null) ctx.dispatch(HomePageActionCreator.onInitHot(recommend));
+
 //
 //  var r = await ApiHelper.getNowPlayingMovie();
 //  if (r != null) ctx.dispatch(HomePageActionCreator.onInitMovie(r));
