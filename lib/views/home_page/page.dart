@@ -17,6 +17,8 @@ import 'components/popularposter_cpmponent/state.dart';
 import 'components/searchbar_component/state.dart';
 import 'components/tv_component/component.dart';
 import 'components/tv_component/state.dart';
+import 'components/recommend_component/component.dart';
+import 'components/recommend_component/state.dart';
 import 'effect.dart';
 import 'reducer.dart';
 import 'state.dart';
@@ -38,6 +40,7 @@ class HomePage extends Page<HomePageState, Map<String, dynamic>> {
                 'searchbar': SearchBarConnector() + SearchBarComponent(),
                 'swiper': SwiperConnector() + SwiperComponent(),
                 'hotMovie': HotMovieConnector() + HotMovieComponent(),
+                'recommendMovie': RecommendMovieConnector() + RecommendMovieComponent(),
 //                'moviecells': MovieCellsConnector() + MovieCellsComponent(),
 //                'tvcells': TVCellsConnector() + TVCellsComponent(),
                 'popular': PopularConnector() + PopularComponent(),

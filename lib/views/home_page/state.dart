@@ -9,6 +9,7 @@ import 'package:movie/models/videolist.dart';
 class HomePageState implements Cloneable<HomePageState> {
   SwiperListModel swiper;
   MovieListModel hotMovie;
+  MovieListModel recommendMovie;
   VideoListModel movie;
   VideoListModel tv;
   VideoListModel popularMovies;
@@ -24,6 +25,7 @@ class HomePageState implements Cloneable<HomePageState> {
     return HomePageState()
       ..swiper = swiper
       ..hotMovie = hotMovie
+      ..recommendMovie = recommendMovie
       ..tv = tv
       ..movie = movie
       ..popularMovies = popularMovies
@@ -42,6 +44,8 @@ HomePageState initState(Map<String, dynamic> args) {
   state.swiper = new SwiperListModel.fromParams(results: List<SwiperListResult>());
 
   state.hotMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
+
+  state.recommendMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
 
   state.movie = new VideoListModel.fromParams(results: List<VideoListResult>());
 

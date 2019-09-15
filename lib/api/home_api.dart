@@ -21,4 +21,12 @@ class HomeApi {
     return model;
   }
 
+  ///推荐视频
+  static Future<MovieListModel> getRecommendMovieList(String uid, {int page = 1}) async {
+    MovieListModel model;
+    String param = 'service=Video.GetRecommendVideos&uid=$uid&p=$page';
+    var r = await ApiHelper.httpGet(param, cached: false);
+    if (r != null) model = MovieListModel(r);
+    return model;
+  }
 }
