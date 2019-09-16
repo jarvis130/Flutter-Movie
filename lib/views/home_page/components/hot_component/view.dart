@@ -46,8 +46,8 @@ Widget buildView(
         onTap: () => dispatch(HotMovieActionCreator.onCellTapped(
             d.id,
             '',
-            '',
-            '')),
+            d.title,
+            d.thumb_s)),
         child: Column(
           children: <Widget>[
             ClipRRect(

@@ -615,7 +615,7 @@ Widget buildView(
                 GestureDetector(
                   onTap: () => dispatch(
                       HomePageActionCreator.onPopularFilterChanged(true)),
-                  child: Text(I18n.of(viewService.context).movies,
+                  child: Text(I18n.of(viewService.context).more,
                       style: _unselectPopStyle),
                 ),
                 

@@ -301,7 +301,10 @@ Widget buildView(
       child: ParallaxImage(
           extent: h,
           image: CachedNetworkImageProvider(
-              ImageUrl.getUrl(d.file_path, ImageSize.w300))),
+              // ImageUrl.getUrl(d.file_path, ImageSize.w300)
+              d.file_path
+          )
+        ),
     );
   }
 
@@ -436,7 +439,8 @@ Widget buildView(
           height: Adapt.px(300),
           width: Adapt.px(200),
           fit: BoxFit.cover,
-          imageUrl: ImageUrl.getUrl(state.posterPic, ImageSize.w300),
+          // imageUrl: ImageUrl.getUrl(state.posterPic, ImageSize.w300),
+          imageUrl: state.posterPic,
           placeholder: (c, s) {
             return Container(
               height: Adapt.px(300),

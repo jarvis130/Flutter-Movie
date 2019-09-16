@@ -75,16 +75,16 @@ Widget buildView(
     );
   }
 
-  Widget _buildCell(VideoListResult d) {
+  Widget _buildCell(MovieListResult d) {
     return Padding(
       key: ValueKey(d.id),
       padding: EdgeInsets.only(top: Adapt.px(10), left: Adapt.px(0), bottom: Adapt.px(0)),
       child: GestureDetector(
-        // onTap: () => dispatch(PopularPosterActionCreator.onCellTapped(
-        //     d.id,
-        //     d.backdrop_path,
-        //     state.showmovie ? d.title : d.name,
-        //     d.poster_path)),
+        onTap: () => dispatch(NewMovieActionCreator.onCellTapped(
+            d.id,
+            '',
+            d.title,
+            d.thumb_s)),
         child: Column(
           children: <Widget>[
             ClipRRect(
@@ -95,7 +95,8 @@ Widget buildView(
 //                width: Adapt.px(250),
 //                height: Adapt.px(450),
                 fit: BoxFit.cover,
-                imageUrl: ImageUrl.getUrl(d.poster_path, ImageSize.w400),
+                // imageUrl: ImageUrl.getUrl(d.poster_path, ImageSize.w400),
+                imageUrl: d.thumb_s,
                 placeholder: (ctx, s) {
                   return Image.asset(
                     'images/CacheBG.jpg',
@@ -134,7 +135,7 @@ Widget buildView(
              d.id,
              '',
              d.title,
-             '')),
+             d.thumb_s)),
         child: Column(
           children: <Widget>[
             ClipRRect(

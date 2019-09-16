@@ -41,7 +41,7 @@ Widget buildView(
             d.id,
             '',
             d.title,
-            '')),
+            d.thumb_s)),
         child: Stack(
           children: <Widget>[
             ClipRRect(
