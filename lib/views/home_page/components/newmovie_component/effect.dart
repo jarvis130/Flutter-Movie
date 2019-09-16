@@ -14,8 +14,7 @@ void _onAction(Action action, Context<NewMovieState> ctx) {
 }
 
 Future _onCellTapped(Action action, Context<NewMovieState> ctx) async{
-  if(ctx.state.showmovie)
-    await Navigator.of(ctx.context).pushNamed('moviedetailpage',arguments:{'movieid':action.payload[0],'bgpic':action.payload[1],'title':action.payload[2],'posterpic':action.payload[3]});
-  else
-    await Navigator.of(ctx.context).pushNamed('tvdetailpage',arguments:{'tvid':action.payload[0],'bgpic':action.payload[1],'name':action.payload[2],'posterpic':action.payload[3]});
+
+  await Navigator.of(ctx.context).pushNamed('moviedetailpage',arguments:{'movieid':action.payload[0],'bgpic':action.payload[1],'title':action.payload[2],'posterpic':action.payload[3]});
+  
 }

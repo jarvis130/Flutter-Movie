@@ -10,6 +10,7 @@ class HomePageState implements Cloneable<HomePageState> {
   SwiperListModel swiper;
   MovieListModel hotMovie;
   MovieListModel recommendMovie;
+  MovieListModel newMovie;
   VideoListModel movie;
   VideoListModel tv;
   VideoListModel popularMovies;
@@ -26,6 +27,7 @@ class HomePageState implements Cloneable<HomePageState> {
       ..swiper = swiper
       ..hotMovie = hotMovie
       ..recommendMovie = recommendMovie
+      ..newMovie = newMovie
       ..tv = tv
       ..movie = movie
       ..popularMovies = popularMovies
@@ -46,6 +48,8 @@ HomePageState initState(Map<String, dynamic> args) {
   state.hotMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
 
   state.recommendMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
+
+  state.newMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
 
   state.movie = new VideoListModel.fromParams(results: List<VideoListResult>());
 

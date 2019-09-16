@@ -577,9 +577,7 @@ Widget buildView(
                 children: <Widget>[
                   Text(
                     I18n.of(viewService.context).recommendations,
-                    style: state.showPopMovie
-                        ? _selectPopStyle
-                        : _unselectPopStyle,
+                    style: _selectPopStyle,
                   ),
                   Expanded(
                     child: Container(),
@@ -587,28 +585,9 @@ Widget buildView(
                   GestureDetector(
                     onTap: () => dispatch(
                         HomePageActionCreator.onPopularFilterChanged(true)),
-                    child: Text(I18n.of(viewService.context).movies,
-                        style: state.showPopMovie
-                            ? _unselectPopStyle
-                            : _selectPopStyle),
+                    child: Text(I18n.of(viewService.context).more,
+                        style: _unselectPopStyle),
                   ),
-                  SizedBox(
-                    width: Adapt.px(20),
-                  ),
-                  GestureDetector(
-                    onTap: () => dispatch(
-                        HomePageActionCreator.onPopularFilterChanged(
-                            false)),
-                    child: Text(I18n.of(viewService.context).tvShows,
-                        style: TextStyle(
-                            fontSize: Adapt.px(24),
-                            fontWeight: state.showPopMovie
-                                ? FontWeight.normal
-                                : FontWeight.bold,
-                            color: state.showPopMovie
-                                ? Colors.grey
-                                : Colors.black)),
-                  )
                 ],
               ),
             ),

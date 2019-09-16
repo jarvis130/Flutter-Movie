@@ -29,4 +29,13 @@ class HomeApi {
     if (r != null) model = MovieListModel(r);
     return model;
   }
+
+  ///新增视频
+  static Future<MovieListModel> getNewMovieList(String uid, {int page = 1}) async {
+    MovieListModel model;
+    String param = 'service=Video.GetNewVideoList&uid=$uid&p=$page';
+    var r = await ApiHelper.httpGet(param, cached: false);
+    if (r != null) model = MovieListModel(r);
+    return model;
+  }
 }

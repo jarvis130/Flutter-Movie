@@ -6,66 +6,12 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/imagesize.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
 import 'state.dart';
-
-class ProductItem {
-  final String name;
-  final String tag;
-  final String asset;
-  final int stock;
-  final double price;
-
-  ProductItem({
-    this.name,
-    this.tag,
-    this.asset,
-    this.stock,
-    this.price,
-  });
-}
-
-final List<ProductItem> _products = [
-  ProductItem(
-    name: 'Bueno Chocolate',
-    asset: 'images/food01.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate with berries',
-    asset: 'images/food02.jpeg',
-  ),
-  ProductItem(
-    name: 'Trumoo Candies',
-    asset: 'images/food03.jpeg',
-  ),
-  ProductItem(
-    name: 'Choco-coko',
-    asset: 'images/food04.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'images/food05.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate',
-    asset: 'images/food06.jpeg',
-  ),
-  ProductItem(
-    name: 'Bueno Chocolate',
-    asset: 'images/food01.jpeg',
-  ),
-  ProductItem(
-    name: 'Choco-coko',
-    asset: 'images/food04.jpeg',
-  ),
-  ProductItem(
-    name: 'Chocolate tree',
-    asset: 'images/food05.jpeg',
-  ),
-];
 
 Widget buildView(
     NewMovieState state, Dispatch dispatch, ViewService viewService) {
@@ -180,15 +126,15 @@ Widget buildView(
     );
   }
 
-  Widget _buildItem(VideoListResult d) {
+  Widget _buildItem(MovieListResult d) {
     return Container(
       key: ValueKey(d.id),
       child: GestureDetector(
          onTap: () => dispatch(NewMovieActionCreator.onCellTapped(
              d.id,
-             d.backdrop_path,
-             state.showmovie ? d.title : d.name,
-             d.poster_path)),
+             '',
+             d.title,
+             '')),
         child: Column(
           children: <Widget>[
             ClipRRect(
@@ -199,7 +145,8 @@ Widget buildView(
                 width: Adapt.px(250),
                 height: Adapt.px(300),
                 fit: BoxFit.cover,
-                imageUrl: ImageUrl.getUrl(d.poster_path, ImageSize.w400),
+                // imageUrl: ImageUrl.getUrl(d.poster_path, ImageSize.w400),
+                imageUrl: d.thumb_s,
                 placeholder: (ctx, s) {
                   return Image.asset(
                     'images/CacheBG.jpg',
@@ -231,7 +178,7 @@ Widget buildView(
   }
 
   Widget _buildbody() {
-    VideoListModel model = state.movie;
+    MovieListModel model = state.newMovie;
 
 //    var list = model.results.length > 0 ? (model.results.map(_buildCell).toList()..add(_buildMoreCell()))
 //        : <Widget>[

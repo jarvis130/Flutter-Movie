@@ -1,17 +1,15 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/movielist.dart';
 import '../../state.dart';
 
 class NewMovieState implements Cloneable<NewMovieState> {
 
-  VideoListModel movie;
-  bool showmovie;
+  MovieListModel newMovie;
 
   @override
   NewMovieState clone() {
     return NewMovieState()
-      ..movie = movie
-      ..showmovie = showmovie;
+      ..newMovie = newMovie;
   }
 }
 
@@ -19,8 +17,7 @@ class NewMovieConnector extends ConnOp<HomePageState, NewMovieState> {
   @override
   NewMovieState get(HomePageState state) {
     NewMovieState mstate = NewMovieState();
-    mstate.movie = state.movie;
-    mstate.showmovie = state.showPopMovie;
+    mstate.newMovie = state.newMovie;
     return mstate;
   }
 }
