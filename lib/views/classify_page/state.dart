@@ -1,13 +1,26 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/classify_list_model.dart';
+import 'package:flutter/material.dart';
 
-class ClassifyState implements Cloneable<ClassifyState> {
+class ClassifyPageState implements Cloneable<ClassifyPageState> {
+
+  ClassifyListModel classifyModel;
+  ScrollController scrollController;
+  AnimationController animationController;
+  AnimationController cellAnimationController;
 
   @override
-  ClassifyState clone() {
-    return ClassifyState();
+  ClassifyPageState clone() {
+    return ClassifyPageState()
+    ..classifyModel = classifyModel
+    ..scrollController = scrollController
+    ..animationController=animationController
+    ..cellAnimationController=cellAnimationController;
   }
 }
 
-ClassifyState initState(Map<String, dynamic> args) {
-  return ClassifyState();
+ClassifyPageState initState(Map<String, dynamic> args) {
+  var state = ClassifyPageState();
+  state.classifyModel = ClassifyListModel.fromParams(results: []);
+  return state;
 }

@@ -1,22 +1,26 @@
 import 'package:fish_redux/fish_redux.dart';
-
+import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'effect.dart';
 import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class ClassifyPage extends Page<ClassifyState, Map<String, dynamic>> {
+class ClassifyPage extends Page<ClassifyPageState, Map<String, dynamic>> {
+  
+  @override
+  CustomstfState<ClassifyPageState> createState()=>CustomstfState<ClassifyPageState> ();
+
   ClassifyPage()
       : super(
             initState: initState,
             effect: buildEffect(),
             reducer: buildReducer(),
             view: buildView,
-            dependencies: Dependencies<ClassifyState>(
+            dependencies: Dependencies<ClassifyPageState>(
                 adapter: null,
-                slots: <String, Dependent<ClassifyState>>{
+                slots: <String, Dependent<ClassifyPageState>>{
                 }),
-            middleware: <Middleware<ClassifyState>>[
+            middleware: <Middleware<ClassifyPageState>>[
             ],);
 
 }
