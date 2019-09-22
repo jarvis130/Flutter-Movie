@@ -38,6 +38,7 @@ class ApiHelper {
 //  static final String _apikeyV4 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
   static final String _apikeyV4 = '';
   static String _requestToken;
+  static String uid;
   static String accessTokenV4;
   static DateTime _requestTokenExpiresTime;
   static String session;
@@ -63,6 +64,7 @@ class ApiHelper {
       var jsonobject = json.decode(r);
       if (jsonobject['data'] !=null ) {
         var data = jsonobject['data']['info'];
+        prefs.setString('uid', data['id']);
         prefs.setString('accessTokenV4', data['token']);
 //        var data = jsonobject['data']['info'];
 //        session = jsonobject['guest_session_id'];

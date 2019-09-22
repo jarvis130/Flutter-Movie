@@ -7,6 +7,7 @@ import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:movie/api/moviedetail_api.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -32,13 +33,20 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     /*var paletteGenerator = await PaletteGenerator.fromImageProvider(
          CachedNetworkImageProvider(ImageUrl.getUrl(ctx.state.posterPic, ImageSize.w300)));
       ctx.dispatch(MovieDetailPageActionCreator.onsetColor(paletteGenerator));*/
-    var r = await ApiHelper.getMovieDetail(ctx.state.movieid,
-        appendtoresponse:
-            'keywords,recommendations,credits,external_ids,release_dates');
+    // var r = await ApiHelper.getMovieDetail(ctx.state.movieid,
+    //     appendtoresponse:
+    //         'keywords,recommendations,credits,external_ids,release_dates');
+    // if (r != null) {
+    //   ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
+    //   ctx.state.animationController.forward();
+    // }
+  
+    var r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
     if (r != null) {
       ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
       ctx.state.animationController.forward();
     }
+
     var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);
     if (accountstate != null)
       ctx.dispatch(

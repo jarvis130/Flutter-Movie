@@ -44,6 +44,7 @@ class MovieDetailModel {
   ReviewModel reviews;
   ExternalIdsModel externalids;
   ReleaseDateModel releaseDates;
+  String description;
 
   MovieDetailModel.fromParams(
       {this.homepage,
@@ -78,18 +79,20 @@ class MovieDetailModel {
       this.reviews,
       this.externalids,
       this.releaseDates,
-      this.videos});
+      this.videos,
+      this.description
+      });
 
   factory MovieDetailModel(jsonStr) => jsonStr == null
       ? null
       : jsonStr is String
-          ? new MovieDetailModel.fromJson(json.decode(jsonStr))
+          ? new MovieDetailModel.fromJson((json.decode(jsonStr))['data']['info'])
           : new MovieDetailModel.fromJson(jsonStr);
 
   MovieDetailModel.fromJson(jsonRes) {
     homepage = jsonRes['homepage'];
     budget = jsonRes['budget'];
-    id = jsonRes['id'];
+    id = int.parse(jsonRes['id']);
     revenue = jsonRes['revenue'];
     runtime = jsonRes['runtime'];
     vote_count = jsonRes['vote_count'];
@@ -97,17 +100,19 @@ class MovieDetailModel {
     vote_average = jsonRes['vote_average'];
     adult = jsonRes['adult'];
     video = jsonRes['video'];
-    backdrop_path = jsonRes['backdrop_path'];
     imdb_id = jsonRes['imdb_id'];
     original_language = jsonRes['original_language'];
     original_title = jsonRes['original_title'];
-    overview = jsonRes['overview'];
-    poster_path = jsonRes['poster_path'];
     release_date = jsonRes['release_date'];
     status = jsonRes['status'];
     tagline = jsonRes['tagline'];
     title = jsonRes['title'];
     genres = jsonRes['genres'] == null ? null : [];
+
+    description = jsonRes['description'];
+    overview = jsonRes['comments'];
+    poster_path = jsonRes['thumb_s'];
+    backdrop_path = jsonRes['thumb'];
 
     for (var genresItem in genres == null ? [] : jsonRes['genres']) {
       genres.add(genresItem == null ? null : new Genre.fromJson(genresItem));

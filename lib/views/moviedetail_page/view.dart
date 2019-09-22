@@ -119,9 +119,10 @@ Widget buildView(
                   width: Adapt.px(400),
                   height: Adapt.px(400) * 9 / 16,
                   placeholder: 'images/CacheBG.jpg',
-                  image: ImageUrl.getUrl(
-                      d.backdrop_path ?? '/eIkFHNlfretLS1spAcIoihKUS62.jpg',
-                      ImageSize.w400),
+                  // image: ImageUrl.getUrl(
+                  //     d.backdrop_path ?? '/eIkFHNlfretLS1spAcIoihKUS62.jpg',
+                  //     ImageSize.w400),
+                  image: d.backdrop_path    
                 ),
               ),
               Container(
@@ -480,27 +481,27 @@ Widget buildView(
                       color: Colors.black,
                     ),
                   ])),
-          TextSpan(
-              text: s.title == null
-                  ? ' (-)'
-                  : ' (${DateTime.tryParse(s.release_date)?.year.toString()})',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: Adapt.px(30),
-                  color: Colors.grey[400],
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 2.0,
-                      color: Colors.black,
-                    ),
-                  ])),
+          // TextSpan(
+          //     text: s.title == null
+          //         ? ' (-)'
+          //         : ' (${DateTime.tryParse(s.release_date)?.year.toString()})',
+          //     style: TextStyle(
+          //         fontWeight: FontWeight.w700,
+          //         fontSize: Adapt.px(30),
+          //         color: Colors.grey[400],
+          //         shadows: <Shadow>[
+          //           Shadow(
+          //             offset: Offset(2.0, 2.0),
+          //             blurRadius: 2.0,
+          //             color: Colors.black,
+          //           ),
+          //         ])),
         ]),
       );
   }
 
   Widget _getOverWatch() {
-    if (state.movieDetailModel.overview == null)
+    if (state.movieDetailModel.description == null)
       return SizedBox(
           child: Shimmer.fromColors(
         baseColor: Colors.grey[200],
@@ -560,7 +561,7 @@ Widget buildView(
         ),
       ));
     else
-      return Text(s.overview,
+      return Text(s.description,
           style: TextStyle(
               color: Colors.black,
               fontSize: Adapt.px(30),
