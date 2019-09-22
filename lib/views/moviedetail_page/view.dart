@@ -856,34 +856,35 @@ Widget buildView(
                         ),
                       ),
                     ),
-                    SliverToBoxAdapter(
-                        child: AnimatedSwitcher(
-                            switchInCurve: Curves.easeIn,
-                            switchOutCurve: Curves.easeOut,
-                            duration: Duration(milliseconds: 600),
-                            child: Column(
-                              key: ValueKey(state.movieDetailModel.id),
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(Adapt.px(30)),
-                                  child: Text(
-                                      I18n.of(viewService.context)
-                                          .topBilledCast,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: Adapt.px(40),
-                                          fontWeight: FontWeight.w800)),
-                                ),
-                                Container(
-                                  height: Adapt.px(450),
-                                  child: _getCreditsCells(),
-                                ),
-                              ],
-                            ))),
-                    SliverToBoxAdapter(
-                      child: viewService.buildComponent('keywords'),
-                    ),
+                    // SliverToBoxAdapter(
+                    //     child: AnimatedSwitcher(
+                    //         switchInCurve: Curves.easeIn,
+                    //         switchOutCurve: Curves.easeOut,
+                    //         duration: Duration(milliseconds: 600),
+                    //         child: Column(
+                    //           key: ValueKey(state.movieDetailModel.id),
+                    //           crossAxisAlignment: CrossAxisAlignment.start,
+                    //           children: <Widget>[
+                    //             Padding(
+                    //               padding: EdgeInsets.all(Adapt.px(30)),
+                    //               child: Text(
+                    //                   I18n.of(viewService.context)
+                    //                       .topBilledCast,
+                    //                   style: TextStyle(
+                    //                       color: Colors.black,
+                    //                       fontSize: Adapt.px(40),
+                    //                       fontWeight: FontWeight.w800)),
+                    //             ),
+                    //             Container(
+                    //               height: Adapt.px(450),
+                    //               child: _getCreditsCells(),
+                    //             ),
+                    //           ],
+                    //         ))
+                    // ),
+                    // SliverToBoxAdapter(
+                    //   child: viewService.buildComponent('keywords'),
+                    // ),
                     SliverToBoxAdapter(
                         child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -907,9 +908,9 @@ Widget buildView(
                         ),
                       ],
                     )),
-                    SliverToBoxAdapter(
-                      child: viewService.buildComponent('info'),
-                    ),
+                    // SliverToBoxAdapter(
+                    //   child: viewService.buildComponent('info'),
+                    // ),
                   ]);
                 })),
                 Container(child: Builder(builder: (BuildContext context) {
