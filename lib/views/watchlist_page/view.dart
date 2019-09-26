@@ -94,7 +94,7 @@ Widget buildView(
                                     alignment: Alignment.bottomCenter,
                                     image: CachedNetworkImageProvider(
                                         ImageUrl.getUrl(
-                                            _d.poster_path, ImageSize.w500))),
+                                            _d.thumb_s, ImageSize.w500))),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                       blurRadius: 20,
@@ -104,28 +104,28 @@ Widget buildView(
                                 borderRadius:
                                     BorderRadius.circular(Adapt.px(50))),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(
-                                right: Adapt.px(10), bottom: Adapt.px(60)),
-                            width: Adapt.px(120),
-                            height: Adapt.px(120),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(Adapt.px(30))),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: Text(
-                                _d.vote_average.toString(),
-                                style: TextStyle(
-                                    color:
-                                        Colors.tealAccent[700].withAlpha(200),
-                                    fontSize: Adapt.px(50),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   margin: EdgeInsets.only(
+                          //       right: Adapt.px(10), bottom: Adapt.px(60)),
+                          //   width: Adapt.px(120),
+                          //   height: Adapt.px(120),
+                          //   decoration: BoxDecoration(
+                          //       color: Colors.white,
+                          //       borderRadius:
+                          //           BorderRadius.circular(Adapt.px(30))),
+                          //   child: Material(
+                          //     color: Colors.transparent,
+                          //     child: Text(
+                          //       _d.vote_average.toString(),
+                          //       style: TextStyle(
+                          //           color:
+                          //               Colors.tealAccent[700].withAlpha(200),
+                          //           fontSize: Adapt.px(50),
+                          //           fontWeight: FontWeight.bold),
+                          //     ),
+                          //   ),
+                          // ),
                           Container(
                             width: Adapt.px(60),
                             height: Adapt.px(60),
@@ -199,7 +199,7 @@ Widget buildView(
             key: ValueKey(state.selectMdeia),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(state.selectMdeia.title ?? state.selectMdeia.name,
+              Text(state.selectMdeia.title ?? state.selectMdeia.title,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: Adapt.px(45),
@@ -207,17 +207,17 @@ Widget buildView(
               SizedBox(
                 height: Adapt.px(20),
               ),
-              Text(state.selectMdeia.genre_ids
-                  .map((f) {
-                    return Genres.genres[f];
-                  })
-                  .toList()
-                  .join(' / ')),
+              // Text(state.selectMdeia.genre_ids
+              //     .map((f) {
+              //       return Genres.genres[f];
+              //     })
+              //     .toList()
+              //     .join(' / ')),
               SizedBox(
                 height: Adapt.px(20),
               ),
               Text(
-                state.selectMdeia.overview,
+                state.selectMdeia.description,
                 maxLines: 5,
               )
             ],
@@ -295,7 +295,7 @@ Widget buildView(
                                     alignment: Alignment.bottomCenter,
                                     image: CachedNetworkImageProvider(
                                         ImageUrl.getUrl(
-                                            _d.poster_path, ImageSize.w500))),
+                                            _d.thumb_s, ImageSize.w500))),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                       blurRadius: 20,
@@ -305,28 +305,28 @@ Widget buildView(
                                 borderRadius:
                                     BorderRadius.circular(Adapt.px(50))),
                           ),
-                          Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.only(
-                                right: Adapt.px(10), bottom: Adapt.px(60)),
-                            width: Adapt.px(120),
-                            height: Adapt.px(120),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.circular(Adapt.px(30))),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: Text(
-                                _d.vote_average.toString(),
-                                style: TextStyle(
-                                    color:
-                                        Colors.tealAccent[700].withAlpha(200),
-                                    fontSize: Adapt.px(50),
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
+                          // Container(
+                          //   alignment: Alignment.center,
+                          //   margin: EdgeInsets.only(
+                          //       right: Adapt.px(10), bottom: Adapt.px(60)),
+                          //   width: Adapt.px(120),
+                          //   height: Adapt.px(120),
+                          //   decoration: BoxDecoration(
+                          //       color: Colors.white,
+                          //       borderRadius:
+                          //           BorderRadius.circular(Adapt.px(30))),
+                          //   child: Material(
+                          //     color: Colors.transparent,
+                          //     child: Text(
+                          //       _d.vote_average.toString(),
+                          //       style: TextStyle(
+                          //           color:
+                          //               Colors.tealAccent[700].withAlpha(200),
+                          //           fontSize: Adapt.px(50),
+                          //           fontWeight: FontWeight.bold),
+                          //     ),
+                          //   ),
+                          // ),
                           Container(
                             width: Adapt.px(60),
                             height: Adapt.px(60),

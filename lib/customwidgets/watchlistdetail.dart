@@ -125,7 +125,7 @@ class WatchlistDetailState extends State<WatchlistDetail>
                                   image: CachedNetworkImageProvider(
                                       ImageUrl.getUrl(
                                           widget
-                                              .data.results[index].poster_path,
+                                              .data.results[index].thumb_s,
                                           ImageSize.w300)))),
                           child: Container(
                             color: Colors.white.withAlpha(240),
@@ -146,14 +146,14 @@ class WatchlistDetailState extends State<WatchlistDetail>
                               ),
                             ),
                             Text(
-                              widget.data.results[index].name,
+                              widget.data.results[index].title,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold,
                                   fontSize: Adapt.px(45)),
                             ),
                             Text(
-                              widget.data.results[index].overview,
+                              widget.data.results[index].description,
                               style: TextStyle(color: Colors.black),
                             ),
                           ],

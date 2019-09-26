@@ -13,10 +13,10 @@ Effect<TVListState> buildEffect() {
 void _onAction(Action action, Context<TVListState> ctx) {}
 
 Future _onLoadSeason(Action action, Context<TVListState> ctx) async {
-  if (ctx.state.tvcoming.results[action.payload].nextAirDate == null) {
-    var r = await ApiHelper.getTVDetail(
-        ctx.state.tvcoming.results[action.payload].id);
-    if (r != null)
-      ctx.dispatch(TVListActionCreator.onUpdateSeason(action.payload, r));
-  }
+  // if (ctx.state.tvcoming.results[action.payload].nextAirDate == null) {
+  //   var r = await ApiHelper.getTVDetail(
+  //       ctx.state.tvcoming.results[action.payload].id);
+  //   if (r != null)
+  //     ctx.dispatch(TVListActionCreator.onUpdateSeason(action.payload, r));
+  // }
 }

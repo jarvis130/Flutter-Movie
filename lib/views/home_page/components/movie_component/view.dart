@@ -14,7 +14,7 @@ Widget buildView(
     MovieCellsState state, Dispatch dispatch, ViewService viewService) {
   Widget _bulidcell(VideoListResult d) {
     return GestureDetector(
-      onTap: ()=>dispatch(MovieCellsActionCreator.onCellTapped(d.id,d.backdrop_path,d.title,d.poster_path)),
+      onTap: ()=>dispatch(MovieCellsActionCreator.onCellTapped(d.id,d.thumb_s,d.title,d.thumb_s)),
       child: Container(
         child: Stack(
           children: <Widget>[
@@ -25,7 +25,7 @@ Widget buildView(
               height: Adapt.screenW() * 9 / 16,
               fit: BoxFit.cover,
               imageUrl: ImageUrl.getUrl(
-                  d.backdrop_path,
+                  d.thumb_s,
                   ImageSize.w500),
                   placeholder: (ctx,str){return Container(
                     width: Adapt.screenW(),

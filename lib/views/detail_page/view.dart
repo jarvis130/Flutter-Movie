@@ -296,13 +296,13 @@ Widget buildView(
     return GestureDetector(
       key: ValueKey('recommendation${d.id}'),
       onTap: () => dispatch(
-          MovieDetailPageActionCreator.movieCellTapped(d.id, d.poster_path)),
+          MovieDetailPageActionCreator.movieCellTapped(d.id, d.thumb_s)),
       child: Padding(
         padding: EdgeInsets.only(right: Adapt.px(30)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _buildImage(ImageUrl.getUrl(d.poster_path, ImageSize.w500), _width,
+            _buildImage(ImageUrl.getUrl(d.thumb_s, ImageSize.w500), _width,
                 Adapt.px(320), Adapt.px(20)),
             SizedBox(
               height: Adapt.px(15),
@@ -323,20 +323,20 @@ Widget buildView(
             SizedBox(
               height: Adapt.px(8),
             ),
-            Text(
-                '${DateTime.parse(d.release_date.isEmpty ? '2020-01-01' : d.release_date).year}',
-                style: TextStyle(fontSize: Adapt.px(24))),
+            // Text(
+            //     '${DateTime.parse(d.release_date.isEmpty ? '2020-01-01' : d.release_date).year}',
+            //     style: TextStyle(fontSize: Adapt.px(24))),
             SizedBox(
               height: Adapt.px(8),
             ),
-            Container(
-                width: _width,
-                child: FlutterRatingBarIndicator(
-                  itemPadding: EdgeInsets.only(right: Adapt.px(5)),
-                  itemSize: Adapt.px(25),
-                  emptyColor: Colors.grey[300],
-                  rating: d.vote_average / 2,
-                ))
+            // Container(
+            //     width: _width,
+            //     child: FlutterRatingBarIndicator(
+            //       itemPadding: EdgeInsets.only(right: Adapt.px(5)),
+            //       itemSize: Adapt.px(25),
+            //       emptyColor: Colors.grey[300],
+            //       rating: d.vote_average / 2,
+            //     ))
           ],
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' hide Action;
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/views/discover_page/page.dart';
 import 'package:movie/views/episodedetail_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
 import 'package:movie/views/gallery_page/page.dart';
@@ -86,7 +87,8 @@ Future<Widget> createApp() async {
       'WatchlistDetailPage': WatchlistDetailPage(),
       'detailpage': detail.MovieDetailPage(),
       'classifypage': ClassifyPage(),
-      'GalleryPage': GalleryPage()
+      'GalleryPage': GalleryPage(),
+      'DiscoverPage': DiscoverPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {

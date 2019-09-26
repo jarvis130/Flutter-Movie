@@ -136,7 +136,7 @@ Widget buildView(
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                        d.poster_path,
+                        d.thumb_s,
                         ImageSize.w300))
                     )
                   ),),
@@ -162,37 +162,37 @@ Widget buildView(
                                           BorderRadius.circular(Adapt.px(40))),
                                 ),
                               ),
-                              Center(
-                                child: Container(
-                                    width: Adapt.px(60),
-                                    height: Adapt.px(60),
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 3.0,
-                                      valueColor:
-                                          new AlwaysStoppedAnimation<Color>(
-                                              VoteColorHelper.getColor(
-                                                  d.vote_average)),
-                                      backgroundColor: Colors.grey,
-                                      value: d.vote_average / 10.0,
-                                    )),
-                              ),
-                              Center(
-                                child: Container(
-                                    width: Adapt.px(60),
-                                    height: Adapt.px(60),
-                                    child: Center(
-                                      child: Text(
-                                        (d.vote_average * 10.0)
-                                                .floor()
-                                                .toString() +
-                                            '%',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: Adapt.px(22),
-                                            color: Colors.white),
-                                      ),
-                                    )),
-                              )
+                              // Center(
+                              //   child: Container(
+                              //       width: Adapt.px(60),
+                              //       height: Adapt.px(60),
+                              //       child: CircularProgressIndicator(
+                              //         strokeWidth: 3.0,
+                              //         valueColor:
+                              //             new AlwaysStoppedAnimation<Color>(
+                              //                 VoteColorHelper.getColor(
+                              //                     d.vote_average)),
+                              //         backgroundColor: Colors.grey,
+                              //         value: d.vote_average / 10.0,
+                              //       )),
+                              // ),
+                              // Center(
+                              //   child: Container(
+                              //       width: Adapt.px(60),
+                              //       height: Adapt.px(60),
+                              //       child: Center(
+                              //         child: Text(
+                              //           (d.vote_average * 10.0)
+                              //                   .floor()
+                              //                   .toString() +
+                              //               '%',
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.w700,
+                              //               fontSize: Adapt.px(22),
+                              //               color: Colors.white),
+                              //         ),
+                              //       )),
+                              // )
                             ],
                           ),
                         ),
@@ -205,7 +205,7 @@ Widget buildView(
                             Container(
                               width: Adapt.screenW() - Adapt.px(450),
                               child: Text(
-                                (ismovie ? d.title : d.name) ?? '',
+                                (ismovie ? d.title : d.title) ?? '',
                                 maxLines: 2,
                                 softWrap: true,
                                 overflow: TextOverflow.ellipsis,
@@ -215,15 +215,15 @@ Widget buildView(
                                     fontSize: Adapt.px(26)),
                               ),
                             ),
-                            Text(
-                              DateFormat.yMMMd().format(DateTime.tryParse(
-                                  (ismovie
-                                          ? _changDatetime(d.release_date)
-                                          : _changDatetime(d.first_air_date)))),
-                              style: TextStyle(
-                                  color: Colors.grey[800],
-                                  fontSize: Adapt.px(20)),
-                            )
+                            // Text(
+                            //   DateFormat.yMMMd().format(DateTime.tryParse(
+                            //       (ismovie
+                            //               ? _changDatetime(d.release_date)
+                            //               : _changDatetime(d.first_air_date)))),
+                            //   style: TextStyle(
+                            //       color: Colors.grey[800],
+                            //       fontSize: Adapt.px(20)),
+                            // )
                           ],
                         )
                       ],
@@ -234,7 +234,7 @@ Widget buildView(
                     Container(
                       width: Adapt.screenW() - Adapt.px(360),
                       child: Text(
-                        d.overview ?? '',
+                        d.description ?? '',
                         softWrap: true,
                         maxLines: 7,
                         overflow: TextOverflow.ellipsis,
@@ -248,7 +248,7 @@ Widget buildView(
         ),
       ),
       onTap: () => dispatch(
-          DiscoverPageActionCreator.onVideoCellTapped(d.id, d.backdrop_path)),
+          DiscoverPageActionCreator.onVideoCellTapped(d.id, d.thumb_s)),
     );
   }
 

@@ -36,7 +36,7 @@ Widget buildView(
         opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curve),
         child:  GestureDetector(
         onTap: () => dispatch(MoreMediaPageActionCreator.cellTapped(
-            d.id, d.title ?? d.name, d.backdrop_path, d.poster_path)),
+            d.id, d.title ?? d.title, d.thumb_s, d.thumb_s)),
         child: Container(
           alignment: Alignment.bottomLeft,
           width: w,
@@ -47,9 +47,9 @@ Widget buildView(
                   random.nextInt(255), random.nextDouble()),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(d.poster_path == null
+                  image: CachedNetworkImageProvider(d.thumb_s == null
                       ? ImageUrl.emptyimage
-                      : ImageUrl.getUrl(d.poster_path, ImageSize.w300)))),
+                      : ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
           child: Column(
             children: <Widget>[
               Container(
@@ -65,19 +65,19 @@ Widget buildView(
                     SizedBox(
                       width: Adapt.px(5),
                     ),
-                    Text(
-                      d.vote_average.toStringAsFixed(1),
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(30),
-                          shadows: <Shadow>[
-                            Shadow(
-                                blurRadius: 2,
-                                //offset: Offset(Adapt.px(1),Adapt.px(1)),
-                                color: Colors.black87)
-                          ]),
-                    )
+                    // Text(
+                    //   d.vote_average.toStringAsFixed(1),
+                    //   style: TextStyle(
+                    //       color: Colors.white,
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: Adapt.px(30),
+                    //       shadows: <Shadow>[
+                    //         Shadow(
+                    //             blurRadius: 2,
+                    //             //offset: Offset(Adapt.px(1),Adapt.px(1)),
+                    //             color: Colors.black87)
+                    //       ]),
+                    // )
                   ],
                 ),
               ),
@@ -88,7 +88,7 @@ Widget buildView(
                 children: <Widget>[
                   Container(
                     width: w - Adapt.px(10) * 2,
-                    child: Text(d.title ?? d.name,
+                    child: Text(d.title ?? d.title,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: Adapt.px(30),

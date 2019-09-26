@@ -36,7 +36,7 @@ Widget buildView(
           image: DecorationImage(
               fit: BoxFit.cover,
               image: CachedNetworkImageProvider(
-                  ImageUrl.getUrl(d.poster_path, ImageSize.w500)))),
+                  ImageUrl.getUrl(d.thumb_s, ImageSize.w500)))),
     );
   }
 
@@ -173,8 +173,8 @@ Widget buildView(
   Widget _buildHeader() {
     final d = state.selectedMedia;
     if (d != null) {
-      String name = d?.title ?? d?.name;
-      String datetime = d?.release_date ?? d?.first_air_date;
+      String name = d?.title ?? d?.title;
+      // String datetime = d?.release_date ?? d?.first_air_date;
       return FadeTransition(
           opacity:
               Tween(begin: 0.0, end: 1.0).animate(state.animationController),
@@ -198,33 +198,33 @@ Widget buildView(
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      DateFormat.yMMMd()
-                          .format(DateTime.parse(datetime ?? '1990-01-01')),
-                      style: TextStyle(fontSize: Adapt.px(26)),
-                    ),
+                    // Text(
+                    //   DateFormat.yMMMd()
+                    //       .format(DateTime.parse(datetime ?? '1990-01-01')),
+                    //   style: TextStyle(fontSize: Adapt.px(26)),
+                    // ),
                     SizedBox(
                       width: Adapt.px(20),
                     ),
-                    FlutterRatingBarIndicator(
-                      itemSize: Adapt.px(30),
-                      itemPadding:
-                          EdgeInsets.symmetric(horizontal: Adapt.px(4)),
-                      emptyColor: Colors.grey[400],
-                      rating: (d?.vote_average ?? 0) / 2,
-                    ),
+                    // FlutterRatingBarIndicator(
+                    //   itemSize: Adapt.px(30),
+                    //   itemPadding:
+                    //       EdgeInsets.symmetric(horizontal: Adapt.px(4)),
+                    //   emptyColor: Colors.grey[400],
+                    //   rating: (d?.vote_average ?? 0) / 2,
+                    // ),
                     SizedBox(
                       width: Adapt.px(10),
                     ),
-                    Text(d?.vote_average?.toStringAsFixed(1) ?? '0.0',
-                        style: TextStyle(fontSize: Adapt.px(26)))
+                    // Text(d?.vote_average?.toStringAsFixed(1) ?? '0.0',
+                    //     style: TextStyle(fontSize: Adapt.px(26)))
                   ],
                 ),
                 SizedBox(
                   height: Adapt.px(10),
                 ),
                 Text(
-                  d?.overview ?? '',
+                  d?.description ?? '',
                   maxLines: 9,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -286,9 +286,9 @@ Widget buildView(
       state.selectedMedia!=null? AnimatedSwitcher(
          duration: Duration(milliseconds: 800),
           child: CachedNetworkImage(
-            key: ValueKey(state?.selectedMedia?.poster_path),
+            key: ValueKey(state?.selectedMedia?.thumb_s),
             imageUrl: ImageUrl.getUrl(
-                state?.selectedMedia?.poster_path, ImageSize.w500),
+                state?.selectedMedia?.thumb_s, ImageSize.w500),
             imageBuilder: (ctx, image) => Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(

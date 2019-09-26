@@ -94,7 +94,7 @@ Widget buildView(
   }
 
   Widget _buildHeaderListCell(VideoListResult f) {
-    String name = f.title ?? f.name;
+    String name = f.title ?? f.title;
     return Padding(
         key: ValueKey('headercell' + f.id.toString()),
         padding: EdgeInsets.only(left: Adapt.px(30)),
@@ -103,9 +103,9 @@ Widget buildView(
             GestureDetector(
               onTap: () => dispatch(HomePageActionCreator.onCellTapped(
                   f.id,
-                  f.backdrop_path,
+                  f.thumb_s,
                   name,
-                  f.poster_path,
+                  f.thumb_s,
                   state.showHeaderMovie ? MediaType.movie : MediaType.tv)),
               child: Container(
                 width: Adapt.px(200),
@@ -115,7 +115,7 @@ Widget buildView(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                            ImageUrl.getUrl(f.poster_path, ImageSize.w300)))),
+                            ImageUrl.getUrl(f.thumb_s, ImageSize.w300)))),
               ),
             ),
             SizedBox(
@@ -204,9 +204,9 @@ Widget buildView(
         key: ValueKey('card${d.id}'),
         onTap: () => dispatch(HomePageActionCreator.onCellTapped(
             d.id,
-            d.backdrop_path,
-            d.title ?? d.name,
-            d.poster_path,
+            d.thumb_s,
+            d.title ?? d.title,
+            d.thumb_s,
             state.showHeaderMovie ? MediaType.movie : MediaType.tv)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -235,7 +235,7 @@ Widget buildView(
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                                d.poster_path, ImageSize.w300)))),
+                                d.thumb_s, ImageSize.w300)))),
                   ),
                   SizedBox(
                     width: Adapt.px(20),
@@ -252,7 +252,7 @@ Widget buildView(
                           Container(
                             width: Adapt.screenW() - Adapt.px(450),
                             child: Text(
-                              d.title ?? d.name,
+                              d.title ?? d.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -261,21 +261,21 @@ Widget buildView(
                                   fontSize: Adapt.px(35)),
                             ),
                           ),
-                          Container(
-                            width: Adapt.px(160),
-                            child: FlutterRatingBarIndicator(
-                              emptyColor: Colors.grey[300],
-                              itemSize: Adapt.px(22),
-                              itemPadding: EdgeInsets.only(right: Adapt.px(8)),
-                              rating: d.vote_average / 2,
-                            ),
-                          ),
-                          Text(
-                            d.vote_average.toStringAsFixed(1),
-                            style: TextStyle(
-                                fontSize: Adapt.px(22),
-                                fontWeight: FontWeight.w700),
-                          )
+                          // Container(
+                          //   width: Adapt.px(160),
+                          //   child: FlutterRatingBarIndicator(
+                          //     emptyColor: Colors.grey[300],
+                          //     itemSize: Adapt.px(22),
+                          //     itemPadding: EdgeInsets.only(right: Adapt.px(8)),
+                          //     rating: d.vote_average / 2,
+                          //   ),
+                          // ),
+                          // Text(
+                          //   d.vote_average.toStringAsFixed(1),
+                          //   style: TextStyle(
+                          //       fontSize: Adapt.px(22),
+                          //       fontWeight: FontWeight.w700),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -284,7 +284,7 @@ Widget buildView(
                       Container(
                         width: Adapt.screenW() - Adapt.px(210),
                         child: Text(
-                          d.overview,
+                          d.description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(

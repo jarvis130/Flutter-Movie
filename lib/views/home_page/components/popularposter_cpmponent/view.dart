@@ -46,9 +46,9 @@ Widget buildView(
       child: GestureDetector(
         onTap: () => dispatch(PopularPosterActionCreator.onCellTapped(
             d.id,
-            d.backdrop_path,
-            state.showmovie ? d.title : d.name,
-            d.poster_path)),
+            d.thumb_s,
+            state.showmovie ? d.title : d.title,
+            d.thumb_s)),
         child: Column(
           children: <Widget>[
             ClipRRect(
@@ -59,7 +59,7 @@ Widget buildView(
                 width: Adapt.px(250),
                 height: Adapt.px(350),
                 fit: BoxFit.cover,
-                imageUrl: ImageUrl.getUrl(d.poster_path, ImageSize.w400),
+                imageUrl: ImageUrl.getUrl(d.thumb_s, ImageSize.w400),
                 placeholder: (ctx, s) {
                   return Image.asset(
                     'images/CacheBG.jpg',
@@ -75,7 +75,7 @@ Widget buildView(
                 width: Adapt.px(250),
                 padding: EdgeInsets.all(Adapt.px(10)),
                 child: Text(
-                  d.title ?? d.name,
+                  d.title ?? d.title,
                   maxLines: 2,
                   //textAlign: TextAlign.center,
                   style: TextStyle(

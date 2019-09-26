@@ -477,7 +477,7 @@ Widget buildView(
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: CachedNetworkImageProvider(
-                    ImageUrl.getUrl(d.poster_path, ImageSize.w300)))),
+                    ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
         child: Column(
           children: <Widget>[
             Container(
@@ -490,10 +490,10 @@ Widget buildView(
                       color: Colors.white,
                       size: Adapt.px(30),
                     ),
-                    Text(
-                      d.vote_average.toStringAsFixed(1),
-                      style: TextStyle(color: Colors.white),
-                    )
+                    // Text(
+                    //   d.vote_average.toStringAsFixed(1),
+                    //   style: TextStyle(color: Colors.white),
+                    // )
                   ],
                 ))
           ],

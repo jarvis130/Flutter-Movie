@@ -15,7 +15,7 @@ Widget buildView(
   Widget _bulidcell(VideoListResult d) {
     return GestureDetector(
       onTap: () => dispatch(TVCellsActionCreator.onCellTapped(
-          d.id, d.backdrop_path, d.name, d.poster_path)),
+          d.id, d.thumb_s, d.title, d.thumb_s)),
       child: Container(
         child: Stack(
           children: <Widget>[
@@ -26,7 +26,7 @@ Widget buildView(
               height: Adapt.screenW() * 9 / 16,
               fit: BoxFit.cover,
               imageUrl: ImageUrl.getUrl(
-                  d.backdrop_path ?? '/p60VSQL7usdxztIGokJPpHmKWdU.jpg',
+                  d.thumb_s ?? '/p60VSQL7usdxztIGokJPpHmKWdU.jpg',
                   ImageSize.w500),
               placeholder: (ctx, str) {
                 return Container(
@@ -42,7 +42,7 @@ Widget buildView(
               height: Adapt.screenW() * 9 / 16,
               alignment: Alignment.bottomLeft,
               child: Text(
-                d.name,
+                d.title,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: Adapt.px(40),

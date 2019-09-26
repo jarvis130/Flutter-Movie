@@ -74,7 +74,7 @@ Widget buildView(WatchlistDetailPageState state, Dispatch dispatch,
                       opacity: titleOpacity.value,
                       child: Container(
                         child: Text(
-                          _d.title ?? _d.name,
+                          _d.title ?? _d.title,
                           maxLines: 1,
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -93,58 +93,58 @@ Widget buildView(WatchlistDetailPageState state, Dispatch dispatch,
                       child: Opacity(
                           opacity: owOpacity.value,
                           child: Text(
-                            _d.overview,
+                            _d.description,
                             maxLines: 3,
                           ))),
                   SizedBox(
                     height: Adapt.px(60),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      _buildColumnCell(
-                          _d.vote_average.toStringAsFixed(1), 'Score',
-                          start: 0.6, end: 0.8),
-                      Opacity(
-                          opacity: Tween(begin: 0.0, end: 1.0)
-                              .animate(CurvedAnimation(
-                                  parent: state.animationController,
-                                  curve: Interval(0.7, 0.8, curve: curve)))
-                              .value,
-                          child: Container(
-                            width: Adapt.px(3),
-                            height: Adapt.px(60),
-                            color: Colors.grey[200],
-                          )),
-                      SlideTransition(
-                          position: owPosition,
-                          child: Opacity(
-                              opacity: owOpacity.value,
-                              child: _buildColumnCell(
-                                  _d.vote_count.toString(), 'Rated',
-                                  start: 0.7, end: 0.9))),
-                      Opacity(
-                          opacity: Tween(begin: 0.0, end: 1.0)
-                              .animate(CurvedAnimation(
-                                  parent: state.animationController,
-                                  curve: Interval(0.8, 0.9, curve: curve)))
-                              .value,
-                          child: Opacity(
-                              opacity: owOpacity.value,
-                              child: Container(
-                                width: Adapt.px(3),
-                                height: Adapt.px(60),
-                                color: Colors.grey[200],
-                              ))),
-                      SlideTransition(
-                          position: owPosition,
-                          child: Opacity(
-                              opacity: owOpacity.value,
-                              child: _buildColumnCell(
-                                  _d.popularity.toStringAsFixed(0), 'Popular',
-                                  start: 0.8, end: 1.0))),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //   children: <Widget>[
+                  //     _buildColumnCell(
+                  //         _d.vote_average.toStringAsFixed(1), 'Score',
+                  //         start: 0.6, end: 0.8),
+                  //     Opacity(
+                  //         opacity: Tween(begin: 0.0, end: 1.0)
+                  //             .animate(CurvedAnimation(
+                  //                 parent: state.animationController,
+                  //                 curve: Interval(0.7, 0.8, curve: curve)))
+                  //             .value,
+                  //         child: Container(
+                  //           width: Adapt.px(3),
+                  //           height: Adapt.px(60),
+                  //           color: Colors.grey[200],
+                  //         )),
+                  //     SlideTransition(
+                  //         position: owPosition,
+                  //         child: Opacity(
+                  //             opacity: owOpacity.value,
+                  //             child: _buildColumnCell(
+                  //                 _d.vote_count.toString(), 'Rated',
+                  //                 start: 0.7, end: 0.9))),
+                  //     Opacity(
+                  //         opacity: Tween(begin: 0.0, end: 1.0)
+                  //             .animate(CurvedAnimation(
+                  //                 parent: state.animationController,
+                  //                 curve: Interval(0.8, 0.9, curve: curve)))
+                  //             .value,
+                  //         child: Opacity(
+                  //             opacity: owOpacity.value,
+                  //             child: Container(
+                  //               width: Adapt.px(3),
+                  //               height: Adapt.px(60),
+                  //               color: Colors.grey[200],
+                  //             ))),
+                  //     SlideTransition(
+                  //         position: owPosition,
+                  //         child: Opacity(
+                  //             opacity: owOpacity.value,
+                  //             child: _buildColumnCell(
+                  //                 _d.popularity.toStringAsFixed(0), 'Popular',
+                  //                 start: 0.8, end: 1.0))),
+                  //   ],
+                  // ),
                 ],
               ),
             );
@@ -168,7 +168,7 @@ Widget buildView(WatchlistDetailPageState state, Dispatch dispatch,
                       alignment: Alignment.bottomCenter,
                       fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                          state.mediaData.poster_path, ImageSize.w500))),
+                          state.mediaData.thumb_s, ImageSize.w500))),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
                         blurRadius: 20,

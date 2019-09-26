@@ -28,7 +28,7 @@ FavoritesPageState _setFavoriteMovies(FavoritesPageState state, Action action) {
   final FavoritesPageState newState = state.clone();
   newState.favoriteMovies=model;
   newState.backgroundColor=Colors.cyan.withAlpha(80);
-  newState.secbackgroundUrl=model.results[0].poster_path;
+  newState.secbackgroundUrl=model.results[0].thumb_s;
   newState.selectedMedia=model.results[0];
   return newState;
 }
@@ -51,7 +51,7 @@ FavoritesPageState _setBackground(FavoritesPageState state, Action action) {
   final VideoListResult result=action.payload[0];
   final Color color=action.payload[01];
   final FavoritesPageState newState = state.clone();
-  newState.secbackgroundUrl=state.selectedMedia.poster_path;
+  newState.secbackgroundUrl=state.selectedMedia.thumb_s;
   newState.selectedMedia=result;
   newState.backgroundColor=color;
   return newState;

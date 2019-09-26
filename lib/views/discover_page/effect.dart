@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/api/classify_api.dart';
 import 'package:movie/models/videolist.dart';
 import 'action.dart';
 import 'state.dart';
@@ -31,20 +32,24 @@ Future _onInit(Action action, Context<DiscoverPageState> ctx) async{
 
 Future _onLoadData(Action action, Context<DiscoverPageState> ctx) async{
   ctx.dispatch(DiscoverPageActionCreator.onBusyChanged(true));
-  var genresIds=ctx.state.filterState.genres.where((e)=>e.isSelected).map<int>((e){return e.value;}).toList();
-  VideoListModel r;
-  if(ctx.state.filterState.isMovie)
-  r=await ApiHelper.getMovieDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
-  else
-  r=await ApiHelper.getTVDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
+  // var genresIds=ctx.state.filterState.genres.where((e)=>e.isSelected).map<int>((e){return e.value;}).toList();
+  // VideoListModel r;
+  // if(ctx.state.filterState.isMovie)
+  // r=await ApiHelper.getMovieDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
+  // else
+  // r=await ApiHelper.getTVDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
+  String classifyId = ctx.state.classifyId;
+  VideoListModel r = await ClassifyApi.getClassifyVideoList(ApiHelper.uid, classifyId, ctx.state.page);
   if(r!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadData(r));
 }
+
 Future _onVideoCellTapped(Action action, Context<DiscoverPageState> ctx) async{
   if(ctx.state.filterState.isMovie)
   await Navigator.of(ctx.context).pushNamed('moviedetailpage',arguments:{'movieid':action.payload[0],'bgpic':action.payload[1]});
   else
    await Navigator.of(ctx.context).pushNamed('tvdetailpage',arguments:{'tvid':action.payload[0],'bgpic':action.payload[1]});
 }
+
 Future _onLoadMore(Action action, Context<DiscoverPageState> ctx) async{
   ctx.dispatch(DiscoverPageActionCreator.onBusyChanged(true));
   var genresIds=ctx.state.filterState.genres.where((e)=>e.isSelected).map<int>((e){return e.value;}).toList();

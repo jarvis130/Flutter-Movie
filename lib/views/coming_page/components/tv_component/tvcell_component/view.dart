@@ -31,7 +31,7 @@ Widget buildView(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                            ImageUrl.getUrl(d.poster_path, ImageSize.w300)))),
+                            ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
               ),
               SizedBox(
                 width: Adapt.px(20),
@@ -45,31 +45,31 @@ Widget buildView(
                     child: RichText(
                       text: TextSpan(children: <TextSpan>[
                         TextSpan(
-                            text: d?.name ?? '-',
+                            text: d?.title ?? '-',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: Adapt.px(30),
                                 fontWeight: FontWeight.bold)),
-                        TextSpan(
-                            text: ' (${d.nextEpisodeNumber ?? '-'})',
-                            style: TextStyle(
-                                color: Colors.grey, fontSize: Adapt.px(30)))
+                        // TextSpan(
+                        //     text: ' (${d.nextEpisodeNumber ?? '-'})',
+                        //     style: TextStyle(
+                        //         color: Colors.grey, fontSize: Adapt.px(30)))
                       ]),
                     ),
                   ),
-                  Text('Season:' + (d.season ?? '-')),
-                  Text(
-                      "Air Date: " +
-                          (d.nextAirDate == null ? '-' : d.nextAirDate),
-                      style: TextStyle(
-                          color: Colors.grey[700], fontSize: Adapt.px(24))),
+                  // Text('Season:' + (d.season ?? '-')),
+                  // Text(
+                  //     "Air Date: " +
+                  //         (d.nextAirDate == null ? '-' : d.nextAirDate),
+                  //     style: TextStyle(
+                  //         color: Colors.grey[700], fontSize: Adapt.px(24))),
                   SizedBox(
                     height: Adapt.px(8),
                   ),
                   Container(
                     width: Adapt.screenW() - Adapt.px(200),
                     child: Text(
-                      d.overview ?? '',
+                      d.description ?? '',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

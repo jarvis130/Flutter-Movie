@@ -102,6 +102,9 @@ Future _loadMore(Action action, Context<ClassifyPageState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<ClassifyPageState> ctx) async {
+  // await Navigator.of(ctx.context)
+  //     .pushNamed('ListDetailPage', arguments: {'listId': action.payload});
+
   await Navigator.of(ctx.context)
-      .pushNamed('ListDetailPage', arguments: {'listId': action.payload});
+      .pushNamed('DiscoverPage', arguments: {'classifyId': action.payload});    
 }

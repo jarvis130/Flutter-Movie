@@ -118,7 +118,7 @@ Widget buildView(
                   height: Adapt.px(400) * 9 / 16,
                   placeholder: 'images/CacheBG.jpg',
                   image: ImageUrl.getUrl(
-                      d.backdrop_path ?? '/eIkFHNlfretLS1spAcIoihKUS62.jpg',
+                      d.thumb_s ?? '/eIkFHNlfretLS1spAcIoihKUS62.jpg',
                       ImageSize.w400),
                 ),
               ),
@@ -126,7 +126,7 @@ Widget buildView(
                 padding: EdgeInsets.all(Adapt.px(10)),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  d.name ?? '',
+                  d.title ?? '',
                   softWrap: false,
                   style: TextStyle(
                       color: Colors.white,
@@ -150,23 +150,23 @@ Widget buildView(
                       color: Colors.white,
                       size: Adapt.px(28),
                     ),
-                    Text(d.vote_average.toString(),
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Adapt.px(28),
-                            shadows: <Shadow>[
-                              Shadow(
-                                  blurRadius: 1.2,
-                                  color: Colors.black87,
-                                  offset: Offset(Adapt.px(3), Adapt.px(3)))
-                            ]))
+                    // Text(d.vote_average.toString(),
+                    //     style: TextStyle(
+                    //         color: Colors.white,
+                    //         fontSize: Adapt.px(28),
+                    //         shadows: <Shadow>[
+                    //           Shadow(
+                    //               blurRadius: 1.2,
+                    //               color: Colors.black87,
+                    //               offset: Offset(Adapt.px(3), Adapt.px(3)))
+                    //         ]))
                   ],
                 ),
               ),
             ],
           )),
       onTap: () => dispatch(TVDetailPageActionCreator.onRecommendationTapped(
-          d.id, d.backdrop_path)),
+          d.id, d.thumb_s)),
     );
   }
 

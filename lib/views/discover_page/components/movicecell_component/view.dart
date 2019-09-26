@@ -13,7 +13,7 @@ Widget buildView(
     VideoCellState state, Dispatch dispatch, ViewService viewService) {
   var d = state.videodata;
   return GestureDetector(
-    key: Key(d.original_title),
+    key: Key(d.title),
     child: Container(
       padding: EdgeInsets.fromLTRB(Adapt.px(20), 0, Adapt.px(20), Adapt.px(30)),
       child: Card(
@@ -27,7 +27,7 @@ Widget buildView(
                   fit: BoxFit.cover,
                   placeholder: 'images/CacheBG.jpg',
                   image: ImageUrl.getUrl(
-                      d.poster_path ?? '/lrzvimkeL72qxHN1FaSmjIoztvj.jpg',
+                      d.thumb_s ?? '/lrzvimkeL72qxHN1FaSmjIoztvj.jpg',
                       ImageSize.w300),
                 )),
             Container(
@@ -52,37 +52,37 @@ Widget buildView(
                                         BorderRadius.circular(Adapt.px(40))),
                               ),
                             ),
-                            Center(
-                              child: Container(
-                                  width: Adapt.px(60),
-                                  height: Adapt.px(60),
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 3.0,
-                                    valueColor:
-                                        new AlwaysStoppedAnimation<Color>(
-                                            VoteColorHelper.getColor(
-                                                d.vote_average)),
-                                    backgroundColor: Colors.grey,
-                                    value: d.vote_average / 10.0,
-                                  )),
-                            ),
-                            Center(
-                              child: Container(
-                                  width: Adapt.px(60),
-                                  height: Adapt.px(60),
-                                  child: Center(
-                                    child: Text(
-                                      (d.vote_average * 10.0)
-                                              .floor()
-                                              .toString() +
-                                          '%',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Adapt.px(22),
-                                          color: Colors.white),
-                                    ),
-                                  )),
-                            )
+                            // Center(
+                            //   child: Container(
+                            //       width: Adapt.px(60),
+                            //       height: Adapt.px(60),
+                            //       child: CircularProgressIndicator(
+                            //         strokeWidth: 3.0,
+                            //         valueColor:
+                            //             new AlwaysStoppedAnimation<Color>(
+                            //                 VoteColorHelper.getColor(
+                            //                     d.vote_average)),
+                            //         backgroundColor: Colors.grey,
+                            //         value: d.vote_average / 10.0,
+                            //       )),
+                            // ),
+                            // Center(
+                            //   child: Container(
+                            //       width: Adapt.px(60),
+                            //       height: Adapt.px(60),
+                            //       child: Center(
+                            //         child: Text(
+                            //           (d.vote_average * 10.0)
+                            //                   .floor()
+                            //                   .toString() +
+                            //               '%',
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.w700,
+                            //               fontSize: Adapt.px(22),
+                            //               color: Colors.white),
+                            //         ),
+                            //       )),
+                            // )
                           ],
                         ),
                       ),
@@ -105,13 +105,13 @@ Widget buildView(
                                   fontSize: Adapt.px(26)),
                             ),
                           ),
-                          Text(
-                            DateFormat.yMMMd()
-                                .format(DateTime.parse((d.release_date==null||d.release_date?.isEmpty==true)?'1970-01-01':d.release_date)),
-                            style: TextStyle(
-                                color: Colors.grey[800],
-                                fontSize: Adapt.px(20)),
-                          )
+                          // Text(
+                          //   DateFormat.yMMMd()
+                          //       .format(DateTime.parse((d.release_date==null||d.release_date?.isEmpty==true)?'1970-01-01':d.release_date)),
+                          //   style: TextStyle(
+                          //       color: Colors.grey[800],
+                          //       fontSize: Adapt.px(20)),
+                          // )
                         ],
                       )
                     ],
@@ -122,7 +122,7 @@ Widget buildView(
                   Container(
                     width: Adapt.screenW() - Adapt.px(360),
                     child: Text(
-                      d.overview,
+                      d.description,
                       softWrap: true,
                       maxLines: 8,
                       overflow: TextOverflow.ellipsis,

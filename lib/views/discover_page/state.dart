@@ -9,6 +9,8 @@ import 'package:movie/models/videolist.dart';
 import 'package:movie/views/discover_page/components/filter_component/state.dart';
 
 class DiscoverPageState implements GlobalBaseState<DiscoverPageState> {
+  String classifyId;
+  int page;
   List<SortCondition> sortType;
   List<String> filterTabNames;
   FilterState filterState;
@@ -23,6 +25,8 @@ class DiscoverPageState implements GlobalBaseState<DiscoverPageState> {
 
   DiscoverPageState clone() {
     return DiscoverPageState()
+    ..classifyId = classifyId
+    ..page = page
     ..sortType=sortType
     ..filterTabNames=filterTabNames
     ..filterState=filterState
@@ -40,7 +44,11 @@ class DiscoverPageState implements GlobalBaseState<DiscoverPageState> {
 }
 
 DiscoverPageState initState(Map<String, dynamic> args) {
+  
   final DiscoverPageState state= DiscoverPageState();
+
+  state.classifyId=args['classifyId'];
+  state.page = 1;
   state.filterTabNames=new List<String>()..add('Sort By')..add('Filter');
   state.filterState=new FilterState();
   state.scaffoldKey = GlobalKey();

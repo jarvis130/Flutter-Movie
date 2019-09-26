@@ -44,22 +44,28 @@ Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
 
 Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
   VideoListResult d = action.payload;
-  if (d != null) {
-    if (d.mediaType == 'movie')
-      await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
+  // if (d != null) {
+  //   if (d.mediaType == 'movie')
+  //     await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
+  //       'movieid': d.id,
+  //       'bgpic': d.backdrop_path,
+  //       'title': d.title,
+  //       'posterpic': d.poster_path
+  //     });
+  //   else
+  //     await Navigator.of(ctx.context).pushNamed('tvdetailpage', arguments: {
+  //       'tvid': d.id,
+  //       'bgpic': d.backdrop_path,
+  //       'name': d.name,
+  //       'posterpic': d.poster_path
+  //     });
+  // }
+  await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
         'movieid': d.id,
-        'bgpic': d.backdrop_path,
+        'bgpic': d.thumb_s,
         'title': d.title,
-        'posterpic': d.poster_path
+        'posterpic': d.thumb_s
       });
-    else
-      await Navigator.of(ctx.context).pushNamed('tvdetailpage', arguments: {
-        'tvid': d.id,
-        'bgpic': d.backdrop_path,
-        'name': d.name,
-        'posterpic': d.poster_path
-      });
-  }
 }
 
 Future _sortChanged(Action action, Context<ListDetailPageState> ctx) async {
