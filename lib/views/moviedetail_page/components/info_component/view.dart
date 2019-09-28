@@ -149,18 +149,18 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
   }
 
   Widget _getReleaseDate() {
-    if (state.movieDetailModel?.releaseDates != null) {
-      var q = state?.movieDetailModel?.releaseDates?.results
-          ?.where((d) => d.iso31661 == ui.window.locale.countryCode)
-          ?.toList();
-      ReleaseDateResult data;
-      if (q != null && q.length > 0) {
-        data = q.first;
-        return Wrap(
-            spacing: Adapt.px(20),
-            children: data.releaseDates.map(_buildReleaseDateCell).toList());
-      }
-    }
+    // if (state.movieDetailModel?.releaseDates != null) {
+    //   var q = state?.movieDetailModel?.releaseDates?.results
+    //       ?.where((d) => d.iso31661 == ui.window.locale.countryCode)
+    //       ?.toList();
+    //   ReleaseDateResult data;
+    //   if (q != null && q.length > 0) {
+    //     data = q.first;
+    //     return Wrap(
+    //         spacing: Adapt.px(20),
+    //         children: data.releaseDates.map(_buildReleaseDateCell).toList());
+    //   }
+    // }
     return Wrap(
       spacing: Adapt.px(40),
       children: <Widget>[
@@ -171,54 +171,54 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
   }
 
   Widget _getExternal() {
-    var d = state.movieDetailModel.externalids;
-    if (d != null)
-      return Row(
-        children: <Widget>[
-          _buildExternalCell('images/facebook_circle.png',
-              'https://www.facebook.com/', d.facebookId),
-          SizedBox(
-            width: Adapt.px(10),
-          ),
-          _buildExternalCell(
-              'images/twitter_circle.png', 'https://twitter.com/', d.twitterId),
-          SizedBox(
-            width: Adapt.px(10),
-          ),
-          _buildExternalCell('images/instagram_circle.png',
-              'https://www.instagram.com/', d.instagramId),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          (d.facebookId == null &&
-                      d.twitterId == null &&
-                      d.instagramId == null) ||
-                  state.movieDetailModel.homepage == null
-              ? Container()
-              : Container(
-                  width: Adapt.px(2),
-                  height: Adapt.px(50),
-                  color: Colors.grey,
-                ),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          state.movieDetailModel.homepage != null
-              ? InkWell(
-                  borderRadius: BorderRadius.circular(Adapt.px(30)),
-                  onTap: () => dispatch(InfoActionCreator.onExternalTapped(
-                      state.movieDetailModel.homepage)),
-                  child: Container(
-                    width: Adapt.px(40),
-                    height: Adapt.px(40),
-                    child: Image.asset(
-                      'images/link_bold.png',
-                    ),
-                  ))
-              : SizedBox(),
-        ],
-      );
-    else
+    // var d = state.movieDetailModel.externalids;
+    // if (d != null)
+    //   return Row(
+    //     children: <Widget>[
+    //       _buildExternalCell('images/facebook_circle.png',
+    //           'https://www.facebook.com/', d.facebookId),
+    //       SizedBox(
+    //         width: Adapt.px(10),
+    //       ),
+    //       _buildExternalCell(
+    //           'images/twitter_circle.png', 'https://twitter.com/', d.twitterId),
+    //       SizedBox(
+    //         width: Adapt.px(10),
+    //       ),
+    //       _buildExternalCell('images/instagram_circle.png',
+    //           'https://www.instagram.com/', d.instagramId),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       (d.facebookId == null &&
+    //                   d.twitterId == null &&
+    //                   d.instagramId == null) ||
+    //               state.movieDetailModel.homepage == null
+    //           ? Container()
+    //           : Container(
+    //               width: Adapt.px(2),
+    //               height: Adapt.px(50),
+    //               color: Colors.grey,
+    //             ),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       state.movieDetailModel.homepage != null
+    //           ? InkWell(
+    //               borderRadius: BorderRadius.circular(Adapt.px(30)),
+    //               onTap: () => dispatch(InfoActionCreator.onExternalTapped(
+    //                   state.movieDetailModel.homepage)),
+    //               child: Container(
+    //                 width: Adapt.px(40),
+    //                 height: Adapt.px(40),
+    //                 child: Image.asset(
+    //                   'images/link_bold.png',
+    //                 ),
+    //               ))
+    //           : SizedBox(),
+    //     ],
+    //   );
+    // else
       return Row(
         children: <Widget>[
           ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30)),
@@ -264,17 +264,17 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: Adapt.px(10)),
-              Wrap(
-                spacing: Adapt.px(40),
-                children: state.movieDetailModel?.production_companies != null
-                    ? state.movieDetailModel.production_companies
-                        .map(_buildProductionCompanieCell)
-                        .toList()
-                    : <Widget>[
-                        ShimmerCell(Adapt.px(120), Adapt.px(60), 0),
-                        ShimmerCell(Adapt.px(120), Adapt.px(60), 0)
-                      ],
-              )
+              // Wrap(
+              //   spacing: Adapt.px(40),
+              //   children: state.movieDetailModel?.production_companies != null
+              //       ? state.movieDetailModel.production_companies
+              //           .map(_buildProductionCompanieCell)
+              //           .toList()
+              //       : <Widget>[
+              //           ShimmerCell(Adapt.px(120), Adapt.px(60), 0),
+              //           ShimmerCell(Adapt.px(120), Adapt.px(60), 0)
+              //         ],
+              // )
             ],
           ),
           SizedBox(
@@ -303,32 +303,32 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
           SizedBox(
             height: Adapt.px(10),
           ),
-          Row(
-            children: <Widget>[
-              _buildInfoCell(I18n.of(viewService.context).originalLanguage,
-                  state.movieDetailModel?.original_language),
-              _buildInfoCell(
-                  I18n.of(viewService.context).runtime,
-                  state.movieDetailModel.runtime == null
-                      ? 'none'
-                      : state.movieDetailModel.runtime.toString() + 'M'),
-            ],
-          ),
+          // Row(
+          //   children: <Widget>[
+          //     _buildInfoCell(I18n.of(viewService.context).originalLanguage,
+          //         state.movieDetailModel?.original_language),
+          //     _buildInfoCell(
+          //         I18n.of(viewService.context).runtime,
+          //         state.movieDetailModel.runtime == null
+          //             ? 'none'
+          //             : state.movieDetailModel.runtime.toString() + 'M'),
+          //   ],
+          // ),
           SizedBox(
             height: Adapt.px(10),
           ),
-          Row(
-            children: <Widget>[
-              _buildInfoCell(
-                  I18n.of(viewService.context).budget,
-                  '\$' +
-                      moneyformat.format(state.movieDetailModel?.budget ?? 0)),
-              _buildInfoCell(
-                  I18n.of(viewService.context).revenue,
-                  "\$" +
-                      moneyformat.format(state.movieDetailModel?.revenue ?? 0)),
-            ],
-          ),
+          // Row(
+          //   children: <Widget>[
+          //     _buildInfoCell(
+          //         I18n.of(viewService.context).budget,
+          //         '\$' +
+          //             moneyformat.format(state.movieDetailModel?.budget ?? 0)),
+          //     _buildInfoCell(
+          //         I18n.of(viewService.context).revenue,
+          //         "\$" +
+          //             moneyformat.format(state.movieDetailModel?.revenue ?? 0)),
+          //   ],
+          // ),
           SizedBox(
             height: Adapt.px(10),
           ),
@@ -342,18 +342,18 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
                     fontSize: Adapt.px(30),
                     fontWeight: FontWeight.bold),
               ),
-              Wrap(
-                spacing: Adapt.px(20),
-                children: state.movieDetailModel?.genres != null
-                    ? state.movieDetailModel.genres
-                        .map(_buildGenderCell)
-                        .toList()
-                    : <Widget>[
-                        ShimmerCell(Adapt.px(100), Adapt.px(50), Adapt.px(25)),
-                        ShimmerCell(Adapt.px(120), Adapt.px(50), Adapt.px(25)),
-                        ShimmerCell(Adapt.px(80), Adapt.px(50), Adapt.px(25)),
-                      ],
-              )
+              // Wrap(
+              //   spacing: Adapt.px(20),
+              //   children: state.movieDetailModel?.genres != null
+              //       ? state.movieDetailModel.genres
+              //           .map(_buildGenderCell)
+              //           .toList()
+              //       : <Widget>[
+              //           ShimmerCell(Adapt.px(100), Adapt.px(50), Adapt.px(25)),
+              //           ShimmerCell(Adapt.px(120), Adapt.px(50), Adapt.px(25)),
+              //           ShimmerCell(Adapt.px(80), Adapt.px(50), Adapt.px(25)),
+              //         ],
+              // )
             ],
           ),
         ],

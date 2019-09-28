@@ -112,69 +112,69 @@ Widget buildView(
 
   Widget _getExternal() {
     var _detail = state.detail;
-    var _ids = _detail.externalids;
-    if (_ids != null)
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          _buildExternalCell('images/facebook_circle.png',
-              'https://www.facebook.com/', _ids.facebookId),
-          SizedBox(
-            width: Adapt.px(10),
-          ),
-          _buildExternalCell('images/twitter_circle.png',
-              'https://twitter.com/', _ids.twitterId),
-          SizedBox(
-            width: Adapt.px(10),
-          ),
-          _buildExternalCell('images/instagram_circle.png',
-              'https://www.instagram.com/', _ids.instagramId),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          (_ids.facebookId == null &&
-                      _ids.twitterId == null &&
-                      _ids.instagramId == null) ||
-                  _detail.homepage == null
-              ? Container()
-              : Container(
-                  width: Adapt.px(2),
-                  height: Adapt.px(30),
-                  color: Colors.grey,
-                ),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          _detail.homepage != null
-              ? InkWell(
-                  borderRadius: BorderRadius.circular(Adapt.px(15)),
-                  onTap: () => dispatch(
-                      MovieDetailPageActionCreator.onExternalTapped(
-                          _detail.homepage)),
-                  child: Container(
-                    width: Adapt.px(30),
-                    height: Adapt.px(30),
-                    child: Image.asset(
-                      'images/link_bold.png',
-                    ),
-                  ))
-              : SizedBox(),
-        ],
-      );
-    else
-      return Row(
-        children: <Widget>[
-          ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30)),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30)),
-          SizedBox(
-            width: Adapt.px(20),
-          ),
-          ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30))
-        ],
-      );
+    var _ids = _detail.id;
+    // if (_ids != null)
+    //   return Row(
+    //     mainAxisAlignment: MainAxisAlignment.end,
+    //     children: <Widget>[
+    //       _buildExternalCell('images/facebook_circle.png',
+    //           'https://www.facebook.com/', '1'),
+    //       SizedBox(
+    //         width: Adapt.px(10),
+    //       ),
+    //       _buildExternalCell('images/twitter_circle.png',
+    //           'https://twitter.com/', '2'),
+    //       SizedBox(
+    //         width: Adapt.px(10),
+    //       ),
+    //       _buildExternalCell('images/instagram_circle.png',
+    //           'https://www.instagram.com/', '3'),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       (_ids.facebookId == null &&
+    //                   _ids.twitterId == null &&
+    //                   _ids.instagramId == null) ||
+    //               _detail.homepage == null
+    //           ? Container()
+    //           : Container(
+    //               width: Adapt.px(2),
+    //               height: Adapt.px(30),
+    //               color: Colors.grey,
+    //             ),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       _detail.homepage != null
+    //           ? InkWell(
+    //               borderRadius: BorderRadius.circular(Adapt.px(15)),
+    //               onTap: () => dispatch(
+    //                   MovieDetailPageActionCreator.onExternalTapped(
+    //                       _detail.homepage)),
+    //               child: Container(
+    //                 width: Adapt.px(30),
+    //                 height: Adapt.px(30),
+    //                 child: Image.asset(
+    //                   'images/link_bold.png',
+    //                 ),
+    //               ))
+    //           : SizedBox(),
+    //     ],
+    //   );
+    // else
+    //   return Row(
+    //     children: <Widget>[
+    //       ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30)),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30)),
+    //       SizedBox(
+    //         width: Adapt.px(20),
+    //       ),
+    //       ShimmerCell(Adapt.px(60), Adapt.px(60), Adapt.px(30))
+    //     ],
+    //   );
   }
 
   Widget _buildCastCell(CastData d) {
@@ -413,54 +413,54 @@ Widget buildView(
               SizedBox(
                 height: Adapt.px(10),
               ),
-              Text(DateFormat.yMMMd().format(
-                  DateTime.parse(state.detail?.release_date ?? '1990-01-01'))),
+              // Text(DateFormat.yMMMd().format(
+              //     DateTime.parse(state.detail?.release_date ?? '1990-01-01'))),
               SizedBox(
                 height: Adapt.px(10),
               ),
-              RichText(
-                text: TextSpan(
-                    style: TextStyle(color: Colors.grey),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: state.detail?.genres
-                                  ?.map((f) {
-                                    return f.name;
-                                  })
-                                  ?.toList()
-                                  ?.take(3)
-                                  ?.join(' / ') ??
-                              ''),
-                      TextSpan(text: ' · '),
-                      TextSpan(
-                          text: _covertDuration(state.detail?.runtime ?? 0))
-                    ]),
-              ),
+              // RichText(
+              //   text: TextSpan(
+              //       style: TextStyle(color: Colors.grey),
+              //       children: <TextSpan>[
+              //         TextSpan(
+              //             text: state.detail?.genres
+              //                     ?.map((f) {
+              //                       return f.name;
+              //                     })
+              //                     ?.toList()
+              //                     ?.take(3)
+              //                     ?.join(' / ') ??
+              //                 ''),
+              //         TextSpan(text: ' · '),
+              //         TextSpan(
+              //             text: _covertDuration(state.detail?.runtime ?? 0))
+              //       ]),
+              // ),
               SizedBox(
                 height: Adapt.px(10),
               ),
-              Row(
-                children: <Widget>[
-                  FlutterRatingBarIndicator(
-                    rating: (state.detail?.vote_average ?? 0.0) / 2,
-                    itemPadding: EdgeInsets.only(right: Adapt.px(8)),
-                    itemCount: 5,
-                    emptyColor: Colors.grey,
-                    itemSize: Adapt.px(25),
-                  ),
-                  SizedBox(
-                    width: Adapt.px(8),
-                  ),
-                  Text(
-                    '${state.detail?.vote_average ?? 0.0}',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    width: Adapt.px(8),
-                  ),
-                  Text('(${state.detail?.vote_count ?? 0})'),
-                ],
-              ),
+              // Row(
+              //   children: <Widget>[
+              //     FlutterRatingBarIndicator(
+              //       rating: (state.detail?.vote_average ?? 0.0) / 2,
+              //       itemPadding: EdgeInsets.only(right: Adapt.px(8)),
+              //       itemCount: 5,
+              //       emptyColor: Colors.grey,
+              //       itemSize: Adapt.px(25),
+              //     ),
+              //     SizedBox(
+              //       width: Adapt.px(8),
+              //     ),
+              //     Text(
+              //       '${state.detail?.vote_average ?? 0.0}',
+              //       style: TextStyle(fontWeight: FontWeight.bold),
+              //     ),
+              //     SizedBox(
+              //       width: Adapt.px(8),
+              //     ),
+              //     Text('(${state.detail?.vote_count ?? 0})'),
+              //   ],
+              // ),
             ],
           );
     return SliverAppBar(
@@ -527,7 +527,7 @@ Widget buildView(
   }
 
   Widget _buildOverWatch() {
-    Widget _overWatch = state.detail?.overview == null
+    Widget _overWatch = state.detail?.description == null
         ? Shimmer.fromColors(
             baseColor: Colors.grey[200],
             highlightColor: Colors.grey[100],
@@ -563,7 +563,7 @@ Widget buildView(
               ],
             ),
           )
-        : Text(state.detail?.overview ?? '');
+        : Text(state.detail?.description ?? '');
     return SliverToBoxAdapter(
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: Adapt.px(40)),
@@ -591,7 +591,8 @@ Widget buildView(
   }
 
   Widget _buildCast() {
-    var _model = state.detail?.credits?.cast ?? [];
+    // var _model = state.detail?.credits?.cast ?? [];
+    var _model;
     return SliverToBoxAdapter(
       child: Container(
         child: Column(
@@ -613,36 +614,36 @@ Widget buildView(
             SizedBox(
               height: Adapt.px(30),
             ),
-            Container(
-              height: Adapt.px(300),
-              child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: _model.length == 0
-                      ? <Widget>[
-                          SizedBox(
-                            width: Adapt.px(40),
-                          ),
-                          _buildCastShimmerCell(),
-                          SizedBox(
-                            width: Adapt.px(30),
-                          ),
-                          _buildCastShimmerCell(),
-                          SizedBox(
-                            width: Adapt.px(30),
-                          ),
-                          _buildCastShimmerCell(),
-                          SizedBox(
-                            width: Adapt.px(30),
-                          ),
-                          _buildCastShimmerCell()
-                        ]
-                      : (state.detail.credits.cast.map(_buildCastCell).toList()
-                        ..insert(
-                            0,
-                            SizedBox(
-                              width: Adapt.px(40),
-                            )))),
-            )
+            // Container(
+            //   height: Adapt.px(300),
+            //   child: ListView(
+            //       scrollDirection: Axis.horizontal,
+            //       children: _model.length == 0
+            //           ? <Widget>[
+            //               SizedBox(
+            //                 width: Adapt.px(40),
+            //               ),
+            //               _buildCastShimmerCell(),
+            //               SizedBox(
+            //                 width: Adapt.px(30),
+            //               ),
+            //               _buildCastShimmerCell(),
+            //               SizedBox(
+            //                 width: Adapt.px(30),
+            //               ),
+            //               _buildCastShimmerCell(),
+            //               SizedBox(
+            //                 width: Adapt.px(30),
+            //               ),
+            //               _buildCastShimmerCell()
+            //             ]
+            //           : (state.detail.credits.cast.map(_buildCastCell).toList()
+            //             ..insert(
+            //                 0,
+            //                 SizedBox(
+            //                   width: Adapt.px(40),
+            //                 )))),
+            // )
           ],
         ),
       ),
@@ -712,7 +713,8 @@ Widget buildView(
   }
 
   Widget _buildKeyWord() {
-    var _model = state.detail?.keywords?.keywords ?? [];
+    // var _model = state.detail?.keywords?.keywords ?? [];
+    var _model;
     return SliverToBoxAdapter(
       child: Container(
         child: Column(
@@ -731,26 +733,26 @@ Widget buildView(
             SizedBox(
               height: Adapt.px(10),
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(
-                  Adapt.px(40), 0, Adapt.px(40), Adapt.px(30)),
-              child: Wrap(
-                spacing: Adapt.px(15),
-                direction: Axis.horizontal,
-                children: _model.length == 0
-                    ? <Widget>[
-                        ShimmerCell(Adapt.px(120), Adapt.px(60), Adapt.px(30),
-                            margin: EdgeInsets.only(top: Adapt.px(20))),
-                        ShimmerCell(Adapt.px(180), Adapt.px(60), Adapt.px(30),
-                            margin: EdgeInsets.only(top: Adapt.px(20))),
-                        ShimmerCell(Adapt.px(200), Adapt.px(60), Adapt.px(30),
-                            margin: EdgeInsets.only(top: Adapt.px(20))),
-                      ]
-                    : state.detail.keywords.keywords
-                        .map(_buildKeyWordCell)
-                        .toList(),
-              ),
-            )
+            // Container(
+            //   padding: EdgeInsets.fromLTRB(
+            //       Adapt.px(40), 0, Adapt.px(40), Adapt.px(30)),
+            //   child: Wrap(
+            //     spacing: Adapt.px(15),
+            //     direction: Axis.horizontal,
+            //     children: _model.length == 0
+            //         ? <Widget>[
+            //             ShimmerCell(Adapt.px(120), Adapt.px(60), Adapt.px(30),
+            //                 margin: EdgeInsets.only(top: Adapt.px(20))),
+            //             ShimmerCell(Adapt.px(180), Adapt.px(60), Adapt.px(30),
+            //                 margin: EdgeInsets.only(top: Adapt.px(20))),
+            //             ShimmerCell(Adapt.px(200), Adapt.px(60), Adapt.px(30),
+            //                 margin: EdgeInsets.only(top: Adapt.px(20))),
+            //           ]
+            //         : state.detail.keywords.keywords
+            //             .map(_buildKeyWordCell)
+            //             .toList(),
+            //   ),
+            // )
           ],
         ),
       ),
@@ -758,56 +760,56 @@ Widget buildView(
   }
 
   Widget _buildRecommendations() {
-    var _model = state.detail?.recommendations?.results ?? [];
-    return SliverToBoxAdapter(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: Adapt.px(40)),
-            child: Text(
-              I18n.of(viewService.context).recommendations,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Adapt.px(35)),
-            ),
-          ),
-          SizedBox(
-            height: Adapt.px(30),
-          ),
-          Container(
-            height: Adapt.px(450),
-            child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _model.length == 0
-                    ? <Widget>[
-                        SizedBox(
-                          width: Adapt.px(40),
-                        ),
-                        _buildRecommendationShimmerCell(),
-                        SizedBox(
-                          width: Adapt.px(30),
-                        ),
-                        _buildRecommendationShimmerCell(),
-                        SizedBox(
-                          width: Adapt.px(30),
-                        ),
-                        _buildRecommendationShimmerCell()
-                      ]
-                    : (state.detail.recommendations.results
-                        .map(_buildRecommendationCell)
-                        .toList()
-                          ..insert(
-                              0,
-                              SizedBox(
-                                width: Adapt.px(40),
-                              )))),
-          ),
-          SizedBox(
-            height: Adapt.px(30),
-          ),
-        ]));
+    // var _model = state.detail?.recommendations?.results ?? [];
+    // return SliverToBoxAdapter(
+    //     child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.start,
+    //         children: <Widget>[
+    //       Padding(
+    //         padding: EdgeInsets.symmetric(horizontal: Adapt.px(40)),
+    //         child: Text(
+    //           I18n.of(viewService.context).recommendations,
+    //           style: TextStyle(
+    //               color: Colors.black,
+    //               fontWeight: FontWeight.bold,
+    //               fontSize: Adapt.px(35)),
+    //         ),
+    //       ),
+    //       SizedBox(
+    //         height: Adapt.px(30),
+    //       ),
+    //       Container(
+    //         height: Adapt.px(450),
+    //         child: ListView(
+    //             scrollDirection: Axis.horizontal,
+    //             children: _model.length == 0
+    //                 ? <Widget>[
+    //                     SizedBox(
+    //                       width: Adapt.px(40),
+    //                     ),
+    //                     _buildRecommendationShimmerCell(),
+    //                     SizedBox(
+    //                       width: Adapt.px(30),
+    //                     ),
+    //                     _buildRecommendationShimmerCell(),
+    //                     SizedBox(
+    //                       width: Adapt.px(30),
+    //                     ),
+    //                     _buildRecommendationShimmerCell()
+    //                   ]
+    //                 : (state.detail.recommendations.results
+    //                     .map(_buildRecommendationCell)
+    //                     .toList()
+    //                       ..insert(
+    //                           0,
+    //                           SizedBox(
+    //                             width: Adapt.px(40),
+    //                           )))),
+    //       ),
+    //       SizedBox(
+    //         height: Adapt.px(30),
+    //       ),
+    //     ]));
   }
 
   return Scaffold(

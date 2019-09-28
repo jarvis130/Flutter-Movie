@@ -26,7 +26,7 @@ MovieDetailPageState _updateDetail(MovieDetailPageState state, Action action) {
   final MovieDetailModel model = action.payload;
   final MovieDetailPageState newState = state.clone();
   newState.detail = model;
-  if (newState.bgPic == null) newState.bgPic = model.poster_path;
+  if (newState.bgPic == null) newState.bgPic = model.thumb_s;
   return newState;
 }
 

@@ -135,9 +135,12 @@ Widget buildView(
                     color: Colors.grey[200],
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                        d.thumb_s,
-                        ImageSize.w300))
+                      image: CachedNetworkImageProvider(
+                        // ImageUrl.getUrl(
+                        // d.thumb_s,
+                        // ImageSize.w300)
+                        d.thumb_s
+                      )
                     )
                   ),),
               Container(
@@ -254,8 +257,14 @@ Widget buildView(
 
   return Scaffold(
     key: state.scaffoldKey,
-    endDrawer: Drawer(
-      child: viewService.buildComponent('filter'),
+    // endDrawer: Drawer(
+    //   child: viewService.buildComponent('filter'),
+    // ),
+    appBar: AppBar(
+        backgroundColor: Color.fromRGBO(45, 45, 48, 1),
+        brightness: Brightness.dark,
+        // elevation: 0.0,
+        // automaticallyImplyLeading: false,
     ),
     body: SafeArea(
       child: Stack(
@@ -264,63 +273,64 @@ Widget buildView(
           CustomScrollView(
             controller: state.scrollController,
             slivers: <Widget>[
-              SliverPersistentHeader(
-                pinned: true,
-                floating: true,
-                delegate: SliverAppBarDelegate(
-                    minHeight: 40,
-                    maxHeight: 40,
-                    child: GZXDropDownHeader(
-                      items: [
-                        GZXDropDownHeaderItem(state.filterTabNames[0]),
-                        GZXDropDownHeaderItem(I18n.of(viewService.context).filter,
-                            iconData: Icons.filter_list, iconSize: 13),
-                      ],
-                      style: TextStyle(
-                          fontSize: Adapt.px(24), color: Colors.black),
-                      dropDownStyle: TextStyle(
-                          fontSize: Adapt.px(24), color: Colors.black),
-                      iconDropDownColor: Colors.black,
-                      stackKey: state.stackKey,
-                      controller: state.dropdownMenuController,
-                      onItemTap: (index) {
-                        if (index == 1) {
-                          state.scaffoldKey.currentState.openEndDrawer();
-                          state.dropdownMenuController.hide();
-                        }
-                      },
-                    )),
-              ),
+              // SliverPersistentHeader(
+              //   pinned: true,
+              //   floating: true,
+              //   delegate: SliverAppBarDelegate(
+              //       minHeight: 40,
+              //       maxHeight: 40,
+              //       child: GZXDropDownHeader(
+              //         items: [
+              //           GZXDropDownHeaderItem(state.filterTabNames[0]),
+              //           GZXDropDownHeaderItem(I18n.of(viewService.context).filter,
+              //               iconData: Icons.filter_list, iconSize: 13),
+              //         ],
+              //         style: TextStyle(
+              //             fontSize: Adapt.px(24), color: Colors.black),
+              //         dropDownStyle: TextStyle(
+              //             fontSize: Adapt.px(24), color: Colors.black),
+              //         iconDropDownColor: Colors.black,
+              //         stackKey: state.stackKey,
+              //         controller: state.dropdownMenuController,
+              //         onItemTap: (index) {
+              //           if (index == 1) {
+              //             state.scaffoldKey.currentState.openEndDrawer();
+              //             state.dropdownMenuController.hide();
+              //           }
+              //         },
+              //       )),
+              // ),
               SliverList(
-                delegate:
-                    SliverChildBuilderDelegate((BuildContext cxt, int index) {
+                delegate: SliverChildBuilderDelegate((BuildContext cxt, int index) {
                   return _buildListCell(state.videoListModel.results[index]);
-                }, childCount: state.videoListModel.results.length),
+                }, 
+                childCount: state.videoListModel.results.length),
               ),
-              SliverToBoxAdapter(
-                  child: Offstage(
-                offstage: state.isbusy,
-                child: Container(
-                  margin: EdgeInsets.only(
-                      top: Adapt.px(10),
-                      bottom: Adapt.px(30),
-                      left: Adapt.px(30),
-                      right: Adapt.px(30)),
-                  child: Column(
-                    children: <Widget>[
-                      _buildShimmerCell(),
-                      SizedBox(
-                        height: Adapt.px(30),
-                      ),
-                      _buildShimmerCell(),
-                      SizedBox(
-                        height: Adapt.px(30),
-                      ),
-                      _buildShimmerCell(),
-                    ],
-                  ),
-                ),
-              ))
+              // SliverToBoxAdapter(
+              //     child: Offstage(
+              //       offstage: state.isbusy,
+              //       child: Container(
+              //         margin: EdgeInsets.only(
+              //             top: Adapt.px(10),
+              //             bottom: Adapt.px(30),
+              //             left: Adapt.px(30),
+              //             right: Adapt.px(30)),
+              //         child: Column(
+              //           children: <Widget>[
+              //             _buildShimmerCell(),
+              //             SizedBox(
+              //               height: Adapt.px(30),
+              //             ),
+              //             _buildShimmerCell(),
+              //             SizedBox(
+              //               height: Adapt.px(30),
+              //             ),
+              //             _buildShimmerCell(),
+              //           ],
+              //         ),
+              //       ),
+              //   )
+              // )
             ],
           ),
           GZXDropDownMenu(

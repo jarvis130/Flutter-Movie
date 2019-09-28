@@ -179,14 +179,14 @@ Widget buildView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             VideoPlayerItem(
-              vc: VideoPlayerController.network(VideoUrl.getUrl(d.key, d.site)),
-              coverurl: 'https://i.ytimg.com/vi/${d.key}/hqdefault.jpg',
+              vc: VideoPlayerController.network(VideoUrl.getUrl(d.id, d.href)),
+              coverurl: 'https://i.ytimg.com/vi/${d.id}/hqdefault.jpg',
               showplayer: true,
             ),
             Padding(
               padding: EdgeInsets.all(Adapt.px(20)),
               child: Text(
-                d.name,
+                d.title,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: Adapt.px(35),

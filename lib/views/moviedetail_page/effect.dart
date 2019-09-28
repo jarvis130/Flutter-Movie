@@ -47,16 +47,16 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
       ctx.state.animationController.forward();
     }
 
-    var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);
-    if (accountstate != null)
-      ctx.dispatch(
-          MovieDetailPageActionCreator.onSetAccountState(accountstate));
-    var l = await ApiHelper.getMovieReviews(ctx.state.movieid);
-    if (l != null) ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(l));
-    var k = await ApiHelper.getMovieImages(ctx.state.movieid);
-    if (k != null) ctx.dispatch(MovieDetailPageActionCreator.onSetImages(k));
-    var f = await ApiHelper.getMovieVideo(ctx.state.movieid);
-    if (f != null) ctx.dispatch(MovieDetailPageActionCreator.onSetVideos(f));
+    // var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);
+    // if (accountstate != null)
+    //   ctx.dispatch(
+    //       MovieDetailPageActionCreator.onSetAccountState(accountstate));
+    // var l = await ApiHelper.getMovieReviews(ctx.state.movieid);
+    // if (l != null) ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(l));
+    // var k = await ApiHelper.getMovieImages(ctx.state.movieid);
+    // if (k != null) ctx.dispatch(MovieDetailPageActionCreator.onSetImages(k));
+    // var f = await ApiHelper.getMovieVideo(ctx.state.movieid);
+    // if (f != null) ctx.dispatch(MovieDetailPageActionCreator.onSetVideos(f));
   } on Exception catch (e) {}
 }
 

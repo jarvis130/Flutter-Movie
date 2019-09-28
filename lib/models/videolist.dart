@@ -18,7 +18,7 @@ class VideoListModel {
     // total_results = jsonRes['total_results'];
     results = jsonRes['data']['info'] == null ? null : [];
 
-    for (var resultsItem in results == null ? [] : jsonRes['results']['info']){
+    for (var resultsItem in results == null ? [] : jsonRes['data']['info']){
             results.add(resultsItem == null ? null : new VideoListResult.fromJson(resultsItem));
     }
 

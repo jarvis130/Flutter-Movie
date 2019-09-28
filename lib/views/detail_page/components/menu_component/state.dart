@@ -31,8 +31,8 @@ class MenuConnector extends ConnOp<MovieDetailPageState, MenuState> {
     substate.name = state.detail.title ?? '';
     substate.accountState = state.accountState;
     substate.id = state.mediaId;
-    substate.backdropPic = state.detail.backdrop_path;
-    substate.overWatch = state.detail.overview;
+    substate.backdropPic = state.detail.thumb_s;
+    substate.overWatch = state.detail.description;
     return substate;
   }
 

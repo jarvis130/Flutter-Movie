@@ -11,76 +11,83 @@ import 'imagemodel.dart';
 import 'keyword.dart';
 
 class MovieDetailModel {
-  Object homepage;
-  int budget;
   int id;
-  int revenue;
-  int runtime;
-  int vote_count;
-  double popularity;
-  double vote_average;
-  bool adult;
-  bool video;
-  String backdrop_path;
-  String imdb_id;
-  String original_language;
-  String original_title;
-  String overview;
-  String poster_path;
-  String release_date;
-  String status;
-  String tagline;
+  String uid;
   String title;
-  List<Genre> genres;
-  List<ProductionCompanie> production_companies;
-  List<ProductionCountrie> production_countries;
-  List<SpokenLanguage> spoken_languages;
-  BelongsToCollection belongs_to_collection;
-  CreditsModel credits;
-  ImageModel images;
-  VideoModel videos;
-  KeyWordModel keywords;
-  VideoListModel recommendations;
-  ReviewModel reviews;
-  ExternalIdsModel externalids;
-  ReleaseDateModel releaseDates;
+  String thumb;
+  String thumb_s;
+  String href;
+  String likes;
+  String views;
+  String comments;
+  String steps;
+  String shares;
+  String addtime;
+  String lat;
+  String lng;
+  String city;
+  String isdel;
+  String status;
+  String music_id;
+  String xiajia_reason;
+  String show_val;
+  String nopass_time;
+  String watch_ok;
+  String is_ad;
+  String ad_endtime;
+  String ad_url;
+  String orderno;
+  String wmk_thumb;
+  String wmk_href;
+  String classify_id;
+  String collects;
   String description;
+  String datetime;
+  int islike;
+  int isstep;
+  int isattent;
+  int iscollect;
+// 37: "musicinfo" -> Map 
+// String userinfo" -> Map (16 items)
+  List recommendations;
 
-  MovieDetailModel.fromParams(
-      {this.homepage,
-      this.budget,
+  MovieDetailModel.fromParams({
       this.id,
-      this.revenue,
-      this.runtime,
-      this.vote_count,
-      this.popularity,
-      this.vote_average,
-      this.adult,
-      this.video,
-      this.backdrop_path,
-      this.imdb_id,
-      this.original_language,
-      this.original_title,
-      this.overview,
-      this.poster_path,
-      this.release_date,
-      this.status,
-      this.tagline,
-      this.title,
-      this.genres,
-      this.production_companies,
-      this.production_countries,
-      this.spoken_languages,
-      this.belongs_to_collection,
-      this.credits,
-      this.images,
-      this.keywords,
-      this.recommendations,
-      this.reviews,
-      this.externalids,
-      this.releaseDates,
-      this.videos,
-      this.description
+    this.uid,
+    this.title,
+    this.thumb,
+    this.thumb_s,
+    this.href,
+    this.likes,
+    this.views,
+    this.comments,
+    this.steps,
+    this.shares,
+    this.addtime,
+    this.lat,
+    this.lng,
+    this.city,
+    this.isdel,
+    this.status,
+    this.music_id,
+    this.xiajia_reason,
+    this.show_val,
+    this.nopass_time,
+    this.watch_ok,
+    this.is_ad,
+    this.ad_endtime,
+    this.ad_url,
+    this.orderno,
+    this.wmk_thumb,
+    this.wmk_href,
+    this.classify_id,
+    this.collects,
+    this.description,
+    this.datetime,
+    this.islike,
+    this.isstep,
+    this.isattent,
+    this.iscollect,
       });
 
   factory MovieDetailModel(jsonStr) => jsonStr == null
@@ -90,96 +97,48 @@ class MovieDetailModel {
           : new MovieDetailModel.fromJson(jsonStr);
 
   MovieDetailModel.fromJson(jsonRes) {
-    homepage = jsonRes['homepage'];
-    budget = jsonRes['budget'];
-    id = int.parse(jsonRes['id']);
-    revenue = jsonRes['revenue'];
-    runtime = jsonRes['runtime'];
-    vote_count = jsonRes['vote_count'];
-    popularity = jsonRes['popularity'];
-    vote_average = jsonRes['vote_average'];
-    adult = jsonRes['adult'];
-    video = jsonRes['video'];
-    imdb_id = jsonRes['imdb_id'];
-    original_language = jsonRes['original_language'];
-    original_title = jsonRes['original_title'];
-    release_date = jsonRes['release_date'];
-    status = jsonRes['status'];
-    tagline = jsonRes['tagline'];
-    title = jsonRes['title'];
-    genres = jsonRes['genres'] == null ? null : [];
-
-    description = jsonRes['description'];
-    overview = jsonRes['comments'];
-    poster_path = jsonRes['thumb_s'];
-    backdrop_path = jsonRes['thumb'];
-
-    for (var genresItem in genres == null ? [] : jsonRes['genres']) {
-      genres.add(genresItem == null ? null : new Genre.fromJson(genresItem));
-    }
-
-    production_companies = jsonRes['production_companies'] == null ? null : [];
-
-    for (var production_companiesItem in production_companies == null
-        ? []
-        : jsonRes['production_companies']) {
-      production_companies.add(production_companiesItem == null
-          ? null
-          : new ProductionCompanie.fromJson(production_companiesItem));
-    }
-
-    production_countries = jsonRes['production_countries'] == null ? null : [];
-
-    for (var production_countriesItem in production_countries == null
-        ? []
-        : jsonRes['production_countries']) {
-      production_countries.add(production_countriesItem == null
-          ? null
-          : new ProductionCountrie.fromJson(production_countriesItem));
-    }
-
-    spoken_languages = jsonRes['spoken_languages'] == null ? null : [];
-
-    for (var spoken_languagesItem
-        in spoken_languages == null ? [] : jsonRes['spoken_languages']) {
-      spoken_languages.add(spoken_languagesItem == null
-          ? null
-          : new SpokenLanguage.fromJson(spoken_languagesItem));
-    }
-
-    belongs_to_collection = jsonRes['belongs_to_collection'] == null
-        ? null
-        : new BelongsToCollection.fromJson(jsonRes['belongs_to_collection']);
-    credits = jsonRes['credits'] == null
-        ? null
-        : new CreditsModel.fromJson(jsonRes['credits']);
-    images = jsonRes['images'] == null
-        ? null
-        : new ImageModel.fromJson(jsonRes['images']);
-    videos = jsonRes['videos'] == null
-        ? null
-        : new VideoModel.fromJson(jsonRes['videos']);
-    keywords = jsonRes['keywords'] == null
-        ? null
-        : new KeyWordModel.fromJson(jsonRes['keywords']);
-    recommendations = jsonRes['recommendations'] == null
-        ? null
-        : new VideoListModel.fromJson(jsonRes['recommendations']);
-    reviews = jsonRes['reviews'] == null
-        ? null
-        : new ReviewModel.fromJson(jsonRes['reviews']);
-    externalids = jsonRes['external_ids'] == null
-        ? null
-        : new ExternalIdsModel.fromJson(jsonRes['external_ids']);
-    releaseDates = jsonRes['release_dates'] == null
-        ? null
-        : new ReleaseDateModel.fromJson(jsonRes['release_dates']);
+    this.id = int.parse(jsonRes['id']);
+    this.uid = jsonRes['uid'];
+    this.title = jsonRes['title'];
+    this.thumb = jsonRes['thumb'];
+    this.thumb_s = jsonRes['thumb_s'];
+    this.href = jsonRes['href'];
+    this.likes = jsonRes['likes'];
+    this.views = jsonRes['views'];
+    this.comments = jsonRes['comments'];
+    this.steps = jsonRes['steps'];
+    this.shares = jsonRes['shares'];
+    this.addtime = jsonRes['addtime'];
+    this.lat = jsonRes['lat'];
+    this.lng = jsonRes['lng'];
+    this.city = jsonRes['city'];
+    this.isdel = jsonRes['isdel'];
+    this.status = jsonRes['status'];
+    this.music_id = jsonRes['music_id'];
+    this.xiajia_reason = jsonRes['xiajia_reason'];
+    this.show_val = jsonRes['show_val'];
+    this.nopass_time = jsonRes['nopass_time'];
+    this.watch_ok = jsonRes['watch_ok'];
+    this.is_ad = jsonRes['is_ad'];
+    this.ad_endtime = jsonRes['ad_endtime'];
+    this.ad_url = jsonRes['ad_url'];
+    this.orderno = jsonRes['orderno'];
+    this.wmk_thumb = jsonRes['wmk_thumb'];
+    this.wmk_href = jsonRes['wmk_href'];
+    this.classify_id = jsonRes['classify_id'];
+    this.collects = jsonRes['collects'];
+    this.description = jsonRes['description'];
+    this.datetime = jsonRes['datetime'];
+    // this.islike = jsonRes['islike'];
+    // this.isstep = jsonRes['isstep'];
+    // this.isattent = jsonRes['isattent'];
+    // this.iscollect = jsonRes['iscollect'];
   }
 
-  @override
-  String toString() {
-    return '{"homepage": $homepage,"budget": $budget,"id": $id,"revenue": $revenue,"runtime": $runtime,"vote_count": $vote_count,"popularity": $popularity,"vote_average": $vote_average,"adult": $adult,"video": $video,"backdrop_path": ${backdrop_path != null ? '${json.encode(backdrop_path)}' : 'null'},"imdb_id": ${imdb_id != null ? '${json.encode(imdb_id)}' : 'null'},"original_language": ${original_language != null ? '${json.encode(original_language)}' : 'null'},"original_title": ${original_title != null ? '${json.encode(original_title)}' : 'null'},"overview": ${overview != null ? '${json.encode(overview)}' : 'null'},"poster_path": ${poster_path != null ? '${json.encode(poster_path)}' : 'null'},"release_date": ${release_date != null ? '${json.encode(release_date)}' : 'null'},"status": ${status != null ? '${json.encode(status)}' : 'null'},"tagline": ${tagline != null ? '${json.encode(tagline)}' : 'null'},"title": ${title != null ? '${json.encode(title)}' : 'null'},"genres": $genres,"production_companies": $production_companies,"production_countries": $production_countries,"spoken_languages": $spoken_languages,"belongs_to_collection": $belongs_to_collection,"credits": $credits,"images": $images,"keywords": $keywords,"recommendations": $recommendations,"reviews": $reviews,"externalids":$externalids,"releaseDates":$releaseDates,"videos":$videos}';
-  }
+  // @override
+  // String toString() {
+  //   return '{"homepage": $homepage,"budget": $budget,"id": $id,"revenue": $revenue,"runtime": $runtime,"vote_count": $vote_count,"popularity": $popularity,"vote_average": $vote_average,"adult": $adult,"video": $video,"backdrop_path": ${backdrop_path != null ? '${json.encode(backdrop_path)}' : 'null'},"imdb_id": ${imdb_id != null ? '${json.encode(imdb_id)}' : 'null'},"original_language": ${original_language != null ? '${json.encode(original_language)}' : 'null'},"original_title": ${original_title != null ? '${json.encode(original_title)}' : 'null'},"overview": ${overview != null ? '${json.encode(overview)}' : 'null'},"poster_path": ${poster_path != null ? '${json.encode(poster_path)}' : 'null'},"release_date": ${release_date != null ? '${json.encode(release_date)}' : 'null'},"status": ${status != null ? '${json.encode(status)}' : 'null'},"tagline": ${tagline != null ? '${json.encode(tagline)}' : 'null'},"title": ${title != null ? '${json.encode(title)}' : 'null'},"genres": $genres,"production_companies": $production_companies,"production_countries": $production_countries,"spoken_languages": $spoken_languages,"belongs_to_collection": $belongs_to_collection,"credits": $credits,"images": $images,"keywords": $keywords,"recommendations": $recommendations,"reviews": $reviews,"externalids":$externalids,"releaseDates":$releaseDates,"videos":$videos}';
+  // }
 }
 
 class BelongsToCollection {

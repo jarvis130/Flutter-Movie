@@ -33,7 +33,7 @@ class MenuConnector extends ConnOp<MovieDetailPageState,MenuState>{
     substate.accountState=state.accountState;
     substate.id=state.movieid;
     substate.backdropPic=state.backdropPic;
-    substate.overWatch=state.movieDetailModel.overview;
+    substate.overWatch=state.movieDetailModel.description;
     return substate;
   }
   @override

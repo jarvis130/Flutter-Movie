@@ -55,7 +55,8 @@ void _onDispose(Action action, Context<MovieDetailPageState> ctx) {
 }
 
 Future _playTrailer(Action action, Context<MovieDetailPageState> ctx) async {
-  var _model = ctx.state?.detail?.videos?.results ?? [];
+  // var _model = ctx.state?.detail?.results?.results ?? [];
+  var _model;
   if (_model.length > 0)
     await showGeneralDialog(
         barrierLabel: 'Trailer',

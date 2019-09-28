@@ -8,23 +8,30 @@ import 'state.dart';
 
 Widget buildView(PlayState state, Dispatch dispatch, ViewService viewService) {
 
-  VideoPlayerController videoPlayerController = VideoPlayerController.network('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+  // var href = state.href==null ? 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' : state.href;
+  if (state.href == null) {
+      return Container(
+      );
+  } else {
+    VideoPlayerController videoPlayerController = VideoPlayerController.network(state.href);//'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
 
-  return Container(
-    child: Chewie(
-      controller: ChewieController(
-        videoPlayerController: videoPlayerController,
-        aspectRatio: 3 / 2,
-        autoPlay: false,
-        looping: false,
-        // 拖动条样式颜色
-        materialProgressColors: new ChewieProgressColors(
-          playedColor: material.Colors.red,
-          handleColor: material.Colors.blue,
-          backgroundColor: material.Colors.grey,
-          bufferedColor: material.Colors.lightGreen,
+    return Container(
+      child: Chewie(
+        controller: ChewieController(
+          videoPlayerController: videoPlayerController,
+          aspectRatio: 3 / 2,
+          autoPlay: false,
+          looping: false,
+          // 拖动条样式颜色
+          materialProgressColors: new ChewieProgressColors(
+            playedColor: material.Colors.red,
+            handleColor: material.Colors.blue,
+            backgroundColor: material.Colors.grey,
+            bufferedColor: material.Colors.lightGreen,
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
+  
 }

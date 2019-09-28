@@ -1,16 +1,17 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/videomodel.dart';
-
+import 'package:video_player/video_player.dart';
 import '../../state.dart';
 
 class PlayState implements Cloneable<PlayState> {
 
-  VideoModel movie;
+  String  href;
+  VideoPlayerController videoPlayerController;
 
   @override
   PlayState clone() {
     return PlayState()
-    ..movie = movie;
+    ..videoPlayerController = videoPlayerController
+    ..href = href;
   }
 }
 
@@ -19,9 +20,7 @@ class PlayConnector extends ConnOp<MovieDetailPageState, PlayState>{
   PlayState get(MovieDetailPageState state) {
 
     PlayState substate = new PlayState();
-    // substate.movie = state.movieDetailModel
-
-
+    substate.href = state.movieDetailModel.href;
     return substate;
   }
 }

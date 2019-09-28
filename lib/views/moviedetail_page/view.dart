@@ -182,14 +182,14 @@ Widget buildView(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             VideoPlayerItem(
-              vc: VideoPlayerController.network(VideoUrl.getUrl(d.key, d.site)),
-              coverurl: 'https://i.ytimg.com/vi/${d.key}/hqdefault.jpg',
+              vc: VideoPlayerController.network(VideoUrl.getUrl(d.id, d.href)),
+              coverurl: 'https://i.ytimg.com/vi/${d.id}/hqdefault.jpg',
               showplayer: true,
             ),
             Padding(
               padding: EdgeInsets.all(Adapt.px(20)),
               child: Text(
-                d.name,
+                d.title,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: Adapt.px(35),
@@ -365,11 +365,11 @@ Widget buildView(
   }
 
   List<Widget> _buildRecommendationBody() {
-    if (state.movieDetailModel?.recommendations != null)
-      return state.movieDetailModel.recommendations.results
-          .map(_buildRecommendationCell)
-          .toList();
-    else
+    // if (state.movieDetailModel?.recommendations != null)
+    //   return state.movieDetailModel.recommendations.results
+    //       .map(_buildRecommendationCell)
+    //       .toList();
+    // else
       return <Widget>[
         _buildRecommendationShimmer(),
         _buildRecommendationShimmer(),
@@ -570,30 +570,30 @@ Widget buildView(
   }
 
   Widget _getCreditsCells() {
-    if (state.movieDetailModel?.credits != null)
-      return ListView(
-        scrollDirection: Axis.horizontal,
-        children:
-            state.movieDetailModel.credits.cast.map(_buildCreditsCell).toList(),
-      );
-    else
-      return ListView(
-        scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          SizedBox(
-            width: Adapt.px(30),
-          ),
-          _buildCreditsShimmerCell(),
-          SizedBox(
-            width: Adapt.px(30),
-          ),
-          _buildCreditsShimmerCell(),
-          SizedBox(
-            width: Adapt.px(30),
-          ),
-          _buildCreditsShimmerCell(),
-        ],
-      );
+    // if (state.movieDetailModel?.credits != null)
+    //   return ListView(
+    //     scrollDirection: Axis.horizontal,
+    //     children:
+    //         state.movieDetailModel.credits.cast.map(_buildCreditsCell).toList(),
+    //   );
+    // else
+    //   return ListView(
+    //     scrollDirection: Axis.horizontal,
+    //     children: <Widget>[
+    //       SizedBox(
+    //         width: Adapt.px(30),
+    //       ),
+    //       _buildCreditsShimmerCell(),
+    //       SizedBox(
+    //         width: Adapt.px(30),
+    //       ),
+    //       _buildCreditsShimmerCell(),
+    //       SizedBox(
+    //         width: Adapt.px(30),
+    //       ),
+    //       _buildCreditsShimmerCell(),
+    //     ],
+    //   );
   }
 
   Widget _buildHeader() {
