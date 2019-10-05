@@ -11,7 +11,7 @@ import 'imagemodel.dart';
 import 'keyword.dart';
 
 class MovieDetailModel {
-  int id;
+  String id;
   String uid;
   String title;
   String thumb;
@@ -43,10 +43,10 @@ class MovieDetailModel {
   String collects;
   String description;
   String datetime;
-  int islike;
-  int isstep;
-  int isattent;
-  int iscollect;
+  String islike;
+  String isstep;
+  String isattent;
+  String iscollect;
 // 37: "musicinfo" -> Map 
 // String userinfo" -> Map (16 items)
   List recommendations;
@@ -97,7 +97,7 @@ class MovieDetailModel {
           : new MovieDetailModel.fromJson(jsonStr);
 
   MovieDetailModel.fromJson(jsonRes) {
-    this.id = int.parse(jsonRes['id']);
+    this.id = jsonRes['id'];
     this.uid = jsonRes['uid'];
     this.title = jsonRes['title'];
     this.thumb = jsonRes['thumb'];
@@ -129,10 +129,10 @@ class MovieDetailModel {
     this.collects = jsonRes['collects'];
     this.description = jsonRes['description'];
     this.datetime = jsonRes['datetime'];
-    // this.islike = jsonRes['islike'];
-    // this.isstep = jsonRes['isstep'];
-    // this.isattent = jsonRes['isattent'];
-    // this.iscollect = jsonRes['iscollect'];
+    this.islike = jsonRes['islike'];
+    this.isstep = jsonRes['isstep'];
+    this.isattent = jsonRes['isattent'];
+    this.iscollect = jsonRes['iscollect'];
   }
 
   // @override

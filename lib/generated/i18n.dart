@@ -43,6 +43,8 @@ class I18n implements WidgetsLocalizations {
   String get discover => "Discover";
   /// "Coming"
   String get coming => "Coming";
+  /// "Concern"
+  String get concern => "Concern";
   /// "Account"
   String get account => "Account";
   /// "In Theaters"
@@ -187,6 +189,9 @@ class _I18n_zh_CN extends I18n {
   /// "预播"
   @override
   String get coming => "预播";
+  /// "关注"
+  @override
+  String get concern => "关注";
   /// "账号"
   @override
   String get account => "账号";
@@ -277,9 +282,9 @@ class _I18n_zh_CN extends I18n {
   /// "收藏表"
   @override
   String get lists => "收藏表";
-  /// "我的最爱"
+  /// "收藏"
   @override
-  String get favorites => "我的最爱";
+  String get favorites => "收藏";
   /// "评分"
   @override
   String get ratingsReviews => "评分";

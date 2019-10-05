@@ -1,6 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/enums/media_type.dart';
+import 'package:movie/api/moviedetail_api.dart';
+import 'package:movie/models/moviedetail.dart';
 import 'package:movie/views/moviedetail_page/action.dart';
 import 'action.dart';
 import 'state.dart';
@@ -26,8 +28,13 @@ Future _setRating(Action action, Context<MenuState> ctx) async{
 Future _setFavorite(Action action, Context<MenuState> ctx) async{
   final bool f=action.payload;
   ctx.dispatch(MenuActionCreator.updateFavorite(f));
-  var r=await ApiHelper.markAsFavorite(ctx.state.id,MediaType.movie, f);
-  if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been mark as favorite':'has been removed'));
+
+  // var r=await ApiHelper.markAsFavorite(ctx.state.id,MediaType.movie, f);
+  // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been mark as favorite':'has been removed'));
+
+  MovieDetailModel r=await MoiveDetailApi.addCollect(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.id);
+  if(r != null)
+    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
 }
 
 Future _setWatchlist(Action action, Context<MenuState> ctx) async{

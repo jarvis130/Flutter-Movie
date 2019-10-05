@@ -36,7 +36,7 @@ Widget buildView(
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today, size: Adapt.px(44)),
-          title: Text(I18n.of(viewService.context).coming),
+          title: Text(I18n.of(viewService.context).concern),
         ),
         BottomNavigationBarItem(
           icon: Icon(
