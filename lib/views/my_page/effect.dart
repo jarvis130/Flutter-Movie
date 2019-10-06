@@ -41,8 +41,8 @@ Future _onInit(Action action, Context<MyState> ctx) async {
   var q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
   if (q != null) ctx.dispatch(MyActionCreator.onInitFavorites(q));
   
-  // var t = await ApiHelper.getTVOnTheAir();
-  // if (t != null) ctx.dispatch(ComingPageActionCreator.onInitTVComing(t));
+  var t = await MyApi.getAttentionVideos(ApiHelper.uid, ApiHelper.accessTokenV4, 1);
+  if (t != null) ctx.dispatch(MyActionCreator.onInitConcern(t));
 }
 
 void _onDispose(Action action, Context<MyState> ctx) {

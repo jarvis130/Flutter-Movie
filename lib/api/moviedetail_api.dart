@@ -11,10 +11,19 @@ class MoiveDetailApi {
     return model;
   }
 
-  ///
+  ///收藏
   static Future<MovieDetailModel> addCollect(var uid, var token, var videoid) async {
     MovieDetailModel model;
     String param = 'service=Video.AddCollect&uid=$uid&videoid=$videoid&token=$token';
+    var r = await ApiHelper.httpGet(param, cached: false);
+    if (r != null) model = MovieDetailModel(r);
+    return model;
+  }
+
+    ///关注
+  static Future<MovieDetailModel> setAttent(var uid, var token, var touid) async {
+    MovieDetailModel model;
+    String param = 'service=User.SetAttent&uid=$uid&touid=$touid&token=$token';
     var r = await ApiHelper.httpGet(param, cached: false);
     if (r != null) model = MovieDetailModel(r);
     return model;

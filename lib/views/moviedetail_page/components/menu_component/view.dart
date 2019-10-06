@@ -185,31 +185,31 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
             iconColor: state.accountState.favorite
                 ? Colors.pink[400]
                 : Color.fromRGBO(50, 50, 50, 1)),
-//        Divider(
-//          height: Adapt.px(10),
-//        ),
-//        _buildListTitel(
-//          Icons.flag,
-//          'Add to your Watchlist',
-//          () {
-//            Navigator.of(viewService.context).pop();
-//            dispatch(
-//                MenuActionCreator.setWatchlist(!state.accountState.watchlist));
-//          },
-//          iconColor: state.accountState.watchlist
-//              ? Colors.red
-//              : Color.fromRGBO(50, 50, 50, 1),
-//        ),
-        Divider(
-          height: Adapt.px(10),
-        ),
-        _buildListTitel(
-            state.accountState.isRated == true ? Icons.star : Icons.star_border,
-            '评分',
-            _rateIt,
-            iconColor: state.accountState.isRated == true
-                ? Colors.amber
-                : Color.fromRGBO(50, 50, 50, 1)),
+       Divider(
+         height: Adapt.px(10),
+       ),
+       _buildListTitel(
+         Icons.flag,
+         '关注',
+         () {
+           Navigator.of(viewService.context).pop();
+           dispatch(
+               MenuActionCreator.setWatchlist(!state.accountState.watchlist));
+         },
+         iconColor: state.accountState.watchlist
+             ? Colors.red
+             : Color.fromRGBO(50, 50, 50, 1),
+       ),
+        // Divider(
+        //   height: Adapt.px(10),
+        // ),
+        // _buildListTitel(
+        //     state.accountState.isRated == true ? Icons.star : Icons.star_border,
+        //     '评分',
+        //     _rateIt,
+        //     iconColor: state.accountState.isRated == true
+        //         ? Colors.amber
+        //         : Color.fromRGBO(50, 50, 50, 1)),
         Divider(
           height: Adapt.px(10),
         ),

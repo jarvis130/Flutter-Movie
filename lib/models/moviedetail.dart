@@ -48,11 +48,11 @@ class MovieDetailModel {
   String isattent;
   String iscollect;
 // 37: "musicinfo" -> Map 
-// String userinfo" -> Map (16 items)
+  Map userinfo;
   List recommendations;
 
   MovieDetailModel.fromParams({
-      this.id,
+    this.id,
     this.uid,
     this.title,
     this.thumb,
@@ -88,7 +88,7 @@ class MovieDetailModel {
     this.isstep,
     this.isattent,
     this.iscollect,
-      });
+  });
 
   factory MovieDetailModel(jsonStr) => jsonStr == null
       ? null
@@ -133,6 +133,7 @@ class MovieDetailModel {
     this.isstep = jsonRes['isstep'];
     this.isattent = jsonRes['isattent'];
     this.iscollect = jsonRes['iscollect'];
+    this.userinfo = jsonRes['userinfo'];
   }
 
   // @override

@@ -40,6 +40,9 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
 Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   final bool f=action.payload;
   ctx.dispatch(MenuActionCreator.updateWatctlist(f));
-  var r=await ApiHelper.addToWatchlist(ctx.state.id,MediaType.movie, f);
-  if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been add to your watchlist':'has been removed from your watchlist'));
+
+  // var r=await ApiHelper.addToWatchlist(ctx.state.id,MediaType.movie, f);
+  // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been add to your watchlist':'has been removed from your watchlist'));
+  MovieDetailModel r=await MoiveDetailApi.setAttent(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.userinfo['id']);
+  if(r != null)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
 }

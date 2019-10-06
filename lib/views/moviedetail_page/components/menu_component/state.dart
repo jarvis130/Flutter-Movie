@@ -10,6 +10,7 @@ String backdropPic;
 String posterPic;
 String name;
 String overWatch;
+Map userinfo;
 MediaAccountStateModel accountState;
 
   @override
@@ -20,6 +21,7 @@ MediaAccountStateModel accountState;
     ..backdropPic=backdropPic
     ..id=id
     ..overWatch=overWatch
+    ..userinfo = userinfo
     ..name=name;
   }
 }
@@ -34,6 +36,7 @@ class MenuConnector extends ConnOp<MovieDetailPageState,MenuState>{
     substate.id=state.movieid;
     substate.backdropPic=state.backdropPic;
     substate.overWatch=state.movieDetailModel.description;
+    substate.userinfo = state.movieDetailModel.userinfo;
     return substate;
   }
   @override
