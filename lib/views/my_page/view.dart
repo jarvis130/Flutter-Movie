@@ -44,7 +44,7 @@ Widget buildView(MyState state, Dispatch dispatch, ViewService viewService) {
           children: <Widget>[
             viewService.buildComponent('favorites'),
             // viewService.buildComponent('tvlist'),
-            Text('321'),
+            viewService.buildComponent('concerns'),
           ],
         )),
   );

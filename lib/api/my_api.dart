@@ -13,9 +13,9 @@ class MyApi {
   }
 
   ///关注列表
-  static Future<ConcernListModel> getAttentionVideos(String uid, String token, int page) async {
+  static Future<ConcernListModel> getFollowsList(String uid, String touid, int page) async {
     ConcernListModel model;
-    String param = 'service=User.GetAttentionVideos&uid=$uid&token=$token&p=$page';
+    String param = 'service=User.getFollowsList&uid=$uid&touid=$touid&p=$page';
     var r = await ApiHelper.httpGet(param, cached: false);
     if (r != null) model = ConcernListModel(r);
     return model;

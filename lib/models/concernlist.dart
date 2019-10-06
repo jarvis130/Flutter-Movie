@@ -51,33 +51,61 @@ class DateString {
 
 class ConcernListResult {
 
-  String likes;
-  String comments;
-  String collects;
-  String datetime;
-  String islike;
-  String iscollect;
-  Map userinfo;
+  String user_nicename;
+  String avatar;
+  String avatar_thumb;
+  String sex ;
+  String signature;
+  String province;
+  String city;
+  String birthday ;
+  String age;
+  String praise;
+  String fans;
+  String follows ;
+  String workVideos;
+  String likeVideos;
+  String vip_info ;
+  int isattention;
+
 
   ConcernListResult.fromParams({
-    this.likes,
-    this.comments,  
-    this.collects,
-    this.datetime,
-    this.islike,
-    this.iscollect,
-    this.userinfo
+    this.user_nicename,
+    this.avatar,
+    this.avatar_thumb,
+    this.sex ,
+    this.signature,
+    this.province,
+    this.city,
+    this.birthday,
+    this.age,
+    this.praise,
+    this.fans,
+    this.follows ,
+    this.workVideos,
+    this.likeVideos,
+    this.vip_info ,
+    this.isattention,
   });
 
   ConcernListResult.fromJson(jsonRes) {
 
-    this.likes = jsonRes['likes'];
-    this.comments = jsonRes['comments'];
-    this.collects = jsonRes['collects'];
-    this.datetime = jsonRes['datetime'];
-    this.islike = jsonRes['islike'];
-    this.iscollect = jsonRes['iscollect'];
-    this.userinfo = jsonRes['userinfo'];
+    this.user_nicename = jsonRes['user_nicename'];
+    this.avatar = jsonRes['avatar'];
+    this.avatar_thumb = jsonRes['avatar_thumb'];
+    this.sex  = jsonRes['sex'];
+    this.signature = jsonRes['signature'];
+    this.province = jsonRes['province'];
+    this.city = jsonRes['city'];
+    this.birthday = jsonRes['birthday'];
+    this.age = jsonRes['age'];
+    this.praise = jsonRes['praise'];
+    this.fans = jsonRes['fans'];
+    this.follows  = jsonRes['follows'];
+    this.workVideos = jsonRes['workVideos'];
+    this.likeVideos = jsonRes['likeVideos'];
+    this.vip_info  = jsonRes['vip_info'];
+    this.isattention = jsonRes['isattention'];
   }
 
   // @override
