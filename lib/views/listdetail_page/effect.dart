@@ -8,6 +8,7 @@ import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_extend/share_extend.dart';
+import 'package:movie/api/listdetail_api.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -28,15 +29,18 @@ Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
       bool isBottom = ctx.state.scrollController.position.pixels ==
           ctx.state.scrollController.position.maxScrollExtent;
       if (isBottom) {
-        if (ctx.state.listDetailModel.id != null) {
-          int page = ctx.state.listDetailModel.page + 1;
-          if (page <= ctx.state.listDetailModel.totalPages) {
-            var r = await ApiHelper.getListDetailV4(ctx.state.listId,
-                page: page, sortBy: ctx.state.sortType);
-            if (r != null)
-              ctx.dispatch(ListDetailPageActionCreator.loadMore(r));
-          }
-        }
+        // if (ctx.state.listDetailModel.id != null) {
+        //   int page = ctx.state.listDetailModel.page + 1;
+        //   if (page <= ctx.state.listDetailModel.totalPages) {
+        //     // var r = await ApiHelper.getListDetailV4(ctx.state.userid,
+        //     //     page: page, sortBy: ctx.state.sortType);
+        //     // if (r != null)
+        //     //   ctx.dispatch(ListDetailPageActionCreator.loadMore(r));
+        //     var r = await ListDetailApi.getUserHome(ctx.state.userid);
+        //     if (r != null)
+        //       ctx.dispatch(ListDetailPageActionCreator.loadMore(r));
+        //   }
+        // }
       }
     });
   _loadData(action, ctx);
@@ -77,9 +81,12 @@ Future _sortChanged(Action action, Context<ListDetailPageState> ctx) async {
 }
 
 Future _loadData(Action action, Context<ListDetailPageState> ctx) async {
-  if (ctx.state.listId != null) {
-    var r = await ApiHelper.getListDetailV4(ctx.state.listId,
-        sortBy: ctx.state.sortType);
-    if (r != null) ctx.dispatch(ListDetailPageActionCreator.setListDetail(r));
+  if (ctx.state.userid != null) {
+    // var r = await ApiHelper.getListDetailV4(ctx.state.userid,
+    //     sortBy: ctx.state.sortType);
+    // if (r != null) ctx.dispatch(ListDetailPageActionCreator.setListDetail(r));
+    var r = await ListDetailApi.getUserHome(ctx.state.userid);
+    if (r != null)
+      ctx.dispatch(ListDetailPageActionCreator.loadMore(r));
   }
 }

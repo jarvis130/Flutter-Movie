@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
-import 'package:movie/models/listdetailmode.dart';
+import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 

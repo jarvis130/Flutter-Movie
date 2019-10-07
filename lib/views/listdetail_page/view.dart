@@ -10,7 +10,7 @@ import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/sortcondition.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/listdetailmodel.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -84,13 +84,13 @@ Widget buildView(
             width: Adapt.px(1),
             height: Adapt.px(60),
           ),
-          _buildInfoCell('', 'RATING',
+          _buildInfoCell('', '粉丝',
               valueChild: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    d?.averageRating?.toStringAsFixed(1) ?? '0.0',
+                    d?.fans ?? '0',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -108,15 +108,15 @@ Widget buildView(
             width: Adapt.px(1),
             height: Adapt.px(60),
           ),
-          _buildInfoCell(_covertDuration(d?.runtime ?? 0), 'RUNTIME'),
+          _buildInfoCell(_covertDuration(d?.vip_info ?? 0), 'RUNTIME'),
           Container(
             color: Colors.grey[300],
             width: Adapt.px(1),
             height: Adapt.px(60),
           ),
-          _buildInfoCell(
-              '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
-              'REVENUE'),
+          // _buildInfoCell(
+          //     '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
+          //     'REVENUE'),
         ],
       ),
     );
@@ -227,7 +227,7 @@ Widget buildView(
         SizedBox(
           height: Adapt.px(20),
         ),
-        Text(d.name,
+        Text(d.user_nicename,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: Adapt.px(45),
@@ -251,14 +251,14 @@ Widget buildView(
                           borderRadius: BorderRadius.circular(Adapt.px(40)),
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  ImageUrl.getGravatarUrl(
-                                      d?.createdBy?.gravatarHash, 200)))),
+                                  d.avatar_thumb
+                          ))),
                     ),
                     SizedBox(
                       height: Adapt.px(10),
                     ),
                     Text(
-                      'A list by',
+                      d.avatar_thumb,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -267,13 +267,13 @@ Widget buildView(
                     SizedBox(
                       height: Adapt.px(5),
                     ),
-                    SizedBox(
-                      width: Adapt.px(130),
-                      child: Text(
-                        d?.createdBy?.username ?? '',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
+                    // SizedBox(
+                    //   width: Adapt.px(130),
+                    //   child: Text(
+                    //     d?.createdBy?.username ?? '',
+                    //     style: TextStyle(color: Colors.white),
+                    //   ),
+                    // )
                   ],
                 ),
               ),
@@ -286,19 +286,19 @@ Widget buildView(
                     children: <Widget>[
                       _buildInfoCell(
                         d?.totalResults?.toString() ?? '0',
-                        'ITEMS',
+                        '视频',
                         labelColor: Colors.white,
                         titleColor: Colors.white,
                       ),
                       SizedBox(
                         width: Adapt.px(20),
                       ),
-                      _buildInfoCell(
-                        d?.averageRating?.toStringAsFixed(1) ?? '0.0',
-                        'RATING',
-                        labelColor: Colors.white,
-                        titleColor: Colors.white,
-                      ),
+                      // _buildInfoCell(
+                      //   d?.averageRating?.toStringAsFixed(1) ?? '0.0',
+                      //   'RATING',
+                      //   labelColor: Colors.white,
+                      //   titleColor: Colors.white,
+                      // ),
                     ],
                   ),
                   SizedBox(
@@ -306,21 +306,21 @@ Widget buildView(
                   ),
                   Row(
                     children: <Widget>[
-                      _buildInfoCell(
-                        _covertDuration(d?.runtime ?? 0),
-                        'RUNTIME',
-                        labelColor: Colors.white,
-                        titleColor: Colors.white,
-                      ),
+                      // _buildInfoCell(
+                      //   _covertDuration(d?.runtime ?? 0),
+                      //   'RUNTIME',
+                      //   labelColor: Colors.white,
+                      //   titleColor: Colors.white,
+                      // ),
                       SizedBox(
                         width: Adapt.px(20),
                       ),
-                      _buildInfoCell(
-                        '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
-                        'REVENUE',
-                        labelColor: Colors.white,
-                        titleColor: Colors.white,
-                      ),
+                      // _buildInfoCell(
+                      //   '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
+                      //   'REVENUE',
+                      //   labelColor: Colors.white,
+                      //   titleColor: Colors.white,
+                      // ),
                     ],
                   )
                 ],
@@ -338,8 +338,9 @@ Widget buildView(
             image: DecorationImage(
           fit: BoxFit.cover,
           //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
-          image: CachedNetworkImageProvider(ImageUrl.getUrl(
-              state?.listDetailModel?.backdropPath, ImageSize.w500)),
+          image: CachedNetworkImageProvider(
+            state?.listDetailModel?.avatar_thumb
+          ),
         )),
         child: Container(
           alignment: Alignment.bottomLeft,
@@ -359,8 +360,8 @@ Widget buildView(
                           borderRadius: BorderRadius.circular(Adapt.px(50)),
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  ImageUrl.getGravatarUrl(
-                                      d?.createdBy?.gravatarHash, 200)))),
+                                  d.avatar_thumb
+                          ))),
                     ),
                     SizedBox(
                       width: Adapt.px(20),
@@ -369,7 +370,7 @@ Widget buildView(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'A list by',
+                          d?.user_nicename ?? '',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -378,86 +379,86 @@ Widget buildView(
                         SizedBox(
                           height: Adapt.px(5),
                         ),
-                        SizedBox(
-                          width: Adapt.px(200),
-                          child: Text(
-                            d?.createdBy?.username ?? '',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
+                        // SizedBox(
+                        //   width: Adapt.px(200),
+                        //   child: Text(
+                        //     d?.createdBy?.username ?? '',
+                        //     style: TextStyle(color: Colors.white),
+                        //   ),
+                        // )
                       ],
                     ),
                     Expanded(
                       child: Container(),
                     ),
                     //_buildIconButton(Icons.edit, () {}),
-                    _buildIconButton(Icons.share, () {
-                      showDialog(
-                          context: viewService.context,
-                          builder: (ctx) {
-                            return ShareCard(
-                              backgroundImage: ImageUrl.getUrl(
-                                  state.listDetailModel.backdropPath,
-                                  ImageSize.w500),
-                              qrValue:
-                                  "https://www.themoviedb.org/list/${state.listDetailModel.id}",
-                              header: _buildShareCardHeader(),
-                            );
-                          });
-                    }),
-                    PopupMenuButton<SortCondition>(
-                      offset: Offset(0, Adapt.px(100)),
-                      icon: Icon(Icons.sort, color: Colors.white),
-                      onSelected: (selected) => dispatch(
-                          ListDetailPageActionCreator.sortChanged(selected)),
-                      itemBuilder: (ctx) {
-                        return state.sortBy.map((s) {
-                          var unSelectedStyle = TextStyle(color: Colors.grey);
-                          var selectedStyle = TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold);
-                          return PopupMenuItem<SortCondition>(
-                            value: s,
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  s.name,
-                                  style: s.isSelected
-                                      ? selectedStyle
-                                      : unSelectedStyle,
-                                ),
-                                Expanded(
-                                  child: Container(),
-                                ),
-                                s.isSelected ? Icon(Icons.check) : SizedBox()
-                              ],
-                            ),
-                          );
-                        }).toList();
-                      },
-                    )
+                    // _buildIconButton(Icons.share, () {
+                    //   showDialog(
+                    //       context: viewService.context,
+                    //       builder: (ctx) {
+                    //         return ShareCard(
+                    //           backgroundImage: ImageUrl.getUrl(
+                    //               state.listDetailModel.backdropPath,
+                    //               ImageSize.w500),
+                    //           qrValue:
+                    //               "https://www.themoviedb.org/list/${state.listDetailModel.id}",
+                    //           header: _buildShareCardHeader(),
+                    //         );
+                    //       });
+                    // }),
+                    // PopupMenuButton<SortCondition>(
+                    //   offset: Offset(0, Adapt.px(100)),
+                    //   icon: Icon(Icons.sort, color: Colors.white),
+                    //   onSelected: (selected) => dispatch(
+                    //       ListDetailPageActionCreator.sortChanged(selected)),
+                    //   itemBuilder: (ctx) {
+                    //     return state.sortBy.map((s) {
+                    //       var unSelectedStyle = TextStyle(color: Colors.grey);
+                    //       var selectedStyle = TextStyle(
+                    //           color: Colors.black, fontWeight: FontWeight.bold);
+                    //       return PopupMenuItem<SortCondition>(
+                    //         value: s,
+                    //         child: Row(
+                    //           children: <Widget>[
+                    //             Text(
+                    //               s.name,
+                    //               style: s.isSelected
+                    //                   ? selectedStyle
+                    //                   : unSelectedStyle,
+                    //             ),
+                    //             Expanded(
+                    //               child: Container(),
+                    //             ),
+                    //             s.isSelected ? Icon(Icons.check) : SizedBox()
+                    //           ],
+                    //         ),
+                    //       );
+                    //     }).toList();
+                    //   },
+                    // )
                   ]),
                   SizedBox(
                     height: Adapt.px(20),
                   ),
-                  Text('About this list',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(30))),
-                  Container(
-                    width: Adapt.screenW() - Adapt.px(60),
-                    height: Adapt.px(120),
-                    child: Text(
-                      d.description ?? '',
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
-                      style: TextStyle(
-                          color: Colors.white, fontSize: Adapt.px(26)),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Adapt.px(30),
-                  ),
+                  // Text('About this list',
+                  //     style: TextStyle(
+                  //         color: Colors.white,
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: Adapt.px(30))),
+                  // Container(
+                  //   width: Adapt.screenW() - Adapt.px(60),
+                  //   height: Adapt.px(120),
+                  //   child: Text(
+                  //     d.description ?? '',
+                  //     overflow: TextOverflow.ellipsis,
+                  //     maxLines: 4,
+                  //     style: TextStyle(
+                  //         color: Colors.white, fontSize: Adapt.px(26)),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: Adapt.px(30),
+                  // ),
                 ],
               ),
             ),
@@ -468,9 +469,11 @@ Widget buildView(
       return _buildShimmerHeader();
   }
 
-  Widget _buildListCell(VideoListResult d) {
+  Widget _buildListCell(ListDetailResult d) {
     return GestureDetector(
-      onTap: () => dispatch(ListDetailPageActionCreator.cellTapped(d)),
+      onTap: () {
+        // dispatch(ListDetailPageActionCreator.cellTapped(d.id));
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.grey[200],
@@ -542,7 +545,7 @@ Widget buildView(
           backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           pinned: true,
           title: Text(
-            state?.listDetailModel?.name ?? '',
+            state?.listDetailModel?.user_nicename ?? '',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           expandedHeight: Adapt.px(550),

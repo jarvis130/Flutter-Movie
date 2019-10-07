@@ -90,7 +90,7 @@ Widget buildView(
   Widget _buildMovieCell(ConcernListResult d) {
     return InkWell(
       onTap: () {
-        // dispatch(ConcernActionCreator.cellTapped(d.id));
+        dispatch(ConcernActionCreator.onCellTappedToListDetail(d.id));
       },
       child: Column(
         // key: ValueKey<int>(d.userinfo['id']),

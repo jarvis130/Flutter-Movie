@@ -50,7 +50,7 @@ class DateString {
 }
 
 class ConcernListResult {
-
+  String id;
   String user_nicename;
   String avatar;
   String avatar_thumb;
@@ -70,6 +70,7 @@ class ConcernListResult {
 
 
   ConcernListResult.fromParams({
+    this.id,
     this.user_nicename,
     this.avatar,
     this.avatar_thumb,
@@ -89,7 +90,7 @@ class ConcernListResult {
   });
 
   ConcernListResult.fromJson(jsonRes) {
-
+    this.id = jsonRes['id'];
     this.user_nicename = jsonRes['user_nicename'];
     this.avatar = jsonRes['avatar'];
     this.avatar_thumb = jsonRes['avatar_thumb'];

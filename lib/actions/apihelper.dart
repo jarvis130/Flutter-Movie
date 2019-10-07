@@ -13,7 +13,7 @@ import 'package:movie/models/enums/time_window.dart';
 import 'package:movie/models/episodemodel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/keyword.dart';
-import 'package:movie/models/listdetailmode.dart';
+import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/listmediaitem.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviechange.dart';

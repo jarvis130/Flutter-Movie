@@ -1,57 +1,74 @@
 import 'dart:convert' show json;
 
-class VideoListModel {
+class ListDetailModel {
 
+  String id;
   int page;
-  int total_pages;
-  int total_results;
-  List< VideoListResult> results;
-  DateString dates;
+  int totalPages;
+  int totalResults;
+  String user_nicename;
+  String avatar;
+  String avatar_thumb;
+  String sex ;
+  String signature;
+  String province;
+  String city;
+  String birthday ;
+  String age;
+  String praise;
+  String fans;
+  String follows ;
+  String workVideos;
+  String likeVideos;
+  String vip_info ;
+  String isattention;
+  List<ListDetailResult> results;
 
-  VideoListModel.fromParams({this.page, this.total_pages, this.total_results, this.results, this.dates});
+  ListDetailModel.fromParams({this.id, this.page, this.totalPages, this.totalResults, this.user_nicename, this.avatar, this.avatar_thumb, this.sex, this.signature, this.province, this.city, this.birthday, this.age, this.praise, this.fans, this.follows, this.workVideos, this.likeVideos, this.vip_info, this.isattention, this.results});
 
-  factory VideoListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new VideoListModel.fromJson(json.decode(jsonStr)) : new VideoListModel.fromJson(jsonStr);
+  factory ListDetailModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new ListDetailModel.fromJson(json.decode(jsonStr)) : new ListDetailModel.fromJson(jsonStr);
   
-  VideoListModel.fromJson(jsonRes) {
-    // page = jsonRes['page'];
-    // total_pages = jsonRes['total_pages'];
-    // total_results = jsonRes['total_results'];
-    results = jsonRes['data']['info'] == null ? null : [];
+  ListDetailModel.fromJson(jsonRes) {
+    var tmp = jsonRes['data']['info'];
+    this.id = tmp['id'];
+    this.user_nicename = tmp['user_nicename'];
+    this.avatar = tmp['avatar'];
+    this.avatar_thumb = tmp['avatar_thumb'];
+    this.sex  = tmp['sex'];
+    this.signature = tmp['signature'];
+    this.province = tmp['province'];
+    this.city = tmp['city'];
+    this.birthday = tmp['birthday'];
+    this.age = tmp['age'];
+    this.praise = tmp['praise'];
+    this.fans = tmp['fans'];
+    this.follows  = tmp['follows'];
+    this.workVideos = tmp['workVideos'];
+    this.likeVideos = tmp['likeVideos'];
+    this.vip_info  = tmp['vip_info'];
+    this.isattention = tmp['isattention'];
 
-    for (var resultsItem in results == null ? [] : jsonRes['data']['info']){
-      results.add(resultsItem == null ? null : new VideoListResult.fromJson(resultsItem));
+    results = tmp['videos'] == null ? null : [];
+
+    for (var resultsItem in tmp['videos'] == null ? [] : tmp['videos']){
+      resultsItem == null ? null : new ListDetailResult.fromJson(resultsItem);
+      results.add(resultsItem);
     }
 
-    // dates = jsonRes['dates'] == null ? null : new DateString.fromJson(jsonRes['dates']);
+    //comments = jsonRes['comments'] == null ? null : new Comments.fromJson(jsonRes['comments']);
+    // createdBy = jsonRes['created_by'] == null ? null : new CreatedBy.fromJson(jsonRes['created_by']);
+    //objectIds = jsonRes['object_ids'] == null ? null : new ObjectIds.fromJson(jsonRes['object_ids']);
   }
 
-  @override
-  String toString() {
-    return '{"page": $page,"total_pages": $total_pages,"total_results": $total_results,"results": $results,"dates": $dates}';
-  }
+  // @override
+  // String toString() {
+  //   return '{"id": $id,"page": $page,"runtime": $runtime,"total_pages": $totalPages,"total_results": $totalResults,"average_rating": $averageRating,"public": $public,"backdrop_path": ${backdropPath != null?'${json.encode(backdropPath)}':'null'},"description": ${description != null?'${json.encode(description)}':'null'},"iso_3166_1": ${iso31661 != null?'${json.encode(iso31661)}':'null'},"iso_639_1": ${iso6391 != null?'${json.encode(iso6391)}':'null'},"name": ${name != null?'${json.encode(name)}':'null'},"poster_path": ${posterPath != null?'${json.encode(posterPath)}':'null'},"revenue": ${revenue != null?'${json.encode(revenue)}':'null'},"results": $results,"comments": $comments,"created_by": $createdBy,"object_ids": $objectIds}';
+  // }
 }
 
-class DateString {
+class ListDetailResult {
 
-  String maximum;
-  String minimum;
-
-  DateString.fromParams({this.maximum, this.minimum});
-  
-  DateString.fromJson(jsonRes) {
-    maximum = jsonRes['maximum'];
-    minimum = jsonRes['minimum'];
-  }
-
-  @override
-  String toString() {
-    return '{"maximum": ${maximum != null?'${json.encode(maximum)}':'null'},"minimum": ${minimum != null?'${json.encode(minimum)}':'null'}}';
-  }
-}
-
-class VideoListResult {
-
-  int id;
+  String id;
   String uid;
   String title;
   String thumb;
@@ -90,7 +107,7 @@ class VideoListResult {
 // 37: "musicinfo" -> Map 
 // String userinfo" -> Map (16 items)
 
-  VideoListResult.fromParams({
+  ListDetailResult.fromParams({
     this.id,
     this.uid,
     this.title,
@@ -129,8 +146,8 @@ class VideoListResult {
     this.iscollect,
   });
 
-  VideoListResult.fromJson(jsonRes) {
-    this.id = int.parse(jsonRes['id']);
+  ListDetailResult.fromJson(jsonRes) {
+    this.id = jsonRes['id'];
     this.uid = jsonRes['uid'];
     this.title = jsonRes['title'];
     this.thumb = jsonRes['thumb'];
@@ -169,4 +186,32 @@ class VideoListResult {
   //   return '{"id": $id,"rating": $rating,"mediaType":$mediaType,"vote_count": $vote_count,"popularity": $popularity,"vote_average": $vote_average,"adult": $adult,"video": $video,"backdrop_path": ${backdrop_path != null?'${json.encode(backdrop_path)}':'null'},"original_language": ${original_language != null?'${json.encode(original_language)}':'null'},"original_title": ${original_title != null?'${json.encode(original_title)}':'null'},"overview": ${overview != null?'${json.encode(overview)}':'null'},"poster_path": ${poster_path != null?'${json.encode(poster_path)}':'null'},"release_date": ${release_date != null?'${json.encode(release_date)}':'null'},"title": ${title != null?'${json.encode(title)}':'null'},"genre_ids": $genre_ids,"first_air_date": ${first_air_date != null?'${json.encode(first_air_date)}':'null'},"name": ${name != null?'${json.encode(name)}':'null'},"original_language": ${original_language != null?'${json.encode(original_language)}':'null'},"original_name": ${original_name != null?'${json.encode(original_name)}':'null'},"origin_country": $origin_country}';
   // }
 }
+
+class ObjectIds {
+}
+
+class CreatedBy {
+
+  String gravatarHash;
+  String name;
+  String username;
+
+  CreatedBy.fromParams({this.gravatarHash, this.name, this.username});
+  
+  CreatedBy.fromJson(jsonRes) {
+    gravatarHash = jsonRes['gravatar_hash'];
+    name = jsonRes['name'];
+    username = jsonRes['username'];
+  }
+
+  @override
+  String toString() {
+    return '{"gravatar_hash": ${gravatarHash != null?'${json.encode(gravatarHash)}':'null'},"name": ${name != null?'${json.encode(name)}':'null'},"username": ${username != null?'${json.encode(username)}':'null'}}';
+  }
+}
+
+class Comments {
+}
+
+
 

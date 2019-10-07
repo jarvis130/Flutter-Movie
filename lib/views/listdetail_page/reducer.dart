@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/listdetailmode.dart';
+import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 
 import 'action.dart';
@@ -32,7 +32,7 @@ ListDetailPageState _loadMore(ListDetailPageState state, Action action) {
   final ListDetailModel model=action.payload??ListDetailModel.fromParams(results: []);
   final ListDetailPageState newState = state.clone();
   newState.listDetailModel.results.addAll(model.results);
-  newState.listDetailModel.page=model.page??newState.listDetailModel.page;
+  // newState.listDetailModel.page=model.page??newState.listDetailModel.page;
   return newState;
 }
 
