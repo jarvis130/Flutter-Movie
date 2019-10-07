@@ -51,8 +51,7 @@ class ListDetailModel {
     results = tmp['videos'] == null ? null : [];
 
     for (var resultsItem in tmp['videos'] == null ? [] : tmp['videos']){
-      resultsItem == null ? null : new ListDetailResult.fromJson(resultsItem);
-      results.add(resultsItem);
+      results.add(resultsItem == null ? null : new ListDetailResult.fromJson(resultsItem));
     }
 
     //comments = jsonRes['comments'] == null ? null : new Comments.fromJson(jsonRes['comments']);

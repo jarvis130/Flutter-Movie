@@ -30,16 +30,16 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
   }
 
   void _addToList() {
-    Navigator.of(viewService.context).pop();
-    showDialog(
-        context: viewService.context,
-        builder: (ctx) {
-          var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
-          return MediaListCardDialog(
-            type: MediaType.movie,
-            mediaId: state.id,
-          );
-        });
+//    Navigator.of(viewService.context).pop();
+//    showDialog(
+//        context: viewService.context,
+//        builder: (ctx) {
+//          var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
+//          return MediaListCardDialog(
+//            type: MediaType.movie,
+//            mediaId: state.id,
+//          );
+//        });
   }
 
   void _rateIt() {

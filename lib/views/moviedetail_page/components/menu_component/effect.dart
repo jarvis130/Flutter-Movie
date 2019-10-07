@@ -20,9 +20,9 @@ void _onAction(Action action, Context<MenuState> ctx) {
 }
 
 Future _setRating(Action action, Context<MenuState> ctx) async{
-  ctx.dispatch(MenuActionCreator.updateRating(action.payload));
-  var r=await ApiHelper.rateMovie(ctx.state.id, action.payload);
-  if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('your rating has been saved'));
+//  ctx.dispatch(MenuActionCreator.updateRating(action.payload));
+//  var r=await ApiHelper.rateMovie(ctx.state.id, action.payload);
+//  if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('your rating has been saved'));
 }
 
 Future _setFavorite(Action action, Context<MenuState> ctx) async{

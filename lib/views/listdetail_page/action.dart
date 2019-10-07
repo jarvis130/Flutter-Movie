@@ -14,7 +14,7 @@ class ListDetailPageActionCreator {
   static Action setListDetail(ListDetailModel d) {
     return Action(ListDetailPageAction.setListDetail,payload: d);
   }
-  static Action cellTapped(VideoListResult result) {
+  static Action cellTapped(ListDetailResult result) {
     return Action(ListDetailPageAction.cellTapped,payload: result);
   }
   static Action loadMore(ListDetailModel d) {

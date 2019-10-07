@@ -472,7 +472,7 @@ Widget buildView(
   Widget _buildListCell(ListDetailResult d) {
     return GestureDetector(
       onTap: () {
-        // dispatch(ListDetailPageActionCreator.cellTapped(d.id));
+         dispatch(ListDetailPageActionCreator.cellTapped(d));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -480,7 +480,8 @@ Widget buildView(
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: CachedNetworkImageProvider(
-                    ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
+                    d.thumb_s
+                ))),
         child: Column(
           children: <Widget>[
             Container(

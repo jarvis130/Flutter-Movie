@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
+import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:screenshot/screenshot.dart';
@@ -47,7 +48,7 @@ Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
-  VideoListResult d = action.payload;
+  ListDetailResult d = action.payload;
   // if (d != null) {
   //   if (d.mediaType == 'movie')
   //     await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
@@ -65,7 +66,7 @@ Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
   //     });
   // }
   await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
-        'movieid': d.id,
+        'movieid': int.parse(d.id),
         'bgpic': d.thumb_s,
         'title': d.title,
         'posterpic': d.thumb_s
