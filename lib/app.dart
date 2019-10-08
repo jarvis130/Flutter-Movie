@@ -9,6 +9,7 @@ import 'package:movie/views/discover_page/page.dart';
 import 'package:movie/views/episodedetail_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
 import 'package:movie/views/gallery_page/page.dart';
+import 'package:movie/views/guide_page/page.dart';
 import 'package:movie/views/listdetail_page/page.dart';
 import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
@@ -18,6 +19,7 @@ import 'package:movie/views/peopledetail_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
 import 'package:movie/views/seasondetail_page/page.dart';
 import 'package:movie/views/seasons_page/page.dart';
+import 'package:movie/views/splash_page/page.dart';
 import 'package:movie/views/tvdetail_page/page.dart';
 import 'package:movie/views/watchlist_page/page.dart';
 import 'package:movie/views/watchlistdetail_page/page.dart';
@@ -88,7 +90,9 @@ Future<Widget> createApp() async {
       'detailpage': detail.MovieDetailPage(),
       'classifypage': ClassifyPage(),
       'GalleryPage': GalleryPage(),
-      'DiscoverPage': DiscoverPage()
+      'DiscoverPage': DiscoverPage(),
+      'GuidePage': GuidePage(),
+      'SplashPage': SplashPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {
@@ -147,8 +151,8 @@ Future<Widget> createApp() async {
     ],
     supportedLocales: I18n.delegate.supportedLocales,
     localeResolutionCallback:
-        I18n.delegate.resolution(fallback: new Locale("en", "US")),
-    home: routes.buildPage('mainpage', null),
+        I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
+    home: routes.buildPage('GuidePage', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);
