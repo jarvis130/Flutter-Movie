@@ -5,12 +5,12 @@ import '../../state.dart';
 class PlayState implements Cloneable<PlayState> {
 
   String  href;
-  VideoPlayerController videoPlayerController;
+//  VideoPlayerController videoPlayerController;
 
   @override
   PlayState clone() {
     return PlayState()
-    ..videoPlayerController = videoPlayerController
+//    ..videoPlayerController = videoPlayerController
     ..href = href;
   }
 }

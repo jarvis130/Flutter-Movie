@@ -15,7 +15,8 @@ void _onAction(Action action, Context<PlayState> ctx) {
 }
 
 void _onInit(Action action, Context<PlayState> ctx) {
-  // ctx.state.videoPlayerController = VideoPlayerController.network('http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4');
+//   String url = ctx.state.href;
+//   ctx.state.videoPlayerController = VideoPlayerController.network(url);
 }
 
 void _onDispose(Action action, Context<PlayState> ctx) {
