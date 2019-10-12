@@ -12,6 +12,7 @@ import 'state.dart';
 
 Widget buildView(
     RecommendMovieState state, Dispatch dispatch, ViewService viewService) {
+
   Widget _buildMoreCell() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
@@ -117,7 +118,7 @@ Widget buildView(
         switchOutCurve: Curves.easeOut,
         duration: Duration(milliseconds: 300),
         child: Container(
-          margin: EdgeInsets.only(bottom: Adapt.px(30)),
+          margin: EdgeInsets.only(bottom: Adapt.px(10)),
           key: ValueKey(model),
           height: Adapt.px(225),
           child: ListView(

@@ -36,6 +36,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:movie/views/detail_page/page.dart' as detail;
 import 'package:device_info/device_info.dart';
 
+String tip = '0';
+
 Future _init() async {
   if (Platform.isAndroid)
     Map<PermissionGroup, PermissionStatus> permissions =
@@ -63,6 +65,11 @@ Future _init() async {
   }
 
 //  if (accessToken != null) ApiHelper.accessTokenV4 = accessToken;
+
+  tip = prefs.getString('tip') == null ? '0' : '1';
+  if(tip == '0'){
+    prefs.setString('tip', '1');
+  }
 
   setLocaleInfo('zh', TimelineInfoCN());
   setLocaleInfo('en', TimelineInfoEN());
@@ -152,7 +159,7 @@ Future<Widget> createApp() async {
     supportedLocales: I18n.delegate.supportedLocales,
     localeResolutionCallback:
         I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
-    home: routes.buildPage('GuidePage', null),
+    home: tip == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);

@@ -428,8 +428,8 @@ Widget buildView(
         baseColor: Colors.grey[500],
         highlightColor: Colors.grey[100],
         child: Container(
-          height: Adapt.px(300),
-          width: Adapt.px(200),
+          height: Adapt.px(250),
+          width: Adapt.px(150),
           color: Colors.grey[500],
         ),
       ));
@@ -437,8 +437,8 @@ Widget buildView(
       return Card(
         elevation: 20.0,
         child: CachedNetworkImage(
-          height: Adapt.px(300),
-          width: Adapt.px(200),
+          height: Adapt.px(250),
+          width: Adapt.px(150),
           fit: BoxFit.cover,
           // imageUrl: ImageUrl.getUrl(state.posterPic, ImageSize.w300),
           imageUrl: state.posterPic,
@@ -467,12 +467,14 @@ Widget buildView(
       ));
     else
       return RichText(
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
         text: TextSpan(children: <TextSpan>[
           TextSpan(
               text: state.title ?? '',
               style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  fontSize: Adapt.px(50),
+                  fontSize: Adapt.px(40),
                   color: Colors.white,
                   shadows: <Shadow>[
                     Shadow(
@@ -812,13 +814,13 @@ Widget buildView(
                           ), 
                           Container(
                             width: Adapt.screenW(),
-                            height: Adapt.px(401),
+                            height: Adapt.px(350),
                             color: dominantColor.withOpacity(.8),
                           ),
                           Container(
                             alignment: Alignment.bottomLeft,
                             padding: EdgeInsets.fromLTRB(
-                                Adapt.px(30), Adapt.px(50), Adapt.px(30), Adapt.px(10)),
+                                Adapt.px(30), Adapt.px(30), Adapt.px(30), Adapt.px(0)),
                             child: Row(
                               children: <Widget>[
                                 _getPosterPic(),
@@ -826,7 +828,7 @@ Widget buildView(
                                   width: Adapt.px(20),
                                 ),
                                 Container(
-                                  padding: EdgeInsets.only(top: Adapt.px(150)),
+//                                  padding: EdgeInsets.only(top: Adapt.px(10)),
                                   width: Adapt.screenW() * 0.6,
                                   child: _getTitle(),
                                 ),
@@ -839,7 +841,7 @@ Widget buildView(
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(
-                            Adapt.px(30), Adapt.px(30), Adapt.px(30), 0),
+                            Adapt.px(30), Adapt.px(0), Adapt.px(30), 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

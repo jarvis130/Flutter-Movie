@@ -13,6 +13,7 @@ import 'state.dart';
 
 Widget buildView(
     HotMovieState state, Dispatch dispatch, ViewService viewService) {
+
   Widget _buildMoreCell() {
     return Column(
       children: <Widget>[
@@ -58,7 +59,6 @@ Widget buildView(
                 width: Adapt.px(250),
                 height: Adapt.px(350),
                 fit: BoxFit.cover,
-                // imageUrl: ImageUrl.getUrl(d.thumb_s, ImageSize.w400),
                 imageUrl: d.thumb_s,
                 placeholder: (ctx, s) {
                   return Image.asset(
@@ -76,8 +76,8 @@ Widget buildView(
                 padding: EdgeInsets.all(Adapt.px(10)),
                 child: Text(
                   d.title,
-                  maxLines: 2,
-                  //textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: Adapt.px(28),
@@ -139,7 +139,7 @@ Widget buildView(
         duration: Duration(milliseconds: 300),
         child: Container(
           key: ValueKey(model),
-          height: Adapt.px(450),
+          height: Adapt.px(420),
           child: ListView(
             scrollDirection: Axis.horizontal,
             physics: PageScrollPhysics(),
