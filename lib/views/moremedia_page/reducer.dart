@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 
 import 'action.dart';
@@ -19,7 +20,7 @@ MoreMediaPageState _onAction(MoreMediaPageState state, Action action) {
 }
 
 MoreMediaPageState _loadMore(MoreMediaPageState state, Action action) {
-  final VideoListModel model =action.payload??VideoListModel.fromParams(results: []);
+  final MovieListModel model =action.payload??VideoListModel.fromParams(results: []);
   final MoreMediaPageState newState = state.clone();
   newState.videoList.results.addAll(model.results);
   newState.videoList.page=model.page;

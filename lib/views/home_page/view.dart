@@ -576,7 +576,7 @@ Widget buildView(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    I18n.of(viewService.context).recommendations,
+                    I18n.of(viewService.context).newMovie,
                     style: _selectPopStyle,
                   ),
                   Expanded(
@@ -584,7 +584,8 @@ Widget buildView(
                   ),
                   GestureDetector(
                     onTap: () => dispatch(
-                        HomePageActionCreator.onPopularFilterChanged(true)),
+                        HomePageActionCreator.onMoreTapped(state.newMovie, MediaType.newMovie)
+                    ),
                     child: Text(I18n.of(viewService.context).more,
                         style: _unselectPopStyle),
                   ),
@@ -614,7 +615,8 @@ Widget buildView(
                 ),
                 GestureDetector(
                   onTap: () => dispatch(
-                      HomePageActionCreator.onPopularFilterChanged(true)),
+                      HomePageActionCreator.onMoreTapped(state.hotMovie, MediaType.hot)
+                  ),
                   child: Text(I18n.of(viewService.context).more,
                       style: _unselectPopStyle),
                 ),
@@ -646,7 +648,8 @@ Widget buildView(
                   ),
                   GestureDetector(
                     onTap: () => dispatch(
-                        HomePageActionCreator.onPopularFilterChanged(true)),
+                        HomePageActionCreator.onMoreTapped(state.recommendMovie, MediaType.recommend)
+                    ),
                     child: Text(I18n.of(viewService.context).more,
                         style: _unselectPopStyle),
                   ),

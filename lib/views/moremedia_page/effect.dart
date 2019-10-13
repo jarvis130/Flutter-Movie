@@ -55,18 +55,18 @@ Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<MoreMediaPageState> ctx) async {
-  if (ctx.state.mediaType == MediaType.movie)
+//  if (ctx.state.mediaType == MediaType.movie)
     await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
       'movieid': action.payload[0],
       'bgpic': action.payload[2],
       'title': action.payload[1],
       'posterpic': action.payload[3]
     });
-  else
-    await Navigator.of(ctx.context).pushNamed('tvdetailpage', arguments: {
-      'tvid': action.payload[0],
-      'bgpic': action.payload[2],
-      'name': action.payload[1],
-      'posterpic': action.payload[3]
-    });
+//  else
+//    await Navigator.of(ctx.context).pushNamed('tvdetailpage', arguments: {
+//      'tvid': action.payload[0],
+//      'bgpic': action.payload[2],
+//      'name': action.payload[1],
+//      'posterpic': action.payload[3]
+//    });
 }

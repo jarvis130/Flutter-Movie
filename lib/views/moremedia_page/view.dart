@@ -9,6 +9,7 @@ import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/media_type.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 
 import 'action.dart';
@@ -16,9 +17,10 @@ import 'state.dart';
 
 Widget buildView(
     MoreMediaPageState state, Dispatch dispatch, ViewService viewService) {
+
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
 
-  Widget _buildCell(VideoListResult d) {
+  Widget _buildCell(MovieListResult d) {
     int index = state.videoList.results.indexOf(d);
     double w = Adapt.screenW() / 2;
     double h = w * 1.5;
@@ -47,9 +49,9 @@ Widget buildView(
                   random.nextInt(255), random.nextDouble()),
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: CachedNetworkImageProvider(d.thumb_s == null
-                      ? ImageUrl.emptyimage
-                      : ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
+                  image: CachedNetworkImageProvider(
+                      d.thumb_s
+                  ))),
           child: Column(
             children: <Widget>[
               Container(
@@ -111,15 +113,23 @@ Widget buildView(
     );
   }
 
+  String title;
+
+  if(state.mediaType == MediaType.hot){
+    title = I18n.of(viewService.context).popular;
+  }else if(state.mediaType == MediaType.recommend){
+    title = I18n.of(viewService.context).recommendations;
+  }else{
+    title = title = I18n.of(viewService.context).newMovie;
+  }
+
   return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
-          state.mediaType == MediaType.movie
-              ? I18n.of(viewService.context).inTheaters
-              : I18n.of(viewService.context).onTV,
+          title,
           style: TextStyle(color: Colors.black),
         ),
       ),

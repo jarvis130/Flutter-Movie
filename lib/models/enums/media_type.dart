@@ -3,4 +3,7 @@ enum MediaType {
   tv,
   all,
   person,
+  hot,
+  newMovie,
+  recommend
 }

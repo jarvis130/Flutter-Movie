@@ -70,7 +70,7 @@ class HomePageActionCreator {
     return Action(HomePageAction.headerFilterChanged, payload: e);
   }
 
-  static Action onMoreTapped(VideoListModel model, MediaType t) {
+  static Action onMoreTapped(MovieListModel model, MediaType t) {
     return Action(HomePageAction.moreTapped, payload: [model, t]);
   }
 
