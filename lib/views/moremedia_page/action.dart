@@ -12,7 +12,7 @@ class MoreMediaPageActionCreator {
     return Action(MoreMediaPageAction.loadMore,payload:list);
   }
 
-  static Action cellTapped(int id,String title,String bgpic,String posterpic) {
+  static Action cellTapped(String id,String title,String bgpic,String posterpic) {
     return Action(MoreMediaPageAction.cellTapped,payload:[id,title,bgpic,posterpic]);
   }
 }

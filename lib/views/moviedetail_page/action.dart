@@ -48,7 +48,7 @@ class MovieDetailPageActionCreator {
   static Action onSetVideos(VideoModel c) {
     return Action(MovieDetailPageAction.setVideos, payload: c);
   }
-  static Action onRecommendationTapped(int movieid,String backpic) {
+  static Action onRecommendationTapped(String movieid,String backpic) {
     return Action(MovieDetailPageAction.recommendationTapped, payload:[movieid,backpic]);
   }
   static Action onCastCellTapped(int peopleid,String profilePath,String profileName) {

@@ -96,7 +96,7 @@ Widget buildView(
     return InkWell(
       onTap: () => dispatch(MovieListActionCreator.cellTapped(d.id)),
       child: Column(
-        key: ValueKey<int>(d.id),
+        key: ValueKey<String>(d.id),
         children: <Widget>[
           Container(
             padding: EdgeInsets.all(Adapt.px(20)),

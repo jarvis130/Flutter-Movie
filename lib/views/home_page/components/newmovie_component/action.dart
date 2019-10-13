@@ -7,7 +7,7 @@ class NewMovieActionCreator {
   static Action onAction() {
     return const Action(NewMovieAction.action);
   }
-  static Action onCellTapped(int id,String bgpic,String title,String posterpic) {
+  static Action onCellTapped(String id,String bgpic,String title,String posterpic) {
     return Action(NewMovieAction.cellTapped,payload:[id,bgpic,title,posterpic]);
   }
 }

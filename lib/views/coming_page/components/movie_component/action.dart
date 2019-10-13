@@ -8,7 +8,7 @@ class MovieListActionCreator {
     return const Action(MovieListAction.action);
   }
 
-  static Action cellTapped(int id) {
+  static Action cellTapped(String id) {
     return Action(MovieListAction.cellTapped, payload: id);
   }
 }

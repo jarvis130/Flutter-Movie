@@ -5,7 +5,7 @@ import '../../state.dart';
 
 class MenuState implements Cloneable<MenuState> {
 
-int id;
+String id;
 String backdropPic;
 String posterPic;
 String name;

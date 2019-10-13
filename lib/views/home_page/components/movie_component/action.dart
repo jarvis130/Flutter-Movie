@@ -7,7 +7,7 @@ class MovieCellsActionCreator {
   static Action onAction() {
     return const Action(MovieCellsAction.action);
   }
-  static Action onCellTapped(int movieid,String bgpic,String title,String postpic){
+  static Action onCellTapped(String movieid,String bgpic,String title,String postpic){
     return Action(MovieCellsAction.celltapped,payload: [movieid,bgpic,title,postpic]);
   }
 }

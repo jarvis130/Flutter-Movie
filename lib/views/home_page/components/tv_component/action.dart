@@ -7,7 +7,7 @@ class TVCellsActionCreator {
   static Action onAction() {
     return const Action(TVCellsAction.action);
   }
-  static Action onCellTapped(int tvid,String bgpic,String name,String posterpic){
+  static Action onCellTapped(String tvid,String bgpic,String name,String posterpic){
     return Action(TVCellsAction.celltapped,payload: [tvid,bgpic,name,posterpic]);
   }
 }

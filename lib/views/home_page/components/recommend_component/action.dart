@@ -9,7 +9,7 @@ class RecommendMovieActionCreator {
   }
 
   static Action onCellTapped(
-      int id, String bgpic, String title, String posterpic) {
+      String id, String bgpic, String title, String posterpic) {
     return Action(RecommendMovieAction.cellTapped,
         payload: [id, bgpic, title, posterpic]);
   }

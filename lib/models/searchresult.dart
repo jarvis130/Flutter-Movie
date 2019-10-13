@@ -30,7 +30,7 @@ class SearchResultModel {
 
 class SearchResult {
 
-  int id;
+  String id;
   double voteAverage;
   int voteCount;
   double popularity;

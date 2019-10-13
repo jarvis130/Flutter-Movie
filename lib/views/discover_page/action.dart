@@ -28,8 +28,8 @@ class DiscoverPageActionCreator {
   static Action onLoadMore(List<VideoListResult> p) {
     return Action(DiscoverPageAction.loadMore,payload: p);
   }
-  static Action onVideoCellTapped(int p,String backpic) {
-    return Action(DiscoverPageAction.videoCellTapped,payload: [p,backpic]);
+  static Action onVideoCellTapped(String id,String backpic) {
+    return Action(DiscoverPageAction.videoCellTapped,payload: [id, backpic]);
   }
   static Action onBusyChanged(bool p) {
     return Action(DiscoverPageAction.busyChanged,payload: p);

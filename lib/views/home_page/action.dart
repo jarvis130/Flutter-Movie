@@ -83,7 +83,7 @@ class HomePageActionCreator {
   }
 
   static Action onCellTapped(
-      int id, String bgpic, String title, String posterpic, MediaType type) {
+      String id, String bgpic, String title, String posterpic, MediaType type) {
     return Action(HomePageAction.cellTapped,
         payload: [id, bgpic, title, posterpic, type]);
   }

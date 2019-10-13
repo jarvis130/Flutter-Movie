@@ -83,7 +83,7 @@ Future _onSearchBarTapped(Action action, Context<HomePageState> ctx) async {
 
 Future _onCellTapped(Action action, Context<HomePageState> ctx) async {
   final MediaType type = action.payload[4];
-  final int id = action.payload[0];
+  final String id = action.payload[0];
   final String bgpic = action.payload[1];
   final String title = action.payload[2];
   final String posterpic = action.payload[3];

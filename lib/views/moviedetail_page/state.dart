@@ -19,7 +19,7 @@ class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
   String backdropPic;
   String title;
   String posterPic;
-  int movieid;
+  String movieid;
   Color mainColor;
   Color tabTintColor;
   PaletteGenerator palette;

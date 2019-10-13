@@ -6,30 +6,36 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:shimmer/shimmer.dart';
-
+import 'package:movie/models/enums/media_type.dart';
 import 'action.dart';
 import 'state.dart';
+import '../../action.dart';
 
 Widget buildView(
     RecommendMovieState state, Dispatch dispatch, ViewService viewService) {
 
   Widget _buildMoreCell() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(Adapt.px(15)),
-      ),
-      width: Adapt.px(400),
-      height: Adapt.px(225),
-      child:
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-        Text(
-          I18n.of(viewService.context).more,
-          style: TextStyle(color: Colors.black, fontSize: Adapt.px(35)),
+    return GestureDetector(
+        onTap: () => dispatch(
+            HomePageActionCreator.onMoreTapped(state.recommendMovie, MediaType.recommend)
         ),
-        Icon(Icons.arrow_forward, size: Adapt.px(35))
-      ]),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(Adapt.px(15)),
+          ),
+          width: Adapt.px(400),
+          height: Adapt.px(225),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text(
+              I18n.of(viewService.context).more,
+              style: TextStyle(color: Colors.black, fontSize: Adapt.px(35)),
+            ),
+            Icon(Icons.arrow_forward, size: Adapt.px(35))
+          ]),
+        )
     );
   }
 

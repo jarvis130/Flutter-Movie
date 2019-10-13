@@ -120,7 +120,7 @@ Widget buildView(
   Widget _buildListCell(VideoListResult d) {
     bool ismovie = state.filterState.isMovie;
     return GestureDetector(
-      key: ValueKey<int>(d.id),
+      key: ValueKey<String>(d.id),
       child: Container(
         padding:
             EdgeInsets.fromLTRB(Adapt.px(20), 0, Adapt.px(20), Adapt.px(30)),

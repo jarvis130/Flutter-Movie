@@ -65,7 +65,7 @@ class TVDetailPageActionCreator {
     return Action(TVDetailPageAction.setVideos, payload: c);
   }
 
-  static Action onRecommendationTapped(int movieid, String backpic) {
+  static Action onRecommendationTapped(String movieid, String backpic) {
     return Action(TVDetailPageAction.recommendationTapped,
         payload: [movieid, backpic]);
   }

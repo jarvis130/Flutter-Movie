@@ -8,7 +8,7 @@ class FavoritesActionCreator {
     return const Action(FavoritesAction.action);
   }
 
-  static Action onCellTapped(int id, String bgpic, String title, String posterpic) {
+  static Action onCellTapped(String id, String bgpic, String title, String posterpic) {
     return Action(FavoritesAction.cellTapped,
         payload: [id, bgpic, title, posterpic]);
   }

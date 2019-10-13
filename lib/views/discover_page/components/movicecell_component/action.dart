@@ -8,7 +8,7 @@ class MovieCellActionCreator {
   static Action onAction() {
     return const Action(MovieCellAction.action);
   }
-   static Action onMovieCellTapped(int movieid) {
+   static Action onMovieCellTapped(String movieid) {
     return Action(MovieCellAction.movieCellTapped,payload: movieid);
   }
 }

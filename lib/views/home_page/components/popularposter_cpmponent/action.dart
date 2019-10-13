@@ -9,7 +9,7 @@ class PopularPosterActionCreator {
   }
 
   static Action onCellTapped(
-      int id, String bgpic, String title, String posterpic) {
+      String id, String bgpic, String title, String posterpic) {
     return Action(PopularPosterAction.cellTapped,
         payload: [id, bgpic, title, posterpic]);
   }

@@ -14,7 +14,7 @@ Widget buildView(
     MovieCellsState state, Dispatch dispatch, ViewService viewService) {
   Widget _bulidcell(VideoListResult d) {
     return GestureDetector(
-      onTap: ()=>dispatch(MovieCellsActionCreator.onCellTapped(d.id,d.thumb_s,d.title,d.thumb_s)),
+      onTap: ()=>dispatch(MovieCellsActionCreator.onCellTapped(d.id, d.thumb_s, d.title, d.thumb_s)),
       child: Container(
         child: Stack(
           children: <Widget>[

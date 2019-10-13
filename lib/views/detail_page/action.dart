@@ -43,7 +43,7 @@ class MovieDetailPageActionCreator {
     return Action(MovieDetailPageAction.stillImageTapped, payload: index);
   }
 
-  static Action movieCellTapped(int id, String bgurl) {
+  static Action movieCellTapped(String id, String bgurl) {
     return Action(MovieDetailPageAction.movieCellTapped, payload: [id, bgurl]);
   }
 

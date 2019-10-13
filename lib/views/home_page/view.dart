@@ -201,7 +201,7 @@ Widget buildView(
 
   Widget _buildSwiperCardCell(VideoListResult d) {
     return GestureDetector(
-        key: ValueKey('card${d.id}'),
+//        key: ValueKey('card${d.id}'),
         onTap: () => dispatch(HomePageActionCreator.onCellTapped(
             d.id,
             d.thumb_s,

@@ -51,7 +51,7 @@ class DateString {
 
 class VideoListResult {
 
-  int id;
+  String id;
   String uid;
   String title;
   String thumb;
@@ -130,7 +130,7 @@ class VideoListResult {
   });
 
   VideoListResult.fromJson(jsonRes) {
-    this.id = int.parse(jsonRes['id']);
+    this.id = jsonRes['id'];
     this.uid = jsonRes['uid'];
     this.title = jsonRes['title'];
     this.thumb = jsonRes['thumb'];
