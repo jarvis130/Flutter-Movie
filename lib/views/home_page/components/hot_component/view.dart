@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
-import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/models/enums/media_type.dart';
@@ -51,11 +50,13 @@ Widget buildView(
       key: ValueKey(d.id),
       padding: EdgeInsets.only(left: Adapt.px(30)),
       child: GestureDetector(
-        onTap: () => dispatch(HotMovieActionCreator.onCellTapped(
+        onTap: () => dispatch(
+          HotMovieActionCreator.onCellTapped(
             d.id,
             '',
             d.title,
-            d.thumb_s)),
+            d.thumb_s)
+          ),
         child: Column(
           children: <Widget>[
             ClipRRect(

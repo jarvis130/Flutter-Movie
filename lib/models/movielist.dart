@@ -15,12 +15,12 @@ class MovieListModel {
   factory MovieListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new MovieListModel.fromJson(json.decode(jsonStr)) : new MovieListModel.fromJson(jsonStr);
 
   MovieListModel.fromJson(jsonRes) {
-//    page = jsonRes['page'];
-//    total_pages = jsonRes['total_pages'];
-//    total_results = jsonRes['total_results'];
-    results = jsonRes['data']['info'] == null ? null : [];
+    page = jsonRes['data']['info']['page'] == null ? null : 0;
+    total_pages = jsonRes['data']['info']['total_pages'] == null ? null : 0;
+    total_results = jsonRes['data']['info']['total_results'] == null ? null : 0;
+    results = jsonRes['data']['info']['video'] == null ? null : [];
 
-    for (var resultsItem in results == null ? [] : jsonRes['data']['info']){
+    for (var resultsItem in results == null ? [] : jsonRes['data']['info']['video']){
             results.add(resultsItem == null ? null : new MovieListResult.fromJson(resultsItem));
     }
 

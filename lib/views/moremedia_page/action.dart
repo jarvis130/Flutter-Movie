@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 
 //TODO replace with your own action
@@ -8,7 +9,7 @@ class MoreMediaPageActionCreator {
   static Action onAction() {
     return const Action(MoreMediaPageAction.action);
   }
-  static Action loadMore(VideoListModel list) {
+  static Action loadMore(MovieListModel list) {
     return Action(MoreMediaPageAction.loadMore,payload:list);
   }
 

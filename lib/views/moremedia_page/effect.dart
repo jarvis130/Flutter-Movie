@@ -3,7 +3,8 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/movielist.dart';
+import 'package:movie/api/home_api.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -43,13 +44,15 @@ void _onDispose(Action action, Context<MoreMediaPageState> ctx) {
 void _onAction(Action action, Context<MoreMediaPageState> ctx) {}
 
 Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
-  VideoListModel model;
+  MovieListModel model;
   int page = ctx.state.videoList.page + 1;
   if (page <= ctx.state.videoList.total_pages) {
-    if (ctx.state.mediaType == MediaType.movie)
-      model = await ApiHelper.getNowPlayingMovie(page: page);
+    if (ctx.state.mediaType == MediaType.hot)
+      model = await HomeApi.getHotMovieList('', page:page);
+    else if (ctx.state.mediaType == MediaType.recommend)
+      model = await HomeApi.getRecommendMovieList('', page:page);
     else
-      model = await ApiHelper.getTVOnTheAir(page: page);
+      model = await HomeApi.getNewMovieList('', page:page);
   }
   if (model != null) ctx.dispatch(MoreMediaPageActionCreator.loadMore(model));
 }
