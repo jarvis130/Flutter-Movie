@@ -15,9 +15,9 @@ class MovieListModel {
   factory MovieListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new MovieListModel.fromJson(json.decode(jsonStr)) : new MovieListModel.fromJson(jsonStr);
 
   MovieListModel.fromJson(jsonRes) {
-    page = jsonRes['data']['info']['page'] == null ? null : 0;
-    total_pages = jsonRes['data']['info']['total_pages'] == null ? null : 0;
-    total_results = jsonRes['data']['info']['total_results'] == null ? null : 0;
+    page = jsonRes['data']['info']['page'] == null ? 0 : jsonRes['data']['info']['page'];
+    total_pages = jsonRes['data']['info']['total_pages'] == null ? 0 : jsonRes['data']['info']['total_pages'];
+    total_results = jsonRes['data']['info']['total_results'] == null ? 0 : jsonRes['data']['info']['total_results'];
     results = jsonRes['data']['info']['video'] == null ? null : [];
 
     for (var resultsItem in results == null ? [] : jsonRes['data']['info']['video']){

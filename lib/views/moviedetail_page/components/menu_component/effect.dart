@@ -4,6 +4,9 @@ import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'package:movie/models/moviedetail.dart';
 import 'package:movie/views/moviedetail_page/action.dart';
+import 'package:movie/api/my_api.dart';
+import '../../../my_page/action.dart';
+import 'package:movie/models/videolist.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -12,7 +15,7 @@ Effect<MenuState> buildEffect() {
     MenuAction.action: _onAction,
     MenuAction.setRating:_setRating,
     MenuAction.setFavorite:_setFavorite,
-    MenuAction.setWatchlist:_setWatchlist
+    MenuAction.setWatchlist:_setWatchlist,
   });
 }
 
@@ -27,14 +30,21 @@ Future _setRating(Action action, Context<MenuState> ctx) async{
 
 Future _setFavorite(Action action, Context<MenuState> ctx) async{
   final bool f=action.payload;
-  ctx.dispatch(MenuActionCreator.updateFavorite(f));
 
   // var r=await ApiHelper.markAsFavorite(ctx.state.id,MediaType.movie, f);
   // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been mark as favorite':'has been removed'));
 
   MovieDetailModel r=await MoiveDetailApi.addCollect(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.id);
-  if(r != null)
+  if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
+    //更新收藏组件q
+//    VideoListModel q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
+//    if (q != null)  await ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
+//    await ctx.dispatch(MyActionCreator.onLoadFavoritesMore(q));
+    ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
+  }
+
+  ctx.dispatch(MenuActionCreator.updateFavorite(f));
 }
 
 Future _setWatchlist(Action action, Context<MenuState> ctx) async{
@@ -44,5 +54,12 @@ Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   // var r=await ApiHelper.addToWatchlist(ctx.state.id,MediaType.movie, f);
   // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been add to your watchlist':'has been removed from your watchlist'));
   MovieDetailModel r=await MoiveDetailApi.setAttent(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.userinfo['id']);
-  if(r != null)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
+  if(r != null){
+    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
+    //更新关注组件
+//    var t = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, 1);
+//    if (t != null) ctx.dispatch(MyActionCreator.setConcernState(t));
+//    await ctx.dispatch(MyActionCreator.setConcernState());
+  }
+
 }

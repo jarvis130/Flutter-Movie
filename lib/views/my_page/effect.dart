@@ -11,7 +11,9 @@ Effect<MyState> buildEffect() {
   return combineEffects(<Object, Effect<MyState>>{
     MyAction.action: _onAction,
     Lifecycle.initState: _onInit,
-    Lifecycle.dispose: _onDispose
+    Lifecycle.dispose: _onDispose,
+    MyAction.loadFavoritesMore: _loadFavoritesMore,
+    MyAction.loadConcernMore: _loadConcernMore
   });
 }
 
@@ -38,11 +40,7 @@ Future _onInit(Action action, Context<MyState> ctx) async {
       }
     });
 
-  var q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
-  if (q != null) ctx.dispatch(MyActionCreator.onInitFavorites(q));
-  
-  var t = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, 1);
-  if (t != null) ctx.dispatch(MyActionCreator.onInitConcern(t));
+  await _loadFavoritesMore(action, ctx);
 }
 
 void _onDispose(Action action, Context<MyState> ctx) {
@@ -50,19 +48,26 @@ void _onDispose(Action action, Context<MyState> ctx) {
   ctx.state.concernsController.dispose();
 }
 
-Future _loadFavoritesMore(Action action, Context<MyState> ctx) async {
+void _loadFavoritesMore(Action action, Context<MyState> ctx) async {
   VideoListModel q;
 
+//  ctx.dispatch(MyActionCreator.setFavoritesState(q));
   // if (ctx.state.moviecoming.page == ctx.state.moviecoming.total_pages) return;
   // q = await ApiHelper.getMovieUpComing(page: ctx.state.moviecoming.page + 1);
 
   // if (q != null) ctx.dispatch(ComingPageActionCreator.onLoadMore(q));
+
+  q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
+  if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
 }
 
 Future _loadConcernMore(Action action, Context<MyState> ctx) async {
-  VideoListModel q;
+  ConcernListModel t;
   // if (ctx.state.moviecoming.page == ctx.state.moviecoming.total_pages) return;
   // q = await ApiHelper.getMovieUpComing(page: ctx.state.moviecoming.page + 1);
 
   // if (q != null) ctx.dispatch(ComingPageActionCreator.onLoadMore(q));
+
+  t = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, 1);
+  if (t != null) ctx.dispatch(MyActionCreator.setConcernState(t));
 }

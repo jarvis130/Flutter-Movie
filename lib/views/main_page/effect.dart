@@ -1,4 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
+
+import '../my_page/action.dart';
+
 import 'action.dart';
 import 'state.dart';
 
@@ -10,3 +13,4 @@ Effect<MainPageState> buildEffect() {
 
 void _onAction(Action action, Context<MainPageState> ctx) {
 }
+
