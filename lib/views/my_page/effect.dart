@@ -2,7 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/my_api.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/concernlist.dart';
 import 'action.dart';
 import 'state.dart';
@@ -41,6 +41,7 @@ Future _onInit(Action action, Context<MyState> ctx) async {
     });
 
   await _loadFavoritesMore(action, ctx);
+  await _loadConcernMore(action, ctx);
 }
 
 void _onDispose(Action action, Context<MyState> ctx) {
@@ -49,25 +50,33 @@ void _onDispose(Action action, Context<MyState> ctx) {
 }
 
 void _loadFavoritesMore(Action action, Context<MyState> ctx) async {
-  VideoListModel q;
-
-//  ctx.dispatch(MyActionCreator.setFavoritesState(q));
-  // if (ctx.state.moviecoming.page == ctx.state.moviecoming.total_pages) return;
-  // q = await ApiHelper.getMovieUpComing(page: ctx.state.moviecoming.page + 1);
-
-  // if (q != null) ctx.dispatch(ComingPageActionCreator.onLoadMore(q));
-
-  q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
-  if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
+  MovieListModel q;
+  var t = ctx.state.favorites;
+  if (t != null) {
+    if (t.page != t.total_pages) {
+      int page = t.page + 1;
+      q = await MyApi.getFavoritesList(ApiHelper.uid, page: page);
+      if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
+    }
+  }
 }
 
-Future _loadConcernMore(Action action, Context<MyState> ctx) async {
-  ConcernListModel t;
-  // if (ctx.state.moviecoming.page == ctx.state.moviecoming.total_pages) return;
-  // q = await ApiHelper.getMovieUpComing(page: ctx.state.moviecoming.page + 1);
+void _loadConcernMore(Action action, Context<MyState> ctx) async {
+  ConcernListModel q;
+  var c = ctx.state.concerns;
+  if (c != null) {
+    if (c.page == null || c.page != c.total_pages) {
+      int page = 0;
+      if(c.page == null){
+        page = 1;
+      }else{
+        page = c.page + 1;
+      }
 
-  // if (q != null) ctx.dispatch(ComingPageActionCreator.onLoadMore(q));
+      q = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: page);
+      if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
+    }
+  }
 
-  t = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, 1);
-  if (t != null) ctx.dispatch(MyActionCreator.setConcernState(t));
+
 }

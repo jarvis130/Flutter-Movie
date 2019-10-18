@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class MovieListModel {
 
-  int page;
+  int page = 0;
   int total_pages;
   int total_results;
   List< MovieListResult> results;
@@ -164,10 +164,10 @@ class MovieListResult {
     this.collects = jsonRes['collects'];
     this.description = jsonRes['description'];
     this.datetime = jsonRes['datetime'];
-    // this.islike = jsonRes['islike'];
-    // this.isstep = jsonRes['isstep'];
-    // this.isattent = jsonRes['isattent'];
-    // this.iscollect = jsonRes['iscollect'];
+//     this.islike = jsonRes['islike'];
+//     this.isstep = jsonRes['isstep'];
+//     this.isattent = jsonRes['isattent'];
+//     this.iscollect = jsonRes['iscollect'];
 
 //    for (var genre_idsItem in genre_ids == null ? [] : jsonRes['genre_ids']){
 //            genre_ids.add(genre_idsItem);

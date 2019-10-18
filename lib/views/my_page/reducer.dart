@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/models/concernlist.dart';
 import 'action.dart';
@@ -31,8 +32,8 @@ MyState _setConcernState(MyState state, Action action) {
 }
 
 MyState _setFavoritesState(MyState state, Action action) {
-  final VideoListModel q = action.payload ??
-      VideoListModel.fromParams(results: List<VideoListResult>());
+  final MovieListModel q = action.payload ??
+      MovieListModel.fromParams(results: List<MovieListResult>());
   final MyState newState = state.clone();
   newState.favorites = q;
   return newState;

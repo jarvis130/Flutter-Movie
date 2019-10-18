@@ -2,9 +2,6 @@ import 'dart:convert' show json;
 
 import 'package:movie/models/releasedatemodel.dart';
 import 'package:movie/models/review.dart';
-import 'package:movie/models/videolist.dart';
-import 'package:movie/models/videomodel.dart';
-
 import 'creditsmodel.dart';
 import 'externalidsmodel.dart';
 import 'imagemodel.dart';

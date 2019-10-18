@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/concernlist.dart';
 
 //TODO replace with your own action
@@ -24,7 +24,7 @@ class MyActionCreator {
     return Action(MyAction.loadConcernMore);
   }
 
-  static Action setFavoritesState(VideoListModel d) {
+  static Action setFavoritesState(MovieListModel d) {
     return Action(MyAction.setFavoritesState, payload: d);
   }
   static Action setConcernState(ConcernListModel d) {

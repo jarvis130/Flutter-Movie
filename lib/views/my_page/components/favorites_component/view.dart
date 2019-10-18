@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/models/videolist.dart';
 import 'dart:ui';
@@ -13,7 +14,7 @@ import 'state.dart';
 
 Widget buildView(FavoritesState state, Dispatch dispatch, ViewService viewService) {
 
- Widget _buildListCell(VideoListResult d) {
+ Widget _buildListCell(MovieListResult d) {
     return GestureDetector(
         onTap: () {
           dispatch(FavoritesActionCreator.onCellTapped(d.id, d.thumb_s, d.title, d.thumb_s));    

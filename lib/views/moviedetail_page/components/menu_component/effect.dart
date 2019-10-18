@@ -52,11 +52,8 @@ Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   MovieDetailModel r=await MoiveDetailApi.setAttent(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.userinfo['id']);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
+    ctx.broadcast(MyActionCreator.onLoadConcernMore());
   }
 
 }
 
-void _loadFavoritesMore(Action action, Context<MenuState> ctx) async{
-  ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
-
-}

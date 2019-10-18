@@ -2,7 +2,7 @@ import 'dart:convert' show json;
 
 class ConcernListModel {
 
-  int page;
+  int page = 0;
   int total_pages;
   int total_results;
   List< ConcernListResult> results;
@@ -13,12 +13,12 @@ class ConcernListModel {
   factory ConcernListModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new ConcernListModel.fromJson(json.decode(jsonStr)) : new ConcernListModel.fromJson(jsonStr);
   
   ConcernListModel.fromJson(jsonRes) {
-    // page = jsonRes['page'];
-    // total_pages = jsonRes['total_pages'];
-    // total_results = jsonRes['total_results'];
-    results = jsonRes['data']['info'] == null ? null : [];
+    page = jsonRes['data']['info']['page'] == null ? 0 : jsonRes['data']['info']['page'];
+    total_pages = jsonRes['data']['info']['total_pages'] == null ? 0 : jsonRes['data']['info']['total_pages'];
+    total_results = jsonRes['data']['info']['total_results'] == null ? 0 : jsonRes['data']['info']['total_results'];
+    results = jsonRes['data']['info']['list'] == null ? null : [];
 
-    for (var resultsItem in results == null ? [] : jsonRes['data']['info']){
+    for (var resultsItem in results == null ? [] : jsonRes['data']['info']['list']){
             results.add(resultsItem == null ? null : new ConcernListResult.fromJson(resultsItem));
     }
 
@@ -65,7 +65,7 @@ class ConcernListResult {
   String follows ;
   String workVideos;
   String likeVideos;
-  String vip_info ;
+  bool vip_info ;
   int isattention;
 
 
