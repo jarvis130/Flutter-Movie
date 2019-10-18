@@ -11,7 +11,6 @@ Effect<MyState> buildEffect() {
   return combineEffects(<Object, Effect<MyState>>{
     MyAction.action: _onAction,
     Lifecycle.initState: _onInit,
-    Lifecycle.build: _onBuild,
     Lifecycle.dispose: _onDispose,
     MyAction.loadFavoritesMore: _loadFavoritesMore,
     MyAction.loadConcernMore: _loadConcernMore
@@ -47,10 +46,6 @@ Future _onInit(Action action, Context<MyState> ctx) async {
 void _onDispose(Action action, Context<MyState> ctx) {
   ctx.state.favoritesController.dispose();
   ctx.state.concernsController.dispose();
-}
-
-void _onBuild(Action action, Context<MyState> ctx) {
-  _loadFavoritesMore(action, ctx);
 }
 
 void _loadFavoritesMore(Action action, Context<MyState> ctx) async {

@@ -37,6 +37,7 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
   MovieDetailModel r=await MoiveDetailApi.addCollect(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.id);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
+    ctx.broadcast(MyActionCreator.onLoadFavoritesMore());
   }
 
   ctx.dispatch(MenuActionCreator.updateFavorite(f));
@@ -52,5 +53,10 @@ Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
   }
+
+}
+
+void _loadFavoritesMore(Action action, Context<MenuState> ctx) async{
+  ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
 
 }
