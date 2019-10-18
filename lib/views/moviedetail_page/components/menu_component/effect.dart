@@ -37,11 +37,6 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
   MovieDetailModel r=await MoiveDetailApi.addCollect(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.id);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
-    //更新收藏组件q
-//    VideoListModel q = await MyApi.getFavoritesList(ApiHelper.uid, 1);
-//    if (q != null)  await ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
-//    await ctx.dispatch(MyActionCreator.onLoadFavoritesMore(q));
-    ctx.dispatch(MyActionCreator.onLoadFavoritesMore());
   }
 
   ctx.dispatch(MenuActionCreator.updateFavorite(f));
@@ -56,10 +51,6 @@ Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   MovieDetailModel r=await MoiveDetailApi.setAttent(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.userinfo['id']);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
-    //更新关注组件
-//    var t = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, 1);
-//    if (t != null) ctx.dispatch(MyActionCreator.setConcernState(t));
-//    await ctx.dispatch(MyActionCreator.setConcernState());
   }
 
 }
