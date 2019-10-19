@@ -100,9 +100,10 @@ Widget buildView(
             child: Row(
               children: <Widget>[
                 Container(
-                  width: Adapt.px(120),
-                  height: Adapt.px(180),
+                  width: Adapt.px(100),
+                  height: Adapt.px(100),
                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Adapt.px(50)),
                       color: Color.fromRGBO(
                           random.nextInt(255),
                           random.nextInt(255),
@@ -122,7 +123,7 @@ Widget buildView(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: Adapt.px(500),
+                      width: Adapt.px(450),
                       child: Text(
                         d.user_nicename ?? '',
                         style: TextStyle(
@@ -131,29 +132,38 @@ Widget buildView(
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Text("Release on: " + d?.release_date ?? '-',
-                    //     style: TextStyle(
-                    //         color: Colors.grey[700], fontSize: Adapt.px(24))),
+                     Text("视频数量" + d?.workVideos ?? '0',
+                         style: TextStyle(
+                             color: Colors.grey[700], fontSize: Adapt.px(24))),
                     SizedBox(
                       height: Adapt.px(8),
                     ),
-                    // Row(
-                    //   children:
-                    //       d.genre_ids.take(3).map(_buildGenreChip).toList(),
-                    // ),
-                    SizedBox(
-                      height: Adapt.px(8),
-                    ),
-                    Container(
-                      width: Adapt.screenW() - Adapt.px(200),
-                      child: Text(
-                        d.follows ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    )
                   ],
-                )
+                ),
+//                Expanded(
+//                  child: Column(
+//                    mainAxisAlignment: MainAxisAlignment.center,
+//                    crossAxisAlignment: CrossAxisAlignment.start,
+//                    children: <Widget>[
+//                      Container(
+//                        width: Adapt.px(500),
+//                        child: Text(
+//                          "视频数量",
+//                          style: TextStyle(
+//                              color: Colors.grey[700],
+//                              fontSize: Adapt.px(24),
+//                              fontWeight: FontWeight.bold),
+//                        ),
+//                      ),
+//                      Text(d?.workVideos ?? '0',
+//                         style: TextStyle(
+//                             color: Colors.grey[700], fontSize: Adapt.px(24))),
+//                      SizedBox(
+//                        height: Adapt.px(8),
+//                      ),
+//                    ],
+//                  ),
+//                )
               ],
             ),
           ),

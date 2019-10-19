@@ -88,7 +88,7 @@ Future<Widget> createApp() async {
 //      'peopledetailpage': PeopleDetailPage(),
 //      'seasondetailpage': SeasonDetailPage(),
 //      'episodedetailpage': EpisodeDetailPage(),
-//      'MoreMediaPage': MoreMediaPage(),
+      'MoreMediaPage': MoreMediaPage(),
 //      'SeasonsPage': SeasonsPage(),
       'MyListsPage': MyListsPage(),
       'ListDetailPage': ListDetailPage(),
