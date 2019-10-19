@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/views/discover_page/page.dart';
+import 'package:movie/views/douyin_page/page.dart';
 import 'package:movie/views/episodedetail_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
 import 'package:movie/views/gallery_page/page.dart';
@@ -101,7 +102,8 @@ Future<Widget> createApp() async {
       'DiscoverPage': DiscoverPage(),
       'GuidePage': GuidePage(),
       'SplashPage': SplashPage(),
-      'UserPage': UserPage()
+      'UserPage': UserPage(),
+      'DouyinPage': DouyinPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {
