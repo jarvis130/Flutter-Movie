@@ -16,9 +16,9 @@ class ConcernListModel {
     page = jsonRes['data']['info']['page'] == null ? 0 : jsonRes['data']['info']['page'];
     total_pages = jsonRes['data']['info']['total_pages'] == null ? 0 : jsonRes['data']['info']['total_pages'];
     total_results = jsonRes['data']['info']['total_results'] == null ? 0 : jsonRes['data']['info']['total_results'];
-    results = jsonRes['data']['info']['list'] == null ? null : [];
+    results = jsonRes['data']['info']['items'] == null ? null : [];
 
-    for (var resultsItem in results == null ? [] : jsonRes['data']['info']['list']){
+    for (var resultsItem in results == null ? [] : jsonRes['data']['info']['items']){
             results.add(resultsItem == null ? null : new ConcernListResult.fromJson(resultsItem));
     }
 

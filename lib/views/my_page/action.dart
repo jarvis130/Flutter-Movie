@@ -6,6 +6,8 @@ import 'package:movie/models/concernlist.dart';
 enum MyAction {
   action,
   setFavoritesState,
+  loadFavorites,
+  loadConcern,
   loadFavoritesMore,
   loadConcernMore,
   setConcernState ,
@@ -22,6 +24,13 @@ class MyActionCreator {
   }
   static Action onLoadConcernMore() {
     return Action(MyAction.loadConcernMore);
+  }
+
+  static Action onLoadFavorites() {
+    return Action(MyAction.loadFavorites);
+  }
+  static Action onLoadConcern() {
+    return Action(MyAction.loadConcern);
   }
 
   static Action setFavoritesState(MovieListModel d) {

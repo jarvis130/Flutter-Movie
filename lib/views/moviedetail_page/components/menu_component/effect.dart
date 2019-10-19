@@ -6,7 +6,8 @@ import 'package:movie/models/moviedetail.dart';
 import 'package:movie/views/moviedetail_page/action.dart';
 import 'package:movie/api/my_api.dart';
 import '../../../my_page/action.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/movielist.dart';
+import 'package:movie/models/concernlist.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -30,17 +31,18 @@ Future _setRating(Action action, Context<MenuState> ctx) async{
 
 Future _setFavorite(Action action, Context<MenuState> ctx) async{
   final bool f=action.payload;
-
+  ctx.dispatch(MenuActionCreator.updateFavorite(f));
   // var r=await ApiHelper.markAsFavorite(ctx.state.id,MediaType.movie, f);
   // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been mark as favorite':'has been removed'));
 
   MovieDetailModel r=await MoiveDetailApi.addCollect(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.id);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
-    ctx.broadcast(MyActionCreator.onLoadFavoritesMore());
+    //
+    ctx.broadcast(MyActionCreator.onLoadFavorites());
   }
 
-  ctx.dispatch(MenuActionCreator.updateFavorite(f));
+
 }
 
 Future _setWatchlist(Action action, Context<MenuState> ctx) async{
@@ -52,7 +54,8 @@ Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   MovieDetailModel r=await MoiveDetailApi.setAttent(ApiHelper.uid, ApiHelper.accessTokenV4, ctx.state.userinfo['id']);
   if(r != null){
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
-    ctx.broadcast(MyActionCreator.onLoadConcernMore());
+    //
+    ctx.broadcast(MyActionCreator.onLoadConcern());
   }
 
 }

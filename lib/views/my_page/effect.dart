@@ -13,7 +13,9 @@ Effect<MyState> buildEffect() {
     Lifecycle.initState: _onInit,
     Lifecycle.dispose: _onDispose,
     MyAction.loadFavoritesMore: _loadFavoritesMore,
-    MyAction.loadConcernMore: _loadConcernMore
+    MyAction.loadConcernMore: _loadConcernMore,
+    MyAction.loadFavorites: _loadFavorites,
+    MyAction.loadConcern: _loadConcern
   });
 }
 
@@ -40,8 +42,8 @@ Future _onInit(Action action, Context<MyState> ctx) async {
       }
     });
 
-  await _loadFavoritesMore(action, ctx);
-  await _loadConcernMore(action, ctx);
+  await _loadFavorites(action, ctx);
+  await _loadConcern(action, ctx);
 }
 
 void _onDispose(Action action, Context<MyState> ctx) {
@@ -77,6 +79,15 @@ void _loadConcernMore(Action action, Context<MyState> ctx) async {
       if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
     }
   }
+}
 
+void _loadFavorites(Action action, Context<MyState> ctx) async {
+  MovieListModel  q = await MyApi.getFavoritesList(ApiHelper.uid, page: 1);
+  if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
+}
+
+void _loadConcern(Action action, Context<MyState> ctx) async {
+  ConcernListModel q = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: 1);
+  if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
 
 }
