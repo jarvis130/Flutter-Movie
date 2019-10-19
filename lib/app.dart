@@ -24,6 +24,7 @@ import 'package:movie/views/tvdetail_page/page.dart';
 import 'package:movie/views/watchlist_page/page.dart';
 import 'package:movie/views/watchlistdetail_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
+import 'package:movie/views/user_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'actions/timeline.dart';
@@ -82,24 +83,25 @@ Future<Widget> createApp() async {
       'mainpage': MainPage(),
       'loginpage': LoginPage(),
       'moviedetailpage': MovieDetailPage(),
-      'tvdetailpage': TVDetailPage(),
+//      'tvdetailpage': TVDetailPage(),
       'searchpage': SearchPage(),
-      'peopledetailpage': PeopleDetailPage(),
-      'seasondetailpage': SeasonDetailPage(),
-      'episodedetailpage': EpisodeDetailPage(),
-      'MoreMediaPage': MoreMediaPage(),
-      'SeasonsPage': SeasonsPage(),
+//      'peopledetailpage': PeopleDetailPage(),
+//      'seasondetailpage': SeasonDetailPage(),
+//      'episodedetailpage': EpisodeDetailPage(),
+//      'MoreMediaPage': MoreMediaPage(),
+//      'SeasonsPage': SeasonsPage(),
       'MyListsPage': MyListsPage(),
       'ListDetailPage': ListDetailPage(),
       'FavoritesPage': FavoritesPage(),
-      'WatchlistPage': WatchlistPage(),
-      'WatchlistDetailPage': WatchlistDetailPage(),
+//      'WatchlistPage': WatchlistPage(),
+//      'WatchlistDetailPage': WatchlistDetailPage(),
       'detailpage': detail.MovieDetailPage(),
       'classifypage': ClassifyPage(),
       'GalleryPage': GalleryPage(),
       'DiscoverPage': DiscoverPage(),
       'GuidePage': GuidePage(),
-      'SplashPage': SplashPage()
+      'SplashPage': SplashPage(),
+      'UserPage': UserPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {

@@ -19,8 +19,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(
-    ListDetailPageState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService) {
 
   String _covertDuration(int d) {
     String result = '';
@@ -42,8 +41,8 @@ Widget buildView(
 
   Widget _buildInfoCell(String value, String title,
       {Widget valueChild,
-      Color labelColor = Colors.black,
-      Color titleColor = Colors.black}) {
+        Color labelColor = Colors.black,
+        Color titleColor = Colors.black}) {
     var titleStyle = TextStyle(
         fontSize: Adapt.px(26), color: titleColor, fontWeight: FontWeight.bold);
     var valueStyle = TextStyle(
@@ -54,9 +53,9 @@ Widget buildView(
         children: <Widget>[
           valueChild == null
               ? Text(
-                  value ?? '',
-                  style: valueStyle,
-                )
+            value ?? '',
+            style: valueStyle,
+          )
               : valueChild,
           SizedBox(
             height: Adapt.px(8),
@@ -253,7 +252,7 @@ Widget buildView(
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
                                   d.avatar_thumb
-                          ))),
+                              ))),
                     ),
                     SizedBox(
                       height: Adapt.px(10),
@@ -337,12 +336,12 @@ Widget buildView(
       return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          fit: BoxFit.cover,
-          //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
-          image: CachedNetworkImageProvider(
-            state?.listDetailModel?.avatar_thumb
-          ),
-        )),
+              fit: BoxFit.cover,
+              //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
+              image: CachedNetworkImageProvider(
+                  state?.listDetailModel?.avatar_thumb
+              ),
+            )),
         child: Container(
           alignment: Alignment.bottomLeft,
           padding: EdgeInsets.all(Adapt.px(30)),
@@ -362,7 +361,7 @@ Widget buildView(
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
                                   d.avatar_thumb
-                          ))),
+                              ))),
                     ),
                     SizedBox(
                       width: Adapt.px(20),
@@ -384,76 +383,66 @@ Widget buildView(
                         SizedBox(
                           height: Adapt.px(5),
                         ),
-                         SizedBox(
-                           width: Adapt.px(200),
-                           child: Text(
-                             d.createTime,
-                             style: TextStyle(
-                                 color: Colors.white,
-                                 fontWeight: FontWeight.bold,
-                                 fontSize: Adapt.px(20)),
-                           ),
-                         )
+                        SizedBox(
+                          width: Adapt.px(200),
+                          child: Text(
+                            d.createTime,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: Adapt.px(20)),
+                          ),
+                        )
                       ],
                     ),
                     Expanded(
                       child: Container(),
                     ),
-                    MaterialButton(
-                      height: 28,
-                      minWidth: 30,
-                      color: d.isattention == 0 ? Colors.red : Colors.grey,
-                      textColor: Colors.white,
-                      child: d.isattention == 0 ? Text('未关注') : Text('已关注'),
-                      onPressed: () {
-                        // ...
-                      },
-                    ),
-//                    _buildIconButton(Icons.exposure_plus_1, () {}),
-//                     _buildIconButton(Icons.share, () {
-//                       showDialog(
-//                           context: viewService.context,
-//                           builder: (ctx) {
-//                             return ShareCard(
-//                               backgroundImage: ImageUrl.getUrl(
-//                                   state.listDetailModel.avatar_thumb,
-//                                   ImageSize.w500),
-//                               qrValue:
-//                                   "https://www.themoviedb.org/list/${state.listDetailModel.id}",
-//                               header: _buildShareCardHeader(),
-//                             );
-//                           });
-//                     }),
-                    // PopupMenuButton<SortCondition>(
-                    //   offset: Offset(0, Adapt.px(100)),
-                    //   icon: Icon(Icons.sort, color: Colors.white),
-                    //   onSelected: (selected) => dispatch(
-                    //       ListDetailPageActionCreator.sortChanged(selected)),
-                    //   itemBuilder: (ctx) {
-                    //     return state.sortBy.map((s) {
-                    //       var unSelectedStyle = TextStyle(color: Colors.grey);
-                    //       var selectedStyle = TextStyle(
-                    //           color: Colors.black, fontWeight: FontWeight.bold);
-                    //       return PopupMenuItem<SortCondition>(
-                    //         value: s,
-                    //         child: Row(
-                    //           children: <Widget>[
-                    //             Text(
-                    //               s.name,
-                    //               style: s.isSelected
-                    //                   ? selectedStyle
-                    //                   : unSelectedStyle,
-                    //             ),
-                    //             Expanded(
-                    //               child: Container(),
-                    //             ),
-                    //             s.isSelected ? Icon(Icons.check) : SizedBox()
-                    //           ],
-                    //         ),
-                    //       );
-                    //     }).toList();
-                    //   },
-                    // )
+                    _buildIconButton(Icons.edit, () {}),
+                     _buildIconButton(Icons.share, () {
+                       showDialog(
+                           context: viewService.context,
+                           builder: (ctx) {
+                             return ShareCard(
+                               backgroundImage: ImageUrl.getUrl(
+                                   state.listDetailModel.avatar_thumb,
+                                   ImageSize.w500),
+                               qrValue:
+                                   "https://www.themoviedb.org/list/${state.listDetailModel.id}",
+                               header: _buildShareCardHeader(),
+                             );
+                           });
+                     }),
+                     PopupMenuButton<SortCondition>(
+                       offset: Offset(0, Adapt.px(100)),
+                       icon: Icon(Icons.sort, color: Colors.white),
+                       onSelected: (selected) => dispatch(
+                           UserPageActionCreator.sortChanged(selected)),
+                       itemBuilder: (ctx) {
+                         return state.sortBy.map((s) {
+                           var unSelectedStyle = TextStyle(color: Colors.grey);
+                           var selectedStyle = TextStyle(
+                               color: Colors.black, fontWeight: FontWeight.bold);
+                           return PopupMenuItem<SortCondition>(
+                             value: s,
+                             child: Row(
+                               children: <Widget>[
+                                 Text(
+                                   s.name,
+                                   style: s.isSelected
+                                       ? selectedStyle
+                                       : unSelectedStyle,
+                                 ),
+                                 Expanded(
+                                   child: Container(),
+                                 ),
+                                 s.isSelected ? Icon(Icons.check) : SizedBox()
+                               ],
+                             ),
+                           );
+                         }).toList();
+                       },
+                     )
                   ]),
                   SizedBox(
                     height: Adapt.px(20),
@@ -463,20 +452,20 @@ Widget buildView(
 //                           color: Colors.white,
 //                           fontWeight: FontWeight.bold,
 //                           fontSize: Adapt.px(30))),
-                   Container(
-                     width: Adapt.screenW() - Adapt.px(60),
-                     height: Adapt.px(120),
-                     child: Text(
-                       d.signature ?? '',
-                       overflow: TextOverflow.ellipsis,
-                       maxLines: 4,
-                       style: TextStyle(
-                           color: Colors.white, fontSize: Adapt.px(26)),
-                     ),
-                   ),
-                   SizedBox(
-                     height: Adapt.px(30),
-                   ),
+                  Container(
+                    width: Adapt.screenW() - Adapt.px(60),
+                    height: Adapt.px(120),
+                    child: Text(
+                      d.signature ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                      style: TextStyle(
+                          color: Colors.white, fontSize: Adapt.px(26)),
+                    ),
+                  ),
+                  SizedBox(
+                    height: Adapt.px(30),
+                  ),
                 ],
               ),
             ),
@@ -490,7 +479,7 @@ Widget buildView(
   Widget _buildListCell(ListDetailResult d) {
     return GestureDetector(
       onTap: () {
-         dispatch(ListDetailPageActionCreator.cellTapped(d));
+        dispatch(UserPageActionCreator.cellTapped(d));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -564,7 +553,7 @@ Widget buildView(
           backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           pinned: true,
           title: Text(
-            state?.listDetailModel?.user_nicename ?? '',
+            '会员中心',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           expandedHeight: Adapt.px(550),
@@ -580,7 +569,7 @@ Widget buildView(
         SliverToBoxAdapter(
           child: Offstage(
             offstage:
-                state.listDetailModel.totalPages == state.listDetailModel.page,
+            state.listDetailModel.totalPages == state.listDetailModel.page,
             child: Container(
               height: Adapt.px(80),
               margin: EdgeInsets.only(top: Adapt.px(30)),
@@ -599,4 +588,5 @@ Widget buildView(
       ],
     ),
   );
+
 }

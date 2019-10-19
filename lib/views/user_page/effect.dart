@@ -1,25 +1,28 @@
+import 'package:fish_redux/fish_redux.dart';
 import 'dart:io';
 import 'dart:convert';
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart' hide Action;
+import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/api/listdetail_api.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<ListDetailPageState> buildEffect() {
-  return combineEffects(<Object, Effect<ListDetailPageState>>{
+Effect<UserPageState> buildEffect() {
+  return combineEffects(<Object, Effect<UserPageState>>{
+    UserPageAction.action: _onAction,
     Lifecycle.initState: _onInit,
-    ListDetailPageAction.action: _onAction,
-    ListDetailPageAction.cellTapped: _cellTapped,
-    ListDetailPageAction.sortChanged: _sortChanged,
+    UserPageAction.cellTapped: _cellTapped,
+    UserPageAction.sortChanged: _sortChanged,
   });
 }
 
-void _onAction(Action action, Context<ListDetailPageState> ctx) {}
+void _onAction(Action action, Context<UserPageState> ctx) {
+}
 
-Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
+
+Future _onInit(Action action, Context<UserPageState> ctx) async {
   ctx.state.scrollController = ScrollController()
     ..addListener(() async {
       bool isBottom = ctx.state.scrollController.position.pixels ==
@@ -42,7 +45,7 @@ Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
   _loadData(action, ctx);
 }
 
-Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
+Future _cellTapped(Action action, Context<UserPageState> ctx) async {
   ListDetailResult d = action.payload;
   // if (d != null) {
   //   if (d.mediaType == 'movie')
@@ -61,28 +64,24 @@ Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
   //     });
   // }
   await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
-        'movieid': d.id,
-        'bgpic': d.thumb_s,
-        'title': d.title,
-        'posterpic': d.thumb_s
-      });
+    'movieid': d.id,
+    'bgpic': d.thumb_s,
+    'title': d.title,
+    'posterpic': d.thumb_s
+  });
 }
 
-Future _sortChanged(Action action, Context<ListDetailPageState> ctx) async {
+Future _sortChanged(Action action, Context<UserPageState> ctx) async {
   final SortCondition model = action.payload;
   if (model.value != ctx.state.sortType) {
-    ctx.dispatch(ListDetailPageActionCreator.setSort(model));
+    ctx.dispatch(UserPageActionCreator.setSort(model));
     _loadData(action, ctx);
   }
 }
 
-Future _loadData(Action action, Context<ListDetailPageState> ctx) async {
-  if (ctx.state.userid != null) {
-    // var r = await ApiHelper.getListDetailV4(ctx.state.userid,
-    //     sortBy: ctx.state.sortType);
-    // if (r != null) ctx.dispatch(ListDetailPageActionCreator.setListDetail(r));
-    ListDetailModel r = await ListDetailApi.getUserHome(ctx.state.userid);
+Future _loadData(Action action, Context<UserPageState> ctx) async {
+    ListDetailModel r = await ListDetailApi.getUserHome(ApiHelper.uid);
     if (r != null)
-      ctx.dispatch(ListDetailPageActionCreator.loadMore(r));
-  }
+      ctx.dispatch(UserPageActionCreator.loadMore(r));
+
 }

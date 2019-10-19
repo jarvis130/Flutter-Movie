@@ -4,28 +4,28 @@ import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 
 //TODO replace with your own action
-enum ListDetailPageAction { action,setListDetail,cellTapped,loadMore,sortChanged,setSort,screenShot}
+enum UserPageAction { action,setListDetail,cellTapped,loadMore,sortChanged,setSort,screenShot }
 
-class ListDetailPageActionCreator {
+class UserPageActionCreator {
   static Action onAction() {
-    return const Action(ListDetailPageAction.action);
+    return const Action(UserPageAction.action);
   }
   static Action setListDetail(ListDetailModel d) {
-    return Action(ListDetailPageAction.setListDetail,payload: d);
+    return Action(UserPageAction.setListDetail,payload: d);
   }
   static Action cellTapped(ListDetailResult result) {
-    return Action(ListDetailPageAction.cellTapped,payload: result);
+    return Action(UserPageAction.cellTapped,payload: result);
   }
   static Action loadMore(ListDetailModel d) {
-    return Action(ListDetailPageAction.loadMore,payload: d);
+    return Action(UserPageAction.loadMore,payload: d);
   }
   static Action sortChanged(SortCondition d) {
-    return Action(ListDetailPageAction.sortChanged,payload: d);
+    return Action(UserPageAction.sortChanged,payload: d);
   }
   static Action setSort(SortCondition d) {
-    return Action(ListDetailPageAction.setSort,payload: d);
+    return Action(UserPageAction.setSort,payload: d);
   }
   static Action screenShot(ScreenShotType type) {
-    return Action(ListDetailPageAction.screenShot,payload: type);
+    return Action(UserPageAction.screenShot,payload: type);
   }
 }

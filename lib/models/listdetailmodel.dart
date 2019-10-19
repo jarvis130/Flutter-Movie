@@ -20,8 +20,9 @@ class ListDetailModel {
   String follows ;
   String workVideos;
   String likeVideos;
-  String vip_info ;
+  bool vip_info ;
   String isattention;
+  String createTime;
   List<ListDetailResult> results;
 
   ListDetailModel.fromParams({this.id, this.page, this.totalPages, this.totalResults, this.user_nicename, this.avatar, this.avatar_thumb, this.sex, this.signature, this.province, this.city, this.birthday, this.age, this.praise, this.fans, this.follows, this.workVideos, this.likeVideos, this.vip_info, this.isattention, this.results});
@@ -47,7 +48,7 @@ class ListDetailModel {
     this.likeVideos = tmp['likeVideos'];
     this.vip_info  = tmp['vip_info'];
     this.isattention = tmp['isattention'];
-
+    this.createTime = tmp['create_time'];
     results = tmp['videos'] == null ? null : [];
 
     for (var resultsItem in tmp['videos'] == null ? [] : tmp['videos']){
