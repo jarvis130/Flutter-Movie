@@ -3,6 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
 import 'package:movie/models/videomodel.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -19,7 +20,8 @@ Reducer<MovieDetailPageState> buildReducer() {
       MovieDetailPageAction.setImages:_onSetImages,
       MovieDetailPageAction.setReviews:_onSetReviews,
       MovieDetailPageAction.setVideos:_onSetVideos,
-      MovieDetailPageAction.setAccountState:_onSetAccountState
+      MovieDetailPageAction.setAccountState:_onSetAccountState,
+      MovieDetailPageAction.setRecommendMovie: _onSetRecommendMovie
     },
   );
 }
@@ -65,5 +67,11 @@ MovieDetailPageState _onSetAccountState(MovieDetailPageState state, Action actio
   MediaAccountStateModel c=action.payload;
   final MovieDetailPageState newState = state.clone();
   newState.accountState=c;
+  return newState;
+}
+MovieDetailPageState _onSetRecommendMovie(MovieDetailPageState state, Action action) {
+  MovieListModel c=action.payload;
+  final MovieDetailPageState newState = state.clone();
+  newState.recommendMovie=c;
   return newState;
 }

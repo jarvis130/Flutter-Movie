@@ -16,6 +16,7 @@ import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/imagemodel.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/models/videomodel.dart';
 import 'package:parallax_image/parallax_image.dart';
@@ -102,7 +103,7 @@ Widget buildView(
     );
   }
 
-  Widget _buildRecommendationCell(VideoListResult d) {
+  Widget _buildRecommendationCell(MovieListResult d) {
     return GestureDetector(
       child: Container(
           padding: EdgeInsets.only(
@@ -173,7 +174,7 @@ Widget buildView(
     );
   }
 
-  Widget _buildVideoCell(VideoResult d) {
+  Widget _buildVideoCell(MovieListResult d) {
     return Container(
       padding: EdgeInsets.fromLTRB(Adapt.px(30), 0, Adapt.px(30), Adapt.px(30)),
       child: Card(
@@ -183,7 +184,7 @@ Widget buildView(
           children: <Widget>[
             VideoPlayerItem(
               vc: VideoPlayerController.network(VideoUrl.getUrl(d.id, d.href)),
-              coverurl: 'https://i.ytimg.com/vi/${d.id}/hqdefault.jpg',
+              coverurl: d.thumb_s,
               showplayer: true,
             ),
             Padding(
@@ -365,11 +366,11 @@ Widget buildView(
   }
 
   List<Widget> _buildRecommendationBody() {
-    // if (state.movieDetailModel?.recommendations != null)
-    //   return state.movieDetailModel.recommendations.results
-    //       .map(_buildRecommendationCell)
-    //       .toList();
-    // else
+     if (state.recommendMovie.results != null)
+       return state.recommendMovie.results
+           .map(_buildRecommendationCell)
+           .toList();
+     else
       return <Widget>[
         _buildRecommendationShimmer(),
         _buildRecommendationShimmer(),
@@ -378,12 +379,12 @@ Widget buildView(
   }
 
   Widget _getVideoBody() {
-    if (state.videomodel.results.length > 0)
+    if (state.recommendMovie.results.length > 0)
       return SliverList(
           delegate:
               SliverChildBuilderDelegate((BuildContext contxt, int index) {
-        return _buildVideoCell(state.videomodel.results[index]);
-      }, childCount: state.videomodel.results.length));
+        return _buildVideoCell(state.recommendMovie.results[index]);
+      }, childCount: state.recommendMovie.results.length));
     else
       return SliverList(
           delegate:

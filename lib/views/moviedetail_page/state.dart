@@ -9,6 +9,7 @@ import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/keyword.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
 import 'package:movie/models/videomodel.dart';
 import 'package:palette_generator/palette_generator.dart';
@@ -16,6 +17,7 @@ import 'package:palette_generator/palette_generator.dart';
 class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
   GlobalKey<ScaffoldState> scaffoldkey;
   MovieDetailModel movieDetailModel;
+  MovieListModel recommendMovie;
   String backdropPic;
   String title;
   String posterPic;
@@ -35,6 +37,7 @@ class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
     return MovieDetailPageState()
       ..scaffoldkey = scaffoldkey
       ..movieDetailModel = movieDetailModel
+      ..recommendMovie = recommendMovie
       ..mainColor = mainColor
       ..tabTintColor=tabTintColor
       ..palette = palette
@@ -55,6 +58,7 @@ class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
 }
 
 MovieDetailPageState initState(Map<String, dynamic> args) {
+
   Random random = new Random(DateTime.now().millisecondsSinceEpoch);
   var state = MovieDetailPageState();
   state.scaffoldkey = GlobalKey<ScaffoldState>();
@@ -62,18 +66,28 @@ MovieDetailPageState initState(Map<String, dynamic> args) {
   if (args['bgpic'] != null) state.backdropPic = args['bgpic'];
   if (args['posterpic'] != null) state.posterPic = args['posterpic'];
   if (args['title'] != null) state.title = args['title'];
+
   state.movieDetailModel = new MovieDetailModel.fromParams();
+  state.recommendMovie = new MovieListModel.fromParams();
+
   state.mainColor = Color.fromRGBO(
       random.nextInt(200), random.nextInt(100), random.nextInt(255), 1);
+
   state.tabTintColor=Color.fromRGBO(
       random.nextInt(200), random.nextInt(100), random.nextInt(255), 1);
+
   state.palette = new PaletteGenerator.fromColors(
       List<PaletteColor>()..add(new PaletteColor(Colors.black87, 0)));
+
   state.imagesmodel = new ImageModel.fromParams(
       posters: List<ImageData>(), backdrops: List<ImageData>());
+
   state.reviewModel = new ReviewModel.fromParams(results: List<ReviewResult>());
+
   state.videomodel = new VideoModel.fromParams(results: List<VideoResult>());
+
   state.accountState =
       new MediaAccountStateModel.fromParams(favorite: false, watchlist: false);
+
   return state;
 }

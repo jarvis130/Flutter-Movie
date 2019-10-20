@@ -6,6 +6,7 @@ import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/keyword.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/models/videomodel.dart';
@@ -23,7 +24,8 @@ enum MovieDetailPageAction {
   recommendationTapped,
   castCellTapped,
   openMenu,
-  showSnackBar
+  showSnackBar,
+  setRecommendMovie
 }
 
 class MovieDetailPageActionCreator {
@@ -62,5 +64,8 @@ class MovieDetailPageActionCreator {
   }
   static Action showSnackBar(String message) {
     return Action(MovieDetailPageAction.showSnackBar,payload: message);
+  }
+  static Action setRecommendMovie(MovieListModel d) {
+    return Action(MovieDetailPageAction.setRecommendMovie,payload: d);
   }
 }
