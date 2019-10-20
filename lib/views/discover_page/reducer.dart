@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 
@@ -23,7 +24,7 @@ DiscoverPageState _onAction(DiscoverPageState state, Action action) {
   return newState;
 }
 DiscoverPageState _onLoadData(DiscoverPageState state, Action action) {
-  VideoListModel m=action.payload??VideoListModel.fromParams(results: List<VideoListResult>());
+  MovieListModel m=action.payload??MovieListModel.fromParams(results: List<MovieListResult>());
   final DiscoverPageState newState = state.clone();
   newState.videoListModel=m;
   return newState;
@@ -43,7 +44,7 @@ DiscoverPageState _onBusyChanged(DiscoverPageState state, Action action) {
 
 
 DiscoverPageState _onLoadMore(DiscoverPageState state, Action action) {
-  final List<VideoListResult> m=action.payload??List<VideoListResult>();
+  final List<MovieListResult> m=action.payload??List<VideoListResult>();
   final DiscoverPageState newState = state.clone();
   newState.videoListModel.page++;
   newState.videoListModel.results.addAll(m);

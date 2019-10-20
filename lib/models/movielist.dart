@@ -8,7 +8,6 @@ class MovieListModel {
   int total_pages;
   int total_results;
   List< MovieListResult> results;
-  DateString dates;
 
   MovieListModel.fromParams({this.results});
 
@@ -29,26 +28,8 @@ class MovieListModel {
 
   @override
   String toString() {
-    return '{"page": $page,"total_pages": $total_pages,"total_results": $total_results,"results": $results,"dates": $dates}';
+    return '{"page": $page,"total_pages": $total_pages,"total_results": $total_results,"results": $results}';
   }
-}
-
-class DateString {
-
-  String maximum;
-  String minimum;
-
-  DateString.fromParams({this.maximum, this.minimum});
-  
-  DateString.fromJson(jsonRes) {
-    maximum = jsonRes['maximum'];
-    minimum = jsonRes['minimum'];
-  }
-
-  // @override
-  // String toString() {
-  //   return '{"maximum": ${maximum != null?'${json.encode(maximum)}':'null'},"minimum": ${minimum != null?'${json.encode(minimum)}':'null'}}';
-  // }
 }
 
 class MovieListResult {
@@ -90,7 +71,7 @@ class MovieListResult {
   int isattent;
   int iscollect;
 // 37: "musicinfo" -> Map 
-// String userinfo" -> Map (16 items)
+  var userinfo;
 
 
   MovieListResult.fromParams({
@@ -165,11 +146,12 @@ class MovieListResult {
     this.collects = jsonRes['collects'];
     this.description = jsonRes['description'];
     this.datetime = jsonRes['datetime'];
-//     this.islike = jsonRes['islike'];
-//     this.isstep = jsonRes['isstep'];
-//     this.isattent = jsonRes['isattent'];
-//     this.iscollect = jsonRes['iscollect'];
+    this.islike = jsonRes['islike'];
+    this.isstep = jsonRes['isstep'];
+    this.isattent = jsonRes['isattent'];
+    this.iscollect = jsonRes['iscollect'];
 
+    this.userinfo = jsonRes['userinfo'];
 //    for (var genre_idsItem in genre_ids == null ? [] : jsonRes['genre_ids']){
 //            genre_ids.add(genre_idsItem);
 //    }

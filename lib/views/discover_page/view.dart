@@ -11,6 +11,7 @@ import 'package:movie/actions/votecolorhelper.dart';
 import 'package:movie/customwidgets/sliverappbar_delegate.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/imagesize.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:shimmer/shimmer.dart';
@@ -117,7 +118,7 @@ Widget buildView(
             ));
   }
 
-  Widget _buildListCell(VideoListResult d) {
+  Widget _buildListCell(MovieListResult d) {
     bool ismovie = state.filterState.isMovie;
     return GestureDetector(
       key: ValueKey<String>(d.id),
@@ -136,13 +137,11 @@ Widget buildView(
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(
-                        // ImageUrl.getUrl(
-                        // d.thumb_s,
-                        // ImageSize.w300)
                         d.thumb_s
                       )
                     )
-                  ),),
+                  ),
+              ),
               Container(
                 padding: EdgeInsets.all(Adapt.px(20)),
                 child: Column(
@@ -160,25 +159,31 @@ Widget buildView(
                                   width: Adapt.px(80),
                                   height: Adapt.px(80),
                                   decoration: BoxDecoration(
-                                      color: Colors.blueGrey,
-                                      borderRadius:
-                                          BorderRadius.circular(Adapt.px(40))),
+                                    color: Colors.blueGrey,
+                                    borderRadius: BorderRadius.circular(Adapt.px(40)),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                            d.userinfo['avatar_thumb']
+                                        )
+                                    )
+                                  ),
                                 ),
                               ),
-                              // Center(
-                              //   child: Container(
-                              //       width: Adapt.px(60),
-                              //       height: Adapt.px(60),
-                              //       child: CircularProgressIndicator(
-                              //         strokeWidth: 3.0,
-                              //         valueColor:
-                              //             new AlwaysStoppedAnimation<Color>(
-                              //                 VoteColorHelper.getColor(
-                              //                     d.vote_average)),
-                              //         backgroundColor: Colors.grey,
-                              //         value: d.vote_average / 10.0,
-                              //       )),
-                              // ),
+//                               Center(
+//                                 child: Container(
+//                                     width: Adapt.px(60),
+//                                     height: Adapt.px(60),
+//                                     child: CircularProgressIndicator(
+//                                       strokeWidth: 3.0,
+//                                       valueColor:
+//                                           new AlwaysStoppedAnimation<Color>(
+//                                               VoteColorHelper.getColor(
+//                                                   d.vote_average)),
+//                                       backgroundColor: Colors.grey,
+//                                       value: d.vote_average / 10.0,
+//                                     )),
+//                               ),
                               // Center(
                               //   child: Container(
                               //       width: Adapt.px(60),
@@ -218,15 +223,16 @@ Widget buildView(
                                     fontSize: Adapt.px(26)),
                               ),
                             ),
-                            // Text(
-                            //   DateFormat.yMMMd().format(DateTime.tryParse(
-                            //       (ismovie
-                            //               ? _changDatetime(d.release_date)
-                            //               : _changDatetime(d.first_air_date)))),
-                            //   style: TextStyle(
-                            //       color: Colors.grey[800],
-                            //       fontSize: Adapt.px(20)),
-                            // )
+                             Text(
+//                               DateFormat.yMMMd().format(DateTime.tryParse(
+//                                   (ismovie
+//                                           ? _changDatetime(d.release_date)
+//                                           : _changDatetime(d.first_air_date)))),
+                               d.datetime,
+                               style: TextStyle(
+                                   color: Colors.grey[800],
+                                   fontSize: Adapt.px(20)),
+                             )
                           ],
                         )
                       ],

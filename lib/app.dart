@@ -6,8 +6,6 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/views/discover_page/page.dart';
-import 'package:movie/views/douyin_page/page.dart';
-import 'package:movie/views/episodedetail_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
 import 'package:movie/views/gallery_page/page.dart';
 import 'package:movie/views/guide_page/page.dart';
@@ -16,16 +14,11 @@ import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
 import 'package:movie/views/moviedetail_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
-import 'package:movie/views/peopledetail_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
-import 'package:movie/views/seasondetail_page/page.dart';
-import 'package:movie/views/seasons_page/page.dart';
 import 'package:movie/views/splash_page/page.dart';
-import 'package:movie/views/tvdetail_page/page.dart';
-import 'package:movie/views/watchlist_page/page.dart';
-import 'package:movie/views/watchlistdetail_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
 import 'package:movie/views/user_page/page.dart';
+import 'package:movie/views/webview_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'actions/timeline.dart';
@@ -103,7 +96,7 @@ Future<Widget> createApp() async {
       'GuidePage': GuidePage(),
       'SplashPage': SplashPage(),
       'UserPage': UserPage(),
-      'DouyinPage': DouyinPage()
+      'WebPage': WebPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {

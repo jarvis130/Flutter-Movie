@@ -399,7 +399,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       child: Container(),
                     ),
                     _buildIconButton(Icons.edit, () {}),
-                     _buildIconButton(Icons.share, () {
+                    _buildIconButton(Icons.share, () {
                        showDialog(
                            context: viewService.context,
                            builder: (ctx) {
@@ -413,36 +413,39 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                              );
                            });
                      }),
-                     PopupMenuButton<SortCondition>(
-                       offset: Offset(0, Adapt.px(100)),
-                       icon: Icon(Icons.sort, color: Colors.white),
-                       onSelected: (selected) => dispatch(
-                           UserPageActionCreator.sortChanged(selected)),
-                       itemBuilder: (ctx) {
-                         return state.sortBy.map((s) {
-                           var unSelectedStyle = TextStyle(color: Colors.grey);
-                           var selectedStyle = TextStyle(
-                               color: Colors.black, fontWeight: FontWeight.bold);
-                           return PopupMenuItem<SortCondition>(
-                             value: s,
-                             child: Row(
-                               children: <Widget>[
-                                 Text(
-                                   s.name,
-                                   style: s.isSelected
-                                       ? selectedStyle
-                                       : unSelectedStyle,
-                                 ),
-                                 Expanded(
-                                   child: Container(),
-                                 ),
-                                 s.isSelected ? Icon(Icons.check) : SizedBox()
-                               ],
-                             ),
-                           );
-                         }).toList();
-                       },
-                     )
+                    _buildIconButton(Icons.shopping_cart, () {
+                      dispatch(UserPageActionCreator.onShipping());
+                    }),
+//                     PopupMenuButton<SortCondition>(
+//                       offset: Offset(0, Adapt.px(100)),
+//                       icon: Icon(Icons.sort, color: Colors.white),
+//                       onSelected: (selected) => dispatch(
+//                           UserPageActionCreator.sortChanged(selected)),
+//                       itemBuilder: (ctx) {
+//                         return state.sortBy.map((s) {
+//                           var unSelectedStyle = TextStyle(color: Colors.grey);
+//                           var selectedStyle = TextStyle(
+//                               color: Colors.black, fontWeight: FontWeight.bold);
+//                           return PopupMenuItem<SortCondition>(
+//                             value: s,
+//                             child: Row(
+//                               children: <Widget>[
+//                                 Text(
+//                                   s.name,
+//                                   style: s.isSelected
+//                                       ? selectedStyle
+//                                       : unSelectedStyle,
+//                                 ),
+//                                 Expanded(
+//                                   child: Container(),
+//                                 ),
+//                                 s.isSelected ? Icon(Icons.check) : SizedBox()
+//                               ],
+//                             ),
+//                           );
+//                         }).toList();
+//                       },
+//                     )
                   ]),
                   SizedBox(
                     height: Adapt.px(20),

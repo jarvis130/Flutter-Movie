@@ -24,9 +24,9 @@ class _WebSceneState extends State<WebScene> {
   }
 
   Future<void> fetchData() async {
-    await Future.delayed(Duration(milliseconds: 2000), () {
+//    await Future.delayed(Duration(milliseconds: 2000), () {
 //      pageState = PageState.Content;
-    });
+//    });
 
     setState(() {
       isDataReady = true;
@@ -50,7 +50,7 @@ class _WebSceneState extends State<WebScene> {
             onTap: () {
               Share.share('https://github.com/ZDfordream/FlutterTianYue');
             },
-            child: Image.asset('img/icon_menu_share.png'),
+            child: Image.asset('images/icon_menu_share.png'),
           ),
         ],
       ),

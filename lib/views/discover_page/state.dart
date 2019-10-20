@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gzx_dropdown_menu/gzx_dropdown_menu.dart';
 import 'package:movie/globalbasestate/state.dart';
 import 'package:movie/models/discoversorttype.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/views/discover_page/components/filter_component/state.dart';
@@ -14,7 +15,7 @@ class DiscoverPageState implements GlobalBaseState<DiscoverPageState> {
   List<SortCondition> sortType;
   List<String> filterTabNames;
   FilterState filterState;
-  VideoListModel videoListModel;
+  MovieListModel videoListModel;
   String selectedSort;
   ScrollController scrollController;
   GlobalKey stackKey ;
@@ -55,7 +56,7 @@ DiscoverPageState initState(Map<String, dynamic> args) {
   state.stackKey = GlobalKey();
   state.isbusy=false;
   state.dropdownMenuController =GZXDropdownMenuController();
-  state.videoListModel=new VideoListModel.fromParams(results: List<VideoListResult>());
+  state.videoListModel=new MovieListModel.fromParams(results: List<MovieListResult>());
   state.sortType=new List<SortCondition>()
   ..add(SortCondition(name:'Popularity Descending',isSelected: false,value: DiscoverSortType.populartiyDesc))
   ..add(SortCondition(name:'Popularity Ascending',isSelected: false,value: DiscoverSortType.populartiyAsc))

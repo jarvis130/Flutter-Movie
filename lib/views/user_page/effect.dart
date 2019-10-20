@@ -15,6 +15,7 @@ Effect<UserPageState> buildEffect() {
     Lifecycle.initState: _onInit,
     UserPageAction.cellTapped: _cellTapped,
     UserPageAction.sortChanged: _sortChanged,
+    UserPageAction.shopping: _shopping
   });
 }
 
@@ -84,4 +85,10 @@ Future _loadData(Action action, Context<UserPageState> ctx) async {
     if (r != null)
       ctx.dispatch(UserPageActionCreator.loadMore(r));
 
+}
+
+void _shopping(Action action, Context<UserPageState> ctx) async {
+  await Navigator.of(ctx.context).pushNamed('WebPage', arguments: {
+    'uid': ApiHelper.uid
+  });
 }

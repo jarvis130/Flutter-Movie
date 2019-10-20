@@ -39,7 +39,8 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
 
   Future<SearchResultModel> _getData() {
     if (query != '' && query != null)
-      return ApiHelper.searchMulit(query);
+//      return ApiHelper.searchMulit(query);
+      return null;
     else
       return null;
   }
@@ -119,7 +120,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            'History',
+                            '历史记录',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
@@ -170,7 +171,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
                         )
                       : Container(
                           padding: EdgeInsets.only(left: Adapt.px(30)),
-                          child: Text('no search history'),
+                          child: Text('没有查询记录'),
                         ),
                 ],
               ),

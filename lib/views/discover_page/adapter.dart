@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/views/discover_page/components/movicecell_component/component.dart';
 
@@ -23,7 +24,7 @@ class _DiscoverConnector extends ConnOp<DiscoverPageState, List<ItemBean>> {
     if(state.videoListModel.results.length>0&&state.filterState.isMovie)
     {
       List<ItemBean>  r=[];
-      var cells= state.videoListModel.results.map<ItemBean>((VideoListResult data) => ItemBean('moviecell',new VideoCellState()..videodata=data))
+      var cells= state.videoListModel.results.map<ItemBean>((MovieListResult data) => ItemBean('moviecell',new VideoCellState()..videodata=data))
           .toList(growable: true);
       r.addAll(cells);
       return r;

@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 
 //TODO replace with your own action
@@ -19,13 +20,13 @@ class DiscoverPageActionCreator {
   static Action onSortChanged(String s) {
     return Action(DiscoverPageAction.sortChanged,payload: s);
   }
-  static Action onLoadData(VideoListModel p) {
+  static Action onLoadData(MovieListModel p) {
     return Action(DiscoverPageAction.loadData,payload: p);
   }
    static Action onRefreshData() {
     return const Action(DiscoverPageAction.refreshData);
   }
-  static Action onLoadMore(List<VideoListResult> p) {
+  static Action onLoadMore(List<MovieListResult> p) {
     return Action(DiscoverPageAction.loadMore,payload: p);
   }
   static Action onVideoCellTapped(String id,String backpic) {
