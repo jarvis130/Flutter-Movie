@@ -9,16 +9,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/actions/videourl.dart';
-import 'package:movie/actions/votecolorhelper.dart';
 import 'package:movie/customwidgets/videoplayeritem.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
-import 'package:movie/models/videomodel.dart';
 import 'package:parallax_image/parallax_image.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -175,6 +171,8 @@ Widget buildView(
   }
 
   Widget _buildVideoCell(MovieListResult d) {
+    double w = Adapt.screenW();
+    double h = 150;
     return Container(
       padding: EdgeInsets.fromLTRB(Adapt.px(30), 0, Adapt.px(30), Adapt.px(30)),
       child: Card(
@@ -182,18 +180,44 @@ Widget buildView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            VideoPlayerItem(
-              vc: VideoPlayerController.network(VideoUrl.getUrl(d.id, d.href)),
-              coverurl: d.thumb_s,
-              showplayer: true,
+//            VideoPlayerItem(
+//              vc: VideoPlayerController.network(d.href),
+//              coverurl: d.thumb_s,
+//              showplayer: true,
+//            ),
+          GestureDetector(
+            onTap: () {
+              dispatch(MovieDetailPageActionCreator.onRecommendationTapped(
+                  d.id, d.thumb_s));
+            },
+            child: Container(
+              width: w,
+              height: h,
+              decoration: BoxDecoration(
+                  color: Color.fromRGBO(
+                      random.nextInt(255),
+                      random.nextInt(255),
+                      random.nextInt(255),
+                      random.nextDouble()),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                          d.thumb_s
+                      ))),
+              /*child: ParallaxImage(
+                  extent: h,
+                  image: CachedNetworkImageProvider(
+                      ImageUrl.getUrl(d.file_path, ImageSize.w300))),*/
             ),
+          ),
+
             Padding(
               padding: EdgeInsets.all(Adapt.px(20)),
               child: Text(
                 d.title,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: Adapt.px(35),
+                    fontSize: Adapt.px(25),
                     fontWeight: FontWeight.w500),
               ),
             ),
@@ -745,7 +769,7 @@ Widget buildView(
                   child: SliverAppBar( 
                       pinned: true,
                       backgroundColor: Colors.black,
-                      expandedHeight: Adapt.px(700),
+                      expandedHeight: Adapt.px(600),
                       floating: false,
                       centerTitle: true,
                       title: Text(de ? state.title ?? '' : ''),
@@ -783,9 +807,14 @@ Widget buildView(
                             )),
                       ),
                       flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: false,
-                        // background: _buildHeader(),
-                        background: viewService.buildComponent('play'),
+                        centerTitle: true,
+//                         background: _buildHeader(),
+//                        background: viewService.buildComponent('play'),
+                        background: state.movieDetailModel.href != null ? VideoPlayerItem(
+                          vc: VideoPlayerController.network(state.movieDetailModel.href),
+                          coverurl: state.movieDetailModel.thumb_s,
+                          showplayer: true,
+                        ) : Container(),
                       )),
                 )
               ];
