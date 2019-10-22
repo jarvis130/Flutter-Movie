@@ -31,7 +31,7 @@ Widget buildView(
               Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Text(
               I18n.of(viewService.context).more,
-              style: TextStyle(color: Colors.black, fontSize: Adapt.px(35)),
+              style: TextStyle(color: Colors.black, fontSize: Adapt.px(20)),
             ),
             Icon(Icons.arrow_forward, size: Adapt.px(35))
           ]),
@@ -79,7 +79,7 @@ Widget buildView(
                   d.title,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: Adapt.px(28),
+                      fontSize: Adapt.px(20),
                       fontWeight: FontWeight.bold,
                       shadows: <Shadow>[
                         Shadow(

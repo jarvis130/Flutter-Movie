@@ -34,6 +34,7 @@ class ApiHelper {
    static final String _apihost = 'http://221.229.197.4:8000/api/public?';
   // static final String _apihost = 'http://vs.kr.meshow.website/api/public?';
 //  static final String _apihost = 'http://localhost:8082/api/public?';
+  static final String shopUrl = 'http://localhost:8083/h5';
   static final String _apikey = 'd7ff494718186ed94ee75cf73c1a3214';
  static final String _apihostV4 = 'https://api.themoviedb.org/4';
  static final String _apikeyV4 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
