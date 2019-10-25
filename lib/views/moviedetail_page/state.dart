@@ -82,7 +82,7 @@ MovieDetailPageState initState(Map<String, dynamic> args) {
   state.imagesmodel = new ImageModel.fromParams(
       posters: List<ImageData>(), backdrops: List<ImageData>());
 
-  state.reviewModel = new ReviewModel.fromParams(results: List<ReviewResult>());
+  state.reviewModel = new ReviewModel.fromParams(commentlist: List<ReviewResult>());
 
   state.videomodel = new VideoModel.fromParams(results: List<VideoResult>());
 

@@ -2,31 +2,31 @@ import 'dart:convert' show json;
 
 class ReviewModel {
 
-  int id;
   int page;
   int total_pages;
   int total_results;
-  List<ReviewResult> results;
+  int comments;
+  List<ReviewResult> commentlist;
 
-  ReviewModel.fromParams({this.id, this.page, this.total_pages, this.total_results, this.results});
+  ReviewModel.fromParams({this.page, this.total_pages, this.total_results, this.commentlist});
 
   factory ReviewModel(jsonStr) => jsonStr == null ? null : jsonStr is String ? new ReviewModel.fromJson(json.decode(jsonStr)) : new ReviewModel.fromJson(jsonStr);
   
   ReviewModel.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    page = jsonRes['page'];
-    total_pages = jsonRes['total_pages'];
-    total_results = jsonRes['total_results'];
-    results = jsonRes['results'] == null ? null : [];
+    page = jsonRes['data']['info']['page'] == null ? 0 : jsonRes['data']['info']['page'];
+    total_pages = jsonRes['data']['info']['total_pages'] == null ? 0 : jsonRes['data']['info']['total_pages'];
+    total_results = jsonRes['data']['info']['total_results'] == null ? 0 : jsonRes['data']['info']['total_results'];
+    comments = jsonRes['data']['info']['comments'] == null ? null : 0;
+    commentlist = jsonRes['data']['info']['commentlist'] == null ? null : [];
 
-    for (var resultsItem in results == null ? [] : jsonRes['results']){
-            results.add(resultsItem == null ? null : new ReviewResult.fromJson(resultsItem));
+    for (var resultsItem in commentlist == null ? [] : jsonRes['data']['info']['commentlist'] ){
+      commentlist.add(resultsItem == null ? null : new ReviewResult.fromJson(resultsItem));
     }
   }
 
   @override
   String toString() {
-    return '{"id": $id,"page": $page,"total_pages": $total_pages,"total_results": $total_results,"results": $results}';
+    return '{"page": $page,"total_pages": $total_pages,"total_results": $total_results,"commentlist": $commentlist}';
   }
 }
 

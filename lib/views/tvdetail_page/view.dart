@@ -873,7 +873,7 @@ Widget buildView(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'A Review by ${state.reviewModel.results[index].author}',
+                                      'A Review by ${state.reviewModel.commentlist[index].author}',
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: Adapt.px(30),
@@ -888,7 +888,7 @@ Widget buildView(
                                               BoxConstraints constraints) {
                                         print(constraints);
                                         return new Text(
-                                          state.reviewModel.results[index]
+                                          state.reviewModel.commentlist[index]
                                               .content,
                                           overflow: TextOverflow.fade,
                                           maxLines: (constraints.maxHeight /
@@ -906,13 +906,13 @@ Widget buildView(
                             ),
                           ),
                           onTap: () async {
-                            var url = state.reviewModel.results[index].url;
+                            var url = state.reviewModel.commentlist[index].url;
                             if (await canLaunch(url)) {
                               await launch(url);
                             }
                           },
                         );
-                      }, childCount: state.reviewModel.results.length),
+                      }, childCount: state.reviewModel.commentlist.length),
                     ),
                   ]);
                 })),

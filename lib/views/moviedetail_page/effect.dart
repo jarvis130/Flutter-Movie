@@ -6,10 +6,12 @@ import 'package:movie/actions/apihelper.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/api/classify_api.dart';
 import 'package:movie/api/home_api.dart';
+import 'package:movie/api/review_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/moviedetail.dart';
 import 'package:movie/models/movielist.dart';
+import 'package:movie/models/review.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'action.dart';
@@ -54,6 +56,12 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
       // 推荐视频
       MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
       if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
+    }
+
+    // 评论
+    ReviewModel reviewModel = await ReviewApi.getGetComments(ApiHelper.uid, ctx.state.movieid, page:1);
+    if (reviewModel != null) {
+      ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(reviewModel));
     }
 
     // var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);

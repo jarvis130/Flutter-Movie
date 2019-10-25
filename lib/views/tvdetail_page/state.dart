@@ -77,7 +77,7 @@ TVDetailPageState initState(Map<String, dynamic> args) {
       List<PaletteColor>()..add(new PaletteColor(Colors.black87, 0)));
   state.imagesmodel = new ImageModel.fromParams(
       posters: List<ImageData>(), backdrops: List<ImageData>());
-  state.reviewModel = new ReviewModel.fromParams(results: List<ReviewResult>());
+  state.reviewModel = new ReviewModel.fromParams(commentlist: List<ReviewResult>());
   state.recommendations =
       new VideoListModel.fromParams(results: List<VideoListResult>());
   state.keywords = new KeyWordModel.fromParams(
