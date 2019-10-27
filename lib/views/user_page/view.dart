@@ -553,11 +553,15 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
       controller: state.scrollController,
       slivers: <Widget>[
         SliverAppBar(
+          centerTitle: true,
           backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           pinned: true,
           title: Text(
             '会员中心',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+            ),
           ),
           expandedHeight: Adapt.px(550),
           flexibleSpace: FlexibleSpaceBar(

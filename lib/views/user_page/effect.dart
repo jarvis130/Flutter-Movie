@@ -6,6 +6,7 @@ import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/api/listdetail_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -81,7 +82,9 @@ Future _sortChanged(Action action, Context<UserPageState> ctx) async {
 }
 
 Future _loadData(Action action, Context<UserPageState> ctx) async {
-    ListDetailModel r = await ListDetailApi.getUserHome(ApiHelper.uid);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String uid = prefs.getString('uid');
+    ListDetailModel r = await ListDetailApi.getUserHome(uid);
     if (r != null)
       ctx.dispatch(UserPageActionCreator.loadMore(r));
 

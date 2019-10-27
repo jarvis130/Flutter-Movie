@@ -125,12 +125,15 @@ Widget buildView(
 
   return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(50, 50, 50, 1),
         brightness: Brightness.light,
-        iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           title,
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+          ),
         ),
       ),
       body: CustomScrollView(

@@ -809,12 +809,12 @@ Widget buildView(
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
 //                         background: _buildHeader(),
-//                        background: viewService.buildComponent('play'),
-                        background: state.movieDetailModel.href != null ? VideoPlayerItem(
-                          vc: VideoPlayerController.network(state.movieDetailModel.href),
-                          coverurl: state.movieDetailModel.thumb_s,
-                          showplayer: true,
-                        ) : Container(),
+                        background: viewService.buildComponent('play'),
+//                        background: state.movieDetailModel.href != null ? VideoPlayerItem(
+//                          vc: VideoPlayerController.network(state.movieDetailModel.href),
+//                          coverurl: state.movieDetailModel.thumb_s,
+//                          showplayer: true,
+//                        ) : Container(),
                       )),
                 )
               ];

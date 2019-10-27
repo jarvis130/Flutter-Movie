@@ -41,6 +41,7 @@ class ApiHelper {
   // static final String _apikeyV4 = '';
   static String _requestToken;
   static String uid;
+  static String username;
   static String accessTokenV4;
   static DateTime _requestTokenExpiresTime;
   static String session;
@@ -67,6 +68,7 @@ class ApiHelper {
       if (jsonobject['data'] !=null ) {
         var data = jsonobject['data']['info'];
         prefs.setString('uid', data['id']);
+        prefs.setString('username', data['user_login']);
         prefs.setString('accessTokenV4', data['token']);
 //        var data = jsonobject['data']['info'];
 //        session = jsonobject['guest_session_id'];

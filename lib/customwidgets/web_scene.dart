@@ -44,7 +44,20 @@ class _WebSceneState extends State<WebScene> {
     return WebviewScaffold(
       url: this.widget.url,
       appBar: AppBar(
-        title: Text(this.widget.title ?? '腾讯动漫'),
+        title: Text(
+          this.widget.title,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color.fromRGBO(50, 50, 50, 1),
+        brightness: Brightness.light,
+        leading: new IconButton(
+          icon: new Icon(Icons.close),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         actions: <Widget>[
           GestureDetector(
             onTap: () {

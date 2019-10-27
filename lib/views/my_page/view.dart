@@ -22,7 +22,7 @@ Widget buildView(MyState state, Dispatch dispatch, ViewService viewService) {
             },
             indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: Colors.black,
-            labelColor: Colors.black,
+            labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
             labelStyle:
                 TextStyle(fontSize: Adapt.px(35), fontWeight: FontWeight.bold),
@@ -36,7 +36,7 @@ Widget buildView(MyState state, Dispatch dispatch, ViewService viewService) {
               )
             ],
           )),
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           elevation: 0.0,
         ),
         body: TabBarView(

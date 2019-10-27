@@ -57,6 +57,7 @@ Future _init() async {
     await ApiHelper.createGuestSessionByMobileDevice(uuid);
   } else {
     ApiHelper.uid = prefs.getString('uid');
+    ApiHelper.username = prefs.getString('username');
     ApiHelper.accessTokenV4 = accessToken;
   }
 

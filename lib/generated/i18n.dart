@@ -36,7 +36,7 @@ class I18n implements WidgetsLocalizations {
   /// "Movie"
   String get appname => "Movie";
   /// "Search for a movie,tv show,person"
-  String get searchbartxt => "Search for a movie,tv show,person";
+  String get searchbartxt => "Search for a movie,person";
   /// "Home"
   String get home => "Home";
   /// "Discover"
@@ -179,7 +179,7 @@ class _I18n_zh_CN extends I18n {
   String get appname => "电影";
   /// "搜索电影、电视剧、演员"
   @override
-  String get searchbartxt => "搜索电影、电视剧、演员";
+  String get searchbartxt => "搜索电影、演员";
   /// "主页"
   @override
   String get home => "主页";
