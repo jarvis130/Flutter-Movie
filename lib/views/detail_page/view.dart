@@ -24,7 +24,7 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
-    MovieDetailPageState state, Dispatch dispatch, ViewService viewService) {
+    DetailPageState state, Dispatch dispatch, ViewService viewService) {
   String _covertDuration(int d) {
     String result = '';
     Duration duration = Duration(minutes: d);
@@ -97,8 +97,8 @@ Widget buildView(
     return id != null
         ? InkWell(
             borderRadius: BorderRadius.circular(Adapt.px(20)),
-            onTap: () =>
-                dispatch(MovieDetailPageActionCreator.onExternalTapped(url)),
+//            onTap: () =>
+//                dispatch(DetailPageAction.onExternalTapped(url)),
             child: Container(
               width: Adapt.px(40),
               height: Adapt.px(40),
@@ -149,7 +149,7 @@ Widget buildView(
     //           ? InkWell(
     //               borderRadius: BorderRadius.circular(Adapt.px(15)),
     //               onTap: () => dispatch(
-    //                   MovieDetailPageActionCreator.onExternalTapped(
+    //                   DetailPageAction.onExternalTapped(
     //                       _detail.homepage)),
     //               child: Container(
     //                 width: Adapt.px(30),
@@ -180,8 +180,8 @@ Widget buildView(
   Widget _buildCastCell(CastData d) {
     double width = Adapt.px(150);
     return GestureDetector(
-      onTap: () => dispatch(MovieDetailPageActionCreator.castCellTapped(
-          d.id, d.profile_path, d.name, d.character)),
+//      onTap: () => dispatch(DetailPageAction.castCellTapped(
+//          d.id, d.profile_path, d.name, d.character)),
       child: Column(
         key: ValueKey('Cast${d.id}'),
         children: <Widget>[
@@ -268,8 +268,8 @@ Widget buildView(
     int index = state.imagesmodel.backdrops.indexOf(d);
     return GestureDetector(
       key: ValueKey('image${d.file_path}'),
-      onTap: () =>
-          dispatch(MovieDetailPageActionCreator.stillImageTapped(index)),
+//      onTap: () =>
+//          dispatch(DetailPageAction.stillImageTapped(index)),
       child: Hero(
           tag: url + index.toString(),
           child: _buildImage(
@@ -295,8 +295,8 @@ Widget buildView(
     double _width = Adapt.px(220);
     return GestureDetector(
       key: ValueKey('recommendation${d.id}'),
-      onTap: () => dispatch(
-          MovieDetailPageActionCreator.movieCellTapped(d.id, d.thumb_s)),
+//      onTap: () => dispatch(
+//          DetailPageAction.movieCellTapped(d.id, d.thumb_s)),
       child: Padding(
         padding: EdgeInsets.only(right: Adapt.px(30)),
         child: Column(
@@ -470,7 +470,7 @@ Widget buildView(
       expandedHeight: Adapt.px(1100).floorToDouble(),
       actions: <Widget>[
         IconButton(
-          onPressed: () => dispatch(MovieDetailPageActionCreator.openMenu()),
+//          onPressed: () => dispatch(DetailPageAction.openMenu()),
           icon: Icon(Icons.more_vert),
         )
       ],
@@ -510,8 +510,8 @@ Widget buildView(
                   color: Colors.white,
                   size: Adapt.px(45),
                 ),
-                onPressed: () =>
-                    dispatch(MovieDetailPageActionCreator.playTrailer()),
+//                onPressed: () =>
+//                    dispatch(DetailPageAction.playTrailer()),
               ),
             ),
             Container(

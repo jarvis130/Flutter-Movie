@@ -13,4 +13,18 @@ class ReviewApi {
     return model;
   }
 
+  /// 评论
+  static Future<void> setComment(var uid, var videoid, var token, String content) async {
+
+//    String param = 'service=Video.SetComment';
+//    FormData formData = new FormData.from(
+//        {"uid": uid, "videoid": videoid, "token": token, "content": content});
+//    var r = await ApiHelper.httpPost(param, formData);
+
+    ReviewModel model;
+    String param = 'service=Video.SetComment&uid=$uid&videoid=$videoid&token=$token&content=$content';
+    await ApiHelper.httpGet(param, cached: false);
+//    if (r != null) model = ReviewModel(r);
+//    return model;
+  }
 }

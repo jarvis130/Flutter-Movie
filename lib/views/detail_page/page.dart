@@ -8,21 +8,21 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class MovieDetailPage extends Page<MovieDetailPageState, Map<String, dynamic>> {
+class MovieDetailPage extends Page<DetailPageState, Map<String, dynamic>> {
   @override
-  CustomstfState<MovieDetailPageState> createState() =>
-      CustomstfState<MovieDetailPageState>();
+  CustomstfState<DetailPageState> createState() =>
+      CustomstfState<DetailPageState>();
   MovieDetailPage()
       : super(
           initState: initState,
           effect: buildEffect(),
           reducer: buildReducer(),
           view: buildView,
-          dependencies: Dependencies<MovieDetailPageState>(
+          dependencies: Dependencies<DetailPageState>(
               adapter: null,
-              slots: <String, Dependent<MovieDetailPageState>>{
+              slots: <String, Dependent<DetailPageState>>{
                 'menu': MenuConnector() + MenuComponent()
               }),
-          middleware: <Middleware<MovieDetailPageState>>[],
+          middleware: <Middleware<DetailPageState>>[],
         );
 }

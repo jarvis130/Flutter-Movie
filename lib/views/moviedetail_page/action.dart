@@ -25,7 +25,8 @@ enum MovieDetailPageAction {
   castCellTapped,
   openMenu,
   showSnackBar,
-  setRecommendMovie
+  setRecommendMovie,
+  reviewMore
 }
 
 class MovieDetailPageActionCreator {
@@ -67,5 +68,8 @@ class MovieDetailPageActionCreator {
   }
   static Action setRecommendMovie(MovieListModel d) {
     return Action(MovieDetailPageAction.setRecommendMovie,payload: d);
+  }
+  static Action onReviewMore(var videoid) {
+    return Action(MovieDetailPageAction.reviewMore, payload: videoid);
   }
 }

@@ -23,9 +23,9 @@ class MenuState implements Cloneable<MenuState> {
   }
 }
 
-class MenuConnector extends ConnOp<MovieDetailPageState, MenuState> {
+class MenuConnector extends ConnOp<DetailPageState, MenuState> {
   @override
-  MenuState get(MovieDetailPageState state) {
+  MenuState get(DetailPageState state) {
     MenuState substate = new MenuState();
     substate.posterPic = state.bgPic;
     substate.name = state.detail.title ?? '';
@@ -37,7 +37,7 @@ class MenuConnector extends ConnOp<MovieDetailPageState, MenuState> {
   }
 
   @override
-  void set(MovieDetailPageState state, MenuState subState) {
+  void set(DetailPageState state, MenuState subState) {
     state.accountState = subState.accountState;
   }
 }

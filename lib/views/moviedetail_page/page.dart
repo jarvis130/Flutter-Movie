@@ -3,6 +3,8 @@ import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/views/moviedetail_page/components/info_component/component.dart';
 import 'package:movie/views/moviedetail_page/components/keywords_component/component.dart';
 import 'package:movie/views/moviedetail_page/components/keywords_component/state.dart';
+import 'package:movie/views/moviedetail_page/components/review_component/component.dart';
+import 'package:movie/views/moviedetail_page/components/review_component/state.dart';
 
 import 'components/info_component/state.dart';
 import 'components/menu_component/component.dart';
@@ -30,6 +32,7 @@ class MovieDetailPage extends Page<MovieDetailPageState, Map<String, dynamic>> {
                   'info':InfoConnector()+InfoComponent(),
                   'menu':MenuConnector()+MenuComponent(),
                   'play':PlayConnector()+PlayComponent(),
+                  'review':ReviewConnector()+ReviewComponent(),
                 }),
             middleware: <Middleware<MovieDetailPageState>>[
             ],);

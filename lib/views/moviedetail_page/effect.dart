@@ -25,6 +25,7 @@ Effect<MovieDetailPageState> buildEffect() {
     MovieDetailPageAction.openMenu: _openMenu,
     MovieDetailPageAction.showSnackBar: _showSnackBar,
     Lifecycle.initState: _onInit,
+    MovieDetailPageAction.reviewMore: _reviewMore,
   });
 }
 
@@ -59,10 +60,7 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     }
 
     // 评论
-    ReviewModel reviewModel = await ReviewApi.getGetComments(ApiHelper.uid, ctx.state.movieid, page:1);
-    if (reviewModel != null) {
-      ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(reviewModel));
-    }
+    _reviewMore(action, ctx);
 
     // var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);
     // if (accountstate != null)
@@ -105,4 +103,11 @@ void _showSnackBar(Action action, Context<MovieDetailPageState> ctx) {
   ctx.state.scaffoldkey.currentState.showSnackBar(SnackBar(
     content: Text(action.payload ?? ''),
   ));
+}
+
+void _reviewMore(Action action, Context<MovieDetailPageState> ctx) async{
+  ReviewModel reviewModel = await ReviewApi.getGetComments(ApiHelper.uid, ctx.state.movieid, page:1);
+  if (reviewModel != null) {
+    ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(reviewModel));
+  }
 }

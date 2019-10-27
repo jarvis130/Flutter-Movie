@@ -6,41 +6,41 @@ import 'package:movie/models/moviedetail.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<MovieDetailPageState> buildReducer() {
+Reducer<DetailPageState> buildReducer() {
   return asReducer(
-    <Object, Reducer<MovieDetailPageState>>{
-      MovieDetailPageAction.action: _onAction,
-      MovieDetailPageAction.updateDetail: _updateDetail,
-      MovieDetailPageAction.setImages: _onSetImages,
-      MovieDetailPageAction.setAccountState: _onSetAccountState
+    <Object, Reducer<DetailPageState>>{
+      DetailPageAction.action: _onAction,
+      DetailPageAction.updateDetail: _updateDetail,
+      DetailPageAction.setImages: _onSetImages,
+      DetailPageAction.setAccountState: _onSetAccountState
     },
   );
 }
 
-MovieDetailPageState _onAction(MovieDetailPageState state, Action action) {
-  final MovieDetailPageState newState = state.clone();
+DetailPageState _onAction(DetailPageState state, Action action) {
+  final DetailPageState newState = state.clone();
   return newState;
 }
 
-MovieDetailPageState _updateDetail(MovieDetailPageState state, Action action) {
+DetailPageState _updateDetail(DetailPageState state, Action action) {
   final MovieDetailModel model = action.payload;
-  final MovieDetailPageState newState = state.clone();
+  final DetailPageState newState = state.clone();
   newState.detail = model;
   if (newState.bgPic == null) newState.bgPic = model.thumb_s;
   return newState;
 }
 
-MovieDetailPageState _onSetImages(MovieDetailPageState state, Action action) {
+DetailPageState _onSetImages(DetailPageState state, Action action) {
   ImageModel c = action.payload;
-  final MovieDetailPageState newState = state.clone();
+  final DetailPageState newState = state.clone();
   newState.imagesmodel = c;
   return newState;
 }
 
-MovieDetailPageState _onSetAccountState(
-    MovieDetailPageState state, Action action) {
+DetailPageState _onSetAccountState(
+    DetailPageState state, Action action) {
   MediaAccountStateModel c = action.payload;
-  final MovieDetailPageState newState = state.clone();
+  final DetailPageState newState = state.clone();
   newState.accountState = c;
   return newState;
 }

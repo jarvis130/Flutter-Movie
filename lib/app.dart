@@ -14,6 +14,7 @@ import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
 import 'package:movie/views/moviedetail_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
+import 'package:movie/views/review_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
 import 'package:movie/views/splash_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
@@ -96,7 +97,8 @@ Future<Widget> createApp() async {
       'GuidePage': GuidePage(),
       'SplashPage': SplashPage(),
       'UserPage': UserPage(),
-      'WebPage': WebPage()
+      'WebPage': WebPage(),
+      'reviewPage': ReviewPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {

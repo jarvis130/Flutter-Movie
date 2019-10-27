@@ -872,13 +872,13 @@ Widget buildView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(
-                                      'A Review by ${state.reviewModel.commentlist[index].author}',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: Adapt.px(30),
-                                          fontWeight: FontWeight.w700),
-                                    ),
+//                                    Text(
+//                                      'A Review by ${state.reviewModel.commentlist[index].author}',
+//                                      style: TextStyle(
+//                                          color: Colors.black,
+//                                          fontSize: Adapt.px(30),
+//                                          fontWeight: FontWeight.w700),
+//                                    ),
                                     SizedBox(
                                       height: Adapt.px(20),
                                     ),
@@ -906,10 +906,10 @@ Widget buildView(
                             ),
                           ),
                           onTap: () async {
-                            var url = state.reviewModel.commentlist[index].url;
-                            if (await canLaunch(url)) {
-                              await launch(url);
-                            }
+//                            var url = state.reviewModel.commentlist[index].url;
+//                            if (await canLaunch(url)) {
+//                              await launch(url);
+//                            }
                           },
                         );
                       }, childCount: state.reviewModel.commentlist.length),

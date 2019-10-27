@@ -5,7 +5,7 @@ import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
 
-class MovieDetailPageState implements Cloneable<MovieDetailPageState> {
+class DetailPageState implements Cloneable<DetailPageState> {
   GlobalKey<ScaffoldState> scaffoldkey;
   int mediaId;
   String bgPic;
@@ -16,8 +16,8 @@ class MovieDetailPageState implements Cloneable<MovieDetailPageState> {
   ScrollController scrollController;
 
   @override
-  MovieDetailPageState clone() {
-    return MovieDetailPageState()
+  DetailPageState clone() {
+    return DetailPageState()
       ..scaffoldkey = scaffoldkey
       ..detail = detail
       ..bgPic = bgPic
@@ -29,8 +29,8 @@ class MovieDetailPageState implements Cloneable<MovieDetailPageState> {
   }
 }
 
-MovieDetailPageState initState(Map<String, dynamic> args) {
-  MovieDetailPageState state = MovieDetailPageState();
+DetailPageState initState(Map<String, dynamic> args) {
+  DetailPageState state = DetailPageState();
   state.scaffoldkey = GlobalKey<ScaffoldState>();
   state.mediaId = args['id'];
   state.bgPic = args['bgpic'];

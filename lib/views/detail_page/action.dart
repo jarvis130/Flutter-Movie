@@ -4,7 +4,7 @@ import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
 
 //TODO replace with your own action
-enum MovieDetailPageAction {
+enum DetailPageAction {
   action,
   updateDetail,
   setImages,
@@ -18,50 +18,50 @@ enum MovieDetailPageAction {
   showSnackBar
 }
 
-class MovieDetailPageActionCreator {
+class DetailPageActionCreator {
   static Action onAction() {
-    return const Action(MovieDetailPageAction.action);
+    return const Action(DetailPageAction.action);
   }
 
   static Action updateDetail(MovieDetailModel d) {
-    return Action(MovieDetailPageAction.updateDetail, payload: d);
+    return Action(DetailPageAction.updateDetail, payload: d);
   }
 
   static Action onSetImages(ImageModel c) {
-    return Action(MovieDetailPageAction.setImages, payload: c);
+    return Action(DetailPageAction.setImages, payload: c);
   }
 
   static Action playTrailer() {
-    return const Action(MovieDetailPageAction.playTrailer);
+    return const Action(DetailPageAction.playTrailer);
   }
 
   static Action onExternalTapped(String url) {
-    return Action(MovieDetailPageAction.externalTapped, payload: url);
+    return Action(DetailPageAction.externalTapped, payload: url);
   }
 
   static Action stillImageTapped(int index) {
-    return Action(MovieDetailPageAction.stillImageTapped, payload: index);
+    return Action(DetailPageAction.stillImageTapped, payload: index);
   }
 
   static Action movieCellTapped(String id, String bgurl) {
-    return Action(MovieDetailPageAction.movieCellTapped, payload: [id, bgurl]);
+    return Action(DetailPageAction.movieCellTapped, payload: [id, bgurl]);
   }
 
   static Action castCellTapped(
       int id, String profilePath, String profileName, String character) {
-    return Action(MovieDetailPageAction.castCellTapped,
+    return Action(DetailPageAction.castCellTapped,
         payload: [id, profilePath, profileName, character]);
   }
 
   static Action onSetAccountState(MediaAccountStateModel model) {
-    return Action(MovieDetailPageAction.setAccountState, payload: model);
+    return Action(DetailPageAction.setAccountState, payload: model);
   }
 
   static Action openMenu() {
-    return Action(MovieDetailPageAction.openMenu);
+    return Action(DetailPageAction.openMenu);
   }
 
   static Action showSnackBar(String message) {
-    return Action(MovieDetailPageAction.showSnackBar, payload: message);
+    return Action(DetailPageAction.showSnackBar, payload: message);
   }
 }
