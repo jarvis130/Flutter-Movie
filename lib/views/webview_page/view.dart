@@ -7,5 +7,6 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(WebPageState state, Dispatch dispatch, ViewService viewService) {
-  return WebScene(url: ApiHelper.shopUrl, title: '商城');
+  String url = ApiHelper.shopUrl+'?uid=${ApiHelper.uid}';
+  return WebScene(url: url, title: '商城');
 }

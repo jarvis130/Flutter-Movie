@@ -378,88 +378,88 @@ Widget buildView(
   }
 
   Widget _buildTrending() {
-    double _size = (Adapt.screenW() - Adapt.px(70)) / 2;
-    Widget _child = state.trending.results.length > 0
-        ? StaggeredGridView.countBuilder(
-            key: ValueKey('Trending'),
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            crossAxisCount: 4,
-            staggeredTileBuilder: (int index) =>
-                new StaggeredTile.count(2, index == 0 ? 2 : 1),
-            mainAxisSpacing: Adapt.px(5),
-            crossAxisSpacing: Adapt.px(5),
-            itemCount: 3,
-            itemBuilder: (BuildContext contxt, int index) {
-              var d = state.trending.results[index];
-              return GestureDetector(
-                  onTap: () => dispatch(HomePageActionCreator.onCellTapped(
-                      d.id,
-                      d.backdropPath,
-                      d.title ?? d.name,
-                      d.posterPath,
-                      d.title != null ? MediaType.movie : MediaType.tv)),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: Adapt.px(10)),
-                    alignment: Alignment.bottomLeft,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                                d.backdropPath, ImageSize.w400)))),
-                    child: Text(
-                      d.title ?? d.name,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: Adapt.px(30),
-                          fontWeight: FontWeight.bold,
-                          shadows: <Shadow>[Shadow(offset: Offset(1, 1))]),
-                    ),
-                  ));
-            },
-          )
-        : Shimmer.fromColors(
-            baseColor: Colors.grey[200],
-            highlightColor: Colors.grey[100],
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: _size,
-                  height: _size,
-                  color: Colors.grey[200],
-                ),
-                SizedBox(
-                  width: Adapt.px(10),
-                ),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      width: _size,
-                      height: (_size - Adapt.px(10)) / 2,
-                      color: Colors.grey[200],
-                    ),
-                    SizedBox(
-                      height: Adapt.px(10),
-                    ),
-                    Container(
-                      width: _size,
-                      height: (_size - Adapt.px(10)) / 2,
-                      color: Colors.grey[200],
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: Adapt.px(30)),
-        child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 600),
-          switchInCurve: Curves.easeIn,
-          switchOutCurve: Curves.easeOut,
-          child: _child,
-        ));
+//    double _size = (Adapt.screenW() - Adapt.px(70)) / 2;
+//    Widget _child = state.trending.results.length > 0
+//        ? StaggeredGridView.countBuilder(
+//            key: ValueKey('Trending'),
+//            physics: NeverScrollableScrollPhysics(),
+//            shrinkWrap: true,
+//            crossAxisCount: 4,
+//            staggeredTileBuilder: (int index) =>
+//                new StaggeredTile.count(2, index == 0 ? 2 : 1),
+//            mainAxisSpacing: Adapt.px(5),
+//            crossAxisSpacing: Adapt.px(5),
+//            itemCount: 3,
+//            itemBuilder: (BuildContext contxt, int index) {
+//              var d = state.trending.results[index];
+//              return GestureDetector(
+//                  onTap: () => dispatch(HomePageActionCreator.onCellTapped(
+//                      d.id,
+//                      d.backdropPath,
+//                      d.title ?? d.name,
+//                      d.posterPath,
+//                      d.title != null ? MediaType.movie : MediaType.tv)),
+//                  child: Container(
+//                    padding: EdgeInsets.symmetric(horizontal: Adapt.px(10)),
+//                    alignment: Alignment.bottomLeft,
+//                    decoration: BoxDecoration(
+//                        color: Colors.grey[200],
+//                        image: DecorationImage(
+//                            fit: BoxFit.cover,
+//                            image: CachedNetworkImageProvider(ImageUrl.getUrl(
+//                                d.backdropPath, ImageSize.w400)))),
+//                    child: Text(
+//                      d.title ?? d.name,
+//                      style: TextStyle(
+//                          color: Colors.white,
+//                          fontSize: Adapt.px(30),
+//                          fontWeight: FontWeight.bold,
+//                          shadows: <Shadow>[Shadow(offset: Offset(1, 1))]),
+//                    ),
+//                  ));
+//            },
+//          )
+//        : Shimmer.fromColors(
+//            baseColor: Colors.grey[200],
+//            highlightColor: Colors.grey[100],
+//            child: Row(
+//              children: <Widget>[
+//                Container(
+//                  width: _size,
+//                  height: _size,
+//                  color: Colors.grey[200],
+//                ),
+//                SizedBox(
+//                  width: Adapt.px(10),
+//                ),
+//                Column(
+//                  children: <Widget>[
+//                    Container(
+//                      width: _size,
+//                      height: (_size - Adapt.px(10)) / 2,
+//                      color: Colors.grey[200],
+//                    ),
+//                    SizedBox(
+//                      height: Adapt.px(10),
+//                    ),
+//                    Container(
+//                      width: _size,
+//                      height: (_size - Adapt.px(10)) / 2,
+//                      color: Colors.grey[200],
+//                    )
+//                  ],
+//                )
+//              ],
+//            ),
+//          );
+//    return Padding(
+//        padding: EdgeInsets.symmetric(horizontal: Adapt.px(30)),
+//        child: AnimatedSwitcher(
+//          duration: Duration(milliseconds: 600),
+//          switchInCurve: Curves.easeIn,
+//          switchOutCurve: Curves.easeOut,
+//          child: _child,
+//        ));
   }
 
   Widget _buildPopularposter() {

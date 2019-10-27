@@ -22,33 +22,34 @@ Widget buildView(
   Widget _buildTVSuggestion(SearchResult s) {
     return ListTile(
       leading: Icon(Icons.live_tv),
-      title: new Text(s.name),
+      title: new Text(s.title),
     );
   }
 
   Widget _buildPersonSuggestion(SearchResult s) {
     return ListTile(
       leading: Icon(Icons.person),
-      title: new Text(s.name),
+      title: new Text(s.title),
     );
   }
 
   Widget _buildSuggestion(SearchResult s) {
     Widget cell;
-    switch (s.mediaType) {
-      case 'movie':
-        cell = _buildMovieSuggestion(s);
-        break;
-      case 'tv':
-        cell = _buildTVSuggestion(s);
-        break;
-      case 'person':
-        cell = _buildPersonSuggestion(s);
-        break;
-      default:
-        cell = _buildMovieSuggestion(s);
-        break;
-    }
+    cell = _buildMovieSuggestion(s);
+////    switch (s.mediaType) {
+////      case 'movie':
+////        cell = _buildMovieSuggestion(s);
+////        break;
+////      case 'tv':
+////        cell = _buildTVSuggestion(s);
+////        break;
+////      case 'person':
+////        cell = _buildPersonSuggestion(s);
+////        break;
+////      default:
+////        cell = _buildMovieSuggestion(s);
+////        break;
+//    }
     return Container(
       height: Adapt.px(100),
       child: cell,

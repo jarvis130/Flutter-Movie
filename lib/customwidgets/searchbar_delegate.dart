@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/actions/imageurl.dart';
+import 'package:movie/api/home_api.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/searchresult.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -37,10 +38,10 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
     );
   }
 
-  Future<SearchResultModel> _getData() {
+  Future<SearchResultModel> _getData() async{
     if (query != '' && query != null)
-//      return ApiHelper.searchMulit(query);
-      return null;
+      return await HomeApi.searchMulit(query, ApiHelper.uid, page: 1);
+//      return null;
     else
       return null;
   }
@@ -62,8 +63,8 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
     }
     return FutureBuilder<SearchResultModel>(
       future: _getData(), // a previously-obtained Future<String> or null
-      builder:
-          (BuildContext context, AsyncSnapshot<SearchResultModel> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<SearchResultModel> snapshot) {
+        List<SearchResult> data = snapshot.data == null ? null : snapshot.data.results;
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return Container(
@@ -84,7 +85,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             return _ResultList(
               query: query,
-              results: snapshot.data?.results ?? [],
+              results: data,
             );
         }
         return null;
@@ -203,7 +204,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             return _SuggestionList(
               query: query,
-              suggestions: snapshot.data.results,
+              suggestions: snapshot.data == null ? [] : snapshot.data.results,
               onSelected: (String suggestion) {
                 query = suggestion;
                 showResults(context);
@@ -232,14 +233,14 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
 }
 
 Widget _buildSuggestionCell(SearchResult s, ValueChanged<String> tapped) {
-  IconData iconData = s.mediaType == 'movie'
-      ? Icons.movie
-      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
-  String name = s.mediaType == 'movie' ? s.title : s.name;
+//  IconData iconData = s.mediaType == 'movie'
+//      ? Icons.movie
+//      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
+  String name = s.title;
   return Container(
       height: Adapt.px(100),
       child: ListTile(
-        leading: Icon(iconData),
+//        leading: Icon(iconData),
         title: new Text(name),
         onTap: () => tapped(name),
       ));
@@ -267,11 +268,9 @@ class _SuggestionList extends StatelessWidget {
 Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
 Widget _buildResultCell(SearchResult s, BuildContext ctx) {
-  IconData iconData = s.mediaType == 'movie'
-      ? Icons.movie
-      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
-  String imageurl = s.mediaType != 'person' ? s.posterPath : s.profilePath;
-  String name = s.mediaType == "movie" ? s.title : s.name;
+//  IconData iconData = s.mediaType == 'movie'
+//      ? Icons.movie
+//      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
   return GestureDetector(
     child: Padding(
       padding: EdgeInsets.only(bottom: Adapt.px(20)),
@@ -290,9 +289,11 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                       _random.nextDouble()),
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(imageurl == null
-                          ? ImageUrl.emptyimage
-                          : ImageUrl.getUrl(imageurl, ImageSize.w300)))),
+                      image: CachedNetworkImageProvider(
+                          s.thumb_s
+                      )
+                  )
+              ),
             ),
             SizedBox(
               width: Adapt.px(20),
@@ -306,17 +307,17 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                 ),
                 Row(
                   children: <Widget>[
-                    Icon(
-                      iconData,
-                      size: Adapt.px(40),
-                    ),
+//                    Icon(
+//                      iconData,
+//                      size: Adapt.px(40),
+//                    ),
                     SizedBox(
                       width: Adapt.px(10),
                     ),
                     Container(
                       width: Adapt.screenW() - Adapt.px(370),
                       child: Text(
-                        name,
+                        s.title,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
@@ -330,31 +331,58 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                 SizedBox(
                   height: Adapt.px(10),
                 ),
-                s.mediaType != 'person'
-                    ? Container(
-                        width: Adapt.screenW() - Adapt.px(320),
-                        child: Text(
-                          s.overview ?? 'no description',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 7,
-                          style: TextStyle(
-                              fontSize: Adapt.px(26), wordSpacing: 1.2),
-                        ),
-                      )
-                    : Container(
-                        width: Adapt.screenW() - Adapt.px(320),
-                        child: Wrap(
-                          spacing: Adapt.px(10),
-                          children: s.knownFor.map((d) {
-                            return Chip(
-                              backgroundColor: Colors.grey[200],
-                              label: Text(
-                                d.title ?? '',
-                                style: TextStyle(fontSize: Adapt.px(24)),
-                              ),
-                            );
-                          }).toList(),
-                        )),
+                Container(
+                  width: Adapt.screenW() - Adapt.px(370),
+                  child: Text(
+                    s.description,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: Adapt.px(30)),
+                  ),
+                )
+//                s.mediaType != 'person'
+//                    ? Container(
+//                        width: Adapt.screenW() - Adapt.px(320),
+//                        child: Text(
+//                          s.overview ?? 'no description',
+//                          overflow: TextOverflow.ellipsis,
+//                          maxLines: 7,
+//                          style: TextStyle(
+//                              fontSize: Adapt.px(26), wordSpacing: 1.2),
+//                        ),
+//                      )
+//                    : Container(
+//                        width: Adapt.screenW() - Adapt.px(320),
+//                        child: Wrap(
+//                          spacing: Adapt.px(10),
+//                          children: s.knownFor.map((d) {
+//                            return Chip(
+//                              backgroundColor: Colors.grey[200],
+//                              label: Text(
+//                                d.title ?? '',
+//                                style: TextStyle(fontSize: Adapt.px(24)),
+//                              ),
+//                            );
+//                          }).toList(),
+//                        )),
+//                Container(
+//                  width: Adapt.screenW() - Adapt.px(320),
+//                  child: Wrap(
+//                    spacing: Adapt.px(10),
+//                    children: s.userinfo.map((d) {
+//                      return Chip(
+//                        backgroundColor: Colors.grey[200],
+//                        label: Text(
+//                          d.title ?? '',
+//                          style: TextStyle(fontSize: Adapt.px(24)),
+//                        ),
+//                      );
+//                    }).toList(),
+//                  )
+//                )
               ],
             )
           ],
@@ -362,32 +390,40 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
       ),
     ),
     onTap: () async {
-      switch (s.mediaType) {
-        case 'movie':
-          return await Navigator.of(ctx)
-              .pushNamed('moviedetailpage', arguments: {
-            'movieid': s.id,
-            'bgpic': s.backdropPath,
-            'title': s.title,
-            'posterpic': s.posterPath
-          });
-        case 'tv':
-          return await Navigator.of(ctx).pushNamed('tvdetailpage', arguments: {
-            'tvid': s.id,
-            'bgpic': s.backdropPath,
-            'name': s.name,
-            'posterpic': s.posterPath
-          });
-        case 'person':
-          return await Navigator.of(ctx).pushNamed('peopledetailpage',
-              arguments: {
-                'peopleid': s.id,
-                'profilePath': s.profilePath,
-                'profileName': s.name
-              });
-        default:
-          return null;
-      }
+      await Navigator.of(ctx)
+          .pushNamed('moviedetailpage', arguments: {
+        'movieid': s.id,
+        'bgpic': s.thumb_s,
+        'title': s.title,
+        'posterpic': s.thumb_s
+      });
+
+//      switch (s.mediaType) {
+//        case 'movie':
+//          return await Navigator.of(ctx)
+//              .pushNamed('moviedetailpage', arguments: {
+//            'movieid': s.id,
+//            'bgpic': s.backdropPath,
+//            'title': s.title,
+//            'posterpic': s.posterPath
+//          });
+//        case 'tv':
+//          return await Navigator.of(ctx).pushNamed('tvdetailpage', arguments: {
+//            'tvid': s.id,
+//            'bgpic': s.backdropPath,
+//            'name': s.name,
+//            'posterpic': s.posterPath
+//          });
+//        case 'person':
+//          return await Navigator.of(ctx).pushNamed('peopledetailpage',
+//              arguments: {
+//                'peopleid': s.id,
+//                'profilePath': s.profilePath,
+//                'profileName': s.name
+//              });
+//        default:
+//          return null;
+//      }
     },
   );
 }
@@ -422,7 +458,7 @@ class _ResultListState extends State<_ResultList> {
       if (r != null) {
         setState(() {
           pageindex = r.page;
-          totalpage = r.totalPages;
+          totalpage = r.total_pages;
           results.addAll(r.results);
           isloading = false;
         });
