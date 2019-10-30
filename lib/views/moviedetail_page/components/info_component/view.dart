@@ -63,29 +63,29 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
         : Container();
   }
 
-  Widget _buildGenderCell(Genre g) {
-    return Chip(
-      elevation: 3.0,
-      backgroundColor: Colors.white,
-      label: Text(g.name),
-    );
-  }
+  // Widget _buildGenderCell(Genre g) {
+  //   return Chip(
+  //     elevation: 3.0,
+  //     backgroundColor: Colors.white,
+  //     label: Text(g.name),
+  //   );
+  // }
 
-  Widget _buildProductionCompanieCell(ProductionCompanie d) {
-    if (d.logo_path != null)
-      return Container(
-        margin: EdgeInsets.only(bottom: Adapt.px(20)),
-        width: Adapt.px(120),
-        height: Adapt.px(60),
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                fit: BoxFit.scaleDown,
-                image: CachedNetworkImageProvider(
-                    ImageUrl.getUrl(d.logo_path, ImageSize.w300)))),
-      );
-    else
-      return Container();
-  }
+  // Widget _buildProductionCompanieCell(ProductionCompanie d) {
+  //   if (d.logo_path != null)
+  //     return Container(
+  //       margin: EdgeInsets.only(bottom: Adapt.px(20)),
+  //       width: Adapt.px(120),
+  //       height: Adapt.px(60),
+  //       decoration: BoxDecoration(
+  //           image: DecorationImage(
+  //               fit: BoxFit.scaleDown,
+  //               image: CachedNetworkImageProvider(
+  //                   ImageUrl.getUrl(d.logo_path, ImageSize.w300)))),
+  //     );
+  //   else
+  //     return Container();
+  // }
 
   Widget _buildReleaseDateCell(ReleaseDateInfo d) {
     return Container(

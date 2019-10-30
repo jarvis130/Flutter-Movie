@@ -20,7 +20,7 @@ class ListDetailModel {
   String follows ;
   String workVideos;
   String likeVideos;
-  bool vip_info ;
+  Map vip_info ;
   String isattention;
   String createTime;
   List<ListDetailResult> results;
@@ -46,7 +46,7 @@ class ListDetailModel {
     this.follows  = tmp['follows'];
     this.workVideos = tmp['workVideos'];
     this.likeVideos = tmp['likeVideos'];
-    this.vip_info  = tmp['vip_info'];
+    this.vip_info  = tmp['vip_info'] == null ? [] : tmp['vip_info'];
     this.isattention = tmp['isattention'];
     this.createTime = tmp['create_time'];
     results = tmp['videos'] == null ? null : [];

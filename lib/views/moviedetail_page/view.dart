@@ -769,7 +769,7 @@ Widget buildView(
                   child: SliverAppBar( 
                       pinned: true,
                       backgroundColor: Colors.black,
-                      expandedHeight: Adapt.px(600),
+                      expandedHeight: Adapt.px(580),
                       floating: false,
                       centerTitle: true,
                       title: Text(de ? state.title ?? '' : ''),
@@ -809,13 +809,15 @@ Widget buildView(
                       flexibleSpace: FlexibleSpaceBar(
                         centerTitle: true,
 //                         background: _buildHeader(),
-                        background: viewService.buildComponent('play'),
-//                        background: state.movieDetailModel.href != null ? VideoPlayerItem(
-//                          vc: VideoPlayerController.network(state.movieDetailModel.href),
-//                          coverurl: state.movieDetailModel.thumb_s,
-//                          showplayer: true,
-//                        ) : Container(),
-                      )),
+                        // background: viewService.buildComponent('play'),
+                       background: state.movieDetailModel.href != null ? VideoPlayerItem(
+                         movieid: state.movieid,
+                         vc: VideoPlayerController.network(state.movieDetailModel.href),
+                         coverurl: state.movieDetailModel.thumb_s,
+                         showplayer: true,
+                       ) : Container(),
+                    )
+                  ),
                 )
               ];
             },

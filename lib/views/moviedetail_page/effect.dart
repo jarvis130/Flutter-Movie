@@ -50,20 +50,14 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     // }
 
     // 视频详情
-    // MovieDetailModel r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
-    String r = await MoiveDetailApi.getMovieDetailData(ApiHelper.uid, ctx.state.movieid);
+    MovieDetailModel r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
     if (r != null) {
-      var s = json.decode(r);
-      if (s['data']['code'] == 1001) {
-        ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(s['msg']));
-      } else {
-        MovieDetailModel model = MovieDetailModel(r);
-        ctx.dispatch(MovieDetailPageActionCreator.onInit(model));
+
+        ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
         ctx.state.animationController.forward();
         // 推荐视频
         MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
         if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
-      }
       
     }
 

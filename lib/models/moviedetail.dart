@@ -139,97 +139,21 @@ class MovieDetailModel {
   // }
 }
 
-class BelongsToCollection {
-  int id;
-  String backdrop_path;
-  String name;
-  String poster_path;
+class MovieDetailModelReturn {
+  int code;
+  String msg;
 
-  BelongsToCollection.fromParams(
-      {this.id, this.backdrop_path, this.name, this.poster_path});
+  MovieDetailModelReturn.fromParams({this.code, this.msg});
 
-  BelongsToCollection.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    backdrop_path = jsonRes['backdrop_path'];
-    name = jsonRes['name'];
-    poster_path = jsonRes['poster_path'];
+factory MovieDetailModelReturn(jsonStr1) => jsonStr1 == null
+      ? null
+      : jsonStr1 is String
+          ? new MovieDetailModelReturn.fromJson((json.decode(jsonStr1))['data'])
+          : new MovieDetailModelReturn.fromJson(jsonStr1);
+
+  MovieDetailModelReturn.fromJson(jsonRes) {
+    code = jsonRes['code'];
+    msg = jsonRes['msg'];
   }
 
-  @override
-  String toString() {
-    return '{"id": $id,"backdrop_path": ${backdrop_path != null ? '${json.encode(backdrop_path)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'},"poster_path": ${poster_path != null ? '${json.encode(poster_path)}' : 'null'}}';
-  }
-}
-
-class SpokenLanguage {
-  String iso_639_1;
-  String name;
-
-  SpokenLanguage.fromParams({this.iso_639_1, this.name});
-
-  SpokenLanguage.fromJson(jsonRes) {
-    iso_639_1 = jsonRes['iso_639_1'];
-    name = jsonRes['name'];
-  }
-
-  @override
-  String toString() {
-    return '{"iso_639_1": ${iso_639_1 != null ? '${json.encode(iso_639_1)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'}}';
-  }
-}
-
-class ProductionCountrie {
-  String iso_3166_1;
-  String name;
-
-  ProductionCountrie.fromParams({this.iso_3166_1, this.name});
-
-  ProductionCountrie.fromJson(jsonRes) {
-    iso_3166_1 = jsonRes['iso_3166_1'];
-    name = jsonRes['name'];
-  }
-
-  @override
-  String toString() {
-    return '{"iso_3166_1": ${iso_3166_1 != null ? '${json.encode(iso_3166_1)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'}}';
-  }
-}
-
-class ProductionCompanie {
-  int id;
-  String logo_path;
-  String name;
-  String origin_country;
-
-  ProductionCompanie.fromParams(
-      {this.id, this.logo_path, this.name, this.origin_country});
-
-  ProductionCompanie.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    logo_path = jsonRes['logo_path'];
-    name = jsonRes['name'];
-    origin_country = jsonRes['origin_country'];
-  }
-
-  @override
-  String toString() {
-    return '{"id": $id,"logo_path": ${logo_path != null ? '${json.encode(logo_path)}' : 'null'},"name": ${name != null ? '${json.encode(name)}' : 'null'},"origin_country": ${origin_country != null ? '${json.encode(origin_country)}' : 'null'}}';
-  }
-}
-
-class Genre {
-  int id;
-  String name;
-
-  Genre.fromParams({this.id, this.name});
-
-  Genre.fromJson(jsonRes) {
-    id = jsonRes['id'];
-    name = jsonRes['name'];
-  }
-
-  @override
-  String toString() {
-    return '{"id": $id,"name": ${name != null ? '${json.encode(name)}' : 'null'}}';
-  }
 }

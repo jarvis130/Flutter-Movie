@@ -2,7 +2,7 @@ import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/moviedetail.dart';
 class MoiveDetailApi {
 
-  ///
+  ///视频详情
   static Future<MovieDetailModel> getMovieDetail(var uid, var movieId) async {
     MovieDetailModel model;
     String param = 'service=Video.GetVideo&uid=$uid&videoid=$movieId';
@@ -10,11 +10,23 @@ class MoiveDetailApi {
     if (r != null) model = MovieDetailModel(r);
     return model;
   }
-
-   static Future<String> getMovieDetailData(var uid, var movieId) async {
+  
+  ///检查观看次数
+   static Future<MovieDetailModelReturn> getMovieDetailData(var uid, var movieId) async {
+    MovieDetailModelReturn model;
     String param = 'service=Video.GetVideo&uid=$uid&videoid=$movieId';
     var r = await ApiHelper.httpGet(param, cached: false);
-    return r;
+    if (r != null) model = MovieDetailModelReturn(r);
+    return model;
+  }
+
+    ///增加观看次数
+   static Future<MovieDetailModelReturn> addView(var uid, var token, var movieId) async {
+    MovieDetailModelReturn model;
+    String param = 'service=Video.AddView&uid=$uid&videoid=$movieId&token=$token';
+    var r = await ApiHelper.httpGet(param, cached: false);
+    if (r != null) model = MovieDetailModelReturn(r);
+    return model;
   }
 
   ///收藏
