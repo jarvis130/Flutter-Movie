@@ -11,6 +11,12 @@ class MoiveDetailApi {
     return model;
   }
 
+   static Future<String> getMovieDetailData(var uid, var movieId) async {
+    String param = 'service=Video.GetVideo&uid=$uid&videoid=$movieId';
+    var r = await ApiHelper.httpGet(param, cached: false);
+    return r;
+  }
+
   ///收藏
   static Future<MovieDetailModel> addCollect(var uid, var token, var videoid) async {
     MovieDetailModel model;

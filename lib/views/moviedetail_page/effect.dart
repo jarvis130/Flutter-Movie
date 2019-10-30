@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:convert' show json;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart' hide Action;
@@ -50,13 +50,21 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     // }
 
     // 视频详情
-    MovieDetailModel r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
+    // MovieDetailModel r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
+    String r = await MoiveDetailApi.getMovieDetailData(ApiHelper.uid, ctx.state.movieid);
     if (r != null) {
-      ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
-      ctx.state.animationController.forward();
-      // 推荐视频
-      MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
-      if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
+      var s = json.decode(r);
+      if (s['data']['code'] == 1001) {
+        ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(s['msg']));
+      } else {
+        MovieDetailModel model = MovieDetailModel(r);
+        ctx.dispatch(MovieDetailPageActionCreator.onInit(model));
+        ctx.state.animationController.forward();
+        // 推荐视频
+        MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
+        if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
+      }
+      
     }
 
     // 评论
