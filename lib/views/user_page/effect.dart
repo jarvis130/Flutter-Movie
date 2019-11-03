@@ -91,7 +91,10 @@ Future _loadData(Action action, Context<UserPageState> ctx) async {
 }
 
 void _shopping(Action action, Context<UserPageState> ctx) async {
-  await Navigator.of(ctx.context).pushNamed('WebPage', arguments: {
+//  await Navigator.of(ctx.context).pushNamed('WebPage', arguments: {
+//    'uid': ApiHelper.uid
+//  });
+  await Navigator.of(ctx.context).pushNamed('PayPage', arguments: {
     'uid': ApiHelper.uid
   });
 }

@@ -14,6 +14,7 @@ import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
 import 'package:movie/views/moviedetail_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
+import 'package:movie/views/pay_page/page.dart';
 import 'package:movie/views/review_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
 import 'package:movie/views/splash_page/page.dart';
@@ -50,9 +51,11 @@ Future _init() async {
     if(Platform.isIOS){
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
       uuid = iosDeviceInfo.identifierForVendor;
+      prefs.setString('client', '2');
     }else if(Platform.isAndroid){
       AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
       uuid = androidDeviceInfo.id;
+      prefs.setString('client', '1');
     }
     await ApiHelper.createGuestSessionByMobileDevice(uuid);
   } else {
@@ -99,7 +102,8 @@ Future<Widget> createApp() async {
       'SplashPage': SplashPage(),
       'UserPage': UserPage(),
       'WebPage': WebPage(),
-      'reviewPage': ReviewPage()
+      'reviewPage': ReviewPage(),
+      'PayPage': PayPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {
