@@ -7,6 +7,10 @@ import 'state.dart';
 
 Widget buildView(WebPageState state, Dispatch dispatch, ViewService viewService) {
 
-  String url = ApiHelper.shopUrl+'?username=${state.username}';
-  return WebScene(url: url, title: '商城');
+//  String url = ApiHelper.shopUrl+'?username=${state.username}';
+//  return WebScene(url: url, title: '商城');
+
+
+  String url = 'http://localhost:8085/#/topup'+'?uid=${state.uid}&token=${state.token}&client=${state.client}';
+  return WebScene(url: url, title: '充值');
 }

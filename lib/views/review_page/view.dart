@@ -1,5 +1,8 @@
+import 'package:extended_text_field/extended_text_field.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/actions/Adapt.dart';
+import 'package:movie/customwidgets/screen.dart';
 import '../../style/styles.dart';
 import '../../customwidgets/text_field_item.dart';
 import 'action.dart';
@@ -19,12 +22,16 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
           children: <Widget>[
             SizedBox(height: 5),
             TextFormField(
+              // maxLength: 100,
+              // maxLengthEnforced: true,
+              maxLines: 10,
               decoration: InputDecoration(
 //                labelText: "密码",
                   hintText: "内容",
                   hintStyle: TextStyle(
                     color: Colors.grey,
-                  )
+                  ),
+                  border: InputBorder.none,
 //                prefixIcon: Icon(Icons.lock)
               ),
               style: TextStyle(
@@ -86,32 +93,6 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
             flex: 1,
               child: _buildBody()
           ),
-//          Padding(
-//            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8.0),
-//            child: FlatButton(
-//              onPressed: (){},
-//              textColor: Colors.white,
-//              color: Color(0xff4688FA),
-//              disabledTextColor: Color(0xFFD4E2FA),
-//              disabledColor: Color(0xFF96BBFA),
-//              //shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-//              child: Column(
-//                children: <Widget>[
-//                  Container(
-//                    height: 48,
-//                    width: double.infinity,
-//                    alignment: Alignment.center,
-//                    child: Text(
-//                      '提交',
-//                      style: TextStyle(
-//                          fontSize: 18
-//                      ),
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ),
-//          )
         ],
       ),
     ),

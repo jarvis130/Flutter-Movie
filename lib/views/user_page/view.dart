@@ -78,7 +78,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频数量'),
+          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频'),
           Container(
             color: Colors.grey[300],
             width: Adapt.px(1),
@@ -95,11 +95,6 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: Adapt.px(28)),
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.black,
-                    size: Adapt.px(20),
                   )
                 ],
               )),

@@ -7,7 +7,7 @@ class WebPageActionCreator {
   static Action onAction() {
     return const Action(WebPageAction.action);
   }
-  static Action setUsername(String username) {
-    return  Action(WebPageAction.setUsername, payload: username);
+  static Action setUsername(Map m) {
+    return  Action(WebPageAction.setUsername, payload: m);
   }
 }

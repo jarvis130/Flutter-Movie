@@ -16,5 +16,13 @@ void _onAction(Action action, Context<WebPageState> ctx) {
 void _onInit(Action action, Context<WebPageState> ctx) async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String username = prefs.getString('username');
-  ctx.dispatch(WebPageActionCreator.setUsername(username));
+  String uid = prefs.getString('uid');
+  String token = prefs.getString('accessTokenV4');
+  String client = prefs.getString('client');
+  ctx.dispatch(WebPageActionCreator.setUsername({
+    'username': username,
+    'uid': uid,
+    'token': token,
+    'client': client
+  }));
 }

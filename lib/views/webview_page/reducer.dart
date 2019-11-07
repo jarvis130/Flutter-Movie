@@ -18,6 +18,9 @@ WebPageState _onAction(WebPageState state, Action action) {
 
 WebPageState _onSetUsername(WebPageState state, Action action) {
   final WebPageState newState = state.clone();
-  newState.username = action.payload;
+  newState.username = action.payload['username'];
+  newState.uid = action.payload['uid'];
+  newState.client = action.payload['client'];
+  newState.token = action.payload['token'];
   return newState;
 }
