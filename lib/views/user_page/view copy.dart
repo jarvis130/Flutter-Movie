@@ -3,17 +3,14 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/screen.dart';
 import 'package:movie/customwidgets/share_card.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/models/listdetailmodel.dart';
-import 'package:movie/views/my_page/components/favorites_component/action.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -414,10 +411,45 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     _buildIconButton(Icons.shopping_cart, () {
                       dispatch(UserPageActionCreator.onShipping());
                     }),
+//                     PopupMenuButton<SortCondition>(
+//                       offset: Offset(0, Adapt.px(100)),
+//                       icon: Icon(Icons.sort, color: Colors.white),
+//                       onSelected: (selected) => dispatch(
+//                           UserPageActionCreator.sortChanged(selected)),
+//                       itemBuilder: (ctx) {
+//                         return state.sortBy.map((s) {
+//                           var unSelectedStyle = TextStyle(color: Colors.grey);
+//                           var selectedStyle = TextStyle(
+//                               color: Colors.black, fontWeight: FontWeight.bold);
+//                           return PopupMenuItem<SortCondition>(
+//                             value: s,
+//                             child: Row(
+//                               children: <Widget>[
+//                                 Text(
+//                                   s.name,
+//                                   style: s.isSelected
+//                                       ? selectedStyle
+//                                       : unSelectedStyle,
+//                                 ),
+//                                 Expanded(
+//                                   child: Container(),
+//                                 ),
+//                                 s.isSelected ? Icon(Icons.check) : SizedBox()
+//                               ],
+//                             ),
+//                           );
+//                         }).toList();
+//                       },
+//                     )
                   ]),
                   SizedBox(
                     height: Adapt.px(20),
                   ),
+//                   Text('关于作者',
+//                       style: TextStyle(
+//                           color: Colors.white,
+//                           fontWeight: FontWeight.bold,
+//                           fontSize: Adapt.px(30))),
                   Container(
                     width: Adapt.screenW() - Adapt.px(60),
                     height: Adapt.px(120),
@@ -511,288 +543,6 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
       );
   }
 
-  Widget _buildCellCard() {
-    return Container(
-        color: Colors.white,
-        width: Adapt.screenW(),
-        height: 300,
-        alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(
-                  Icons.receipt,
-                  color: Colors.pink
-              ),
-              title: Text(
-                '标题',
-                style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                    fontSize: 12
-                ),
-              ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.receipt,
-                  color: Colors.pink
-              ),
-              title: Text(
-                '标题',
-                style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                    fontSize: 12
-                ),
-              ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.receipt,
-                  color: Colors.pink
-              ),
-              title: Text(
-                '标题',
-                style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                    fontSize: 12
-                ),
-              ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
-            ),
-            ListTile(
-              leading: Icon(
-                  Icons.receipt,
-                  color: Colors.pink
-              ),
-              title: Text(
-                '标题',
-                style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                    fontSize: 12
-                ),
-              ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
-            ),
-          ],
-        ),
-    );
-  }
-
-  Widget _buildToolsCard() {
-    double width =  (Adapt.screenW() - 20) / 4;
-    return Container(
-      color: Colors.white,
-      width: Adapt.screenW(),
-      height: 100,
-      alignment: Alignment.center,
-      padding: EdgeInsets.only(left: 0.0, top: 30.0, right: 0.0, bottom: 0.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          GestureDetector(
-            onTap: (){
-              dispatch(UserPageActionCreator.onFavoritesTapped());
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-              width: width,
-              child: Column(
-                children: <Widget>[
-                  Icon(
-                      Icons.collections,
-                      color: Colors.pink
-                  ),
-                  SizedBox(
-                    height: Adapt.px(10.0),
-                  ),
-                  Text(
-                    '我的收藏',
-                    style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                        fontSize: 12
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                    Icons.receipt,
-                    color: Colors.pink
-                ),
-                SizedBox(
-                  height: Adapt.px(10.0),
-                ),
-                Text(
-                  '觀看記錄',
-                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                      fontSize: 12
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                    Icons.reorder,
-                    color: Colors.pink
-                ),
-                SizedBox(
-                  height: Adapt.px(10.0),
-                ),
-                Text(
-                  '我的訂單',
-                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                      fontSize: 12
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                    Icons.phone,
-                    color: Colors.pink
-                ),
-                SizedBox(
-                  height: Adapt.px(10.0),
-                ),
-                Text(
-                  '聯繫客服',
-                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                      fontSize: 12
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-        ]
-      )
-    );
-  }
-
-  Widget _buildHeaderCard() {
-    var d = state.listDetailModel;
-    return d.id == null ? Container() : Container(
-      color: Colors.white,
-      width: Adapt.screenW(),
-      height: 180,
-      alignment: Alignment.center,
-      child: Column(
-        children: <Widget>[
-          //用户名
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 40.0, right: 0.0, bottom: 10.0),
-            child: Text(
-              '体验会员',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                  fontSize: 12
-              ),
-            ),
-          ),
-          //用户编号
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 20.0),
-            child: Text(
-              'ID:' + d.user_nicename == null ? '' : d.user_nicename,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14
-              ),
-            ),
-          ),
-          //其它
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-
-              Container(
-                margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 20.0, bottom: 0.0),
-                width: (Adapt.screenW() + 10) / 3,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      '每日觀看次數',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.pink
-                      ),
-                    ),
-                    SizedBox(
-                      height: Adapt.px(10.0),
-                    ),
-                    Text(
-                      '30 / 30',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                color: Colors.grey[300],
-                width: Adapt.px(1),
-                height: Adapt.px(60),
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 20.0, top: 0.0, right: 0.0, bottom: 0.0),
-                width: (Adapt.screenW() + 10) / 3,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'VIP劵',
-                      style: TextStyle(
-                          color: Colors.pink,
-                          fontSize: 12
-                      ),
-                    ),
-                    SizedBox(
-                      height: Adapt.px(10.0),
-                    ),
-                    Text(
-                      '30 / 30',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-            ],
-          )
-        ],
-      )
-    );
-  }
-
   return Scaffold(
     body: CustomScrollView(
       controller: state.scrollController,
@@ -802,127 +552,41 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           pinned: true,
           title: Text(
-            '會員中心',
+            '会员中心',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20
             ),
           ),
-          // expandedHeight: Adapt.px(550),
-          // flexibleSpace: FlexibleSpaceBar(
-          //   background: _buildHeader(),
-          // ),
-          // bottom: PreferredSize(
-          //   preferredSize: Size.fromHeight(Adapt.px(100)),
-          //   child: _buildInfoGroup(),
-          // ),
+          expandedHeight: Adapt.px(550),
+          flexibleSpace: FlexibleSpaceBar(
+            background: _buildHeader(),
+          ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(Adapt.px(100)),
+            child: _buildInfoGroup(),
+          ),
         ),
+        _buildBody(),
         SliverToBoxAdapter(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: Adapt.screenW(),
-                height: 80,
-                color: Color.fromRGBO(50, 50, 50, 1),
+          child: Offstage(
+            offstage:
+            state.listDetailModel.totalPages == state.listDetailModel.page,
+            child: Container(
+              height: Adapt.px(80),
+              margin: EdgeInsets.only(top: Adapt.px(30)),
+              alignment: Alignment.topCenter,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(Colors.black),
               ),
-              Card(
-                margin: EdgeInsets.only(left: 10.0, top: 35.0, right: 10.0, bottom: 10.0),
-                // color: Colors.white,
-                //z轴的高度，设置card的阴影
-                elevation: 5.0,
-                //设置shape，这里设置成了R角
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-                //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-                clipBehavior: Clip.antiAlias,
-                semanticContainer: false,
-                child: _buildHeaderCard(),
-              ),
-              Center(
-                child: Container(
-                  width: 60,
-                  height: 60,
-
-                  decoration: BoxDecoration(
-                    image: DecorationImage(//背景图片 ,不能与背景色同时使用
-                      image: CachedNetworkImageProvider(
-                          state.listDetailModel.avatar_thumb == null ? '' : state.listDetailModel.avatar_thumb
-                      ),
-                      alignment: Alignment.topCenter,
-                      repeat: ImageRepeat.repeatY,//是否重复
-                      fit: BoxFit.cover,//填充模式
-                      colorFilter: ColorFilter.mode(//颜色滤镜
-                          Colors.indigoAccent[400].withOpacity(0.5),
-                          BlendMode.hardLight//混合模式
-                      ),
-                    ),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 3.0,
-                      style: BorderStyle.solid,
-                    ),
-                    borderRadius: BorderRadius.circular(50)
-                  ),
-
-                )
-              )
-            ],
-          )
-        ),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
-            // color: Colors.white,
-            //z轴的高度，设置card的阴影
-            elevation: 5.0,
-            //设置shape，这里设置成了R角
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
             ),
-            //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-            clipBehavior: Clip.antiAlias,
-            semanticContainer: false,
-            child: _buildToolsCard(),
           ),
         ),
         SliverToBoxAdapter(
-          child: Card(
-            margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
-            // color: Colors.white,
-            //z轴的高度，设置card的阴影
-            elevation: 5.0,
-            //设置shape，这里设置成了R角
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-            clipBehavior: Clip.antiAlias,
-            semanticContainer: false,
-            child: _buildCellCard(),
+          child: SizedBox(
+            height: Adapt.px(30),
           ),
         )
-        
-        // _buildBody(),
-        // SliverToBoxAdapter(
-        //   child: Offstage(
-        //     offstage:
-        //     state.listDetailModel.totalPages == state.listDetailModel.page,
-        //     child: Container(
-        //       height: Adapt.px(80),
-        //       margin: EdgeInsets.only(top: Adapt.px(30)),
-        //       alignment: Alignment.topCenter,
-        //       child: CircularProgressIndicator(
-        //         valueColor: AlwaysStoppedAnimation(Colors.black),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // SliverToBoxAdapter(
-        //   child: SizedBox(
-        //     height: Adapt.px(30),
-        //   ),
-        // )
       ],
     ),
   );

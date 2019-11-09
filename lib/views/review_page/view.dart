@@ -1,4 +1,3 @@
-import 'package:extended_text_field/extended_text_field.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';

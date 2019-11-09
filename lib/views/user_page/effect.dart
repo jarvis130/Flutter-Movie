@@ -16,7 +16,8 @@ Effect<UserPageState> buildEffect() {
     Lifecycle.initState: _onInit,
     UserPageAction.cellTapped: _cellTapped,
     UserPageAction.sortChanged: _sortChanged,
-    UserPageAction.shopping: _shopping
+    UserPageAction.shopping: _shopping,
+    UserPageAction.favoritesTapped: _favoritesTapped
   });
 }
 
@@ -97,4 +98,10 @@ void _shopping(Action action, Context<UserPageState> ctx) async {
 //  await Navigator.of(ctx.context).pushNamed('PayPage', arguments: {
 //    'uid': ApiHelper.uid
 //  });
+}
+
+void _favoritesTapped(Action action, Context<UserPageState> ctx) async {
+  await Navigator.of(ctx.context).pushNamed('MyPage', arguments: {
+    'uid': ApiHelper.uid
+  });
 }

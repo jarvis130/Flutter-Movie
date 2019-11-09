@@ -108,14 +108,14 @@ Widget buildView(GuideState state, Dispatch dispatch, ViewService viewService) {
         title: Container(),
         body: Column(
           children: <Widget>[
-            Text('One Touch Send Money'),
-            Text(
-              'Send money in just one touch and organize your wallet smart.',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 16.0
-              ),
-            ),
+            Text('同你去往每个地方'),
+//            Text(
+//              'Send money in just one touch and organize your wallet smart.',
+//              style: TextStyle(
+//                color: Colors.black54,
+//                fontSize: 16.0
+//              ),
+//            ),
           ],
         ),
         mainImage: Image.asset(
@@ -134,9 +134,9 @@ Widget buildView(GuideState state, Dispatch dispatch, ViewService viewService) {
         title: Container(),
         body: Column(
           children: <Widget>[
-            Text('Automatically Organize'),
+            Text('懂你，更懂你所爱'),
             Text(
-              'Organize your expenses and incomes and secure your wallet with pin.',
+              '因为在意，所以用心',
               style: TextStyle(
                 color: Colors.black54,
                 fontSize: 16.0

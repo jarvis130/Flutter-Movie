@@ -13,6 +13,7 @@ import 'package:movie/views/listdetail_page/page.dart';
 import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
 import 'package:movie/views/moviedetail_page/page.dart';
+import 'package:movie/views/my_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
 import 'package:movie/views/pay_page/page.dart';
 import 'package:movie/views/review_page/page.dart';
@@ -103,7 +104,8 @@ Future<Widget> createApp() async {
       'UserPage': UserPage(),
       'WebPage': WebPage(),
       'reviewPage': ReviewPage(),
-      'PayPage': PayPage()
+      'PayPage': PayPage(),
+      'MyPage': MyPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {
