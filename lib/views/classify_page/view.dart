@@ -271,7 +271,7 @@ Widget buildView(
         centerTitle: true,
         backgroundColor: Color.fromRGBO(50, 50, 50, 1),
         title: Text(
-          '发现',
+          '發現',
           style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 20

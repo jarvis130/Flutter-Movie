@@ -121,7 +121,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(
-                            '历史记录',
+                            '歷史記錄',
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
