@@ -176,25 +176,25 @@ class _I18n_zh_CN extends I18n {
 
   /// "电影"
   @override
-  String get appname => "电影";
+  String get appname => "電影";
   /// "搜索电影、电视剧、演员"
   @override
-  String get searchbartxt => "搜索电影、演员";
+  String get searchbartxt => "搜索電影、演員";
   /// "主页"
   @override
-  String get home => "主页";
+  String get home => "主頁";
   /// "发现"
   @override
-  String get discover => "发现";
+  String get discover => "發現";
   /// "预播"
   @override
   String get coming => "预播";
   /// "关注"
   @override
-  String get concern => "关注";
+  String get concern => "關注";
   /// "账号"
   @override
-  String get account => "账号";
+  String get account => "會員";
   /// "上映中"
   @override
   String get inTheaters => "上映中";
@@ -218,25 +218,25 @@ class _I18n_zh_CN extends I18n {
   String get main => "主要";
   /// "视频"
   @override
-  String get videos => "视频";
+  String get videos => "視頻";
   /// "图片"
   @override
-  String get images => "图片";
+  String get images => "圖片";
   /// "评论"
   @override
-  String get reviews => "评论";
+  String get reviews => "評論";
   /// "标签"
   @override
   String get tags => "标签";
   /// "推荐"
   @override
-  String get recommendations => "推荐视频";
+  String get recommendations => "推薦視頻";
   /// "新片发布"
   @override
-  String get newMovie => "新片发布";
+  String get newMovie => "新片發佈";
   /// "经历"
   @override
-  String get biography => "经历";
+  String get biography => "經歷";
   /// "被认识"
   @override
   String get knownFor => "被认识";
@@ -287,10 +287,10 @@ class _I18n_zh_CN extends I18n {
   String get favorites => "收藏";
   /// "评分"
   @override
-  String get ratingsReviews => "评分";
+  String get ratingsReviews => "評分";
   /// "热门"
   @override
-  String get popular => "热播视频";
+  String get popular => "熱播視頻";
   /// "更多"
   @override
   String get more => "更多";
