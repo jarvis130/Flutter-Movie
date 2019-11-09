@@ -22,9 +22,7 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
           children: <Widget>[
             SizedBox(height: 5),
             TextFormField(
-              // maxLength: 100,
-              // maxLengthEnforced: true,
-              maxLines: 10,
+              maxLines: null,
               decoration: InputDecoration(
 //                labelText: "密码",
                   hintText: "内容",
