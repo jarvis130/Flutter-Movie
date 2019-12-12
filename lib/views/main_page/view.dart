@@ -35,6 +35,10 @@ Widget buildView(
           title: Text(I18n.of(viewService.context).discover),
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.music_video, size: Adapt.px(44)),
+          title: Text(I18n.of(viewService.context).douyin),
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today, size: Adapt.px(44)),
           title: Text(I18n.of(viewService.context).concern),
         ),

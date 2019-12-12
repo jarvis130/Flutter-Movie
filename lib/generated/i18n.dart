@@ -41,6 +41,8 @@ class I18n implements WidgetsLocalizations {
   String get home => "Home";
   /// "Discover"
   String get discover => "Discover";
+  /// "Douyin"
+  String get douyin => "Douyin";
   /// "Coming"
   String get coming => "Coming";
   /// "Concern"
@@ -186,6 +188,8 @@ class _I18n_zh_CN extends I18n {
   /// "发现"
   @override
   String get discover => "發現";
+  @override
+  String get douyin => "抖音";
   /// "预播"
   @override
   String get coming => "预播";
