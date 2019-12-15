@@ -19,7 +19,7 @@ class MainPageState implements GlobalBaseState<MainPageState> {
 //  ..add(DiscoverPage().buildPage(Map<String,String>()))
   ..add(ClassifyPage().buildPage(Map<String,String>()))
 
-  ..add(DouyinPage().buildPage(Map<String,String>()))
+//  ..add(DouyinPage().buildPage(Map<String,String>()))
 
   ..add(MyPage().buildPage(Map<String,String>()))
 
