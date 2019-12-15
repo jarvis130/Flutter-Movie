@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/user_api.dart';
+import 'package:movie/utils/SharedPreferencesUtil.dart';
 import 'package:movie/views/discover_page/page.dart';
 import 'package:movie/views/douyin_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
@@ -48,7 +49,8 @@ Future _init() async {
 
   String os = '';
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = prefs.getString('token');
+  SharedPreferencesUtil.initPrefsInstance(prefs);
+  String token = SharedPreferencesUtil.prefsInstance.getString('token');
   if (token == null) {
     //获取设备信息
     String uuid;
