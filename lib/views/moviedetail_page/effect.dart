@@ -56,8 +56,8 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
         ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
         ctx.state.animationController.forward();
         // 推荐视频
-        MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
-        if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
+//        MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
+//        if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
       
     }
 

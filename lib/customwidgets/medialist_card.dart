@@ -61,7 +61,7 @@ class MediaListCardDialogState extends State<MediaListCardDialog> {
             ),
           );
         }));
-        var result = await ApiHelper.createAccessTokenV4(token);
+        var result = await ApiHelper.createtoken(token);
         if (result)
           _accountid = prefs.getString('accountIdV4');
         else

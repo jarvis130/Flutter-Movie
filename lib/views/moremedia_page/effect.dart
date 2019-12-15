@@ -1,7 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/api/home_api.dart';
@@ -27,10 +29,13 @@ void _onInit(Action action, Context<MoreMediaPageState> ctx) {
         _loadMore(action, ctx);
       }
     });
+
     final TickerProvider tickerProvider = ctx.stfState as CustomstfState;
     ctx.state.animationController=AnimationController(
-      vsync: tickerProvider, duration: Duration(milliseconds: 300*ctx.state.videoList.results.length)
+      vsync: tickerProvider, duration: Duration(milliseconds: 300*ctx.state.goodProducts.length)
     );
+
+  _initLoad(action, ctx);
 }
 
 void _onBuild(Action action, Context<MoreMediaPageState> ctx) {
@@ -43,18 +48,38 @@ void _onDispose(Action action, Context<MoreMediaPageState> ctx) {
 }
 void _onAction(Action action, Context<MoreMediaPageState> ctx) {}
 
-Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
-  MovieListModel model;
-  int page = ctx.state.videoList.page + 1;
-  if (page <= ctx.state.videoList.total_pages) {
+Future _initLoad(Action action, Context<MoreMediaPageState> ctx) async {
+  GoodProducts model;
+  int currentPage = ctx.state.currentPage + 1;
+  if(currentPage == 1){
     if (ctx.state.mediaType == MediaType.hot)
-      model = await HomeApi.getHotMovieList('', page:page);
+      model = await ProductApi.getList('', page: currentPage, is_hot: 1);
     else if (ctx.state.mediaType == MediaType.recommend)
-      model = await HomeApi.getRecommendMovieList('', page:page);
+      model = await ProductApi.getList('', page: currentPage, is_best: 1);
     else
-      model = await HomeApi.getNewMovieList('', page:page);
+      model = await ProductApi.getList('', page: currentPage, is_new: 1);
   }
-  if (model != null) ctx.dispatch(MoreMediaPageActionCreator.loadMore(model));
+
+  if (model != null){
+    ctx.dispatch(MoreMediaPageActionCreator.loadMore(model));
+  }
+}
+
+Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
+  GoodProducts model;
+  int currentPage = ctx.state.currentPage + 1;
+  if (currentPage <= ctx.state.pages) {
+    if (ctx.state.mediaType == MediaType.hot)
+      model = await ProductApi.getList('', page: currentPage, is_hot: 1);
+    else if (ctx.state.mediaType == MediaType.recommend)
+      model = await ProductApi.getList('', page: currentPage, is_best: 1);
+    else
+      model = await ProductApi.getList('', page: currentPage, is_new: 1);
+  }
+
+  if (model != null){
+    ctx.dispatch(MoreMediaPageActionCreator.loadMore(model));
+  }
 }
 
 Future _cellTapped(Action action, Context<MoreMediaPageState> ctx) async {

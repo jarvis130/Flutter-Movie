@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' hide Action;
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/api/user_api.dart';
 import 'package:movie/views/discover_page/page.dart';
 import 'package:movie/views/douyin_page/page.dart';
 import 'package:movie/views/favorites_page/page.dart';
@@ -35,41 +36,41 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:movie/views/detail_page/page.dart' as detail;
 import 'package:device_info/device_info.dart';
 
-String tip = '0';
+//启动标识
+String startFlag = '0';
 
 Future _init() async {
+
   if (Platform.isAndroid)
     Map<PermissionGroup, PermissionStatus> permissions =
         await PermissionHandler()
             .requestPermissions([PermissionGroup.contacts]);
 
+  String os = '';
   SharedPreferences prefs = await SharedPreferences.getInstance();
-//  var session = prefs.getString('loginsession');
-  String accessToken = prefs.getString('accessTokenV4');
-  if (accessToken == null) {
+  String token = prefs.getString('token');
+  if (token == null) {
     //获取设备信息
     String uuid;
     DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
     if(Platform.isIOS){
       IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
       uuid = iosDeviceInfo.identifierForVendor;
-      prefs.setString('client', '2');
+      os = '2';
     }else if(Platform.isAndroid){
       AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
       uuid = androidDeviceInfo.id;
-      prefs.setString('client', '1');
+      os = '1';
     }
-    await ApiHelper.createGuestSessionByMobileDevice(uuid);
-  } else {
-    ApiHelper.uid = prefs.getString('uid');
-    ApiHelper.username = prefs.getString('username');
-    ApiHelper.accessTokenV4 = accessToken;
+    prefs.setString('client', os);
+    // 设备码登录
+    UserApi.loginByMobileDevice(uuid, os);
   }
 
 //  if (accessToken != null) ApiHelper.accessTokenV4 = accessToken;
 
-  tip = prefs.getString('tip') == null ? '0' : '1';
-  if(tip == '0'){
+  startFlag = prefs.getString('tip') == null ? '0' : '1';
+  if(startFlag == '0'){
     prefs.setString('tip', '1');
   }
 
@@ -84,18 +85,11 @@ Future<Widget> createApp() async {
       'mainpage': MainPage(),
       'loginpage': LoginPage(),
       'moviedetailpage': MovieDetailPage(),
-//      'tvdetailpage': TVDetailPage(),
       'searchpage': SearchPage(),
-//      'peopledetailpage': PeopleDetailPage(),
-//      'seasondetailpage': SeasonDetailPage(),
-//      'episodedetailpage': EpisodeDetailPage(),
       'MoreMediaPage': MoreMediaPage(),
-//      'SeasonsPage': SeasonsPage(),
       'MyListsPage': MyListsPage(),
       'ListDetailPage': ListDetailPage(),
       'FavoritesPage': FavoritesPage(),
-//      'WatchlistPage': WatchlistPage(),
-//      'WatchlistDetailPage': WatchlistDetailPage(),
       'detailpage': detail.MovieDetailPage(),
       'classifypage': ClassifyPage(),
       'GalleryPage': GalleryPage(),
@@ -140,7 +134,7 @@ Future<Widget> createApp() async {
 
         /// Effect AOP
         effectMiddleware: [
-          _pageAnalyticsMiddleware<dynamic>(),
+//          _pageAnalyticsMiddleware<dynamic>(),
         ],
 
         /// Store AOP
@@ -167,7 +161,7 @@ Future<Widget> createApp() async {
     supportedLocales: I18n.delegate.supportedLocales,
     localeResolutionCallback:
         I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
-    home: tip == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
+    home: startFlag == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);

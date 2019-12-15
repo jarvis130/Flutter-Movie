@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/models/enums/media_type.dart';
@@ -14,12 +16,14 @@ import '../../action.dart';
 Widget buildView(
     HotMovieState state, Dispatch dispatch, ViewService viewService) {
 
+  List<Products> list = state.hotMovie;
+
   Widget _buildMoreCell() {
     return Column(
       children: <Widget>[
         GestureDetector(
           onTap: () => dispatch(
-                HomePageActionCreator.onMoreTapped(state.hotMovie, MediaType.hot)
+              HomePageActionCreator.onMoreTapped(state.hotMovie, MediaType.hot)
           ),
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
@@ -45,18 +49,19 @@ Widget buildView(
     );
   }
 
-  Widget _buildCell(MovieListResult d) {
+  Widget _buildCell(Products d) {
     return Padding(
       key: ValueKey(d.id),
       padding: EdgeInsets.only(left: Adapt.px(30)),
       child: GestureDetector(
         onTap: () => dispatch(
           HotMovieActionCreator.onCellTapped(
-            d.id,
+            d.id.toString(),
             '',
-            d.title,
-            d.thumb_s)
-          ),
+            d.goodsName,
+            ''
+          )
+        ),
         child: Column(
           children: <Widget>[
             ClipRRect(
@@ -67,7 +72,7 @@ Widget buildView(
                 width: Adapt.px(250),
                 height: Adapt.px(350),
                 fit: BoxFit.cover,
-                imageUrl: d.thumb_s,
+                imageUrl: d.defaultPhoto.thumb,
                 placeholder: (ctx, s) {
                   return Image.asset(
                     'images/CacheBG.jpg',
@@ -83,7 +88,7 @@ Widget buildView(
                 width: Adapt.px(250),
                 padding: EdgeInsets.all(Adapt.px(10)),
                 child: Text(
-                  d.title,
+                  d.goodsName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -133,7 +138,6 @@ Widget buildView(
   }
 
   Widget _buildbody() {
-    MovieListModel model = state.hotMovie;
     return AnimatedSwitcher(
         transitionBuilder: (widget, animated) {
           return SlideTransition(
@@ -146,16 +150,39 @@ Widget buildView(
         switchOutCurve: Curves.easeOut,
         duration: Duration(milliseconds: 300),
         child: Container(
-          key: ValueKey(model),
           height: Adapt.px(420),
           child: ListView(
             scrollDirection: Axis.horizontal,
             physics: PageScrollPhysics(),
             shrinkWrap: true,
-            children: model.results.length > 0
-                ? (model.results.map(_buildCell).toList()
+            children: (list.map(_buildCell).toList()
               ..add(_buildMoreCell()))
-                : <Widget>[
+          ),
+        )
+    );
+  }
+
+  if(list != null) {
+    return _buildbody();
+  }else{
+    return AnimatedSwitcher(
+        transitionBuilder: (widget, animated) {
+          return SlideTransition(
+            position:
+            animated.drive(Tween(begin: Offset(1, 0), end: Offset.zero)),
+            child: widget,
+          );
+        },
+        switchInCurve: Curves.easeIn,
+        switchOutCurve: Curves.easeOut,
+        duration: Duration(milliseconds: 300),
+        child: Container(
+          height: Adapt.px(420),
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            physics: PageScrollPhysics(),
+            shrinkWrap: true,
+            children: <Widget>[
               SizedBox(
                 width: Adapt.px(20),
               ),
@@ -174,8 +201,7 @@ Widget buildView(
               _buildShimmerCell()
             ],
           ),
-        ));
+        )
+    );
   }
-
-  return _buildbody();
 }

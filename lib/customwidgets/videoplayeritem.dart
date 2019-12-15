@@ -71,7 +71,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
         dialog();
       } else {
         play();
-        await MoiveDetailApi.addView(ApiHelper.uid, ApiHelper.accessTokenV4, movieid);
+        await MoiveDetailApi.addView(ApiHelper.uid, ApiHelper.token, movieid);
       }
       
     }

@@ -23,6 +23,6 @@ void _onInit(Action action, Context<ReviewState> ctx) {
 
 void _onSetComment(Action action, Context<ReviewState> ctx) async{
   var videoid = action.payload;
-   await ReviewApi.setComment(ApiHelper.uid, videoid, ApiHelper.accessTokenV4, ctx.state.content);
+   await ReviewApi.setComment(ApiHelper.uid, videoid, ApiHelper.token, ctx.state.content);
    ctx.broadcast(MovieDetailPageActionCreator.onReviewMore(videoid));
 }

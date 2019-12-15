@@ -1,39 +1,31 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/models/BannerModel.dart';
+import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/searchresult.dart';
 import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 class HomePageState implements Cloneable<HomePageState> {
-  SwiperListModel swiper;
-  MovieListModel hotMovie;
-  MovieListModel recommendMovie;
-  MovieListModel newMovie;
-  VideoListModel movie;
-  VideoListModel tv;
-  VideoListModel popularMovies;
-  VideoListModel popularTVShows;
+  BannerModel swiper;
+  List<Products> hotModel;
+  List<Products> newModel;
+  List<Products> recommendModel;
+
   SearchResultModel trending;
   ScrollController scrollController;
-  bool showHeaderMovie;
-  bool showPopMovie;
   AnimationController animatedController;
 
   @override
   HomePageState clone() {
     return HomePageState()
       ..swiper = swiper
-      ..hotMovie = hotMovie
-      ..recommendMovie = recommendMovie
-      ..newMovie = newMovie
-      ..tv = tv
-      ..movie = movie
-      ..popularMovies = popularMovies
-      ..popularTVShows = popularTVShows
-      ..showHeaderMovie = showHeaderMovie
-      ..showPopMovie = showPopMovie
+      ..hotModel = hotModel
+      ..newModel = newModel
+      ..recommendModel = recommendModel
       ..trending = trending
       ..scrollController = scrollController
       ..animatedController = animatedController;
@@ -43,27 +35,11 @@ class HomePageState implements Cloneable<HomePageState> {
 HomePageState initState(Map<String, dynamic> args) {
   var state = HomePageState();
 
-  state.swiper = new SwiperListModel.fromParams(results: List<SwiperListResult>());
+  state.swiper = new BannerModel();
 
-  state.hotMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
+  state.hotModel = List<Products>();
+  state.newModel = List<Products>();
+  state.recommendModel = List<Products>();
 
-  state.recommendMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
-
-  state.newMovie = new MovieListModel.fromParams(results: List<MovieListResult>());
-
-  state.movie = new VideoListModel.fromParams(results: List<VideoListResult>());
-
-  state.tv = new VideoListModel.fromParams(results: List<VideoListResult>());
-
-  state.popularMovies =
-      new VideoListModel.fromParams(results: List<VideoListResult>());
-
-  state.popularTVShows =
-      new VideoListModel.fromParams(results: List<VideoListResult>());
-
-  state.trending = SearchResultModel.fromParams(results: []);
-
-  state.showPopMovie = true;
-  state.showHeaderMovie = true;
   return state;
 }

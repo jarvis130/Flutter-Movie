@@ -58,7 +58,7 @@ Future _onInit(Action action, Context<MyListsPageState> ctx) async {
           ),
         );
       }));
-      var result = await ApiHelper.createAccessTokenV4(token);
+      var result = await ApiHelper.createtoken(token);
       if (result) {
         var prefs = await SharedPreferences.getInstance();
         id = prefs.getString('accountIdV4');

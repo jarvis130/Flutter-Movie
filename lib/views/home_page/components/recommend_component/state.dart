@@ -1,9 +1,11 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/HomeModel.dart';
 import '../../state.dart';
 
 class RecommendMovieState implements Cloneable<RecommendMovieState> {
-  MovieListModel recommendMovie;
+  List<Products> recommendMovie;
+
   @override
   RecommendMovieState clone() {
     return RecommendMovieState()
@@ -15,7 +17,7 @@ class RecommendMovieConnector extends ConnOp<HomePageState, RecommendMovieState>
   @override
   RecommendMovieState get(HomePageState state) {
     RecommendMovieState mstate = RecommendMovieState();
-    mstate.recommendMovie = state.recommendMovie;
+    mstate.recommendMovie = state.recommendModel;
     return mstate;
   }
 }

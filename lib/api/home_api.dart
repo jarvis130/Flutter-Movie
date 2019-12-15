@@ -1,4 +1,10 @@
+import 'dart:convert' show json;
+import 'dart:ui' as ui;
+import 'package:dio/dio.dart';
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/models/BannerModel.dart';
+import 'package:movie/models/HomeModel.dart';
+import 'package:movie/utils/httpUtil.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/searchresult.dart';
@@ -6,39 +12,32 @@ import 'package:movie/models/searchresult.dart';
 class HomeApi {
 
   ///轮播图
-  static Future<SwiperListModel> getSwiperList() async {
-    SwiperListModel model;
-    String param = 'service=Home.GetCarouselFigure';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = SwiperListModel(r);
-    return model;
+  static Future getSwiperList() async {
+
+    FormData formData = new FormData.from({});
+
+    var response = await HttpUtil().post('ecapi.banner.list', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      BannerModel model = BannerModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
   }
 
   ///热播视频
-  static Future<MovieListModel> getHotMovieList(String uid, {int page = 1}) async {
-    MovieListModel model;
-    String param = 'service=Video.GetVideoList&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieListModel(r);
-    return model;
-  }
+  static Future<HomeModel> home(String uid, {int page = 1}) async {
+    FormData formData = new FormData.from({});
 
-  ///推荐视频
-  static Future<MovieListModel> getRecommendMovieList(String uid, {int page = 1}) async {
-    MovieListModel model;
-    String param = 'service=Video.GetRecommendVideos&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieListModel(r);
-    return model;
-  }
-
-  ///新增视频
-  static Future<MovieListModel> getNewMovieList(String uid, {int page = 1}) async {
-    MovieListModel model;
-    String param = 'service=Video.GetNewVideoList&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieListModel(r);
-    return model;
+    var response = await HttpUtil().post('ecapi.home.product.list', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      HomeModel model = HomeModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
   }
 
   ///搜索

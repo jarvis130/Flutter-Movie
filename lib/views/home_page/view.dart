@@ -56,84 +56,6 @@ Widget buildView(
     );
   }
 
-  Widget _buildHeaderTitel() {
-    var _selectTextStyle = TextStyle(
-        color: Colors.white,
-        fontSize: Adapt.px(40),
-        fontWeight: FontWeight.bold);
-    var _unselectTextStyle =
-        TextStyle(color: Colors.grey, fontSize: Adapt.px(40));
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: Adapt.px(30)),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            InkWell(
-              onTap: () =>
-                  dispatch(HomePageActionCreator.onHeaderFilterChanged(true)),
-              child: Text(I18n.of(viewService.context).inTheaters,
-                  style: state.showHeaderMovie
-                      ? _selectTextStyle
-                      : _unselectTextStyle),
-            ),
-            SizedBox(
-              width: Adapt.px(30),
-            ),
-            InkWell(
-              onTap: () =>
-                  dispatch(HomePageActionCreator.onHeaderFilterChanged(false)),
-              child: Text(
-                I18n.of(viewService.context).onTV,
-                style: state.showHeaderMovie
-                    ? _unselectTextStyle
-                    : _selectTextStyle,
-              ),
-            )
-          ],
-        ));
-  }
-
-  Widget _buildHeaderListCell(VideoListResult f) {
-    String name = f.title ?? f.title;
-    return Padding(
-        key: ValueKey('headercell' + f.id.toString()),
-        padding: EdgeInsets.only(left: Adapt.px(30)),
-        child: Column(
-          children: <Widget>[
-            GestureDetector(
-              onTap: () => dispatch(HomePageActionCreator.onCellTapped(
-                  f.id,
-                  f.thumb_s,
-                  name,
-                  f.thumb_s,
-                  state.showHeaderMovie ? MediaType.movie : MediaType.tv)),
-              child: Container(
-                width: Adapt.px(200),
-                height: Adapt.px(280),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(57, 57, 57, 1),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider(
-                            ImageUrl.getUrl(f.thumb_s, ImageSize.w300)))),
-              ),
-            ),
-            SizedBox(
-              height: Adapt.px(20),
-            ),
-            Container(
-              alignment: Alignment.center,
-              width: Adapt.px(200),
-              height: Adapt.px(70),
-              child: Text(name,
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey, fontSize: Adapt.px(26))),
-            ),
-          ],
-        ));
-  }
-
   Widget _buildShimmerHeaderCell() {
     Color _baseColor = Color.fromRGBO(57, 57, 57, 1);
     Color _highLightColor = Color.fromRGBO(67, 67, 67, 1);
@@ -166,168 +88,6 @@ Widget buildView(
             ),
           ],
         ));
-  }
-
-  Widget _buildHeaderBody() {
-    var _model = state.showHeaderMovie ? state.movie : state.tv;
-    return Container(
-      height: Adapt.px(400),
-      child: AnimatedSwitcher(
-        duration: Duration(milliseconds: 600),
-        switchInCurve: Curves.easeIn,
-        switchOutCurve: Curves.easeOut,
-        child: ListView(
-            key: ValueKey(_model),
-            scrollDirection: Axis.horizontal,
-            children: _model.results.length > 0
-                ? _model.results.map(_buildHeaderListCell).toList()
-                : <Widget>[
-                    SizedBox(
-                      width: Adapt.px(30),
-                    ),
-                    _buildShimmerHeaderCell(),
-                    SizedBox(
-                      width: Adapt.px(30),
-                    ),
-                    _buildShimmerHeaderCell(),
-                    SizedBox(
-                      width: Adapt.px(30),
-                    ),
-                    _buildShimmerHeaderCell(),
-                  ]),
-      ),
-    );
-  }
-
-  Widget _buildSwiperCardCell(VideoListResult d) {
-    return GestureDetector(
-//        key: ValueKey('card${d.id}'),
-        onTap: () => dispatch(HomePageActionCreator.onCellTapped(
-            d.id,
-            d.thumb_s,
-            d.title ?? d.title,
-            d.thumb_s,
-            state.showHeaderMovie ? MediaType.movie : MediaType.tv)),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              decoration: new BoxDecoration(
-                color: Colors.white,
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: Colors.grey[200],
-                      offset: Offset(0, Adapt.px(20)),
-                      blurRadius: Adapt.px(30),
-                      spreadRadius: Adapt.px(1)),
-                ],
-              ),
-              margin: EdgeInsets.fromLTRB(
-                  Adapt.px(30), Adapt.px(5), Adapt.px(30), Adapt.px(30)),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    width: Adapt.px(120),
-                    height: Adapt.px(170),
-                    decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                                d.thumb_s, ImageSize.w300)))),
-                  ),
-                  SizedBox(
-                    width: Adapt.px(20),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: Adapt.px(20),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Container(
-                            width: Adapt.screenW() - Adapt.px(450),
-                            child: Text(
-                              d.title ?? d.title,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: Adapt.px(35)),
-                            ),
-                          ),
-                          // Container(
-                          //   width: Adapt.px(160),
-                          //   child: FlutterRatingBarIndicator(
-                          //     emptyColor: Colors.grey[300],
-                          //     itemSize: Adapt.px(22),
-                          //     itemPadding: EdgeInsets.only(right: Adapt.px(8)),
-                          //     rating: d.vote_average / 2,
-                          //   ),
-                          // ),
-                          // Text(
-                          //   d.vote_average.toStringAsFixed(1),
-                          //   style: TextStyle(
-                          //       fontSize: Adapt.px(22),
-                          //       fontWeight: FontWeight.w700),
-                          // )
-                        ],
-                      ),
-                      SizedBox(
-                        height: Adapt.px(20),
-                      ),
-                      Container(
-                        width: Adapt.screenW() - Adapt.px(210),
-                        child: Text(
-                          d.description,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.grey, fontSize: Adapt.px(24)),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ));
-  }
-
-  Widget _buildSwiper() {
-    var _model = state.showHeaderMovie ? state.movie : state.tv;
-    Widget _child = _model.results.length > 0
-        ? Swiper(
-            key: ValueKey(_model),
-            autoplay: true,
-            duration: 1000,
-            autoplayDelay: 10000,
-            viewportFraction: 0.9999,
-            itemCount: _model.results.length,
-            itemBuilder: (ctx, index) {
-              var d = _model.results[index];
-              return _buildSwiperCardCell(d);
-            },
-          )
-        : Container(
-            margin: EdgeInsets.only(bottom: Adapt.px(55)),
-            child:
-                ShimmerCell(Adapt.screenW() - Adapt.px(60), Adapt.px(170), 0),
-          );
-    return Container(
-      height: Adapt.px(225),
-      child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 600),
-          switchInCurve: Curves.easeIn,
-          switchOutCurve: Curves.easeOut,
-          child: _child),
-    );
   }
 
   Widget _buildTitle(String title, void buttonTap(),
@@ -462,110 +222,6 @@ Widget buildView(
 //        ));
   }
 
-  Widget _buildPopularposter() {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(Adapt.px(30)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  I18n.of(viewService.context).popular,
-                  style: state.showPopMovie
-                      ? _selectPopStyle
-                      : _unselectPopStyle,
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                GestureDetector(
-                  onTap: () => dispatch(
-                      HomePageActionCreator.onPopularFilterChanged(true)),
-                  child: Text(I18n.of(viewService.context).movies,
-                      style: state.showPopMovie
-                          ? _unselectPopStyle
-                          : _selectPopStyle),
-                ),
-                SizedBox(
-                  width: Adapt.px(20),
-                ),
-                GestureDetector(
-                  onTap: () => dispatch(
-                      HomePageActionCreator.onPopularFilterChanged(
-                          false)),
-                  child: Text(I18n.of(viewService.context).tvShows,
-                      style: TextStyle(
-                          fontSize: Adapt.px(24),
-                          fontWeight: state.showPopMovie
-                              ? FontWeight.normal
-                              : FontWeight.bold,
-                          color: state.showPopMovie
-                              ? Colors.grey
-                              : Colors.black)),
-                )
-              ],
-            ),
-          ),
-          viewService.buildComponent('popularposter'),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPopular() {
-    return SliverToBoxAdapter(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(Adapt.px(30)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    I18n.of(viewService.context).recommendations,
-                    style: state.showPopMovie
-                        ? _selectPopStyle
-                        : _unselectPopStyle,
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  GestureDetector(
-                    onTap: () => dispatch(
-                        HomePageActionCreator.onPopularFilterChanged(true)),
-                    child: Text(I18n.of(viewService.context).movies,
-                        style: state.showPopMovie
-                            ? _unselectPopStyle
-                            : _selectPopStyle),
-                  ),
-                  SizedBox(
-                    width: Adapt.px(20),
-                  ),
-                  GestureDetector(
-                    onTap: () => dispatch(
-                        HomePageActionCreator.onPopularFilterChanged(
-                            false)),
-                    child: Text(I18n.of(viewService.context).tvShows,
-                        style: TextStyle(
-                            fontSize: Adapt.px(24),
-                            fontWeight: state.showPopMovie
-                                ? FontWeight.normal
-                                : FontWeight.bold,
-                            color: state.showPopMovie
-                                ? Colors.grey
-                                : Colors.black)),
-                  )
-                ],
-              ),
-            ),
-            viewService.buildComponent('popular'),
-          ],
-        )
-    );
-  }
-
   Widget _buildNewMovieHeader() {
     return SliverToBoxAdapter(
         child: Column(
@@ -584,7 +240,7 @@ Widget buildView(
                   ),
                   GestureDetector(
                     onTap: () => dispatch(
-                        HomePageActionCreator.onMoreTapped(state.newMovie, MediaType.newMovie)
+                        HomePageActionCreator.onMoreTapped(state.newModel, MediaType.newMovie)
                     ),
                     child: Text(I18n.of(viewService.context).more,
                         style: _unselectPopStyle),
@@ -615,7 +271,7 @@ Widget buildView(
                 ),
                 GestureDetector(
                   onTap: () => dispatch(
-                      HomePageActionCreator.onMoreTapped(state.hotMovie, MediaType.hot)
+                      HomePageActionCreator.onMoreTapped(state.hotModel, MediaType.hot)
                   ),
                   child: Text(I18n.of(viewService.context).more,
                       style: _unselectPopStyle),
@@ -648,7 +304,7 @@ Widget buildView(
                   ),
                   GestureDetector(
                     onTap: () => dispatch(
-                        HomePageActionCreator.onMoreTapped(state.recommendMovie, MediaType.recommend)
+                        HomePageActionCreator.onMoreTapped(state.recommendModel, MediaType.recommend)
                     ),
                     child: Text(I18n.of(viewService.context).more,
                         style: _unselectPopStyle),
@@ -675,36 +331,6 @@ Widget buildView(
       body: CustomScrollView(
         slivers: <Widget>[
           viewService.buildComponent('swiper'),
-//          SliverToBoxAdapter(
-//            child: Container(
-//              margin: EdgeInsets.only(top: Adapt.px(30)),
-//              height: Adapt.px(150),
-//              child: ListView(
-//                scrollDirection: Axis.horizontal,
-//                children: [1, 2, 3, 4, 4, 4, 4, 4].map((f) {
-//                  return Padding(
-//                      padding: EdgeInsets.only(left: Adapt.px(30)),
-//                      child: Column(
-//                        children: <Widget>[
-//                          Container(
-//                            width: Adapt.px(100),
-//                            height: Adapt.px(100),
-//                            decoration: BoxDecoration(
-//                                color: Colors.grey[300],
-//                                borderRadius:
-//                                    BorderRadius.circular(Adapt.px(20))),
-//                            child: Icon(Icons.directions_run),
-//                          ),
-//                          Container(
-//                              alignment: Alignment.center,
-//                              width: Adapt.px(100),
-//                              child: Text('data'))
-//                        ],
-//                      ));
-//                }).toList(),
-//              ),
-//            ),
-//          ),
           _buildHotMovie(),//热门
           _buildRecommend(),//推荐
           _buildNewMovieHeader(),

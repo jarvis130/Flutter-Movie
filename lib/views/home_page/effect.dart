@@ -2,9 +2,9 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/customwidgets/searchbar_delegate.dart';
+import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/views/detail_page/page.dart';
-import 'package:movie/views/tvdetail_page/page.dart';
 import 'package:movie/api/home_api.dart';
 import 'action.dart';
 import 'state.dart';
@@ -31,20 +31,17 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
   ctx.state.scrollController = new ScrollController();
 
   //初始化轮播图
-  var swiper = await HomeApi.getSwiperList();
+  BannerModel swiper = await HomeApi.getSwiperList();
   if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
   
   //热门视频
-  var hot = await HomeApi.getHotMovieList('');
-  if (hot != null) ctx.dispatch(HomePageActionCreator.onInitHot(hot));
+  var model = await HomeApi.home('');
+  if (model != null){
+    ctx.dispatch(HomePageActionCreator.onInitHot(model.hotProducts));
+    ctx.dispatch(HomePageActionCreator.onInitNew(model.recentlyProducts));
+    ctx.dispatch(HomePageActionCreator.onInitRecommend(model.bestProducts));
+  }
 
-  //热门视频
-  var recommend = await HomeApi.getRecommendMovieList('');
-  if (recommend != null) ctx.dispatch(HomePageActionCreator.onInitRecommend(recommend));
-
-  //新增视频
-  var newMovie = await HomeApi.getNewMovieList('');
-  if (newMovie != null) ctx.dispatch(HomePageActionCreator.onInitNew(newMovie));
 
 //
 //  var r = await ApiHelper.getNowPlayingMovie();
@@ -79,26 +76,26 @@ Future _onSearchBarTapped(Action action, Context<HomePageState> ctx) async {
 }
 
 Future _onCellTapped(Action action, Context<HomePageState> ctx) async {
-  final MediaType type = action.payload[4];
-  final String id = action.payload[0];
-  final String bgpic = action.payload[1];
-  final String title = action.payload[2];
-  final String posterpic = action.payload[3];
-  final String pagename =
-      type == MediaType.movie ? 'detailpage' : 'tvdetailpage';
-  var data = {
-    type == MediaType.movie ? 'id' : 'tvid': id,
-    'bgpic': type == MediaType.movie ? posterpic : bgpic,
-    type == MediaType.movie ? 'title' : 'name': title,
-    'posterpic': posterpic
-  };
-  Page page = type == MediaType.movie ? MovieDetailPage() : TVDetailPage();
-  await Navigator.of(ctx.context)
-      .push(PageRouteBuilder(pageBuilder: (context, animation, secAnimation) {
-    return FadeTransition(
-      opacity: animation,
-      child: page.buildPage(data),
-    );
-  }));
+//  final MediaType type = action.payload[4];
+//  final String id = action.payload[0];
+//  final String bgpic = action.payload[1];
+//  final String title = action.payload[2];
+//  final String posterpic = action.payload[3];
+//  final String pagename =
+//      type == MediaType.movie ? 'detailpage' : 'tvdetailpage';
+//  var data = {
+//    type == MediaType.movie ? 'id' : 'tvid': id,
+//    'bgpic': type == MediaType.movie ? posterpic : bgpic,
+//    type == MediaType.movie ? 'title' : 'name': title,
+//    'posterpic': posterpic
+//  };
+//  Page page = type == MediaType.movie ? MovieDetailPage() : TVDetailPage();
+//  await Navigator.of(ctx.context)
+//      .push(PageRouteBuilder(pageBuilder: (context, animation, secAnimation) {
+//    return FadeTransition(
+//      opacity: animation,
+//      child: page.buildPage(data),
+//    );
+//  }));
   //await Navigator.of(ctx.context).pushNamed(pagename, arguments: data);
 }

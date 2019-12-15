@@ -1,30 +1,41 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
 
 class MoreMediaPageState implements Cloneable<MoreMediaPageState> {
 
 MediaType mediaType;
-MovieListModel videoList;
+List<Products> goodProducts;
+int currentPage;
+int total;
+int size;
+int pages;
 ScrollController scrollController;
 AnimationController animationController;
 
   @override
   MoreMediaPageState clone() {
     return MoreMediaPageState()
-    ..videoList=videoList
+    ..goodProducts=goodProducts
     ..scrollController=scrollController
     ..mediaType=mediaType
-    ..animationController=animationController;
+    ..animationController=animationController
+    ..total = total
+    ..currentPage = currentPage
+    ..size = size
+    ..pages = pages;
   }
 }
 
 MoreMediaPageState initState(Map<String, dynamic> args) {
   MoreMediaPageState state=MoreMediaPageState();
-  state.videoList=args['list']??VideoListModel.fromParams(results: []);
+  state.goodProducts=args['list']??new List<Products>();
   state.mediaType=args['type']??MediaType.movie;
+  state.currentPage = 0;
+  state.total = 0;
+  state.size = 0;
+  state.pages = 0;
   return state;
 }

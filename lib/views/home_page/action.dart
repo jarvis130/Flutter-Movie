@@ -1,4 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/BannerModel.dart';
+import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/moviechange.dart';
 import 'package:movie/models/movielist.dart';
@@ -11,8 +14,8 @@ enum HomePageAction {
   action,
   initSwiper,
   initHot,
-  initRecommend,
   initNew,
+  initRecommend,
   initMovie,
   initTV,
   initPopularMovies,
@@ -30,20 +33,20 @@ class HomePageActionCreator {
     return const Action(HomePageAction.action);
   }
 
-  static Action onInitSwiper(SwiperListModel swiper) {
+  static Action onInitSwiper(BannerModel swiper) {
     return Action(HomePageAction.initSwiper, payload: swiper);
   }
 
-  static Action onInitHot(MovieListModel hot) {
+  static Action onInitHot(List<Products> hot) {
     return Action(HomePageAction.initHot, payload: hot);
   }
 
-  static Action onInitRecommend(MovieListModel hot) {
-    return Action(HomePageAction.initRecommend, payload: hot);
+  static Action onInitNew(List<Products> list) {
+    return Action(HomePageAction.initNew, payload: list);
   }
 
-  static Action onInitNew(MovieListModel hot) {
-    return Action(HomePageAction.initNew, payload: hot);
+  static Action onInitRecommend(List<Products> list) {
+    return Action(HomePageAction.initRecommend, payload: list);
   }
 
   static Action onInitMovie(VideoListModel movie) {
@@ -70,7 +73,7 @@ class HomePageActionCreator {
     return Action(HomePageAction.headerFilterChanged, payload: e);
   }
 
-  static Action onMoreTapped(MovieListModel model, MediaType t) {
+  static Action onMoreTapped(List<Products> model, MediaType t) {
     return Action(HomePageAction.moreTapped, payload: [model, t]);
   }
 

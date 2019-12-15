@@ -7,6 +7,7 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/movielist.dart';
@@ -20,25 +21,30 @@ Widget buildView(
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
 
-  Widget _buildCell(MovieListResult d) {
-    int index = state.videoList.results.indexOf(d);
+  List<Products> goodProducts = state.goodProducts;
+
+  Widget _buildCell(Products d) {
+
+    int index = goodProducts.indexOf(d);
     double w = Adapt.screenW() / 2;
     double h = w * 1.5;
     var curve = CurvedAnimation(
       parent: state.animationController,
       curve: Interval(
-        index * (1.0 / state.videoList.results.length),
-        (index + 1) * (1.0 / state.videoList.results.length),
+        index * (1.0 / goodProducts.length),
+        (index + 1) * (1.0 / goodProducts.length),
         curve: Curves.ease,
       ),
     );
+
     return SlideTransition(
       position:Tween(begin: Offset(0,1),end: Offset.zero).animate(curve),
       child:FadeTransition(
         opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curve),
         child:  GestureDetector(
         onTap: () => dispatch(MoreMediaPageActionCreator.cellTapped(
-            d.id, d.title ?? d.title, d.thumb_s, d.thumb_s)),
+            d.id.toString(), d.goodsName ?? d.goodsName, d.defaultPhoto.thumb, d.defaultPhoto.thumb)
+        ),
         child: Container(
           alignment: Alignment.bottomLeft,
           width: w,
@@ -50,8 +56,10 @@ Widget buildView(
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: CachedNetworkImageProvider(
-                      d.thumb_s
-                  ))),
+                      d.defaultPhoto.thumb
+                  )
+              )
+          ),
           child: Column(
             children: <Widget>[
               Container(
@@ -90,7 +98,7 @@ Widget buildView(
                 children: <Widget>[
                   Container(
                     width: w - Adapt.px(10) * 2,
-                    child: Text(d.title ?? d.title,
+                    child: Text(d.goodsName ?? d.goodsName,
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: Adapt.px(30),
@@ -142,11 +150,10 @@ Widget buildView(
           SliverGrid.extent(
               childAspectRatio: 2 / 3,
               maxCrossAxisExtent: Adapt.screenW() / 2,
-              children: state.videoList.results.map(_buildCell).toList()),
+              children: state.goodProducts.map(_buildCell).toList()),
           SliverToBoxAdapter(
             child: Offstage(
-              offstage: state.videoList.results.length ==
-                  state.videoList.total_results,
+              offstage: state.goodProducts.length == state.total,
               child: Container(
                 height: Adapt.px(120),
                 alignment: Alignment.center,

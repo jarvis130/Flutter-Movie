@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/GoodProducts.dart';
 
 //TODO replace with your own action
 enum MoreMediaPageAction { action,loadMore,cellTapped}
@@ -9,8 +8,8 @@ class MoreMediaPageActionCreator {
   static Action onAction() {
     return const Action(MoreMediaPageAction.action);
   }
-  static Action loadMore(MovieListModel list) {
-    return Action(MoreMediaPageAction.loadMore,payload:list);
+  static Action loadMore(GoodProducts list) {
+    return Action(MoreMediaPageAction.loadMore, payload:list);
   }
 
   static Action cellTapped(String id,String title,String bgpic,String posterpic) {

@@ -30,19 +30,19 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiHelper {
-//  static final String _apihost = 'https://api.themoviedb.org/3';
-   static final String _apihost = 'http://221.229.197.4:8000/api/public?';
+
+//   static final String _apihost = 'http://221.229.197.4:8000/api/public?';
   // static final String _apihost = 'http://vs.kr.meshow.website/api/public?';
-//  static final String _apihost = 'http://localhost:8082/api/public?';
+  static final String _apihost = 'http://localhost:8084/v2/';
   static final String shopUrl = 'http://221.229.197.4:8001/h5';
   static final String _apikey = 'd7ff494718186ed94ee75cf73c1a3214';
- static final String _apihostV4 = 'https://api.themoviedb.org/4';
- static final String _apikeyV4 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
-  // static final String _apikeyV4 = '';
+  static final String _apihostV4 = 'https://api.themoviedb.org/4';
+  static final String _apikeyV4 = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkN2ZmNDk0NzE4MTg2ZWQ5NGVlNzVjZjczYzFhMzIxNCIsInN1YiI6IjVkMDQ1OWM1OTI1MTQxNjNkMWJjNDZjYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.tTDwJEVH88cCWCfTd42zvN4AsMR2pgix0QdzVJQzzDM';
+
   static String _requestToken;
   static String uid;
   static String username;
-  static String accessTokenV4;
+  static String token;
   static DateTime _requestTokenExpiresTime;
   static String session;
   static DateTime _sessionExpiresTime;
@@ -60,16 +60,20 @@ class ApiHelper {
   }
 
   //根据设备编码获取token
-  static Future createGuestSessionByMobileDevice(String code) async {
-    String param = 'service=Login.UserLoginByDevice&code=$code';
-    var r = await httpGet(param, cached: false);
+  static Future createGuestSessionByMobileDevice(String code, String os) async {
+    String param = 'ecapi.auth.signinByDevice';
+    FormData formData = new FormData.from({
+      "device_id": code,
+      "os": os
+    });
+    var r = await httpPost(param, formData);
     if (r != null) {
       var jsonobject = json.decode(r);
       if (jsonobject['data'] !=null ) {
         var data = jsonobject['data']['info'];
         prefs.setString('uid', data['id']);
         prefs.setString('username', data['user_login']);
-        prefs.setString('accessTokenV4', data['token']);
+        prefs.setString('token', data['token']);
 //        var data = jsonobject['data']['info'];
 //        session = jsonobject['guest_session_id'];
 //        _sessionExpiresTime = DateTime.parse(jsonobject['expires_at']
@@ -210,7 +214,7 @@ class ApiHelper {
           prefs.remove('accountname');
           prefs.remove('accountgravatar');
           prefs.remove('islogin');
-          await deleteAccessTokenV4();
+          await deletetoken();
         } else
           return false;
       }
@@ -232,7 +236,7 @@ class ApiHelper {
     return result;
   }
 
-  static Future<bool> createAccessTokenV4(String requestTokenV4) async {
+  static Future<bool> createtoken(String requestTokenV4) async {
     if (requestTokenV4 == null) return false;
     bool result = false;
     String param = "/auth/access_token";
@@ -242,9 +246,9 @@ class ApiHelper {
       var jsonobject = json.decode(r);
       if (jsonobject['success']) {
         String _accountid = jsonobject['account_id'];
-        accessTokenV4 = jsonobject['access_token'];
+        token = jsonobject['access_token'];
         prefs.setString('accountIdV4', _accountid);
-        prefs.setString('accessTokenV4', accessTokenV4);
+        prefs.setString('token', token);
         result = true;
       }
     }
@@ -270,16 +274,16 @@ class ApiHelper {
     return model;
   }
 
-  static Future<bool> deleteAccessTokenV4() async {
+  static Future<bool> deletetoken() async {
     String param = '/auth/access_token';
     if (session != null) {
-      var formData = {"access_token": accessTokenV4};
+      var formData = {"access_token": token};
       var r = await httpDeleteV4(param, formData);
       if (r != null) {
         var jsonobject = json.decode(r);
         if (jsonobject['success']) {
           prefs.remove('accountIdV4');
-          prefs.remove('accessTokenV4');
+          prefs.remove('token');
         } else
           return false;
       }
@@ -334,7 +338,7 @@ class ApiHelper {
     bool result = false;
     String param = '/list/$listid/items';
     var data = {"items": items};
-    var r = await httpPostV4(param, data, accessTokenV4);
+    var r = await httpPostV4(param, data, token);
     if (r != null) {
       var jsonobject = json.decode(r);
       if (jsonobject['status_code'] == 1) result = true;
@@ -954,14 +958,14 @@ class ApiHelper {
 
   static Future<String> httpPost(String params, dynamic formData) async {
     try {
-      if (_appDocPath == null) {
-        await getCookieDir();
-      }
+//      if (_appDocPath == null) {
+//        await getCookieDir();
+//      }
       var dio = new Dio();
       dio.options.headers = {
         'ContentType': 'application/json;charset=utf-8',
       };
-      dio.options.cookies = _cj.loadForRequest(Uri.parse(_apihost));
+//      dio.options.cookies = _cj.loadForRequest(Uri.parse(_apihost));
       var response = await dio.post(_apihost + params, data: formData);
       var _content = json.encode(response.data);
       return _content;

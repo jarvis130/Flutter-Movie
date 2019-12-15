@@ -3,12 +3,8 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
-import 'package:movie/generated/i18n.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:movie/models/GoodProducts.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -16,13 +12,17 @@ import 'state.dart';
 Widget buildView(
     NewMovieState state, Dispatch dispatch, ViewService viewService) {
 
-  Widget _buildListCell(MovieListResult d) {
+  List<Products> list = state.newMovie;
+
+  Widget _buildListCell(Products d) {
     return GestureDetector(
-        onTap: () => dispatch(NewMovieActionCreator.onCellTapped(
-            d.id,
-            '',
-            d.title,
-            d.thumb_s)),
+          onTap: () => dispatch(NewMovieActionCreator.onCellTapped(
+              d.id.toString(),
+              '',
+              d.goodsName,
+              d.defaultPhoto.thumb
+          )
+        ),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Adapt.px(15)),
@@ -30,7 +30,7 @@ Widget buildView(
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: CachedNetworkImageProvider(
-                      d.thumb_s
+                      d.defaultPhoto.thumb
                   )
               )
           ),
@@ -59,10 +59,10 @@ Widget buildView(
   }
 
   Widget _buildBody() {
-    var d = state.newMovie;
+
     var width = Adapt.screenW() / 3;
     var height = Adapt.px(280);
-    if (d.results.length > 0)
+    if (list != null)
       return SliverPadding(
         padding: EdgeInsets.all(Adapt.px(20)),
         sliver: SliverGrid.extent(
@@ -70,7 +70,7 @@ Widget buildView(
           maxCrossAxisExtent: width,
           crossAxisSpacing: Adapt.px(20),
           mainAxisSpacing: Adapt.px(20),
-          children: d.results.map(_buildListCell).toList(),
+          children: list.map(_buildListCell).toList(),
         )
       );
     else
