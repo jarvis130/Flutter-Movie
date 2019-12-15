@@ -4,8 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:movie/globalconfig.dart';
 import 'dart:convert' show json;
 
+import 'package:movie/utils/SharedPreferencesUtil.dart';
+
 class HttpUtil {
   static HttpUtil instance;
+
   Dio dio;
   BaseOptions options;
 
@@ -48,15 +51,23 @@ class HttpUtil {
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
       print("请求之前");
+
+      if(SharedPreferencesUtil.prefsInstance != null){
+        String token = SharedPreferencesUtil.prefsInstance.getString('token');
+        if(token != null){
+          options.headers[GlobalConfig.HEADER_TOKEN_KEY] = token;
+        }
+      }
+
       // Do something before request is sent
       return options; //continue
     }, onResponse: (Response response) {
       print("响应之前");
-      Map map = json.decode(response.toString());
-      if(map['error_code'] != 0){
-        print("error_desc");
-        return false;
-      }
+//      Map map = json.decode(response.toString());
+//      if(map['error_code'] != 0){
+//        print("error_desc");
+//        return false;
+//      }
       // Do something with response data
       return response; // continue
     }, onError: (DioError e) {
