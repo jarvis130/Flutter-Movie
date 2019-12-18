@@ -9,6 +9,7 @@ import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/screen.dart';
 import 'package:movie/customwidgets/share_card.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/sortcondition.dart';
@@ -23,6 +24,8 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService) {
+
+  UserModel userModel = state.userModel;
 
   String _covertDuration(int d) {
     String result = '';
@@ -73,7 +76,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Widget _buildInfoGroup() {
-    var d = state.listDetailModel;
+    var d = userModel.user;
     return Container(
       padding: EdgeInsets.symmetric(vertical: Adapt.px(20)),
       color: Colors.white,
@@ -81,7 +84,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频'),
+//          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频'),
           Container(
             color: Colors.grey[300],
             width: Adapt.px(1),
@@ -93,7 +96,8 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    d?.fans ?? '0',
+//                    d?.fans ?? '0',
+                    '0',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -218,14 +222,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Widget _buildShareCardHeader() {
-    var d = state.listDetailModel;
+    var d = userModel.user;
     double cellwidth = Adapt.px(145);
     return Column(
       children: <Widget>[
         SizedBox(
           height: Adapt.px(20),
         ),
-        Text(d.user_nicename,
+        Text(d.username,
             style: TextStyle(
                 color: Colors.white,
                 fontSize: Adapt.px(45),
@@ -249,14 +253,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                           borderRadius: BorderRadius.circular(Adapt.px(40)),
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  d.avatar_thumb
+                                  d.avatar
                               ))),
                     ),
                     SizedBox(
                       height: Adapt.px(10),
                     ),
                     Text(
-                      d.avatar_thumb,
+                      d.avatar,
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -283,7 +287,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   Row(
                     children: <Widget>[
                       _buildInfoCell(
-                        d?.totalResults?.toString() ?? '0',
+                        '0',
                         '视频',
                         labelColor: Colors.white,
                         titleColor: Colors.white,
@@ -329,7 +333,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Widget _buildHeader() {
-    var d = state.listDetailModel;
+    var d = userModel.user;
     if (d.id != null)
       return Container(
         decoration: BoxDecoration(
@@ -337,7 +341,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               fit: BoxFit.cover,
               //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
               image: CachedNetworkImageProvider(
-                  state?.listDetailModel?.avatar_thumb
+                  d.avatar
               ),
             )),
         child: Container(
@@ -358,7 +362,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                           borderRadius: BorderRadius.circular(Adapt.px(50)),
                           image: DecorationImage(
                               image: CachedNetworkImageProvider(
-                                  d.avatar_thumb
+                                  d.avatar
                               ))),
                     ),
                     SizedBox(
@@ -370,7 +374,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                         Container(
                           width: 120.0,
                           child: Text(
-                            d?.user_nicename ?? '',
+                            d?.username ?? '',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
@@ -384,7 +388,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                         SizedBox(
                           width: Adapt.px(200),
                           child: Text(
-                            d.createTime,
+                            d.joinedAt.toString(),
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -403,10 +407,10 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                            builder: (ctx) {
                              return ShareCard(
                                backgroundImage: ImageUrl.getUrl(
-                                   state.listDetailModel.avatar_thumb,
+                                   d.avatar,
                                    ImageSize.w500),
                                qrValue:
-                                   "https://www.themoviedb.org/list/${state.listDetailModel.id}",
+                                   "https://www.themoviedb.org/list/${d.id}",
                                header: _buildShareCardHeader(),
                              );
                            });
@@ -422,7 +426,8 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     width: Adapt.screenW() - Adapt.px(60),
                     height: Adapt.px(120),
                     child: Text(
-                      d.signature ?? '',
+//                      d. ?? '',
+                      '' ,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 4,
                       style: TextStyle(
@@ -480,35 +485,35 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Widget _buildBody() {
-    var d = state.listDetailModel;
-    var width = Adapt.screenW() / 3;
-    var height = Adapt.px(300);
-    if (d.results.length > 0)
-      return SliverGrid.extent(
-        childAspectRatio: 2 / 3,
-        maxCrossAxisExtent: width,
-        crossAxisSpacing: Adapt.px(10),
-        mainAxisSpacing: Adapt.px(10),
-        children: state.listDetailModel.results.map(_buildListCell).toList(),
-      );
-    else
-      return SliverGrid.extent(
-        childAspectRatio: 2 / 3,
-        maxCrossAxisExtent: width,
-        crossAxisSpacing: Adapt.px(10),
-        mainAxisSpacing: Adapt.px(10),
-        children: <Widget>[
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-          ShimmerCell(width, height, 0),
-        ],
-      );
+//    var d = userModel.user;
+//    var width = Adapt.screenW() / 3;
+//    var height = Adapt.px(300);
+//    if (d.results.length > 0)
+//      return SliverGrid.extent(
+//        childAspectRatio: 2 / 3,
+//        maxCrossAxisExtent: width,
+//        crossAxisSpacing: Adapt.px(10),
+//        mainAxisSpacing: Adapt.px(10),
+//        children: state.listDetailModel.results.map(_buildListCell).toList(),
+//      );
+//    else
+//      return SliverGrid.extent(
+//        childAspectRatio: 2 / 3,
+//        maxCrossAxisExtent: width,
+//        crossAxisSpacing: Adapt.px(10),
+//        mainAxisSpacing: Adapt.px(10),
+//        children: <Widget>[
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//          ShimmerCell(width, height, 0),
+//        ],
+//      );
   }
 
   Widget _buildCellCard() {
@@ -693,7 +698,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Widget _buildHeaderCard() {
-    var d = state.listDetailModel;
+    User d = userModel.user;
     return d.id == null ? Container() : Container(
       color: Colors.white,
       width: Adapt.screenW(),
@@ -705,7 +710,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           Container(
             margin: EdgeInsets.only(left: 0.0, top: 40.0, right: 0.0, bottom: 10.0),
             child: Text(
-              '体验会员',
+              d.rank.name,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -717,7 +722,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           Container(
             margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 20.0),
             child: Text(
-              'ID:' + d.user_nicename == null ? '' : d.user_nicename,
+              'ID:' + d.username == null ? '' : d.username,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14
@@ -847,7 +852,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   decoration: BoxDecoration(
                     image: DecorationImage(//背景图片 ,不能与背景色同时使用
                       image: CachedNetworkImageProvider(
-                          state.listDetailModel.avatar_thumb == null ? '' : state.listDetailModel.avatar_thumb
+                          userModel.user.avatar == null ? '' : userModel.user.avatar
                       ),
                       alignment: Alignment.topCenter,
                       repeat: ImageRepeat.repeatY,//是否重复

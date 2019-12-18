@@ -50,7 +50,7 @@ class HttpUtil {
     //添加拦截器
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
-      print("请求之前");
+//      print("请求之前");
 
       if(SharedPreferencesUtil.prefsInstance != null){
         String token = SharedPreferencesUtil.prefsInstance.getString('token');
@@ -62,7 +62,7 @@ class HttpUtil {
       // Do something before request is sent
       return options; //continue
     }, onResponse: (Response response) {
-      print("响应之前");
+//      print("响应之前");
 //      Map map = json.decode(response.toString());
 //      if(map['error_code'] != 0){
 //        print("error_desc");
@@ -71,7 +71,7 @@ class HttpUtil {
       // Do something with response data
       return response; // continue
     }, onError: (DioError e) {
-      print("错误之前");
+      print("错误之前" + e.toString());
       // Do something with response error
       return e; //continue
     }));

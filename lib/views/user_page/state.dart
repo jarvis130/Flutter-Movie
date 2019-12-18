@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/list_sort_type.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
@@ -8,7 +9,7 @@ import 'package:screenshot/screenshot.dart';
 class UserPageState implements Cloneable<UserPageState> {
 
   String userid;
-  ListDetailModel listDetailModel;
+  UserModel userModel;
   ScrollController scrollController;
   List<SortCondition> sortBy;
   String sortType;
@@ -16,7 +17,7 @@ class UserPageState implements Cloneable<UserPageState> {
   @override
   UserPageState clone() {
     return UserPageState()
-      ..listDetailModel=listDetailModel
+      ..userModel=userModel
       ..userid=userid
       ..sortBy=sortBy
       ..sortType=sortType
@@ -33,7 +34,7 @@ UserPageState initState(Map<String, dynamic> args) {
     SortCondition(isSelected: false,name: 'Release Date',value: ListSortType.releaseDateDesc),
     SortCondition(isSelected: false,name: 'Title',value: ListSortType.titleAsc),
   ];
-  state.sortType=ListSortType.originalOrderAsc;
-  state.listDetailModel=ListDetailModel.fromParams(results:List<ListDetailResult>());
+  state.sortType = ListSortType.originalOrderAsc;
+  state.userModel= new UserModel();
   return state;
 }

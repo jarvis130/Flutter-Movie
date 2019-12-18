@@ -3,10 +3,11 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/api/user_api.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 import 'package:movie/api/listdetail_api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -83,11 +84,10 @@ Future _sortChanged(Action action, Context<UserPageState> ctx) async {
 }
 
 Future _loadData(Action action, Context<UserPageState> ctx) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String uid = prefs.getString('uid');
-    ListDetailModel r = await ListDetailApi.getUserHome(uid);
-    if (r != null)
-      ctx.dispatch(UserPageActionCreator.loadMore(r));
+
+  UserModel model = await UserApi.getUserProfile();
+  if (model != null)
+    ctx.dispatch(UserPageActionCreator.loadMore(model));
 
 }
 

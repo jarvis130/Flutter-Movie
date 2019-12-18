@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserApi {
 
-  //根据设备编码获取token
+  /// 根据设备编码获取token
   static Future loginByMobileDevice(String code, String os) async {
 
     FormData formData = new FormData.from({
@@ -31,5 +31,20 @@ class UserApi {
     }
   }
 
+  /// 用户信息
+  static Future getUserProfile() async {
+
+    FormData formData = new FormData.from({
+    });
+
+    var response = await HttpUtil().post('ecapi.user.profile.get', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      UserModel model = UserModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
+  }
 
 }

@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
@@ -16,7 +17,7 @@ class UserPageActionCreator {
   static Action cellTapped(ListDetailResult result) {
     return Action(UserPageAction.cellTapped,payload: result);
   }
-  static Action loadMore(ListDetailModel d) {
+  static Action loadMore(UserModel d) {
     return Action(UserPageAction.loadMore,payload: d);
   }
   static Action sortChanged(SortCondition d) {
