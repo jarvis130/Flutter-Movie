@@ -57,6 +57,9 @@ ClassifyPageState initState(Map<String, dynamic> args) {
   state.groupValue1 = 0;
   state.groupValue2 = 0;
   state.groupValue3 = 0;
+  state.groupTitle1 = '';
+  state.groupTitle2 = '';
+  state.groupTitle3 = '';
   state.currentPage = 0;
   state.total = 0;
   state.size = 0;

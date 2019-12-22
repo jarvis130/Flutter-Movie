@@ -121,10 +121,6 @@ void _onDispose(Action action, Context<ClassifyPageState> ctx) {
   ctx.state.scrollController.dispose();
   ctx.state.animationController.dispose();
   ctx.state.cellAnimationController.dispose();
-  ctx.state.groupValue1 = 0;
-  ctx.state.groupValue2 = 0;
-  ctx.state.groupValue3 = 0;
-
 }
 
 void _onDeactivate(Action action, Context<ClassifyPageState> ctx) {
