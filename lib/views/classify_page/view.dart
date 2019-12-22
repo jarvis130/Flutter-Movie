@@ -1,269 +1,404 @@
+import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:common_utils/common_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
-import 'package:movie/models/classify_list_model.dart';
-import 'package:movie/models/enums/imagesize.dart';
-import 'dart:ui' as ui;
-
+import 'package:movie/models/GoodProducts.dart';
 import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
     ClassifyPageState state, Dispatch dispatch, ViewService viewService) {
-  var animate = TweenSequence([
-    TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 0.003), weight: 0.5),
-    TweenSequenceItem(tween: Tween<double>(begin: 0.003, end: 0.0), weight: 1),
-    TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: -0.003), weight: 0.5),
-    TweenSequenceItem(tween: Tween<double>(begin: -0.003, end: 0.0), weight: 1),
-    TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 0.003), weight: 0.5),
-    TweenSequenceItem(tween: Tween<double>(begin: 0.003, end: 0.0), weight: 1),
-    TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: -0.003), weight: 0.5),
-    TweenSequenceItem(tween: Tween<double>(begin: -0.003, end: 0.0), weight: 1),
-  ]);
 
-  Widget _buildListCell(ClassifyListResult d) {
-    // var date = DateTime.parse(d.updatedAt);
-    return RotationTransition(
-      turns: animate.animate(CurvedAnimation(
-          parent: state.cellAnimationController, curve: Curves.ease)),
-      child: GestureDetector(
-        onTap: () {
-          // if (!state.isEdit)
-            dispatch(ClassifyActionCreator.cellTapped(d.id));
+  Widget _build_button_default(value, groupVal){
+    String val = value['title'];
+    int n = val.length;
+    return n > 2 ? FlatButton(
+        onPressed: (){
+//        print('切换${value}');
+          dispatch(ClassifyActionCreator.onUpdateGroupValue({
+            'group': groupVal,
+            'title': value['title'],
+            'value': value['value']
+          }));
         },
-        child: Padding(
-          padding: EdgeInsets.only(
-              top: Adapt.px(20), left: Adapt.px(20), right: Adapt.px(20)),
-          child: Container(
-            height: Adapt.px(400),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Adapt.px(30)),
-                color: Colors.grey[200],
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: CachedNetworkImageProvider(
-                        // ImageUrl.getUrl(d.img_url, ImageSize.w300)
-                        d.img_url
-                    )
-                )
-              ),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Adapt.px(30)),
-                  color: Colors.black.withOpacity(0.7),
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        Text(
-                          d.title ?? '',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: Adapt.px(45),
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic),
-                        ),
-                        SizedBox(
-                          height: Adapt.px(15),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            // Text('${d.numberOfItems} Items',
-                            //     style: TextStyle(
-                            //         color: Colors.white,
-                            //         fontSize: Adapt.px(30),
-                            //         fontWeight: FontWeight.bold,
-                            //         fontStyle: FontStyle.italic)),
-                            SizedBox(
-                              width: Adapt.px(20),
-                            ),
-                            // Container(
-                            //   padding: EdgeInsets.all(Adapt.px(8)),
-                            //   decoration: BoxDecoration(
-                            //       color: Colors.white30,
-                            //       borderRadius:
-                            //           BorderRadius.circular(Adapt.px(10))),
-                            //   child: Text(
-                            //     // d.public == 1 ? 'PUBLIC' : 'PRIVATE',
-                            //     'PUBLIC',
-                            //     style: TextStyle(
-                            //         color: Colors.white,
-                            //         fontWeight: FontWeight.bold,
-                            //         fontSize: Adapt.px(24)),
-                            //   ),
-                            // )
-                          ],
-                        ),
-                        SizedBox(
-                          height: Adapt.px(8),
-                        ),
-                        // Text(
-                        //   'Updated ' +
-                        //       TimelineUtil.format(
-                        //         DateTime.utc(
-                        //                 date.year,
-                        //                 date.month,
-                        //                 date.day,
-                        //                 date.hour,
-                        //                 date.minute,
-                        //                 date.second,
-                        //                 date.millisecond,
-                        //                 date.microsecond)
-                        //             .millisecondsSinceEpoch,
-                        //         locTimeMillis:
-                        //             DateTime.now().millisecondsSinceEpoch,
-                        //         locale: ui.window.locale.languageCode,
-                        //       ),
-                        //   style: TextStyle(
-                        //       color: Colors.white54,
-                        //       fontSize: Adapt.px(28),
-                        //       fontWeight: FontWeight.bold),
-                        // )
-                      ],
-                    ),
-                    // state.isEdit
-                    //     ? Row(
-                    //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //         children: <Widget>[
-                    //           IconButton(
-                    //             icon: Icon(Icons.delete_outline,
-                    //                 color: Colors.red),
-                    //             onPressed: () {},
-                    //           ),
-                    //           IconButton(
-                    //             icon: Icon(Icons.edit, color: Colors.white),
-                    //             onPressed: () {},
-                    //           ),
-                    //         ],
-                    //       )
-                    //     : Container()
-                  ],
-                )),
-          ),
-        ),
+        child: Text(
+            val,
+            style: TextStyle(
+                fontSize: Adapt.px(28)
+            )
+        )
+    ) : Container(
+      width: 65,
+      child: FlatButton(
+          onPressed: (){
+//        print('切换${value}');
+            dispatch(ClassifyActionCreator.onUpdateGroupValue({
+              'group': groupVal,
+              'title': value['title'],
+              'value': value['value']
+            }));
+          },
+          child: Text(
+              val,
+              style: TextStyle(
+                  fontSize: Adapt.px(28)
+              )
+          )
       ),
     );
   }
 
-  Widget _buildListShimmerCell() {
-    return Container(
-      margin: EdgeInsets.only(
-          top: Adapt.px(20), left: Adapt.px(20), right: Adapt.px(20)),
-      child: ShimmerCell(Adapt.screenW(), Adapt.px(400), Adapt.px(30)),
+  Widget _build_button_selected(value, groupVal){
+    String val = value['title'];
+    int n = val.length;
+    return n > 2 ? FlatButton(
+      color: Color(0xFFEAEAEA),
+      onPressed: (){
+//        print('切换${value}');
+        dispatch(ClassifyActionCreator.onUpdateGroupValue({
+          'group': groupVal,
+          'title': value['title'],
+          'value': value['value']
+        }));
+      },
+      child: Text(
+          val,
+          style: TextStyle(
+              color: Colors.orange,
+              fontSize: Adapt.px(28)
+          )
+      )
+    ) : Container(
+      width: 65,
+      child: FlatButton(
+          color: Color(0xFFEAEAEA),
+          onPressed: (){
+//        print('切换${value}');
+            dispatch(ClassifyActionCreator.onUpdateGroupValue({
+              'group': groupVal,
+              'title': value['title'],
+              'value': value['value']
+            }));
+          },
+          child: Text(
+              val,
+              style: TextStyle(
+                  color: Colors.orange,
+                  fontSize: Adapt.px(28)
+              )
+          )
+      ),
     );
   }
 
-  Widget _buildAddCell() {
-    return SizeTransition(
-      sizeFactor: Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-          curve: Curves.ease, parent: state.animationController)),
-      child: InkWell(
-        onTap: () {},
+  Widget _build_cell(value, group) {
+    if(group == 1){
+      return state.groupValue1==value['value'] ? _build_button_selected(value, 1):_build_button_default(value, 1);
+    }else if(group == 2){
+      return state.groupValue2==value['value'] ? _build_button_selected(value, 2):_build_button_default(value, 2);
+    }else{
+      return state.groupValue3==value['value'] ? _build_button_selected(value, 3):_build_button_default(value, 3);
+    }
+  }
+
+  Widget _shimmer_cell(){
+    return Container(
+      margin: EdgeInsets.only(
+          top: Adapt.px(5), left: Adapt.px(20), right: Adapt.px(20)
+      ),
+      child: ShimmerCell(Adapt.px(100), Adapt.px(20), Adapt.px(0)),
+    );
+  }
+
+  Widget _build_menu_shimmer_cell(){
+    return Container(
+      margin: EdgeInsets.only(top: 10.0),
+      height: 28.0,
+      child: ListView(
+        //设置水平方向排列
+        scrollDirection: Axis.horizontal,
+        //添加子元素
+        children: <Widget>[
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell(),
+          _shimmer_cell()
+        ],
+      ),
+    );
+  }
+
+  Widget _build1(){
+    return state.atrributionList1 == null ? _build_menu_shimmer_cell() : Container(
+      margin: EdgeInsets.only(top: 10.0),
+      height: 28.0,
+      child: ListView(
+        //设置水平方向排列
+        scrollDirection: Axis.horizontal,
+        //添加子元素
+        children: state.atrributionList1.map((value) {
+          return _build_cell(value, 1);
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _build2(){
+    return state.atrributionList2 == null ? _build_menu_shimmer_cell() : Container(
+      margin: EdgeInsets.only(top: 10.0),
+      height: 28.0,
+      child: ListView(
+        //设置水平方向排列
+        scrollDirection: Axis.horizontal,
+        //添加子元素
+        children: state.atrributionList2.map((value) {
+          return _build_cell(value, 2);
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _build3(){
+    return state.atrributionList3 == null ? _build_menu_shimmer_cell() : Container(
+      margin: EdgeInsets.only(top: 10.0),
+      height: 28.0,
+      child: ListView(
+        //设置水平方向排列
+        scrollDirection: Axis.horizontal,
+        //添加子元素
+        children: state.atrributionList3.map((value) {
+          return _build_cell(value, 3);
+        }).toList(),
+      ),
+    );
+  }
+
+//  return MaterialApp(
+//    title: title,
+//    home: Scaffold(
+//      appBar: AppBar(
+//        title: Text(title),
+//      ),
+//      body: Column(
+//        children: <Widget>[
+//          _build1(),
+//          _build2(),
+//          _build3(),
+//        ],
+//      )
+//    ),
+//  );
+
+  Random random = Random(DateTime.now().millisecondsSinceEpoch);
+
+//  Widget _buildCell(Products d) {
+//
+//    int index = state.productList.indexOf(d);
+//    double w = Adapt.screenW() / 2;
+//    double h = w * 1.5;
+//    var curve = CurvedAnimation(
+//      parent: state.animationController,
+//      curve: Interval(
+//        index * (1.0 / state.productList.length),
+//        (index + 1) * (1.0 / state.productList.length),
+//        curve: Curves.ease,
+//      ),
+//    );
+//
+//    return SlideTransition(
+//      position:Tween(begin: Offset(0,1),end: Offset.zero).animate(curve),
+//      child:FadeTransition(
+//        opacity: Tween<double>(begin: 0.0, end: 1.0).animate(curve),
+//        child:  GestureDetector(
+//          onTap: () {
+////            dispatch(MoreMediaPageActionCreator.cellTapped(d.id.toString(), d.goodsName ?? d.goodsName, d.defaultPhoto.thumb, d.defaultPhoto.thumb);
+//          },
+//          child: Container(
+//            alignment: Alignment.bottomLeft,
+//            width: w,
+//            height: h,
+//            padding: EdgeInsets.all(Adapt.px(10)),
+//            decoration: BoxDecoration(
+//                color: Color.fromRGBO(random.nextInt(255), random.nextInt(255),
+//                    random.nextInt(255), random.nextDouble()),
+//                image: DecorationImage(
+//                    fit: BoxFit.cover,
+//                    image: d.defaultPhoto == null ? AssetImage('images/empty.png') :CachedNetworkImageProvider(
+//                         d.defaultPhoto.thumb
+//                    )
+//                )
+//            ),
+//            child: Column(
+//              children: <Widget>[
+//                Container(
+//                  alignment: Alignment.topRight,
+//                  child: Row(
+//                    mainAxisSize: MainAxisSize.min,
+//                    children: <Widget>[
+//                      Icon(
+//                        Icons.star,
+//                        color: Colors.white,
+//                        size: Adapt.px(30),
+//                      ),
+//                      SizedBox(
+//                        width: Adapt.px(5),
+//                      )
+//                    ],
+//                  ),
+//                ),
+//                Expanded(
+//                  child: SizedBox(),
+//                ),
+//                Row(
+//                  children: <Widget>[
+//                    Container(
+//                      width: w - Adapt.px(10) * 2,
+//                      child: Text(
+//                        d.goodsName,
+//                        style: TextStyle(
+//                            color: Colors.white,
+//                            fontSize: Adapt.px(30),
+//                            fontWeight: FontWeight.bold,
+//                            shadows: <Shadow>[
+//                              Shadow(
+//                                  blurRadius: 3,
+//                                  //offset: Offset(Adapt.px(1),Adapt.px(1)),
+//                                  color: Colors.black87
+//                              )
+//                            ]
+//                        )
+//                      ),
+//                    )
+//                  ],
+//                )
+//              ],
+//            ),
+//          ),
+//        ),
+//      )
+//      ,
+//    );
+//  }
+
+  Widget _buildCell(Products d) {
+
+    double w = Adapt.screenW() / 3;
+    double h = w * 1.5;
+
+    return GestureDetector(
+            onTap: () => dispatch(
+                ClassifyActionCreator.cellTapped(d.id.toString(), d.goodsName, d.defaultPhoto.thumb, d.defaultPhoto.thumb)
+        ),
         child: Container(
-          margin: EdgeInsets.only(
-              top: Adapt.px(20), left: Adapt.px(20), right: Adapt.px(20)),
-          height: Adapt.px(400),
+          alignment: Alignment.bottomLeft,
+          width: w,
+          height: h,
+    //      padding: EdgeInsets.all(Adapt.px(10)),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 2),
-              borderRadius: BorderRadius.circular(Adapt.px(20))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+              color: Color.fromRGBO(random.nextInt(255), random.nextInt(255),
+                  random.nextInt(255), random.nextDouble()),
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: d.defaultPhoto == null ? AssetImage('images/empty.png') :CachedNetworkImageProvider(
+                      d.defaultPhoto.thumb
+                  )
+              )
+          ),
+          child: Column(
             children: <Widget>[
-              Icon(
-                Icons.add,
-                color: Colors.black,
-                size: Adapt.px(50),
+              Container(
+                alignment: Alignment.topRight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+    //                Icon(
+    //                  Icons.star,
+    //                  color: Colors.white,
+    //                  size: Adapt.px(30),
+    //                ),
+                    SizedBox(
+                      width: Adapt.px(5),
+                    )
+                  ],
+                ),
               ),
-              SizedBox(
-                width: Adapt.px(20),
+              Expanded(
+                child: SizedBox(),
               ),
-              Text(
-                'Create new list',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(35)),
+              Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(
+                        top: Adapt.px(0), left: Adapt.px(10), right: Adapt.px(0)
+                    ),
+                    width: w - Adapt.px(10) * 2,
+                    child: Text(
+                        d.goodsName,
+                        overflow: TextOverflow
+                            .ellipsis, //文字超出屏幕之后的处理方式  TextOverflow.clip剪裁   TextOverflow.fade 渐隐  TextOverflow.ellipsis省略号
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Adapt.px(22),
+                            fontWeight: FontWeight.bold,
+                            shadows: <Shadow>[
+                              Shadow(
+                                  blurRadius: 3,
+                                  offset: Offset(Adapt.px(1),Adapt.px(1)),
+                                  color: Colors.black87
+                              )
+                            ]
+                        )
+                    ),
+                  )
+                ],
               )
             ],
           ),
-        ),
+        )
+    );
+  }
+
+  Widget _shimmerCell(){
+    return Container(
+//      margin: EdgeInsets.only(
+//          top: Adapt.px(5), left: Adapt.px(20), right: Adapt.px(20)
+//      ),
+      child: ShimmerCell(
+          Adapt.px(100),
+          Adapt.px(100) * 1.5,
+          Adapt.px(0)
       ),
     );
   }
 
-  Widget _buildBody() {
-    if (state.classifyModel.results.length > 0)
-      return Container(
-        //padding: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
-        child: ListView(
-          controller: state.scrollController,
-          children: state.classifyModel.results.map(_buildListCell).toList()
-            ..add(Offstage(
-              // offstage: state.model.page == state.model.totalPages,
-              child: Container(
-                height: Adapt.px(80),
-                margin: EdgeInsets.only(top: Adapt.px(30)),
-                alignment: Alignment.topCenter,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(Colors.black),
-                ),
-              ),
-            ))
-            ..insert(0, _buildAddCell()),
-        ),
-      );
-    else
-      return Container(
-        margin: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
-        alignment: Alignment.topCenter,
-        child: ListView(
-          children: <Widget>[
-            SizedBox(
-              height: Adapt.px(20),
-            ),
-            ShimmerCell(Adapt.screenW(), Adapt.px(400), Adapt.px(30)),
-            SizedBox(
-              height: Adapt.px(20),
-            ),
-            ShimmerCell(Adapt.screenW(), Adapt.px(400), Adapt.px(30)),
-            SizedBox(
-              height: Adapt.px(20),
-            ),
-            ShimmerCell(Adapt.screenW(), Adapt.px(400), Adapt.px(30)),
-            SizedBox(
-              height: Adapt.px(20),
-            ),
-            ShimmerCell(Adapt.screenW(), Adapt.px(400), Adapt.px(30)),
-          ],
-        ),
-      );
-  }
-
-  Widget _buildList() {
-    if (state.classifyModel.results.length > 0)
-      return SliverList(
-        delegate: SliverChildBuilderDelegate((ctx, index) {
-          return _buildListCell(state.classifyModel.results[index]);
-        }, childCount: state.classifyModel.results.length),
-      );
-    else
-      return SliverList(
-        delegate: SliverChildBuilderDelegate((ctx, index) {
-          return _buildListShimmerCell();
-        }, childCount: 4),
-      );
+  Widget _buildShimmerCell(){
+    return SliverGrid.extent(
+        crossAxisSpacing: 5.0,
+        mainAxisSpacing: 5.0,
+        childAspectRatio: 2 / 3,
+        maxCrossAxisExtent: Adapt.screenW() / 3,
+        children: <Widget>[
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell(),
+          _shimmerCell()
+        ],
+    );
   }
 
   return Scaffold(
@@ -279,48 +414,44 @@ Widget buildView(
         ),
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: Colors.black),
-        // actions: <Widget>[
-        //   IconButton(
-        //     icon: AnimatedSwitcher(
-        //       child: state.isEdit
-        //           ? Icon(
-        //               Icons.check,
-        //               key: ValueKey(state.isEdit),
-        //             )
-        //           : Icon(Icons.edit, key: ValueKey(state.isEdit)),
-        //       duration: Duration(milliseconds: 200),
-        //     ),
-        //     onPressed: () async {
-        //       await state.scrollController.position.animateTo(0.0,
-        //           curve: Curves.ease, duration: Duration(milliseconds: 200));
-        //       final r = !state.isEdit;
-        //       if (r) {
-        //         await state.animationController.forward(from: 0.0);
-        //         state.cellAnimationController.repeat();
-        //         dispatch(MyListsPageActionCreator.onEdit(r));
-        //       } else {
-        //         await state.animationController.reverse(from: 1.0);
-        //         state.cellAnimationController.reset();
-        //         dispatch(MyListsPageActionCreator.onEdit(r));
-        //       }
-        //     },
-        //   ),
-        // ],
       ),
       body: CustomScrollView(
         controller: state.scrollController,
         slivers: <Widget>[
           SliverToBoxAdapter(
-            child: _buildAddCell(),
+            child: _build1(),
           ),
-          _buildList(),
+          SliverToBoxAdapter(
+            child: _build2(),
+          ),
+          SliverToBoxAdapter(
+            child: _build3(),
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: Adapt.px(20),
+            ),
+          ),
+//          SliverGrid.extent(
+//              crossAxisSpacing: 5.0,
+//              mainAxisSpacing: 5.0,
+//              childAspectRatio: 2 / 3,
+//              maxCrossAxisExtent: Adapt.screenW() / 3,
+//              children: state.productList.map(_buildCell).toList()
+//          )
+          state.productList.length > 0 ? SliverGrid.extent(
+              crossAxisSpacing: 5.0,
+              mainAxisSpacing: 5.0,
+              childAspectRatio: 2 / 3,
+              maxCrossAxisExtent: Adapt.screenW() / 3,
+              children: state.productList.map(_buildCell).toList()
+          ) : _buildShimmerCell(),
           SliverToBoxAdapter(
             child: Offstage(
-              // offstage: state.model.page == state.model.totalPages,
+              offstage: state.productList.length == state.total,
               child: Container(
-                height: Adapt.px(80),
-                margin: EdgeInsets.only(top: Adapt.px(30)),
-                alignment: Alignment.topCenter,
+                height: Adapt.px(120),
+                alignment: Alignment.center,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation(Colors.black),
                 ),
@@ -328,5 +459,7 @@ Widget buildView(
             ),
           )
         ],
-      ));
+      )
+  );
+
 }

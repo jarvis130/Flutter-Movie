@@ -9,14 +9,16 @@ import 'package:movie/models/searchresult.dart';
 class ProductApi {
 
   ///商品列表
-  static Future<GoodProducts> getList(String uid, {int page = 1, int per_page = 20, int is_hot = 0, int is_best = 0, int is_new = 0}) async {
+  static Future<GoodProducts> getList(String uid, {int page = 1, int per_page = 20, int is_hot = 0, int is_best = 0, int is_new = 0, String attr_value1 = '', String attr_value2 = ''}) async {
     FormData formData = new FormData.from({
       "page": page,
       "per_page": per_page,
       "is_hot": is_hot,
       "is_best": is_best,
       "is_new": is_new,
-      "XDEBUG_SESSION_START": 16079
+      "attr_value1": attr_value1,
+      "attr_value2": attr_value2,
+      "XDEBUG_SESSION_START": 14314
     });
     var response = await HttpUtil().post('ecapi.product.list', data: formData);
     if(response != null){

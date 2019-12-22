@@ -1,6 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/api/classify_api.dart';
+import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'action.dart';
 import 'state.dart';
@@ -11,7 +12,8 @@ Effect<ClassifyPageState> buildEffect() {
     Lifecycle.deactivate: _onDeactivate,
     Lifecycle.dispose: _onDispose,
     ClassifyPageAction.action: _onAction,
-    ClassifyPageAction.cellTapped: _cellTapped
+    ClassifyPageAction.cellTapped: _cellTapped,
+    ClassifyPageAction.onUpdateGroupValue: _onUpdateGroupValue
   });
 }
 
@@ -24,7 +26,6 @@ Future _onInit(Action action, Context<ClassifyPageState> ctx) async {
       AnimationController(vsync: ticker, duration: Duration(milliseconds: 300));
   ctx.state.cellAnimationController = AnimationController(
       vsync: ticker, duration: Duration(milliseconds: 1000));
-
   
   ctx.state.scrollController = ScrollController(keepScrollOffset: false)
     ..addListener(() async {
@@ -35,46 +36,84 @@ Future _onInit(Action action, Context<ClassifyPageState> ctx) async {
       }
     });
 
-  // String id = ctx.state.accountId;
-  // bool shouldLoad = true;
-  // if (id == null) {
-  //   shouldLoad = false;
-  //   var token = await ApiHelper.createRequestTokenV4();
-  //   if (token != null) {
-  //     var url = 'https://www.themoviedb.org/auth/access?request_token=$token';
-  //     await Navigator.of(ctx.context)
-  //         .push(MaterialPageRoute(builder: (context) {
-  //       return Scaffold(
-  //         appBar: AppBar(
-  //           backgroundColor: Colors.white,
-  //           title: Text(
-  //             'User Permission',
-  //             style: TextStyle(color: Colors.black),
-  //           ),
-  //           brightness: Brightness.light,
-  //           iconTheme: IconThemeData(color: Colors.black),
-  //         ),
-  //         body: WebView(
-  //           initialUrl: url,
-  //         ),
-  //       );
-  //     }));
-  //     var result = await ApiHelper.createAccessTokenV4(token);
-  //     if (result) {
-  //       var prefs = await SharedPreferences.getInstance();
-  //       id = prefs.getString('accountIdV4');
-  //       ctx.dispatch(MyListsPageActionCreator.setAccount(id));
-  //       shouldLoad = true;
-  //     }
-  //   }
-  // }
-  // if (shouldLoad && id != null) {
-  //   var r = await ApiHelper.getAccountListsV4(id);
-  //   if (r != null) ctx.dispatch(MyListsPageActionCreator.setList(r));
-  // }
+  List list1 =[
+    {
+      "title": "最近热播",
+      "value":0,
+    },
+    {
+      "title": "最新上架",
+      "value":1
+    },
+    {
+      "title": "热门推荐",
+      "value":2
+    }
+  ];
 
-  var result = await ClassifyApi.getClassifyList();
-  if (result != null) ctx.dispatch(ClassifyActionCreator.setList(result));
+  List list2 =[
+    {
+      "title": "全部",
+      "value":0,
+    },
+    {
+      "title": "大陆",
+      "value":1
+    },
+    {
+      "title": "香港",
+      "value":2
+    },
+    {
+      "title": "台湾",
+      "value":3
+    },
+    {
+      "title": "欧美",
+      "value":4
+    },
+    {
+      "title": "日本",
+      "value":5
+    },
+  ];
+
+  List list3 =[
+    {
+      "title": "全部",
+      "value":0,
+    },
+    {
+      "title": "喜剧",
+      "value":1
+    },
+    {
+      "title": "动作",
+      "value":2
+    },
+    {
+      "title": "爱情",
+      "value":3
+    },
+    {
+      "title": "惊悚",
+      "value":4
+    },
+    {
+      "title": "犯罪",
+      "value":5
+    },
+  ];
+
+
+
+  Map map = {
+    'list1': list1,
+    'list2': list2,
+    'list3': list3
+  };
+  ctx.dispatch(ClassifyActionCreator.init(map));
+  _loadMore(action, ctx);
 }
 
 void _onDispose(Action action, Context<ClassifyPageState> ctx) {
@@ -82,6 +121,10 @@ void _onDispose(Action action, Context<ClassifyPageState> ctx) {
   ctx.state.scrollController.dispose();
   ctx.state.animationController.dispose();
   ctx.state.cellAnimationController.dispose();
+  ctx.state.groupValue1 = 0;
+  ctx.state.groupValue2 = 0;
+  ctx.state.groupValue3 = 0;
+
 }
 
 void _onDeactivate(Action action, Context<ClassifyPageState> ctx) {
@@ -90,21 +133,60 @@ void _onDeactivate(Action action, Context<ClassifyPageState> ctx) {
 }
 
 Future _loadMore(Action action, Context<ClassifyPageState> ctx) async {
-  // var t = ctx.state.model;
-  // if (t != null) {
-  //   if (t.page != t.totalPages) {
-  //     int page = t.page + 1;
-  //     var r =
-  //         await ApiHelper.getAccountListsV4(ctx.state.accountId, page: page);
-  //     if (r != null) ctx.dispatch(MyListsPageActionCreator.loadMore(r));
-  //   }
-  // }
+  GoodProducts model = await getGoodProducts(action, ctx);
+  if (model != null){
+    ctx.dispatch(ClassifyActionCreator.loadMore(model));
+  }
 }
 
 Future _cellTapped(Action action, Context<ClassifyPageState> ctx) async {
-  // await Navigator.of(ctx.context)
-  //     .pushNamed('ListDetailPage', arguments: {'listId': action.payload});
+//  await Navigator.of(ctx.context)
+//      .pushNamed('DiscoverPage', arguments: {'classifyId': action.payload});
+  await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
+    'movieid': action.payload[0],
+    'bgpic': action.payload[2],
+    'title': action.payload[1],
+    'posterpic': action.payload[3]
+  });
+}
 
-  await Navigator.of(ctx.context)
-      .pushNamed('DiscoverPage', arguments: {'classifyId': action.payload});    
+Future _onUpdateGroupValue(Action action, Context<ClassifyPageState> ctx) async {
+
+  Map map = action.payload;
+  ctx.dispatch(ClassifyActionCreator.updateGroupValue(map));
+  ctx.state.currentPage = 0;
+  _loadMore(action, ctx);
+}
+
+Future<GoodProducts> getGoodProducts(Action action, Context<ClassifyPageState> ctx) async{
+  int currentPage = ctx.state.currentPage + 1;
+  int is_hot = 0;
+  int is_new = 0;
+  int is_best = 0;
+  String title1 = '';
+  String title2 = '';
+  if(ctx.state.groupValue1 == 0){
+    // 热播
+    is_hot = 1;
+  }else if(ctx.state.groupValue1 == 1){
+    is_new = 1;
+  }else{
+    is_best = 1;
+  }
+  if(ctx.state.groupTitle2 != '全部'){
+    title1 = ctx.state.groupTitle2;
+  }
+  if(ctx.state.groupTitle3 != '全部'){
+    title2 = ctx.state.groupTitle3;
+  }
+  GoodProducts model = await ProductApi.getList(
+    '',
+    page: currentPage,
+    is_hot: is_hot,
+    is_best: is_best,
+    is_new: is_new,
+    attr_value1: title1,
+    attr_value2: title2,
+  );
+  return model;
 }

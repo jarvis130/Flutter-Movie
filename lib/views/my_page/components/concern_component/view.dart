@@ -173,25 +173,28 @@ Widget buildView(
     );
   }
 
-  return keepAliveWrapper(AnimatedSwitcher(
-      duration: Duration(milliseconds: 600),
-      child: ListView(
-        key: ValueKey(state.concernList),
-        controller: state.movieController,
-        cacheExtent: Adapt.px(180),
-        children: state.concernList.results.map(_buildMovieCell).toList()
-          ..add(Offstage(
-            offstage: state.concernList.page == state.concernList.total_pages &&
-                state.concernList.results.length > 0,
-            child: Column(
-              children: <Widget>[
-                _buildShimmerCell(),
-                _buildShimmerCell(),
-                _buildShimmerCell(),
-                _buildShimmerCell(),
-              ],
-            ),
-          )),
-      )));
+  return keepAliveWrapper(
+      AnimatedSwitcher(
+        duration: Duration(milliseconds: 600),
+        child: ListView(
+          key: ValueKey(state.concernList),
+          controller: state.movieController,
+          cacheExtent: Adapt.px(180),
+          children: state.concernList.results.map(_buildMovieCell).toList()
+            ..add(Offstage(
+              offstage: state.concernList.page == state.concernList.total_pages &&
+                  state.concernList.results.length > 0,
+              child: Column(
+                children: <Widget>[
+                  _buildShimmerCell(),
+                  _buildShimmerCell(),
+                  _buildShimmerCell(),
+                  _buildShimmerCell(),
+                ],
+              ),
+            )),
+        )
+      )
+  );
 }
 

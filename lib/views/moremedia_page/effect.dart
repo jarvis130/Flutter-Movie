@@ -5,8 +5,6 @@ import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/api/home_api.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -83,18 +81,10 @@ Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<MoreMediaPageState> ctx) async {
-//  if (ctx.state.mediaType == MediaType.movie)
-    await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
-      'movieid': action.payload[0],
-      'bgpic': action.payload[2],
-      'title': action.payload[1],
-      'posterpic': action.payload[3]
-    });
-//  else
-//    await Navigator.of(ctx.context).pushNamed('tvdetailpage', arguments: {
-//      'tvid': action.payload[0],
-//      'bgpic': action.payload[2],
-//      'name': action.payload[1],
-//      'posterpic': action.payload[3]
-//    });
+  await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
+    'movieid': action.payload[0],
+    'bgpic': action.payload[2],
+    'title': action.payload[1],
+    'posterpic': action.payload[3]
+  });
 }

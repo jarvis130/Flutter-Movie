@@ -94,7 +94,7 @@ flutter:
   - images/instagram_circle.png
   - images/link_bold.png
   - images/tmdb_blue.png
-  
+  - images/empty.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
