@@ -31,8 +31,8 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
   ctx.state.scrollController = new ScrollController();
 
   //初始化轮播图
-  BannerModel swiper = await HomeApi.getSwiperList();
-  if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
+//  BannerModel swiper = await HomeApi.getSwiperList();
+//  if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
   
   //热门视频
   var model = await HomeApi.home('');

@@ -1,8 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/api/classify_api.dart';
 import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:flutter/material.dart' hide Action;
+import 'package:movie/models/VideoAttributeModel.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -51,69 +53,72 @@ Future _onInit(Action action, Context<ClassifyPageState> ctx) async {
     }
   ];
 
-  List list2 =[
-    {
-      "title": "全部",
-      "value":0,
-    },
-    {
-      "title": "大陆",
-      "value":1
-    },
-    {
-      "title": "香港",
-      "value":2
-    },
-    {
-      "title": "台湾",
-      "value":3
-    },
-    {
-      "title": "欧美",
-      "value":4
-    },
-    {
-      "title": "日本",
-      "value":5
-    },
-  ];
+//  List list2 =[
+//    {
+//      "title": "全部",
+//      "value":0,
+//    },
+//    {
+//      "title": "大陆",
+//      "value":1
+//    },
+//    {
+//      "title": "香港",
+//      "value":2
+//    },
+//    {
+//      "title": "台湾",
+//      "value":3
+//    },
+//    {
+//      "title": "欧美",
+//      "value":4
+//    },
+//    {
+//      "title": "日本",
+//      "value":5
+//    },
+//  ];
+//
+//  List list3 =[
+//    {
+//      "title": "全部",
+//      "value":0,
+//    },
+//    {
+//      "title": "喜剧",
+//      "value":1
+//    },
+//    {
+//      "title": "动作",
+//      "value":2
+//    },
+//    {
+//      "title": "爱情",
+//      "value":3
+//    },
+//    {
+//      "title": "惊悚",
+//      "value":4
+//    },
+//    {
+//      "title": "犯罪",
+//      "value":5
+//    },
+//  ];
 
-  List list3 =[
-    {
-      "title": "全部",
-      "value":0,
-    },
-    {
-      "title": "喜剧",
-      "value":1
-    },
-    {
-      "title": "动作",
-      "value":2
-    },
-    {
-      "title": "爱情",
-      "value":3
-    },
-    {
-      "title": "惊悚",
-      "value":4
-    },
-    {
-      "title": "犯罪",
-      "value":5
-    },
-  ];
+  VideoAttributeModel model = await ClassifyApi.getVideoAttribute();
+  if(model != null){
+    Map map = {
+      'list1': list1,
+      'list2': model.videoarea,
+      'list3': model.videotype
+    };
+    ctx.dispatch(ClassifyActionCreator.init(map));
+    _loadMore(action, ctx);
+  }
 
 
-
-  Map map = {
-    'list1': list1,
-    'list2': list2,
-    'list3': list3
-  };
-  ctx.dispatch(ClassifyActionCreator.init(map));
-  _loadMore(action, ctx);
 }
 
 void _onDispose(Action action, Context<ClassifyPageState> ctx) {
@@ -183,6 +188,7 @@ Future<GoodProducts> getGoodProducts(Action action, Context<ClassifyPageState> c
     is_new: is_new,
     attr_value1: title1,
     attr_value2: title2,
+    is_real: '2'
   );
   return model;
 }

@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/api/user_api.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:movie/api/moviedetail_api.dart';
@@ -65,15 +67,24 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
  
 
   Future playButtonClicked() async {
-    MovieDetailModelReturn r = await MoiveDetailApi.getMovieDetailData(ApiHelper.uid, movieid);
-    if (r != null) {
-      if (r.code == 1001) {
-        dialog();
-      } else {
+    UserModel model = await UserApi.getUserProfile();
+    if(model != null){
+      if(model.user.rank.id > 1){
+        //vip用户直接播放
+        await MoiveDetailApi.addWatchLog(movieid);
         play();
-        await MoiveDetailApi.addView(ApiHelper.uid, ApiHelper.token, movieid);
+
+      }else{
+        Map r = await MoiveDetailApi.checkWatchTimes();
+        if (r != null) {
+          if (r['times'] == 0) {
+            dialog();
+          } else {
+            await MoiveDetailApi.addWatchLog(movieid);
+            play();
+          }
+        }
       }
-      
     }
   }
 

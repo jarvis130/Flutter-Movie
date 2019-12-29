@@ -4,14 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
-import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/releasedatetype.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/models/releasedatemodel.dart';
-import 'package:shimmer/shimmer.dart';
 
 import 'dart:ui' as ui;
 
@@ -296,8 +292,8 @@ Widget buildView(InfoState state, Dispatch dispatch, ViewService viewService) {
           ),
           Row(
             children: <Widget>[
-              _buildInfoCell(I18n.of(viewService.context).status,
-                  state.movieDetailModel?.status),
+//              _buildInfoCell(I18n.of(viewService.context).status,
+//                  state.movieDetailModel?.status),
             ],
           ),
           SizedBox(

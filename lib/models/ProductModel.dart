@@ -1,46 +1,34 @@
-class GoodProducts {
-  List<Products> _products;
-  Paged _paged;
+class ProductModel {
+  Product _product;
   int _errorCode;
 
-  GoodProducts({List<Products> products, Paged paged, int errorCode}) {
-    this._products = products;
-    this._paged = paged;
+  ProductModel({Product product, int errorCode}) {
+    this._product = product;
     this._errorCode = errorCode;
   }
 
-  List<Products> get products => _products;
-  set products(List<Products> products) => _products = products;
-  Paged get paged => _paged;
-  set paged(Paged paged) => _paged = paged;
+  Product get product => _product;
+  set product(Product product) => _product = product;
   int get errorCode => _errorCode;
   set errorCode(int errorCode) => _errorCode = errorCode;
 
-  GoodProducts.fromJson(Map<String, dynamic> json) {
-    if (json['products'] != null) {
-      _products = new List<Products>();
-      json['products'].forEach((v) {
-        _products.add(new Products.fromJson(v));
-      });
-    }
-    _paged = json['paged'] != null ? new Paged.fromJson(json['paged']) : null;
+  ProductModel.fromJson(Map<String, dynamic> json) {
+    _product =
+    json['product'] != null ? new Product.fromJson(json['product']) : null;
     _errorCode = json['error_code'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._products != null) {
-      data['products'] = this._products.map((v) => v.toJson()).toList();
-    }
-    if (this._paged != null) {
-      data['paged'] = this._paged.toJson();
+    if (this._product != null) {
+      data['product'] = this._product.toJson();
     }
     data['error_code'] = this._errorCode;
     return data;
   }
 }
 
-class Products {
+class Product {
   String _goodsSn;
   String _goodsName;
   int _goodsNumber;
@@ -52,13 +40,14 @@ class Products {
   int _isAloneSale;
   int _isShipping;
   int _integral;
+  String _videoUrl;
   int _id;
   int _category;
   int _brand;
   int _shop;
   String _sku;
   DefaultPhoto _defaultPhoto;
-  List<Null> _photos;
+//  List<Photos> _photos;
   String _name;
   String _price;
   String _currentPrice;
@@ -71,15 +60,19 @@ class Products {
   int _commentCount;
   int _isLiked;
   String _reviewRate;
-  String _introUrl;
+//  Null _introUrl;
   String _shareUrl;
-  String _videoUrl;
   int _createdAt;
   int _updatedAt;
+  int _isCollect;
   List<Null> _promos;
-  List<Properties> _properties;
+  List<Null> _properties;
+  List<PropertieInfo> _propertieInfo;
+  List<Null> _tags;
+  List<Null> _stock;
+  List<Null> _attachments;
 
-  Products(
+  Product(
       {String goodsSn,
         String goodsName,
         int goodsNumber,
@@ -91,13 +84,14 @@ class Products {
         int isAloneSale,
         int isShipping,
         int integral,
+        String videoUrl,
         int id,
         int category,
         int brand,
         int shop,
         String sku,
         DefaultPhoto defaultPhoto,
-        List<Null> photos,
+//        List<Photos> photos,
         String name,
         String price,
         String currentPrice,
@@ -110,13 +104,17 @@ class Products {
         int commentCount,
         int isLiked,
         String reviewRate,
-        String introUrl,
+//        Null introUrl,
         String shareUrl,
-        String videoUrl,
         int createdAt,
         int updatedAt,
+        int isCollect,
         List<Null> promos,
-        List<Properties> properties}) {
+        List<Null> properties,
+        List<PropertieInfo> propertieInfo,
+        List<Null> tags,
+        List<Null> stock,
+        List<Null> attachments}) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
     this._goodsNumber = goodsNumber;
@@ -128,13 +126,14 @@ class Products {
     this._isAloneSale = isAloneSale;
     this._isShipping = isShipping;
     this._integral = integral;
+    this._videoUrl = videoUrl;
     this._id = id;
     this._category = category;
     this._brand = brand;
     this._shop = shop;
     this._sku = sku;
     this._defaultPhoto = defaultPhoto;
-    this._photos = photos;
+//    this._photos = photos;
     this._name = name;
     this._price = price;
     this._currentPrice = currentPrice;
@@ -147,13 +146,17 @@ class Products {
     this._commentCount = commentCount;
     this._isLiked = isLiked;
     this._reviewRate = reviewRate;
-    this._introUrl = introUrl;
+//    this._introUrl = introUrl;
     this._shareUrl = shareUrl;
-    this._videoUrl = videoUrl;
     this._createdAt = createdAt;
     this._updatedAt = updatedAt;
+    this._isCollect = isCollect;
     this._promos = promos;
     this._properties = properties;
+    this._propertieInfo = propertieInfo;
+    this._tags = tags;
+    this._stock = stock;
+    this._attachments = attachments;
   }
 
   String get goodsSn => _goodsSn;
@@ -178,6 +181,8 @@ class Products {
   set isShipping(int isShipping) => _isShipping = isShipping;
   int get integral => _integral;
   set integral(int integral) => _integral = integral;
+  String get videoUrl => _videoUrl;
+  set videoUrl(String videoUrl) => _videoUrl = videoUrl;
   int get id => _id;
   set id(int id) => _id = id;
   int get category => _category;
@@ -190,8 +195,8 @@ class Products {
   set sku(String sku) => _sku = sku;
   DefaultPhoto get defaultPhoto => _defaultPhoto;
   set defaultPhoto(DefaultPhoto defaultPhoto) => _defaultPhoto = defaultPhoto;
-  List<Null> get photos => _photos;
-  set photos(List<Null> photos) => _photos = photos;
+//  List<Photos> get photos => _photos;
+//  set photos(List<Photos> photos) => _photos = photos;
   String get name => _name;
   set name(String name) => _name = name;
   String get price => _price;
@@ -216,22 +221,31 @@ class Products {
   set isLiked(int isLiked) => _isLiked = isLiked;
   String get reviewRate => _reviewRate;
   set reviewRate(String reviewRate) => _reviewRate = reviewRate;
-  String get introUrl => _introUrl;
-  set introUrl(String introUrl) => _introUrl = introUrl;
+//  Null get introUrl => _introUrl;
+//  set introUrl(Null introUrl) => _introUrl = introUrl;
   String get shareUrl => _shareUrl;
   set shareUrl(String shareUrl) => _shareUrl = shareUrl;
-  String get videoUrl => _videoUrl;
-  set videoUrl(String videoUrl) => _videoUrl = videoUrl;
   int get createdAt => _createdAt;
   set createdAt(int createdAt) => _createdAt = createdAt;
   int get updatedAt => _updatedAt;
   set updatedAt(int updatedAt) => _updatedAt = updatedAt;
+  int get isCollect => _isCollect;
+  set isCollect(int isCollect) => _isCollect = isCollect;
   List<Null> get promos => _promos;
   set promos(List<Null> promos) => _promos = promos;
-  List<Properties> get properties => _properties;
-  set properties(List<Properties> properties) => _properties = properties;
+  List<Null> get properties => _properties;
+  set properties(List<Null> properties) => _properties = properties;
+  List<PropertieInfo> get propertieInfo => _propertieInfo;
+  set propertieInfo(List<PropertieInfo> propertieInfo) =>
+      _propertieInfo = propertieInfo;
+  List<Null> get tags => _tags;
+  set tags(List<Null> tags) => _tags = tags;
+  List<Null> get stock => _stock;
+  set stock(List<Null> stock) => _stock = stock;
+  List<Null> get attachments => _attachments;
+  set attachments(List<Null> attachments) => _attachments = attachments;
 
-  Products.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     _goodsSn = json['goods_sn'];
     _goodsName = json['goods_name'];
     _goodsNumber = json['goods_number'];
@@ -243,6 +257,7 @@ class Products {
     _isAloneSale = json['is_alone_sale'];
     _isShipping = json['is_shipping'];
     _integral = json['integral'];
+    _videoUrl = json['video_url'];
     _id = json['id'];
     _category = json['category'];
     _brand = json['brand'];
@@ -252,9 +267,9 @@ class Products {
         ? new DefaultPhoto.fromJson(json['default_photo'])
         : null;
 //    if (json['photos'] != null) {
-//      _photos = new List<Null>();
+//      _photos = new List<Photos>();
 //      json['photos'].forEach((v) {
-//        _photos.add(new Null.fromJson(v));
+//        _photos.add(new Photos.fromJson(v));
 //      });
 //    }
     _name = json['name'];
@@ -269,23 +284,47 @@ class Products {
     _commentCount = json['comment_count'];
     _isLiked = json['is_liked'];
     _reviewRate = json['review_rate'];
-    _introUrl = json['intro_url'];
+//    _introUrl = json['intro_url'];
     _shareUrl = json['share_url'];
-    _videoUrl = json['video_url'];
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
+    _isCollect = json['is_collect'];
 //    if (json['promos'] != null) {
 //      _promos = new List<Null>();
 //      json['promos'].forEach((v) {
 //        _promos.add(new Null.fromJson(v));
 //      });
 //    }
-    if (json['properties'] != null) {
-      _properties = new List<Properties>();
-      json['properties'].forEach((v) {
-        _properties.add(new Properties.fromJson(v));
+//    if (json['properties'] != null) {
+//      _properties = new List<Null>();
+//      json['properties'].forEach((v) {
+//        _properties.add(new Null.fromJson(v));
+//      });
+//    }
+    if (json['propertie_info'] != null) {
+      _propertieInfo = new List<PropertieInfo>();
+      json['propertie_info'].forEach((v) {
+        _propertieInfo.add(new PropertieInfo.fromJson(v));
       });
     }
+//    if (json['tags'] != null) {
+//      _tags = new List<Null>();
+//      json['tags'].forEach((v) {
+//        _tags.add(new Null.fromJson(v));
+//      });
+//    }
+//    if (json['stock'] != null) {
+//      _stock = new List<Null>();
+//      json['stock'].forEach((v) {
+//        _stock.add(new Null.fromJson(v));
+//      });
+//    }
+//    if (json['attachments'] != null) {
+//      _attachments = new List<Null>();
+//      json['attachments'].forEach((v) {
+//        _attachments.add(new Null.fromJson(v));
+//      });
+//    }
   }
 
   Map<String, dynamic> toJson() {
@@ -301,6 +340,7 @@ class Products {
     data['is_alone_sale'] = this._isAloneSale;
     data['is_shipping'] = this._isShipping;
     data['integral'] = this._integral;
+    data['video_url'] = this._videoUrl;
     data['id'] = this._id;
     data['category'] = this._category;
     data['brand'] = this._brand;
@@ -324,38 +364,51 @@ class Products {
     data['comment_count'] = this._commentCount;
     data['is_liked'] = this._isLiked;
     data['review_rate'] = this._reviewRate;
-    data['intro_url'] = this._introUrl;
+//    data['intro_url'] = this._introUrl;
     data['share_url'] = this._shareUrl;
-    data['video_url'] = this._videoUrl;
     data['created_at'] = this._createdAt;
     data['updated_at'] = this._updatedAt;
+    data['is_collect'] = this._isCollect;
 //    if (this._promos != null) {
 //      data['promos'] = this._promos.map((v) => v.toJson()).toList();
 //    }
-    if (this._properties != null) {
-      data['properties'] = this._properties.map((v) => v.toJson()).toList();
-    }
+//    if (this._properties != null) {
+//      data['properties'] = this._properties.map((v) => v.toJson()).toList();
+//    }
+//    if (this._propertieInfo != null) {
+//      data['propertie_info'] =
+//          this._propertieInfo.map((v) => v.toJson()).toList();
+//    }
+//    if (this._tags != null) {
+//      data['tags'] = this._tags.map((v) => v.toJson()).toList();
+//    }
+//    if (this._stock != null) {
+//      data['stock'] = this._stock.map((v) => v.toJson()).toList();
+//    }
+//    if (this._attachments != null) {
+//      data['attachments'] = this._attachments.map((v) => v.toJson()).toList();
+//    }
     return data;
   }
 }
 
 class DefaultPhoto {
-  int _width;
-  int _height;
+  Null _width;
+  Null _height;
   String _thumb;
   String _large;
 
-  DefaultPhoto({int width, int height, String thumb, String large}) {
+  DefaultPhoto({Null width, Null height, String thumb, String large}) {
     this._width = width;
     this._height = height;
     this._thumb = thumb;
     this._large = large;
   }
 
-  int get width => _width;
-  set width(int width) => _width = width;
-  int get height => _height;
-  set height(int height) => _height = height;
+  Null get width => _width;
+  set width(Null width) => _width = width;
+  Null get height => _height;
+  set height(Null height) => _height = height;
   String get thumb => _thumb;
   set thumb(String thumb) => _thumb = thumb;
   String get large => _large;
@@ -378,137 +431,123 @@ class DefaultPhoto {
   }
 }
 
-class Properties {
-  int _id;
-  String _name;
-  List<Attrs> _attrs;
-  bool _isMultiselect;
-
-  Properties({int id, String name, List<Attrs> attrs, bool isMultiselect}) {
-    this._id = id;
-    this._name = name;
-    this._attrs = attrs;
-    this._isMultiselect = isMultiselect;
-  }
-
-  int get id => _id;
-  set id(int id) => _id = id;
-  String get name => _name;
-  set name(String name) => _name = name;
-  List<Attrs> get attrs => _attrs;
-  set attrs(List<Attrs> attrs) => _attrs = attrs;
-  bool get isMultiselect => _isMultiselect;
-  set isMultiselect(bool isMultiselect) => _isMultiselect = isMultiselect;
-
-  Properties.fromJson(Map<String, dynamic> json) {
-    _id = json['id'];
-    _name = json['name'];
-    if (json['attrs'] != null) {
-      _attrs = new List<Attrs>();
-      json['attrs'].forEach((v) {
-        _attrs.add(new Attrs.fromJson(v));
-      });
-    }
-    _isMultiselect = json['is_multiselect'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this._id;
-    data['name'] = this._name;
-    if (this._attrs != null) {
-      data['attrs'] = this._attrs.map((v) => v.toJson()).toList();
-    }
-    data['is_multiselect'] = this._isMultiselect;
-    return data;
-  }
-}
-
-class Attrs {
+class PropertieInfo {
   int _attrId;
-  int _attrPrice;
-  int _id;
+  int _catId;
   String _attrName;
-  bool _isMultiselect;
+  int _attrInputType;
+  int _attrType;
+  String _attrValues;
+  int _attrIndex;
+  int _sortOrder;
+  int _isLinked;
+  int _attrGroup;
+  Pivot _pivot;
 
-  Attrs(
+  PropertieInfo(
       {int attrId,
-        int attrPrice,
-        int id,
+        int catId,
         String attrName,
-        bool isMultiselect}) {
+        int attrInputType,
+        int attrType,
+        String attrValues,
+        int attrIndex,
+        int sortOrder,
+        int isLinked,
+        int attrGroup,
+        Pivot pivot}) {
     this._attrId = attrId;
-    this._attrPrice = attrPrice;
-    this._id = id;
+    this._catId = catId;
     this._attrName = attrName;
-    this._isMultiselect = isMultiselect;
+    this._attrInputType = attrInputType;
+    this._attrType = attrType;
+    this._attrValues = attrValues;
+    this._attrIndex = attrIndex;
+    this._sortOrder = sortOrder;
+    this._isLinked = isLinked;
+    this._attrGroup = attrGroup;
+    this._pivot = pivot;
   }
 
   int get attrId => _attrId;
   set attrId(int attrId) => _attrId = attrId;
-  int get attrPrice => _attrPrice;
-  set attrPrice(int attrPrice) => _attrPrice = attrPrice;
-  int get id => _id;
-  set id(int id) => _id = id;
+  int get catId => _catId;
+  set catId(int catId) => _catId = catId;
   String get attrName => _attrName;
   set attrName(String attrName) => _attrName = attrName;
-  bool get isMultiselect => _isMultiselect;
-  set isMultiselect(bool isMultiselect) => _isMultiselect = isMultiselect;
+  int get attrInputType => _attrInputType;
+  set attrInputType(int attrInputType) => _attrInputType = attrInputType;
+  int get attrType => _attrType;
+  set attrType(int attrType) => _attrType = attrType;
+  String get attrValues => _attrValues;
+  set attrValues(String attrValues) => _attrValues = attrValues;
+  int get attrIndex => _attrIndex;
+  set attrIndex(int attrIndex) => _attrIndex = attrIndex;
+  int get sortOrder => _sortOrder;
+  set sortOrder(int sortOrder) => _sortOrder = sortOrder;
+  int get isLinked => _isLinked;
+  set isLinked(int isLinked) => _isLinked = isLinked;
+  int get attrGroup => _attrGroup;
+  set attrGroup(int attrGroup) => _attrGroup = attrGroup;
+  Pivot get pivot => _pivot;
+  set pivot(Pivot pivot) => _pivot = pivot;
 
-  Attrs.fromJson(Map<String, dynamic> json) {
+  PropertieInfo.fromJson(Map<String, dynamic> json) {
     _attrId = json['attr_id'];
-    _attrPrice = json['attr_price'];
-    _id = json['id'];
+    _catId = json['cat_id'];
     _attrName = json['attr_name'];
-    _isMultiselect = json['is_multiselect'];
+    _attrInputType = json['attr_input_type'];
+    _attrType = json['attr_type'];
+    _attrValues = json['attr_values'];
+    _attrIndex = json['attr_index'];
+    _sortOrder = json['sort_order'];
+    _isLinked = json['is_linked'];
+    _attrGroup = json['attr_group'];
+    _pivot = json['pivot'] != null ? new Pivot.fromJson(json['pivot']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['attr_id'] = this._attrId;
-    data['attr_price'] = this._attrPrice;
-    data['id'] = this._id;
+    data['cat_id'] = this._catId;
     data['attr_name'] = this._attrName;
-    data['is_multiselect'] = this._isMultiselect;
+    data['attr_input_type'] = this._attrInputType;
+    data['attr_type'] = this._attrType;
+    data['attr_values'] = this._attrValues;
+    data['attr_index'] = this._attrIndex;
+    data['sort_order'] = this._sortOrder;
+    data['is_linked'] = this._isLinked;
+    data['attr_group'] = this._attrGroup;
+    if (this._pivot != null) {
+      data['pivot'] = this._pivot.toJson();
+    }
     return data;
   }
 }
 
-class Paged {
-  int _total;
-  int _page;
-  int _size;
-  int _more;
+class Pivot {
+  int _goodsId;
+  int _attrId;
 
-  Paged({int total, int page, int size, int more}) {
-    this._total = total;
-    this._page = page;
-    this._size = size;
-    this._more = more;
+  Pivot({int goodsId, int attrId}) {
+    this._goodsId = goodsId;
+    this._attrId = attrId;
   }
 
-  int get total => _total;
-  set total(int total) => _total = total;
-  int get page => _page;
-  set page(int page) => _page = page;
-  int get size => _size;
-  set size(int size) => _size = size;
-  int get more => _more;
-  set more(int more) => _more = more;
+  int get goodsId => _goodsId;
+  set goodsId(int goodsId) => _goodsId = goodsId;
+  int get attrId => _attrId;
+  set attrId(int attrId) => _attrId = attrId;
 
-  Paged.fromJson(Map<String, dynamic> json) {
-    _total = json['total'];
-    _page = json['page'];
-    _size = json['size'];
-    _more = json['more'];
+  Pivot.fromJson(Map<String, dynamic> json) {
+    _goodsId = json['goods_id'];
+    _attrId = json['attr_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['total'] = this._total;
-    data['page'] = this._page;
-    data['size'] = this._size;
-    data['more'] = this._more;
+    data['goods_id'] = this._goodsId;
+    data['attr_id'] = this._attrId;
     return data;
   }
 }

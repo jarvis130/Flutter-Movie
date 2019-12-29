@@ -1,11 +1,12 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/moviedetail.dart';
 
 import '../../state.dart';
 
 class InfoState implements Cloneable<InfoState> {
 
- MovieDetailModel movieDetailModel;
+ ProductModel movieDetailModel;
 
   @override
   InfoState clone() {

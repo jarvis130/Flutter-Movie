@@ -1,25 +1,26 @@
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/models/classify_list_model.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
+
+import 'package:movie/models/VideoAttributeModel.dart';
+import 'package:movie/utils/httpUtil.dart';
+import 'dart:convert' show json;
+import 'dart:ui' as ui;
+import 'package:dio/dio.dart';
+
 class ClassifyApi {
 
-  ///
-  static Future<ClassifyListModel> getClassifyList() async {
-    ClassifyListModel model;
-    String param = 'service=Video.GetClassifyList';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = ClassifyListModel(r);
-    return model;
-  }
+  /// 视频属性
+  static Future getVideoAttribute() async {
 
- ///
- static Future<MovieListModel> getClassifyVideoList(String uid, String classifyId, int page) async {
-    MovieListModel model;
-    String param = 'service=Video.GetClassifyVideoList&uid=$uid&classify=$classifyId&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieListModel(r);
-    return model;
+    FormData formData = new FormData.from({
+    });
+
+    var response = await HttpUtil().post('ecapi.attr.getVideoAttribute', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      VideoAttributeModel model = VideoAttributeModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
   }
 
 }

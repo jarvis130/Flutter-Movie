@@ -27,38 +27,34 @@ Future _setRating(Action action, Context<MenuState> ctx) async{
 }
 
 Future _setFavorite(Action action, Context<MenuState> ctx) async{
-  final bool f=action.payload;
-  ctx.dispatch(MenuActionCreator.updateFavorite(f));
-  // var r=await ApiHelper.markAsFavorite(ctx.state.id,MediaType.movie, f);
-  // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been mark as favorite':'has been removed'));
+  int f=action.payload;
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String uid = prefs.getString('uid');
-  String accessTokenV4 = prefs.getString('accessTokenV4');
-  MovieDetailModel r=await MoiveDetailApi.addCollect(uid, accessTokenV4, ctx.state.id);
-  if(r != null){
-    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.iscollect == '1' ? '收藏成功！':'取消收藏'));
-    ctx.broadcast(MyActionCreator.onLoadFavorites());
+  if(f == 1){
+    Map r = await MoiveDetailApi.unLike(ctx.state.model.product.id);
+    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('取消收藏'));
+//    ctx.broadcast(MyActionCreator.onLoadFavorites());
+    f = 0;
+  }else{
+    Map r = await MoiveDetailApi.setLike(ctx.state.model.product.id);
+    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('收藏成功！'));
+//    ctx.broadcast(MyActionCreator.onLoadFavorites());
+    f = 1;
   }
-
-
+  ctx.dispatch(MenuActionCreator.updateFavorite(f));
 }
 
 Future _setWatchlist(Action action, Context<MenuState> ctx) async{
   final bool f=action.payload;
   ctx.dispatch(MenuActionCreator.updateWatctlist(f));
 
-  // var r=await ApiHelper.addToWatchlist(ctx.state.id,MediaType.movie, f);
-  // if(r)ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(f?'has been add to your watchlist':'has been removed from your watchlist'));
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String uid = prefs.getString('uid');
-  String accessTokenV4 = prefs.getString('accessTokenV4');
-  MovieDetailModel r=await MoiveDetailApi.setAttent(uid, accessTokenV4, ctx.state.userinfo['id']);
-  if(r != null){
-    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
-    ctx.broadcast(MyActionCreator.onLoadConcern());
-  }
+//  SharedPreferences prefs = await SharedPreferences.getInstance();
+//  String uid = prefs.getString('uid');
+//  String accessTokenV4 = prefs.getString('accessTokenV4');
+//  MovieDetailModel r=await MoiveDetailApi.setAttent(uid, accessTokenV4, ctx.state.userinfo['id']);
+//  if(r != null){
+//    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
+//    ctx.broadcast(MyActionCreator.onLoadConcern());
+//  }
 
 }
 

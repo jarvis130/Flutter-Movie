@@ -3,16 +3,11 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
-import 'package:movie/actions/imageurl.dart';
-import 'package:movie/api/classify_api.dart';
-import 'package:movie/api/home_api.dart';
 import 'package:movie/api/review_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
-import 'package:movie/models/enums/imagesize.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/moviedetail.dart';
-import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'action.dart';
 import 'state.dart';
@@ -38,26 +33,12 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
         vsync: ticker, duration: Duration(milliseconds: 1000));
     ctx.state.scrollController = new ScrollController();
 
-    /*var paletteGenerator = await PaletteGenerator.fromImageProvider(
-         CachedNetworkImageProvider(ImageUrl.getUrl(ctx.state.posterPic, ImageSize.w300)));
-      ctx.dispatch(MovieDetailPageActionCreator.onsetColor(paletteGenerator));*/
-    // var r = await ApiHelper.getMovieDetail(ctx.state.movieid,
-    //     appendtoresponse:
-    //         'keywords,recommendations,credits,external_ids,release_dates');
-    // if (r != null) {
-    //   ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
-    //   ctx.state.animationController.forward();
-    // }
-
     // 视频详情
-    MovieDetailModel r = await MoiveDetailApi.getMovieDetail(ApiHelper.uid, ctx.state.movieid);
+    ProductModel r = await MoiveDetailApi.getMovieDetail(ctx.state.movieid);
     if (r != null) {
 
         ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
         ctx.state.animationController.forward();
-        // 推荐视频
-//        MovieListModel m = await HomeApi.getRecommendMovieList(ApiHelper.uid);
-//        if(r!=null)ctx.dispatch(MovieDetailPageActionCreator.setRecommendMovie(m));
       
     }
 

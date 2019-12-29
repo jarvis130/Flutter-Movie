@@ -1,28 +1,16 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/media_accountstatemodel.dart';
+import 'package:movie/models/ProductModel.dart';
 
 import '../../state.dart';
 
 class MenuState implements Cloneable<MenuState> {
 
-String id;
-String backdropPic;
-String posterPic;
-String name;
-String overWatch;
-Map userinfo;
-MediaAccountStateModel accountState;
+  ProductModel model;
 
   @override
   MenuState clone() {
     return MenuState()
-    ..accountState=accountState
-    ..posterPic=posterPic
-    ..backdropPic=backdropPic
-    ..id=id
-    ..overWatch=overWatch
-    ..userinfo = userinfo
-    ..name=name;
+    ..model=model;
   }
 }
 
@@ -30,17 +18,11 @@ class MenuConnector extends ConnOp<MovieDetailPageState,MenuState>{
   @override
   MenuState get(MovieDetailPageState state) {
     MenuState substate=new MenuState();
-    substate.posterPic=state.posterPic;
-    substate.name=state.title;
-    substate.accountState=state.accountState;
-    substate.id=state.movieid;
-    substate.backdropPic=state.backdropPic;
-    substate.overWatch=state.movieDetailModel.description;
-    substate.userinfo = state.movieDetailModel.userinfo;
+    substate.model=state.movieDetailModel;
     return substate;
   }
-  @override
-  void set(MovieDetailPageState state, MenuState subState) {
-    state.accountState=subState.accountState;
-  }
+//  @override
+//  void set(MovieDetailPageState state, MenuState subState) {
+//    state.accountState=subState.accountState;
+//  }
 }

@@ -24,11 +24,11 @@ class MenuActionCreator {
     return Action(MenuAction.updateRating, payload: d);
   }
 
-  static Action setFavorite(bool isFavorite) {
+  static Action setFavorite(int isFavorite) {
     return Action(MenuAction.setFavorite, payload: isFavorite);
   }
 
-  static Action updateFavorite(bool isFavorite) {
+  static Action updateFavorite(int isFavorite) {
     return Action(MenuAction.updateFavorite, payload: isFavorite);
   }
   static Action setWatchlist(bool isAdd) {

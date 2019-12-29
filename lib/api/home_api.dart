@@ -30,7 +30,7 @@ class HomeApi {
   static Future<HomeModel> home(String uid, {int page = 1}) async {
     FormData formData = new FormData.from({});
 
-    var response = await HttpUtil().post('ecapi.home.product.list', data: formData);
+    var response = await HttpUtil().post('ecapi.home.video.list', data: formData);
     Map map = json.decode(response.toString());
     if(map.length > 0){
       HomeModel model = HomeModel.fromJson(map);

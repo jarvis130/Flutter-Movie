@@ -11,6 +11,7 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/videoplayeritem.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/imagemodel.dart';
@@ -27,8 +28,9 @@ import 'state.dart';
 Widget buildView(
     MovieDetailPageState state, Dispatch dispatch, ViewService viewService) {
 
+  ProductModel model = state.movieDetailModel;
+
   Random random = new Random(DateTime.now().millisecondsSinceEpoch);
-  var s = state.movieDetailModel;
   //var dominantColor = state.palette?.dominantColor?.color ?? Colors.black38;
   var dominantColor = state.mainColor;
   double evote = 0.0;
@@ -528,7 +530,7 @@ Widget buildView(
   }
 
   Widget _getOverWatch() {
-    if (state.movieDetailModel.description == null)
+    if (state.movieDetailModel.product == null)
       return SizedBox(
           child: Shimmer.fromColors(
         baseColor: Colors.grey[200],
@@ -588,7 +590,7 @@ Widget buildView(
         ),
       ));
     else
-      return Text(s.description,
+      return Text(model.product.goodsDesc,
           style: TextStyle(
               color: Colors.black,
               fontSize: Adapt.px(30),
@@ -755,6 +757,9 @@ Widget buildView(
 
   // }
 
+  if(model == null){
+    return Container();
+  }else
   return Scaffold(
     key: state.scaffoldkey,
     body: DefaultTabController(
@@ -772,7 +777,7 @@ Widget buildView(
                       expandedHeight: Adapt.px(580),
                       floating: false,
                       centerTitle: true,
-                      title: Text(de ? state.title ?? '' : ''),
+                      title: Text(de ? model.product.name ?? '' : ''),
                       actions: <Widget>[
                         IconButton(
                           icon: Icon(Icons.more_vert),
@@ -810,10 +815,10 @@ Widget buildView(
                         centerTitle: true,
 //                         background: _buildHeader(),
                         // background: viewService.buildComponent('play'),
-                       background: state.movieDetailModel.href != null ? VideoPlayerItem(
-                         movieid: state.movieid,
-                         vc: VideoPlayerController.network(state.movieDetailModel.href),
-                         coverurl: state.movieDetailModel.thumb_s,
+                       background: model.product != null ? VideoPlayerItem(
+                         movieid: model.product.id.toString(),
+                         vc: VideoPlayerController.network(model.product.videoUrl),
+                         coverurl: model.product.defaultPhoto.thumb,
                          showplayer: true,
                        ) : Container(),
                     )
@@ -839,9 +844,9 @@ Widget buildView(
                                 image: DecorationImage(
                                     colorFilter:
                                         ColorFilter.mode(dominantColor, BlendMode.color),
-                                    image: CachedNetworkImageProvider(state.backdropPic == null
+                                    image: CachedNetworkImageProvider(model.product == null
                                         ? ImageUrl.emptyimage
-                                        : ImageUrl.getUrl(state.backdropPic, ImageSize.w500)),
+                                        : ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w500)),
                                     fit: BoxFit.cover)),
                           ), 
                           Container(

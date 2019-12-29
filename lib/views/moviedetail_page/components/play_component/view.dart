@@ -8,17 +8,18 @@ import 'state.dart';
 
 Widget buildView(PlayState state, Dispatch dispatch, ViewService viewService) {
 
-  if (state.href == null) {
+  if (state.movieDetailModel.product == null) {
       return Container(
       );
   } else {
     // String url = state.href;
     // return VideoWidget(url);
+
     return VideoPlayerItem(
-                         vc: VideoPlayerController.network(state.movieDetailModel.href),
-                         coverurl: state.movieDetailModel.thumb_s,
-                         showplayer: true,
-                       );
+       vc: VideoPlayerController.network(state.movieDetailModel.product.videoUrl),
+       coverurl: state.movieDetailModel.product.defaultPhoto.thumb,
+       showplayer: true,
+     );
   }
   
 }

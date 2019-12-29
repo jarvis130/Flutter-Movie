@@ -33,15 +33,10 @@ Future _onInit(Action action, Context<DiscoverPageState> ctx) async{
 
 Future _onLoadData(Action action, Context<DiscoverPageState> ctx) async{
   ctx.dispatch(DiscoverPageActionCreator.onBusyChanged(true));
-  // var genresIds=ctx.state.filterState.genres.where((e)=>e.isSelected).map<int>((e){return e.value;}).toList();
-  // VideoListModel r;
-  // if(ctx.state.filterState.isMovie)
-  // r=await ApiHelper.getMovieDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
-  // else
-  // r=await ApiHelper.getTVDiscover(sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null);
-  String classifyId = ctx.state.classifyId;
-  MovieListModel r = await ClassifyApi.getClassifyVideoList(ApiHelper.uid, classifyId, ctx.state.page);
-  if(r!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadData(r));
+
+//  String classifyId = ctx.state.classifyId;
+//  MovieListModel r = await ClassifyApi.getClassifyVideoList(ApiHelper.uid, classifyId, ctx.state.page);
+//  if(r!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadData(r));
 }
 
 Future _onVideoCellTapped(Action action, Context<DiscoverPageState> ctx) async{
@@ -52,22 +47,14 @@ Future _onVideoCellTapped(Action action, Context<DiscoverPageState> ctx) async{
 }
 
 Future _onLoadMore(Action action, Context<DiscoverPageState> ctx) async{
-//  ctx.dispatch(DiscoverPageActionCreator.onBusyChanged(true));
-//  var genresIds=ctx.state.filterState.genres.where((e)=>e.isSelected).map<int>((e){return e.value;}).toList();
-//  VideoListModel r;
-//  if(ctx.state.filterState.isMovie)
-//    r=await ApiHelper.getMovieDiscover(page:ctx.state.videoListModel.page+1,sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null,withKeywords: ctx.state.filterState.keywords);
-//  else
-//    r=await ApiHelper.getTVDiscover(page:ctx.state.videoListModel.page+1,sortBy:ctx.state.selectedSort,withGenres: genresIds.length>0?genresIds.join(','):null,withKeywords: ctx.state.filterState.keywords);
-//    if(r!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadMore(r.results));
 
-  String classifyId = ctx.state.classifyId;
-  MovieListModel data;
-  int page = ctx.state.videoListModel.page + 1;
-  if (page <= ctx.state.videoListModel.total_pages) {
-      data = await await ClassifyApi.getClassifyVideoList(ApiHelper.uid, classifyId, ctx.state.page);
-      if(data!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadData(data));
-  }
+//  String classifyId = ctx.state.classifyId;
+//  MovieListModel data;
+//  int page = ctx.state.videoListModel.page + 1;
+//  if (page <= ctx.state.videoListModel.total_pages) {
+//      data = await await ClassifyApi.getClassifyVideoList(ApiHelper.uid, classifyId, ctx.state.page);
+//      if(data!=null)ctx.dispatch(DiscoverPageActionCreator.onLoadData(data));
+//  }
 
 }
 

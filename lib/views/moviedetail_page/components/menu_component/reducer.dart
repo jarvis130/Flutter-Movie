@@ -22,21 +22,21 @@ MenuState _onAction(MenuState state, Action action) {
 
 MenuState _updateRating(MenuState state, Action action) {
   final MenuState newState = state.clone();
-  newState.accountState.rated=RatedResult.fromParams(value: action.payload);
-  newState.accountState.isRated=true;
+//  newState.accountState.rated=RatedResult.fromParams(value: action.payload);
+//  newState.accountState.isRated=true;
   return newState;
 }
 
 MenuState _updateFavorite(MenuState state, Action action) {
-  final bool favorite=action.payload;
+  int favorite=action.payload;
   final MenuState newState = state.clone();
-  newState.accountState.favorite=favorite;
+  newState.model.product.isCollect = favorite;
   return newState;
 }
 
 MenuState _updateWatchlist(MenuState state, Action action) {
   final bool isAdd=action.payload;
   final MenuState newState = state.clone();
-  newState.accountState.watchlist=isAdd;
+//  newState.accountState.watchlist=isAdd;
   return newState;
 }

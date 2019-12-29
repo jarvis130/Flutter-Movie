@@ -4,16 +4,16 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/dialogratingbar.dart';
-import 'package:movie/customwidgets/medialist_card.dart';
 import 'package:movie/customwidgets/share_card.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
-import 'package:movie/models/enums/media_type.dart';
 
 import 'action.dart';
 import 'state.dart';
 
 Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
+
+  ProductModel model = state.model;
 
   Widget _buildListTitel(IconData icon, String title, void onTap(),
       {Color iconColor = const Color.fromRGBO(50, 50, 50, 1)}) {
@@ -43,16 +43,16 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
   }
 
   void _rateIt() {
-    Navigator.of(viewService.context).pop();
-    showDialog(
-        context: viewService.context,
-        builder: (ctx) {
-          double rate = state.accountState.rated?.value ?? 0;
-          return DialogRatingBar(
-            rating: rate,
-            submit: (d) => dispatch(MenuActionCreator.setRating(d)),
-          );
-        });
+//    Navigator.of(viewService.context).pop();
+//    showDialog(
+//        context: viewService.context,
+//        builder: (ctx) {
+//          double rate = state.accountState.rated?.value ?? 0;
+//          return DialogRatingBar(
+//            rating: rate,
+//            submit: (d) => dispatch(MenuActionCreator.setRating(d)),
+//          );
+//        });
   }
 
   void _share() {
@@ -63,9 +63,9 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
           var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
           var height = ((width - Adapt.px(40)) / 2).floorToDouble();
           return ShareCard(
-            backgroundImage: ImageUrl.getUrl(state.backdropPic, ImageSize.w300),
+            backgroundImage: ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w300),
             qrValue:
-                'https://www.themoviedb.org/movie/${state.id}?language=${ui.window.locale.languageCode}',
+                'https://www.themoviedb.org/movie/${model.product.id}?language=${ui.window.locale.languageCode}',
             headerHeight: height,
             header: Column(children: <Widget>[
               SizedBox(
@@ -86,14 +86,14 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                                state.posterPic, ImageSize.w300)))),
+                                model.product.defaultPhoto.thumb, ImageSize.w300)))),
                   ),
                   SizedBox(
                     width: Adapt.px(20),
                   ),
                   Container(
                     width: width - Adapt.px(310),
-                    child: Text(state.name,
+                    child: Text(model.product.name,
                         maxLines: 2,
                         style: TextStyle(
                             color: Colors.white,
@@ -112,7 +112,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                 padding: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
                 width: width - Adapt.px(40),
                 height: height - Adapt.px(170),
-                child: Text(state.overWatch,
+                child: Text(model.product.goodsDesc,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 5,
                     style: TextStyle(
@@ -150,7 +150,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                            ImageUrl.getUrl(state.posterPic, ImageSize.w300)))),
+                            ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w300)))),
               ),
               SizedBox(
                 width: Adapt.px(30),
@@ -158,7 +158,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
               SizedBox(
                   width: Adapt.screenW() - Adapt.px(170),
                   child: Text(
-                    state.name,
+                    model.product.name,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: Adapt.px(40),
@@ -175,16 +175,16 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
 //          height: Adapt.px(10),
 //        ),
         _buildListTitel(
-            state.accountState.favorite
+            model.product.isCollect == 1
                 ? Icons.favorite
                 : Icons.favorite_border,
             '收藏', () {
           Navigator.of(viewService.context).pop();
-          dispatch(MenuActionCreator.setFavorite(!state.accountState.favorite));
+          dispatch(MenuActionCreator.setFavorite(model.product.isCollect));
         },
-            iconColor: state.accountState.favorite
-                ? Colors.pink[400]
-                : Color.fromRGBO(50, 50, 50, 1)),
+        iconColor: model.product.isCollect == 1
+            ? Colors.pink[400]
+            : Color.fromRGBO(50, 50, 50, 1)),
        Divider(
          height: Adapt.px(10),
        ),
@@ -194,11 +194,9 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
          () {
            Navigator.of(viewService.context).pop();
            dispatch(
-               MenuActionCreator.setWatchlist(!state.accountState.watchlist));
+               MenuActionCreator.setWatchlist(null));
          },
-         iconColor: state.accountState.watchlist
-             ? Colors.red
-             : Color.fromRGBO(50, 50, 50, 1),
+         iconColor: Color.fromRGBO(50, 50, 50, 1),
        ),
         // Divider(
         //   height: Adapt.px(10),

@@ -1,41 +1,87 @@
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/moviedetail.dart';
+import 'package:movie/utils/httpUtil.dart';
+import 'dart:convert' show json;
+import 'dart:ui' as ui;
+import 'package:dio/dio.dart';
+
 class MoiveDetailApi {
 
   ///视频详情
-  static Future<MovieDetailModel> getMovieDetail(var uid, var movieId) async {
-    MovieDetailModel model;
-    String param = 'service=Video.GetVideo&uid=$uid&videoid=$movieId';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieDetailModel(r);
-    return model;
+  static Future<ProductModel> getMovieDetail(var movieId) async {
+
+    FormData formData = new FormData.from({
+      'product': movieId,
+      "XDEBUG_SESSION_START": 13134
+    });
+
+    var response = await HttpUtil().post('ecapi.video.get', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      ProductModel model = ProductModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
   }
   
   ///检查观看次数
-   static Future<MovieDetailModelReturn> getMovieDetailData(var uid, var movieId) async {
-    MovieDetailModelReturn model;
-    String param = 'service=Video.GetVideo&uid=$uid&videoid=$movieId';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieDetailModelReturn(r);
-    return model;
+   static Future<Map> checkWatchTimes() async {
+
+    FormData formData = new FormData.from({
+      "XDEBUG_SESSION_START": 15902
+    });
+
+    var response = await HttpUtil().post('ecapi.video.checkWatchTimes', data: formData);
+    Map map = json.decode(response.toString());
+    if(map !=null && map.length > 0){
+      return map;
+    }
   }
 
     ///增加观看次数
-   static Future<MovieDetailModelReturn> addView(var uid, var token, var movieId) async {
-    MovieDetailModelReturn model;
-    String param = 'service=Video.AddView&uid=$uid&videoid=$movieId&token=$token';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieDetailModelReturn(r);
-    return model;
+   static Future<Map> addWatchLog(var videoid) async {
+    FormData formData = new FormData.from({
+      'video_id': videoid,
+      "XDEBUG_SESSION_START": 10482
+    });
+
+    var response = await HttpUtil().post('ecapi.video.addWatchLog', data: formData);
+    Map map = json.decode(response.toString());
+    if(map !=null && map.length > 0){
+      return map;
+    }
   }
 
   ///收藏
-  static Future<MovieDetailModel> addCollect(var uid, var token, var videoid) async {
-    MovieDetailModel model;
-    String param = 'service=Video.AddCollect&uid=$uid&videoid=$videoid&token=$token';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieDetailModel(r);
-    return model;
+  static Future<Map> setLike(var videoid) async {
+
+    FormData formData = new FormData.from({
+      'product': videoid,
+      "XDEBUG_SESSION_START": 10482
+    });
+
+    var response = await HttpUtil().post('ecapi.video.like', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      return map;
+    }
+  }
+
+  ///取消收藏
+  static Future<Map> unLike(var videoid) async {
+
+    FormData formData = new FormData.from({
+      'product': videoid,
+      "XDEBUG_SESSION_START": 10482
+    });
+
+    var response = await HttpUtil().post('ecapi.video.unlike', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      return map;
+    }
   }
 
     ///关注

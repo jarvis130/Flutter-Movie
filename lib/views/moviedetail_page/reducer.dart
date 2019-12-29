@@ -1,5 +1,6 @@
 
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
 import 'package:movie/models/moviedetail.dart';
@@ -31,12 +32,12 @@ MovieDetailPageState _onAction(MovieDetailPageState state, Action action) {
   return newState;
 }
 MovieDetailPageState _onInit(MovieDetailPageState state, Action action) {
-  MovieDetailModel model=action.payload??new MovieDetailModel.fromParams();
+  ProductModel model=action.payload??new ProductModel();
   final MovieDetailPageState newState = state.clone();
   newState.movieDetailModel=model;
-  newState.backdropPic=model.thumb_s;
-  newState.posterPic=model.thumb_s;
-  newState.title=model.title;
+//  newState.backdropPic=model.product.defaultPhoto.thumb;
+//  newState.posterPic=model.product.defaultPhoto.thumb;
+//  newState.title=model.product.name;
   return newState;
 }
 MovieDetailPageState _onSetColor(MovieDetailPageState state, Action action) {

@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/globalbasestate/state.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/keyword.dart';
@@ -16,7 +17,7 @@ import 'package:palette_generator/palette_generator.dart';
 
 class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
   GlobalKey<ScaffoldState> scaffoldkey;
-  MovieDetailModel movieDetailModel;
+  ProductModel movieDetailModel;
   MovieListModel recommendMovie;
   String backdropPic;
   String title;
@@ -67,7 +68,7 @@ MovieDetailPageState initState(Map<String, dynamic> args) {
   if (args['posterpic'] != null) state.posterPic = args['posterpic'];
   if (args['title'] != null) state.title = args['title'];
 
-  state.movieDetailModel = new MovieDetailModel.fromParams();
+  state.movieDetailModel = new ProductModel();
   state.recommendMovie = new MovieListModel.fromParams();
 
   state.mainColor = Color.fromRGBO(

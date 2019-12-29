@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/keyword.dart';
@@ -34,7 +35,7 @@ class MovieDetailPageActionCreator {
     return const Action(MovieDetailPageAction.action);
   }
 
-  static Action onInit(MovieDetailModel model) {
+  static Action onInit(ProductModel model) {
     return Action(MovieDetailPageAction.init, payload: model);
   }
 
