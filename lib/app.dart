@@ -4,7 +4,6 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart' hide Action;
 
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/utils/SharedPreferencesUtil.dart';
 import 'package:movie/views/discover_page/page.dart';
@@ -16,7 +15,7 @@ import 'package:movie/views/listdetail_page/page.dart';
 import 'package:movie/views/login_page/page.dart';
 import 'package:movie/views/main_page/page.dart';
 import 'package:movie/views/moviedetail_page/page.dart';
-import 'package:movie/views/my_page/page.dart';
+import 'package:movie/views/collect_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
 import 'package:movie/views/pay_page/page.dart';
 import 'package:movie/views/review_page/page.dart';
@@ -102,7 +101,7 @@ Future<Widget> createApp() async {
       'WebPage': WebPage(),
       'reviewPage': ReviewPage(),
       'PayPage': PayPage(),
-      'MyPage': MyPage(),
+      'CollectPage': CollectPage(),
       'Douyin': DouyinPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {

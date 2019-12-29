@@ -5,7 +5,7 @@ import 'package:movie/generated/i18n.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(MyState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(CollectState state, Dispatch dispatch, ViewService viewService) {
   return DefaultTabController(
     length: 2,
     child: Scaffold(

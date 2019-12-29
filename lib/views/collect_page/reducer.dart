@@ -5,9 +5,9 @@ import 'package:movie/models/concernlist.dart';
 import 'action.dart';
 import 'state.dart';
 
-Reducer<MyState> buildReducer() {
+Reducer<CollectState> buildReducer() {
   return asReducer(
-    <Object, Reducer<MyState>>{
+    <Object, Reducer<CollectState>>{
       MyAction.action: _onAction,
       MyAction.setConcernState: _setConcernState,
       MyAction.setFavoritesState: _setFavoritesState,
@@ -18,23 +18,23 @@ Reducer<MyState> buildReducer() {
   );
 }
 
-MyState _onAction(MyState state, Action action) {
-  final MyState newState = state.clone();
+CollectState _onAction(CollectState state, Action action) {
+  final CollectState newState = state.clone();
   return newState;
 }
 
-MyState _setConcernState(MyState state, Action action) {
+CollectState _setConcernState(CollectState state, Action action) {
   final ConcernListModel q = action.payload ??
       ConcernListModel.fromParams(results: List<ConcernListResult>());
-  final MyState newState = state.clone();
+  final CollectState newState = state.clone();
   newState.concerns = q;
   return newState;
 }
 
-MyState _setFavoritesState(MyState state, Action action) {
+CollectState _setFavoritesState(CollectState state, Action action) {
   final MovieListModel q = action.payload ??
       MovieListModel.fromParams(results: List<MovieListResult>());
-  final MyState newState = state.clone();
+  final CollectState newState = state.clone();
   newState.favorites = q;
   return newState;
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/models/concernlist.dart';
 import 'package:movie/models/movielist.dart';
 
-class MyState implements Cloneable<MyState> {
+class CollectState implements Cloneable<CollectState> {
 
   MovieListModel favorites;
   ConcernListModel concerns;
@@ -11,8 +11,8 @@ class MyState implements Cloneable<MyState> {
   ScrollController concernsController;
 
   @override
-  MyState clone() {
-    return MyState()
+  CollectState clone() {
+    return CollectState()
     ..favorites = favorites
     ..concerns = concerns
     ..favoritesController = favoritesController
@@ -20,8 +20,8 @@ class MyState implements Cloneable<MyState> {
   }
 }
 
-MyState initState(Map<String, dynamic> args) {
-  var state = MyState();
+CollectState initState(Map<String, dynamic> args) {
+  var state = CollectState();
   state.favorites = MovieListModel.fromParams(results:List<MovieListResult>());
   state.concerns = ConcernListModel.fromParams(results: List<ConcernListResult>());
   return state;

@@ -17,9 +17,9 @@ class FavoritesState implements Cloneable<FavoritesState> {
   }
 }
 
-class FavoritesConnector extends ConnOp<MyState, FavoritesState>{
+class FavoritesConnector extends ConnOp<CollectState, FavoritesState>{
   @override
-  FavoritesState get(MyState state) {
+  FavoritesState get(CollectState state) {
     FavoritesState substate = new FavoritesState();
     substate.favoritesList = state.favorites;
     substate.movieController = state.favoritesController;

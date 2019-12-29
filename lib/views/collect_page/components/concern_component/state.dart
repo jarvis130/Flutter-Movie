@@ -16,9 +16,9 @@ class ConcernState implements Cloneable<ConcernState> {
   }
 }
 
-class ConcernConnector extends ConnOp<MyState, ConcernState>{
+class ConcernConnector extends ConnOp<CollectState, ConcernState>{
   @override
-  ConcernState get(MyState state) {
+  ConcernState get(CollectState state) {
     ConcernState substate = new ConcernState();
     substate.concernList = state.concerns;
     substate.movieController = state.concernsController;

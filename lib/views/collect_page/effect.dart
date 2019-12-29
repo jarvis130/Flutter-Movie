@@ -7,8 +7,8 @@ import 'package:movie/models/concernlist.dart';
 import 'action.dart';
 import 'state.dart';
 
-Effect<MyState> buildEffect() {
-  return combineEffects(<Object, Effect<MyState>>{
+Effect<CollectState> buildEffect() {
+  return combineEffects(<Object, Effect<CollectState>>{
     MyAction.action: _onAction,
     Lifecycle.initState: _onInit,
     Lifecycle.dispose: _onDispose,
@@ -19,10 +19,10 @@ Effect<MyState> buildEffect() {
   });
 }
 
-void _onAction(Action action, Context<MyState> ctx) {
+void _onAction(Action action, Context<CollectState> ctx) {
 }
 
-Future _onInit(Action action, Context<MyState> ctx) async {
+Future _onInit(Action action, Context<CollectState> ctx) async {
 
   ctx.state.favoritesController = new ScrollController()
     ..addListener(() async {
@@ -46,12 +46,12 @@ Future _onInit(Action action, Context<MyState> ctx) async {
   await _loadConcern(action, ctx);
 }
 
-void _onDispose(Action action, Context<MyState> ctx) {
+void _onDispose(Action action, Context<CollectState> ctx) {
   ctx.state.favoritesController.dispose();
   ctx.state.concernsController.dispose();
 }
 
-void _loadFavoritesMore(Action action, Context<MyState> ctx) async {
+void _loadFavoritesMore(Action action, Context<CollectState> ctx) async {
   MovieListModel q;
   var t = ctx.state.favorites;
   if (t != null) {
@@ -63,7 +63,7 @@ void _loadFavoritesMore(Action action, Context<MyState> ctx) async {
   }
 }
 
-void _loadConcernMore(Action action, Context<MyState> ctx) async {
+void _loadConcernMore(Action action, Context<CollectState> ctx) async {
   ConcernListModel q;
   var c = ctx.state.concerns;
   if (c != null) {
@@ -81,12 +81,12 @@ void _loadConcernMore(Action action, Context<MyState> ctx) async {
   }
 }
 
-void _loadFavorites(Action action, Context<MyState> ctx) async {
+void _loadFavorites(Action action, Context<CollectState> ctx) async {
   MovieListModel  q = await MyApi.getFavoritesList(ApiHelper.uid, page: 1);
   if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
 }
 
-void _loadConcern(Action action, Context<MyState> ctx) async {
+void _loadConcern(Action action, Context<CollectState> ctx) async {
   ConcernListModel q = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: 1);
   if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
 

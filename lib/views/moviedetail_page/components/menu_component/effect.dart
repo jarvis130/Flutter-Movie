@@ -1,10 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/moviedetail_api.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/views/moviedetail_page/action.dart';
-import '../../../my_page/action.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'action.dart';
 import 'state.dart';
 
