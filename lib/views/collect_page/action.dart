@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/concernlist.dart';
 
@@ -33,7 +34,7 @@ class MyActionCreator {
     return Action(MyAction.loadConcern);
   }
 
-  static Action setFavoritesState(MovieListModel d) {
+  static Action setFavoritesState(GoodProducts d) {
     return Action(MyAction.setFavoritesState, payload: d);
   }
   static Action setConcernState(ConcernListModel d) {

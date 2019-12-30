@@ -1,15 +1,30 @@
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/concernlist.dart';
-import 'package:movie/models/movielist.dart';
-class MyApi {
+import 'package:movie/utils/httpUtil.dart';
+import 'dart:convert' show json;
+import 'dart:ui' as ui;
+import 'package:dio/dio.dart';
+
+class CollectApi {
 
   ///收藏列表
-  static Future<MovieListModel> getFavoritesList(String uid, {int page = 1}) async {
-    MovieListModel model;
-    String param = 'service=User.getCollectVideos&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieListModel(r);
-    return model;
+  static Future<GoodProducts> getFavoritesList({int page = 1, int per_page = 20}) async {
+
+    FormData formData = new FormData.from({
+      'page': page,
+      'per_page': per_page,
+      "XDEBUG_SESSION_START": 17366
+    });
+
+    var response = await HttpUtil().post('ecapi.video.liked.list', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      GoodProducts model = GoodProducts.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
   }
 
   ///关注列表

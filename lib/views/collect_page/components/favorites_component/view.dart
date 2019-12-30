@@ -2,9 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'action.dart';
@@ -14,10 +12,12 @@ import 'state.dart';
 
 Widget buildView(FavoritesState state, Dispatch dispatch, ViewService viewService) {
 
- Widget _buildListCell(MovieListResult d) {
+ GoodProducts goods =  state.favoritesList;
+
+ Widget _buildListCell(Products d) {
     return GestureDetector(
         onTap: () {
-          dispatch(FavoritesActionCreator.onCellTapped(d.id, d.thumb_s, d.title, d.thumb_s));    
+          dispatch(FavoritesActionCreator.onCellTapped(d.id.toString(), d.defaultPhoto.thumb, d.name, d.defaultPhoto.thumb));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -25,7 +25,7 @@ Widget buildView(FavoritesState state, Dispatch dispatch, ViewService viewServic
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: CachedNetworkImageProvider(
-                      d.thumb_s
+                      d.defaultPhoto.thumb
                   )
               )
           ),
@@ -54,16 +54,16 @@ Widget buildView(FavoritesState state, Dispatch dispatch, ViewService viewServic
   }
 
  Widget _buildBody() {
-    var d = state.favoritesList;
+
     var width = Adapt.screenW() / 3;
     var height = Adapt.px(300);
-    if (d.results.length > 0)
+    if (goods.products != null)
       return SliverGrid.extent(
         childAspectRatio: 2 / 3,
         maxCrossAxisExtent: width,
         crossAxisSpacing: Adapt.px(10),
         mainAxisSpacing: Adapt.px(10),
-        children: d.results.map(_buildListCell).toList(),
+        children: goods.products.map(_buildListCell).toList(),
       );
     else
       return SliverGrid.extent(

@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:movie/models/concernlist.dart';
@@ -32,8 +33,7 @@ CollectState _setConcernState(CollectState state, Action action) {
 }
 
 CollectState _setFavoritesState(CollectState state, Action action) {
-  final MovieListModel q = action.payload ??
-      MovieListModel.fromParams(results: List<MovieListResult>());
+  final GoodProducts q = action.payload ?? new GoodProducts();
   final CollectState newState = state.clone();
   newState.favorites = q;
   return newState;

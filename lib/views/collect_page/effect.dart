@@ -1,8 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/apihelper.dart';
-import 'package:movie/api/my_api.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/api/collect_api.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/concernlist.dart';
 import 'action.dart';
 import 'state.dart';
@@ -52,12 +52,12 @@ void _onDispose(Action action, Context<CollectState> ctx) {
 }
 
 void _loadFavoritesMore(Action action, Context<CollectState> ctx) async {
-  MovieListModel q;
+  GoodProducts q;
   var t = ctx.state.favorites;
   if (t != null) {
-    if (t.page != t.total_pages) {
-      int page = t.page + 1;
-      q = await MyApi.getFavoritesList(ApiHelper.uid, page: page);
+    if (t.paged.page != t.paged.more) {
+      int page = t.paged.page + 1;
+      q = await CollectApi.getFavoritesList(page: page);
       if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
     }
   }
@@ -75,19 +75,19 @@ void _loadConcernMore(Action action, Context<CollectState> ctx) async {
         page = c.page + 1;
       }
 
-      q = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: page);
+      q = await CollectApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: page);
       if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
     }
   }
 }
 
 void _loadFavorites(Action action, Context<CollectState> ctx) async {
-  MovieListModel  q = await MyApi.getFavoritesList(ApiHelper.uid, page: 1);
+  GoodProducts  q = await CollectApi.getFavoritesList(page: 1);
   if (q != null) ctx.dispatch(MyActionCreator.setFavoritesState(q));
 }
 
 void _loadConcern(Action action, Context<CollectState> ctx) async {
-  ConcernListModel q = await MyApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: 1);
+  ConcernListModel q = await CollectApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: 1);
   if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
 
 }

@@ -1,12 +1,11 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
+import 'package:movie/models/GoodProducts.dart';
 import 'package:flutter/widgets.dart';
 import '../../state.dart';
 
 class FavoritesState implements Cloneable<FavoritesState> {
 
-  MovieListModel favoritesList;
+  GoodProducts favoritesList;
   ScrollController movieController;
 
   @override

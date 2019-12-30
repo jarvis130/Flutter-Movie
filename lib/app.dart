@@ -68,8 +68,6 @@ Future _init() async {
     UserApi.loginByMobileDevice(uuid, os);
   }
 
-//  if (accessToken != null) ApiHelper.accessTokenV4 = accessToken;
-
   startFlag = prefs.getString('tip') == null ? '0' : '1';
   if(startFlag == '0'){
     prefs.setString('tip', '1');
