@@ -100,7 +100,7 @@ void _shopping(Action action, Context<UserPageState> ctx) async {
 }
 
 void _favoritesTapped(Action action, Context<UserPageState> ctx) async {
-  await Navigator.of(ctx.context).pushNamed('MyPage', arguments: {
+  await Navigator.of(ctx.context).pushNamed('CollectPage', arguments: {
     'uid': ApiHelper.uid
   });
 }

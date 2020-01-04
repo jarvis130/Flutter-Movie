@@ -35,31 +35,35 @@ class UserModel {
 
 class User {
   int _id;
-  Null _age;
+  int _age;
   Rank _rank;
   int _gender;
   String _username;
   String _nickname;
   String _mobile;
-  Null _avatar;
+  String _avatar;
   bool _mobileBinded;
   int _joinedAt;
   bool _isAuth;
   bool _isCompleted;
+  int _watchTimes;
+  int _watchedTimes;
 
   User(
       {int id,
-        Null age,
+        int age,
         Rank rank,
         int gender,
         String username,
         String nickname,
         String mobile,
-        Null avatar,
+        String avatar,
         bool mobileBinded,
         int joinedAt,
         bool isAuth,
-        bool isCompleted}) {
+        bool isCompleted,
+        int watchTimes,
+        int watchedTimes}) {
     this._id = id;
     this._age = age;
     this._rank = rank;
@@ -72,12 +76,14 @@ class User {
     this._joinedAt = joinedAt;
     this._isAuth = isAuth;
     this._isCompleted = isCompleted;
+    this._watchTimes = watchTimes;
+    this._watchedTimes = watchedTimes;
   }
 
   int get id => _id;
   set id(int id) => _id = id;
-  Null get age => _age;
-  set age(Null age) => _age = age;
+  int get age => _age;
+  set age(int age) => _age = age;
   Rank get rank => _rank;
   set rank(Rank rank) => _rank = rank;
   int get gender => _gender;
@@ -88,8 +94,8 @@ class User {
   set nickname(String nickname) => _nickname = nickname;
   String get mobile => _mobile;
   set mobile(String mobile) => _mobile = mobile;
-  Null get avatar => _avatar;
-  set avatar(Null avatar) => _avatar = avatar;
+  String get avatar => _avatar;
+  set avatar(String avatar) => _avatar = avatar;
   bool get mobileBinded => _mobileBinded;
   set mobileBinded(bool mobileBinded) => _mobileBinded = mobileBinded;
   int get joinedAt => _joinedAt;
@@ -98,6 +104,12 @@ class User {
   set isAuth(bool isAuth) => _isAuth = isAuth;
   bool get isCompleted => _isCompleted;
   set isCompleted(bool isCompleted) => _isCompleted = isCompleted;
+
+  int get watchTimes => _watchTimes;
+  set watchTimes(int watchTimes) => _watchTimes = watchTimes;
+
+  int get watchedTimes => _watchedTimes;
+  set watchedTimes(int watchedTimes) => _watchedTimes = watchedTimes;
 
   User.fromJson(Map<String, dynamic> json) {
     _id = json['id'];
@@ -112,6 +124,8 @@ class User {
     _joinedAt = json['joined_at'];
     _isAuth = json['is_auth'];
     _isCompleted = json['is_completed'];
+    _watchedTimes = json['watched_times'];
+    _watchTimes = json['watch_times'];
   }
 
   Map<String, dynamic> toJson() {
@@ -130,6 +144,8 @@ class User {
     data['joined_at'] = this._joinedAt;
     data['is_auth'] = this._isAuth;
     data['is_completed'] = this._isCompleted;
+    data['watched_times'] = this._watchedTimes;
+    data['watch_times'] = this._watchTimes;
     return data;
   }
 }

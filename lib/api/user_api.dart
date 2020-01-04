@@ -36,6 +36,7 @@ class UserApi {
   static Future getUserProfile() async {
 
     FormData formData = new FormData.from({
+      "XDEBUG_SESSION_START": 16116
     });
 
     var response = await HttpUtil().post('ecapi.user.profile.get', data: formData);
@@ -55,7 +56,7 @@ class UserApi {
       'page': page,
       'per_page': per_page,
       'user_id': user_id,
-      "XDEBUG_SESSION_START": 17366
+      "XDEBUG_SESSION_START": 16116
     });
 
     var response = await HttpUtil().post('ecapi.user.getProfileByUserId', data: formData);

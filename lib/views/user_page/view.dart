@@ -690,16 +690,16 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
 
   Widget _buildHeaderCard() {
     User d = userModel.user;
-    return d.id == null ? Container() : Container(
+    return d == null ? Container() : Container(
       color: Colors.white,
       width: Adapt.screenW(),
-      height: 180,
+      height: 160,
       alignment: Alignment.center,
       child: Column(
         children: <Widget>[
           //用户名
           Container(
-            margin: EdgeInsets.only(left: 0.0, top: 40.0, right: 0.0, bottom: 10.0),
+            margin: EdgeInsets.only(left: 0.0, top: 30.0, right: 0.0, bottom: 10.0),
             child: Text(
               d.rank.name,
               style: TextStyle(
@@ -742,7 +742,8 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       height: Adapt.px(10.0),
                     ),
                     Text(
-                      '30 / 30',
+//                      '30 / '+ (d.rank.id == 0 ? '5' : (d.rank.id == 1 ? '10' : '無限')),
+                      d.watchedTimes.toString() + '/' + d.watchTimes.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18
@@ -818,11 +819,11 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
             children: <Widget>[
               Container(
                 width: Adapt.screenW(),
-                height: 80,
+                height: 150,
                 color: Color.fromRGBO(50, 50, 50, 1),
               ),
               Card(
-                margin: EdgeInsets.only(left: 10.0, top: 35.0, right: 10.0, bottom: 10.0),
+                margin: EdgeInsets.only(left: 10.0, top: 80.0, right: 10.0, bottom: 10.0),
                 // color: Colors.white,
                 //z轴的高度，设置card的阴影
                 elevation: 5.0,
@@ -843,7 +844,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   decoration: BoxDecoration(
                     image: DecorationImage(//背景图片 ,不能与背景色同时使用
                       image: CachedNetworkImageProvider(
-                          userModel.user.avatar == null ? '' : userModel.user.avatar
+                          userModel.user == null ? '' : userModel.user.avatar
                       ),
                       alignment: Alignment.topCenter,
                       repeat: ImageRepeat.repeatY,//是否重复
