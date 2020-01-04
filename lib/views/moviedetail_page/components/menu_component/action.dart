@@ -7,8 +7,8 @@ enum MenuAction {
   updateRating,
   setFavorite,
   updateFavorite,
-  setWatchlist,
-  updateWatchlist
+  setAttention,
+  updateAttention
 }
 
 class MenuActionCreator {
@@ -31,11 +31,11 @@ class MenuActionCreator {
   static Action updateFavorite(int isFavorite) {
     return Action(MenuAction.updateFavorite, payload: isFavorite);
   }
-  static Action setWatchlist(bool isAdd) {
-    return Action(MenuAction.setWatchlist, payload: isAdd);
+  static Action setAttention(int pubId) {
+    return Action(MenuAction.setAttention, payload: pubId);
   }
 
-  static Action updateWatctlist(bool isAdd) {
-    return Action(MenuAction.updateWatchlist, payload: isAdd);
+  static Action updateAttention(int isAttention) {
+    return Action(MenuAction.updateAttention, payload: isAttention);
   }
 }

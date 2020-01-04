@@ -6,6 +6,6 @@ class GlobalConfig {
   static bool isDebug = true;//是否是调试模式
   static bool dark = false;
   static Color fontColor = Colors.black54;
-  static String BASE_URL = "http://192.168.0.102:8084/v2/";
-  static String HEADER_TOKEN_KEY = "X-MOVIEAPI-Authorization";
+  static String BASE_URL = "http://172.31.21.53:8084/v2/";
+  static String HEADER_TOKEN_KEY = "X-API-Authorization";
 }

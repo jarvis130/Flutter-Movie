@@ -10,7 +10,7 @@ Reducer<MenuState> buildReducer() {
       MenuAction.action: _onAction,
       MenuAction.updateRating:_updateRating,
       MenuAction.updateFavorite:_updateFavorite,
-      MenuAction.updateWatchlist:_updateWatchlist
+      MenuAction.updateAttention:_updateAttention
     },
   );
 }
@@ -29,14 +29,14 @@ MenuState _updateRating(MenuState state, Action action) {
 
 MenuState _updateFavorite(MenuState state, Action action) {
   int favorite=action.payload;
-  final MenuState newState = state.clone();
+  MenuState newState = state.clone();
   newState.model.product.isCollect = favorite;
   return newState;
 }
 
-MenuState _updateWatchlist(MenuState state, Action action) {
-  final bool isAdd=action.payload;
-  final MenuState newState = state.clone();
-//  newState.accountState.watchlist=isAdd;
+MenuState _updateAttention(MenuState state, Action action) {
+  int isAttention = action.payload;
+  MenuState newState = state.clone();
+  newState.model.product.isAttention = isAttention;
   return newState;
 }

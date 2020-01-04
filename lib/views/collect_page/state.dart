@@ -1,13 +1,12 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/concernlist.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/models/UserListModel.dart';
 
 class CollectState implements Cloneable<CollectState> {
 
   GoodProducts favorites;
-  ConcernListModel concerns;
+  UserListModel userListModel;
   ScrollController favoritesController;
   ScrollController concernsController;
 
@@ -15,7 +14,7 @@ class CollectState implements Cloneable<CollectState> {
   CollectState clone() {
     return CollectState()
     ..favorites = favorites
-    ..concerns = concerns
+    ..userListModel = userListModel
     ..favoritesController = favoritesController
     ..concernsController = concernsController;
   }
@@ -24,6 +23,6 @@ class CollectState implements Cloneable<CollectState> {
 CollectState initState(Map<String, dynamic> args) {
   var state = CollectState();
   state.favorites = new GoodProducts();
-  state.concerns = ConcernListModel.fromParams(results: List<ConcernListResult>());
+  state.userListModel = new UserListModel();
   return state;
 }

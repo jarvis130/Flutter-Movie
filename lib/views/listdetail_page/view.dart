@@ -7,6 +7,10 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/share_card.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
+import 'package:movie/models/UserDetailModel.dart';
+import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/sortcondition.dart';
@@ -21,6 +25,9 @@ import 'state.dart';
 
 Widget buildView(
     ListDetailPageState state, Dispatch dispatch, ViewService viewService) {
+
+  UserModel userDetailModel = state.userDetailModel;
+  GoodProducts videoList = state.videoList;
 
   String _covertDuration(int d) {
     String result = '';
@@ -71,56 +78,52 @@ Widget buildView(
   }
 
   Widget _buildInfoGroup() {
-    var d = state.listDetailModel;
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: Adapt.px(20)),
-      color: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频数量'),
-          Container(
-            color: Colors.grey[300],
-            width: Adapt.px(1),
-            height: Adapt.px(60),
-          ),
-          _buildInfoCell('', '粉丝',
-              valueChild: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    d?.fans ?? '0',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: Adapt.px(28)),
-                  ),
-                  Icon(
-                    Icons.star,
-                    color: Colors.black,
-                    size: Adapt.px(20),
-                  )
-                ],
-              )),
-          Container(
-            color: Colors.grey[300],
-            width: Adapt.px(1),
-            height: Adapt.px(60),
-          ),
-          _buildInfoCell('0', '金币'),
-          Container(
-            color: Colors.grey[300],
-            width: Adapt.px(1),
-            height: Adapt.px(60),
-          ),
-//           _buildInfoCell(
-//               '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
-//               'REVENUE'),
-        ],
-      ),
-    );
+//    return Container(
+//      padding: EdgeInsets.symmetric(vertical: Adapt.px(20)),
+//      color: Colors.white,
+//      child: Row(
+//        crossAxisAlignment: CrossAxisAlignment.center,
+//        mainAxisAlignment: MainAxisAlignment.spaceAround,
+//        children: <Widget>[
+//          _buildInfoCell(d?.results.length?.toString() ?? '0', '视频数量'),
+//          Container(
+//            color: Colors.grey[300],
+//            width: Adapt.px(1),
+//            height: Adapt.px(60),
+//          ),
+//          _buildInfoCell('', '粉丝',
+//              valueChild: Row(
+//                crossAxisAlignment: CrossAxisAlignment.start,
+//                mainAxisAlignment: MainAxisAlignment.center,
+//                children: <Widget>[
+//                  Text(
+//                    d?.fans ?? '0',
+//                    style: TextStyle(
+//                        color: Colors.black,
+//                        fontWeight: FontWeight.bold,
+//                        fontSize: Adapt.px(28)),
+//                  ),
+//                  Icon(
+//                    Icons.star,
+//                    color: Colors.black,
+//                    size: Adapt.px(20),
+//                  )
+//                ],
+//              )),
+//          Container(
+//            color: Colors.grey[300],
+//            width: Adapt.px(1),
+//            height: Adapt.px(60),
+//          ),
+//          _buildInfoCell('0', '金币'),
+//          Container(
+//            color: Colors.grey[300],
+//            width: Adapt.px(1),
+//            height: Adapt.px(60),
+//          ),
+//        ],
+//      ),
+//    );
   }
 
   Widget _buildShimmerHeader() {
@@ -152,12 +155,10 @@ Widget buildView(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          'A list by',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: Adapt.px(30)),
+                        Container(
+                          width: Adapt.px(120),
+                          height: Adapt.px(28),
+                          color: baseColor,
                         ),
                         SizedBox(
                           height: Adapt.px(5),
@@ -172,46 +173,46 @@ Widget buildView(
                     Expanded(
                       child: Container(),
                     ),
-                    _buildIconButton(Icons.edit, () {}),
-                    _buildIconButton(Icons.share, () {}),
-                    _buildIconButton(Icons.sort, () {}),
+                    _buildIconButton(Icons.favorite, () {}),
+//                    _buildIconButton(Icons.share, () {}),
+//                    _buildIconButton(Icons.sort, () {}),
                   ],
                 ),
                 SizedBox(
                   height: Adapt.px(20),
                 ),
-                Text('About this list',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: Adapt.px(30))),
-                SizedBox(
-                  height: Adapt.px(10),
-                ),
-                Container(
-                  width: Adapt.screenW() - Adapt.px(60),
-                  height: Adapt.px(26),
-                  color: baseColor,
-                ),
-                SizedBox(
-                  height: Adapt.px(10),
-                ),
-                Container(
-                  width: Adapt.screenW() - Adapt.px(60),
-                  height: Adapt.px(26),
-                  color: baseColor,
-                ),
-                SizedBox(
-                  height: Adapt.px(10),
-                ),
-                Container(
-                  width: Adapt.screenW() - Adapt.px(200),
-                  height: Adapt.px(26),
-                  color: baseColor,
-                ),
-                SizedBox(
-                  height: Adapt.px(30),
-                ),
+//                Text('About this list',
+//                    style: TextStyle(
+//                        color: Colors.white,
+//                        fontWeight: FontWeight.bold,
+//                        fontSize: Adapt.px(30))),
+//                SizedBox(
+//                  height: Adapt.px(10),
+//                ),
+//                Container(
+//                  width: Adapt.screenW() - Adapt.px(60),
+//                  height: Adapt.px(26),
+//                  color: baseColor,
+//                ),
+//                SizedBox(
+//                  height: Adapt.px(10),
+//                ),
+//                Container(
+//                  width: Adapt.screenW() - Adapt.px(60),
+//                  height: Adapt.px(26),
+//                  color: baseColor,
+//                ),
+//                SizedBox(
+//                  height: Adapt.px(10),
+//                ),
+//                Container(
+//                  width: Adapt.screenW() - Adapt.px(200),
+//                  height: Adapt.px(26),
+//                  color: baseColor,
+//                ),
+//                SizedBox(
+//                  height: Adapt.px(30),
+//                ),
               ],
             ),
           ),
@@ -221,128 +222,103 @@ Widget buildView(
   }
 
   Widget _buildShareCardHeader() {
-    var d = state.listDetailModel;
-    double cellwidth = Adapt.px(145);
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: Adapt.px(20),
-        ),
-        Text(d.user_nicename,
-            style: TextStyle(
-                color: Colors.white,
-                fontSize: Adapt.px(45),
-                fontWeight: FontWeight.bold)),
-        SizedBox(
-          height: Adapt.px(20),
-        ),
-        Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                width: Adapt.px(150),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: Adapt.px(80),
-                      height: Adapt.px(80),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Adapt.px(40)),
-                          image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                  d.avatar_thumb
-                          ))),
-                    ),
-                    SizedBox(
-                      height: Adapt.px(10),
-                    ),
-                    Text(
-                      d.avatar_thumb,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(30)),
-                    ),
-                    SizedBox(
-                      height: Adapt.px(5),
-                    ),
-                    // SizedBox(
-                    //   width: Adapt.px(130),
-                    //   child: Text(
-                    //     d?.createdBy?.username ?? '',
-                    //     style: TextStyle(color: Colors.white),
-                    //   ),
-                    // )
-                  ],
-                ),
-              ),
-              SizedBox(
-                width: Adapt.px(20),
-              ),
-              Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      _buildInfoCell(
-                        d?.totalResults?.toString() ?? '0',
-                        '视频',
-                        labelColor: Colors.white,
-                        titleColor: Colors.white,
-                      ),
-                      SizedBox(
-                        width: Adapt.px(20),
-                      ),
-                      // _buildInfoCell(
-                      //   d?.averageRating?.toStringAsFixed(1) ?? '0.0',
-                      //   'RATING',
-                      //   labelColor: Colors.white,
-                      //   titleColor: Colors.white,
-                      // ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Adapt.px(20),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      // _buildInfoCell(
-                      //   _covertDuration(d?.runtime ?? 0),
-                      //   'RUNTIME',
-                      //   labelColor: Colors.white,
-                      //   titleColor: Colors.white,
-                      // ),
-                      SizedBox(
-                        width: Adapt.px(20),
-                      ),
-                      // _buildInfoCell(
-                      //   '\$${((d?.revenue ?? 0) / 1000000000).toStringAsFixed(1)} B',
-                      //   'REVENUE',
-                      //   labelColor: Colors.white,
-                      //   titleColor: Colors.white,
-                      // ),
-                    ],
-                  )
-                ],
-              )
-            ]),
-      ],
-    );
+
+//    double cellwidth = Adapt.px(145);
+//    return Column(
+//      children: <Widget>[
+//        SizedBox(
+//          height: Adapt.px(20),
+//        ),
+//        Text(userDetailModel.user.username,
+//            style: TextStyle(
+//                color: Colors.white,
+//                fontSize: Adapt.px(45),
+//                fontWeight: FontWeight.bold)),
+//        SizedBox(
+//          height: Adapt.px(20),
+//        ),
+//        Row(
+//            crossAxisAlignment: CrossAxisAlignment.start,
+//            mainAxisAlignment: MainAxisAlignment.center,
+//            children: <Widget>[
+//              SizedBox(
+//                width: Adapt.px(150),
+//                child: Column(
+//                  crossAxisAlignment: CrossAxisAlignment.center,
+//                  children: <Widget>[
+//                    Container(
+//                      width: Adapt.px(80),
+//                      height: Adapt.px(80),
+//                      decoration: BoxDecoration(
+//                          borderRadius: BorderRadius.circular(Adapt.px(40)),
+//                          image: DecorationImage(
+//                              image: CachedNetworkImageProvider(
+//                                  userDetailModel.user.avatar
+//                          ))),
+//                    ),
+//                    SizedBox(
+//                      height: Adapt.px(10),
+//                    ),
+//                    Text(
+//                      userDetailModel.user.avatar,
+//                      style: TextStyle(
+//                          color: Colors.white,
+//                          fontWeight: FontWeight.bold,
+//                          fontSize: Adapt.px(30)),
+//                    ),
+//                    SizedBox(
+//                      height: Adapt.px(5),
+//                    ),
+//                  ],
+//                ),
+//              ),
+//              SizedBox(
+//                width: Adapt.px(20),
+//              ),
+//              Column(
+//                children: <Widget>[
+//                  Row(
+//                    children: <Widget>[
+//                      _buildInfoCell(
+//                        d?.totalResults?.toString() ?? '0',
+//                        '视频',
+//                        labelColor: Colors.white,
+//                        titleColor: Colors.white,
+//                      ),
+//                      SizedBox(
+//                        width: Adapt.px(20),
+//                      ),
+//                    ],
+//                  ),
+//                  SizedBox(
+//                    height: Adapt.px(20),
+//                  ),
+//                  Row(
+//                    children: <Widget>[
+//                      SizedBox(
+//                        width: Adapt.px(20),
+//                      ),
+//                    ],
+//                  )
+//                ],
+//              )
+//            ]),
+//      ],
+//    );
   }
 
   Widget _buildHeader() {
-    var d = state.listDetailModel;
-    if (d.id != null)
+    if (userDetailModel.user != null)
       return Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-          fit: BoxFit.cover,
-          //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
-          image: CachedNetworkImageProvider(
-            state?.listDetailModel?.avatar_thumb
-          ),
-        )),
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            //colorFilter: ColorFilter.mode(Colors.black87, BlendMode.color),
+            image: userDetailModel.user.avatar != null ? CachedNetworkImageProvider(
+                userDetailModel.user.avatar
+            ) : new ExactAssetImage('images/empty.png'),
+          )
+        ),
         child: Container(
           alignment: Alignment.bottomLeft,
           padding: EdgeInsets.all(Adapt.px(30)),
@@ -360,9 +336,11 @@ Widget buildView(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(Adapt.px(50)),
                           image: DecorationImage(
-                              image: CachedNetworkImageProvider(
-                                  d.avatar_thumb
-                          ))),
+                              image: userDetailModel.user.avatar != null ? CachedNetworkImageProvider(
+                                  userDetailModel.user.avatar
+                              ) : new ExactAssetImage('images/empty.png')
+                          )
+                        ),
                     ),
                     SizedBox(
                       width: Adapt.px(20),
@@ -373,7 +351,7 @@ Widget buildView(
                         Container(
                           width: 120.0,
                           child: Text(
-                            d?.user_nicename ?? '',
+                            userDetailModel.user?.username ?? '',
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 color: Colors.white,
@@ -387,7 +365,7 @@ Widget buildView(
                          SizedBox(
                            width: Adapt.px(200),
                            child: Text(
-                             d.createTime,
+                             userDetailModel.user?.rank?.name ?? '',
                              style: TextStyle(
                                  color: Colors.white,
                                  fontWeight: FontWeight.bold,
@@ -399,16 +377,12 @@ Widget buildView(
                     Expanded(
                       child: Container(),
                     ),
-                    MaterialButton(
-                      height: 28,
-                      minWidth: 30,
-                      color: d.isattention == 0 ? Colors.red : Colors.grey,
-                      textColor: Colors.white,
-                      child: d.isattention == 0 ? Text('未关注') : Text('已关注'),
-                      onPressed: () {
-                        // ...
-                      },
-                    ),
+//                    IconButton(
+//                      icon: Icon(userDetailModel.user.isAttention == 0 ? Icons.favorite_border : Icons.favorite, color: userDetailModel.user.isAttention == 0 ? Color.fromRGBO(50, 50, 50, 1) : Colors.pink[400]),
+//                      onPressed: (){
+//                        dispatch(ListDetailPageActionCreator.setAttention(userDetailModel.user.id));
+//                      },
+//                    ),
 //                    _buildIconButton(Icons.exposure_plus_1, () {}),
 //                     _buildIconButton(Icons.share, () {
 //                       showDialog(
@@ -463,20 +437,20 @@ Widget buildView(
 //                           color: Colors.white,
 //                           fontWeight: FontWeight.bold,
 //                           fontSize: Adapt.px(30))),
-                   Container(
-                     width: Adapt.screenW() - Adapt.px(60),
-                     height: Adapt.px(120),
-                     child: Text(
-                       d.signature ?? '',
-                       overflow: TextOverflow.ellipsis,
-                       maxLines: 4,
-                       style: TextStyle(
-                           color: Colors.white, fontSize: Adapt.px(26)),
-                     ),
-                   ),
-                   SizedBox(
-                     height: Adapt.px(30),
-                   ),
+//                   Container(
+//                     width: Adapt.screenW() - Adapt.px(60),
+//                     height: Adapt.px(120),
+//                     child: Text(
+//                       userDetailModel.user.rank.name ?? '',
+//                       overflow: TextOverflow.ellipsis,
+//                       maxLines: 4,
+//                       style: TextStyle(
+//                           color: Colors.white, fontSize: Adapt.px(26)),
+//                     ),
+//                   ),
+//                   SizedBox(
+//                     height: Adapt.px(30),
+//                   ),
                 ],
               ),
             ),
@@ -487,10 +461,10 @@ Widget buildView(
       return _buildShimmerHeader();
   }
 
-  Widget _buildListCell(ListDetailResult d) {
+  Widget _buildListCell(Products videos) {
     return GestureDetector(
       onTap: () {
-         dispatch(ListDetailPageActionCreator.cellTapped(d));
+         dispatch(ListDetailPageActionCreator.cellTapped(videos));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -498,7 +472,7 @@ Widget buildView(
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: CachedNetworkImageProvider(
-                    d.thumb_s
+                    videos.defaultPhoto.thumb
                 ))),
         child: Column(
           children: <Widget>[
@@ -525,16 +499,16 @@ Widget buildView(
   }
 
   Widget _buildBody() {
-    var d = state.listDetailModel;
+
     var width = Adapt.screenW() / 3;
     var height = Adapt.px(300);
-    if (d.results.length > 0)
+    if (videoList.products != null)
       return SliverGrid.extent(
         childAspectRatio: 2 / 3,
         maxCrossAxisExtent: width,
         crossAxisSpacing: Adapt.px(10),
         mainAxisSpacing: Adapt.px(10),
-        children: state.listDetailModel.results.map(_buildListCell).toList(),
+        children: videoList.products.map(_buildListCell).toList(),
       );
     else
       return SliverGrid.extent(
@@ -565,26 +539,26 @@ Widget buildView(
           backgroundColor: Color.fromRGBO(50, 50, 50, 1),
           pinned: true,
           title: Text(
-            state?.listDetailModel?.user_nicename ?? '',
+            state?.userDetailModel?.user?.username ?? '',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20
             ),
           ),
-          expandedHeight: Adapt.px(550),
+          expandedHeight: Adapt.px(280),
           flexibleSpace: FlexibleSpaceBar(
             background: _buildHeader(),
           ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(Adapt.px(100)),
-            child: _buildInfoGroup(),
-          ),
+//          bottom: PreferredSize(
+//            preferredSize: Size.fromHeight(Adapt.px(100)),
+//            child: _buildInfoGroup(),
+//          ),
         ),
         _buildBody(),
         SliverToBoxAdapter(
-          child: Offstage(
+          child: videoList.products == null ? Container() : Offstage(
             offstage:
-                state.listDetailModel.totalPages == state.listDetailModel.page,
+              state.videoList.products.length == state.total,
             child: Container(
               height: Adapt.px(80),
               margin: EdgeInsets.only(top: Adapt.px(30)),

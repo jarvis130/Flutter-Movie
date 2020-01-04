@@ -9,7 +9,7 @@ Effect<MenuState> buildEffect() {
     MenuAction.action: _onAction,
     MenuAction.setRating:_setRating,
     MenuAction.setFavorite:_setFavorite,
-    MenuAction.setWatchlist:_setWatchlist,
+    MenuAction.setAttention:_setAttention,
   });
 }
 
@@ -39,18 +39,21 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
   ctx.dispatch(MenuActionCreator.updateFavorite(f));
 }
 
-Future _setWatchlist(Action action, Context<MenuState> ctx) async{
-  final bool f=action.payload;
-  ctx.dispatch(MenuActionCreator.updateWatctlist(f));
+Future _setAttention(Action action, Context<MenuState> ctx) async{
+  int userId=action.payload;
+  int f = 0;
+  Map map = await MoiveDetailApi.setAttention(userId);
+  if(map != null){
+    if(map['is_attention'] == false){
+      ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('取消关注'));
+      f = 0;
+    }else{
+      ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('关注成功！'));
+      f = 1;
+    }
+    ctx.dispatch(MenuActionCreator.updateAttention(f));
+  }
 
-//  SharedPreferences prefs = await SharedPreferences.getInstance();
-//  String uid = prefs.getString('uid');
-//  String accessTokenV4 = prefs.getString('accessTokenV4');
-//  MovieDetailModel r=await MoiveDetailApi.setAttent(uid, accessTokenV4, ctx.state.userinfo['id']);
-//  if(r != null){
-//    ctx.broadcast(MovieDetailPageActionCreator.showSnackBar(r.isattent == '1' ? '已关注':'取消关注'));
-//    ctx.broadcast(MyActionCreator.onLoadConcern());
-//  }
 
 }
 

@@ -9,7 +9,7 @@ import 'package:movie/models/searchresult.dart';
 class ProductApi {
 
   ///商品列表
-  static Future<GoodProducts> getList(String uid, {int page = 1, int per_page = 20, int is_hot = 0, int is_best = 0, int is_new = 0, String attr_value1 = '', String attr_value2 = '', String is_real = '-1'}) async {
+  static Future<GoodProducts> getList({int page = 1, int per_page = 20, int is_hot = 0, int is_best = 0, int is_new = 0, String attr_value1 = '', String attr_value2 = '', String is_real = '-1', int pub_id = 0}) async {
     FormData formData = new FormData.from({
       "page": page,
       "per_page": per_page,
@@ -19,6 +19,7 @@ class ProductApi {
       "attr_value1": attr_value1,
       "attr_value2": attr_value2,
       "is_real": is_real,
+      "pub_id": pub_id,
       "XDEBUG_SESSION_START": 19819
     });
     var response = await HttpUtil().post('ecapi.video.list', data: formData);

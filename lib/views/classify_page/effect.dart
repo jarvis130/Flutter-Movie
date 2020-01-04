@@ -181,7 +181,6 @@ Future<GoodProducts> getGoodProducts(Action action, Context<ClassifyPageState> c
     title2 = ctx.state.groupTitle3;
   }
   GoodProducts model = await ProductApi.getList(
-    '',
     page: currentPage,
     is_hot: is_hot,
     is_best: is_best,

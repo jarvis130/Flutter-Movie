@@ -51,11 +51,11 @@ Future _initLoad(Action action, Context<MoreMediaPageState> ctx) async {
   int currentPage = ctx.state.currentPage + 1;
   if(currentPage == 1){
     if (ctx.state.mediaType == MediaType.hot)
-      model = await ProductApi.getList('', page: currentPage, is_hot: 1);
+      model = await ProductApi.getList(page: currentPage, is_hot: 1);
     else if (ctx.state.mediaType == MediaType.recommend)
-      model = await ProductApi.getList('', page: currentPage, is_best: 1);
+      model = await ProductApi.getList(page: currentPage, is_best: 1);
     else
-      model = await ProductApi.getList('', page: currentPage, is_new: 1);
+      model = await ProductApi.getList(page: currentPage, is_new: 1);
   }
 
   if (model != null){
@@ -68,11 +68,11 @@ Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
   int currentPage = ctx.state.currentPage + 1;
   if (currentPage <= ctx.state.pages) {
     if (ctx.state.mediaType == MediaType.hot)
-      model = await ProductApi.getList('', page: currentPage, is_hot: 1);
+      model = await ProductApi.getList(page: currentPage, is_hot: 1);
     else if (ctx.state.mediaType == MediaType.recommend)
-      model = await ProductApi.getList('', page: currentPage, is_best: 1);
+      model = await ProductApi.getList( page: currentPage, is_best: 1);
     else
-      model = await ProductApi.getList('', page: currentPage, is_new: 1);
+      model = await ProductApi.getList(page: currentPage, is_new: 1);
   }
 
   if (model != null){

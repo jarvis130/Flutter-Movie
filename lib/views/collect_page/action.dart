@@ -1,7 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/concernlist.dart';
+import 'package:movie/models/UserListModel.dart';
 
 //TODO replace with your own action
 enum MyAction {
@@ -37,7 +36,7 @@ class MyActionCreator {
   static Action setFavoritesState(GoodProducts d) {
     return Action(MyAction.setFavoritesState, payload: d);
   }
-  static Action setConcernState(ConcernListModel d) {
+  static Action setConcernState(UserListModel d) {
     return Action(MyAction.setConcernState, payload: d);
   }
 }

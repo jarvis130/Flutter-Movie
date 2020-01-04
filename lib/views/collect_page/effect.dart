@@ -1,9 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/collect_api.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/concernlist.dart';
+import 'package:movie/models/UserListModel.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -64,18 +63,18 @@ void _loadFavoritesMore(Action action, Context<CollectState> ctx) async {
 }
 
 void _loadConcernMore(Action action, Context<CollectState> ctx) async {
-  ConcernListModel q;
-  var c = ctx.state.concerns;
+  UserListModel q;
+  var c = ctx.state.userListModel;
   if (c != null) {
-    if (c.page == null || c.page != c.total_pages) {
+    if (c.paged.page == null || c.paged.page != c.paged.more) {
       int page = 0;
-      if(c.page == null){
+      if(c.paged.page == null){
         page = 1;
       }else{
-        page = c.page + 1;
+        page = c.paged.page + 1;
       }
 
-      q = await CollectApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: page);
+      q = await CollectApi.getFollowsList(page: page);
       if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
     }
   }
@@ -87,7 +86,7 @@ void _loadFavorites(Action action, Context<CollectState> ctx) async {
 }
 
 void _loadConcern(Action action, Context<CollectState> ctx) async {
-  ConcernListModel q = await CollectApi.getFollowsList(ApiHelper.uid, ApiHelper.uid, page: 1);
+  UserListModel q = await CollectApi.getFollowsList(page: 1);
   if (q != null) ctx.dispatch(MyActionCreator.setConcernState(q));
 
 }

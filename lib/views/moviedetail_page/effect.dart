@@ -36,11 +36,11 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     // 视频详情
     ProductModel r = await MoiveDetailApi.getMovieDetail(ctx.state.movieid);
     if (r != null) {
-
         ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
         ctx.state.animationController.forward();
-      
     }
+
+    //
 
     // 评论
     _reviewMore(action, ctx);

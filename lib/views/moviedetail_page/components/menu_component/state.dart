@@ -21,8 +21,8 @@ class MenuConnector extends ConnOp<MovieDetailPageState,MenuState>{
     substate.model=state.movieDetailModel;
     return substate;
   }
-//  @override
-//  void set(MovieDetailPageState state, MenuState subState) {
-//    state.accountState=subState.accountState;
-//  }
+  @override
+  void set(MovieDetailPageState state, MenuState subState) {
+    state.movieDetailModel = subState.model;
+  }
 }

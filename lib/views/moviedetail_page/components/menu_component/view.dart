@@ -189,14 +189,16 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
          height: Adapt.px(10),
        ),
        _buildListTitel(
-         Icons.flag,
+         model.product.isAttention == 1
+             ? Icons.flag
+             : Icons.outlined_flag,
          '关注',
          () {
            Navigator.of(viewService.context).pop();
            dispatch(
-               MenuActionCreator.setWatchlist(null));
+               MenuActionCreator.setAttention(model.product.pubId));
          },
-         iconColor: Color.fromRGBO(50, 50, 50, 1),
+         iconColor: model.product.isAttention == 1 ? Colors.pink[400] : Color.fromRGBO(50, 50, 50, 1),
        ),
         // Divider(
         //   height: Adapt.px(10),

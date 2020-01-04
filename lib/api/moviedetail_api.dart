@@ -13,12 +13,12 @@ class MoiveDetailApi {
 
     FormData formData = new FormData.from({
       'product': movieId,
-      "XDEBUG_SESSION_START": 13134
+      "XDEBUG_SESSION_START": 12891
     });
 
     var response = await HttpUtil().post('ecapi.video.get', data: formData);
     Map map = json.decode(response.toString());
-    if(map.length > 0){
+    if(map != null && map.length > 0){
       ProductModel model = ProductModel.fromJson(map);
       if(model.errorCode == 0){
         return model;
@@ -85,11 +85,48 @@ class MoiveDetailApi {
   }
 
     ///关注
-  static Future<MovieDetailModel> setAttent(var uid, var token, var touid) async {
-    MovieDetailModel model;
-    String param = 'service=User.SetAttent&uid=$uid&touid=$touid&token=$token';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null) model = MovieDetailModel(r);
-    return model;
+  static Future<Map> setAttention(var userId) async {
+
+    FormData formData = new FormData.from({
+      'att_user_id': userId,
+      "XDEBUG_SESSION_START": 12124
+    });
+
+    var response = await HttpUtil().post('ecapi.user.setAttention', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      return map;
+    }
   }
+
+  ///取消关注
+  static Future<Map> setUnAttention(var userId) async {
+
+    FormData formData = new FormData.from({
+      'att_user_id': userId,
+      "XDEBUG_SESSION_START": 17829
+    });
+
+    var response = await HttpUtil().post('ecapi.user.setUnattention', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      return map;
+    }
+  }
+
+  ///查询是否关注
+  static Future<Map> getAttention(var userId) async {
+
+    FormData formData = new FormData.from({
+      'att_user_id': userId,
+      "XDEBUG_SESSION_START": 10482
+    });
+
+    var response = await HttpUtil().post('ecapi.user.getAttention', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      return map;
+    }
+  }
+
 }

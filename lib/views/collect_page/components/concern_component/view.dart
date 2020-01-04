@@ -1,7 +1,8 @@
 import 'dart:math';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/models/concernlist.dart';
+import 'package:movie/models/UserModel.dart';
+import 'package:movie/models/UserListModel.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/customwidgets/keepalive_widget.dart';
@@ -11,7 +12,11 @@ import 'state.dart';
 
 Widget buildView(
     ConcernState state, Dispatch dispatch, ViewService viewService) {
+
+  UserListModel userListModel = state.userListModel;
+
   Random random = new Random(DateTime.now().millisecondsSinceEpoch);
+
   Widget _buildGenreChip(int id) {
     return Container(
       margin: EdgeInsets.only(right: Adapt.px(10)),
@@ -87,10 +92,10 @@ Widget buildView(
     );
   }
 
-  Widget _buildMovieCell(ConcernListResult d) {
+  Widget _buildCell(Users d) {
     return InkWell(
       onTap: () {
-        dispatch(ConcernActionCreator.onCellTappedToListDetail(d.id));
+        dispatch(ConcernActionCreator.onCellTappedToListDetail(d.id.toString()));
       },
       child: Column(
         // key: ValueKey<int>(d.userinfo['id']),
@@ -109,11 +114,13 @@ Widget buildView(
                           random.nextInt(255),
                           random.nextInt(255),
                           random.nextDouble()),
-                      image: DecorationImage(
+                      image: d.avatar != null ? DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
-                              d.avatar_thumb
-                          ))),
+                              d.avatar
+                          )
+                      ) : null
+                  ),
                 ),
                 SizedBox(
                   width: Adapt.px(20),
@@ -125,14 +132,14 @@ Widget buildView(
                     Container(
                       width: Adapt.px(450),
                       child: Text(
-                        d.user_nicename ?? '',
+                        d.username ?? '',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: Adapt.px(30),
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                     Text("视频数量" + d?.workVideos ?? '0',
+                     Text(d.rank?.name ?? '',
                          style: TextStyle(
                              color: Colors.grey[700], fontSize: Adapt.px(24))),
                     SizedBox(
@@ -173,28 +180,26 @@ Widget buildView(
     );
   }
 
-  return keepAliveWrapper(
+  return userListModel.users != null ? keepAliveWrapper(
       AnimatedSwitcher(
         duration: Duration(milliseconds: 600),
         child: ListView(
-          key: ValueKey(state.concernList),
+          key: ValueKey(userListModel),
           controller: state.movieController,
           cacheExtent: Adapt.px(180),
-          children: state.concernList.results.map(_buildMovieCell).toList()
-            ..add(Offstage(
-              offstage: state.concernList.page == state.concernList.total_pages &&
-                  state.concernList.results.length > 0,
-              child: Column(
-                children: <Widget>[
-                  _buildShimmerCell(),
-                  _buildShimmerCell(),
-                  _buildShimmerCell(),
-                  _buildShimmerCell(),
-                ],
-              ),
-            )),
+          children: userListModel.users.map(_buildCell).toList()
         )
       )
+  ) : Container(
+    child: ListView(
+      cacheExtent: Adapt.px(180),
+      children: <Widget>[
+        _buildShimmerCell(),
+        _buildShimmerCell(),
+        _buildShimmerCell(),
+        _buildShimmerCell(),
+      ]
+    ),
   );
 }
 

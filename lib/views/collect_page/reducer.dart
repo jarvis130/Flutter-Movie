@@ -1,8 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
-import 'package:movie/models/concernlist.dart';
+import 'package:movie/models/UserListModel.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -25,10 +23,9 @@ CollectState _onAction(CollectState state, Action action) {
 }
 
 CollectState _setConcernState(CollectState state, Action action) {
-  final ConcernListModel q = action.payload ??
-      ConcernListModel.fromParams(results: List<ConcernListResult>());
+  final UserListModel q = action.payload ?? new UserListModel();
   final CollectState newState = state.clone();
-  newState.concerns = q;
+  newState.userListModel = q;
   return newState;
 }
 

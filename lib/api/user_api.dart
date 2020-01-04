@@ -12,7 +12,8 @@ class UserApi {
 
     FormData formData = new FormData.from({
       "device_id": code,
-      "os": os
+      "os": os,
+      "XDEBUG_SESSION_START": 15977
     });
 
     var response = await HttpUtil().post('ecapi.auth.signinByDevice', data: formData);
@@ -40,6 +41,26 @@ class UserApi {
     var response = await HttpUtil().post('ecapi.user.profile.get', data: formData);
     Map map = json.decode(response.toString());
     if(map.length > 0){
+      UserModel model = UserModel.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
+      }
+    }
+  }
+
+  ///用户详情
+  static Future<UserModel> getUserInfoByUserId(int user_id, {int page = 1, int per_page = 20}) async {
+
+    FormData formData = new FormData.from({
+      'page': page,
+      'per_page': per_page,
+      'user_id': user_id,
+      "XDEBUG_SESSION_START": 17366
+    });
+
+    var response = await HttpUtil().post('ecapi.user.getProfileByUserId', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
       UserModel model = UserModel.fromJson(map);
       if(model.errorCode == 0){
         return model;

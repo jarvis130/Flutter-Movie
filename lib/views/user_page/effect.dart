@@ -7,7 +7,6 @@ import 'package:movie/api/user_api.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
-import 'package:movie/api/listdetail_api.dart';
 import 'action.dart';
 import 'state.dart';
 
