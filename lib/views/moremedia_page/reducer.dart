@@ -21,7 +21,7 @@ MoreMediaPageState _onAction(MoreMediaPageState state, Action action) {
 MoreMediaPageState _loadMore(MoreMediaPageState state, Action action) {
   final GoodProducts model =action.payload??GoodProducts();
   final MoreMediaPageState newState = state.clone();
-  newState.goodProducts = model.products;
+  newState.goodProducts.addAll(model.products);
   newState.total = model.paged.total;
   newState.pages = model.paged.more;
   newState.size = model.paged.size;
