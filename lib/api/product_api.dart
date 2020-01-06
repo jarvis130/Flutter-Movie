@@ -20,7 +20,7 @@ class ProductApi {
       "attr_value2": attr_value2,
       "is_real": is_real,
       "pub_id": pub_id,
-      "XDEBUG_SESSION_START": 19819
+      "XDEBUG_SESSION_START": 14403
     });
     var response = await HttpUtil().post('ecapi.video.list', data: formData);
     if(response != null){
@@ -30,6 +30,25 @@ class ProductApi {
         if(map['error_code'] == 0){
           return model;
         }
+      }
+    }
+  }
+
+  ///观看记录
+  static Future<GoodProducts> getWatchLog({int page = 1, int per_page = 20}) async {
+
+    FormData formData = new FormData.from({
+      'page': page,
+      'per_page': per_page,
+      "XDEBUG_SESSION_START": 16116
+    });
+
+    var response = await HttpUtil().post('ecapi.video.getWatchLog', data: formData);
+    Map map = json.decode(response.toString());
+    if(map.length > 0){
+      GoodProducts model = GoodProducts.fromJson(map);
+      if(model.errorCode == 0){
+        return model;
       }
     }
   }

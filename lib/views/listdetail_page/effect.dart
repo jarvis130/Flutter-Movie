@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/api/product_api.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/UserDetailModel.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/views/moviedetail_page/components/menu_component/action.dart';
 import 'package:movie/models/sortcondition.dart';

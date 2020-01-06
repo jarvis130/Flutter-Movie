@@ -1,12 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/UserDetailModel.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/list_sort_type.dart';
-import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
-import 'package:screenshot/screenshot.dart';
 
 class ListDetailPageState implements Cloneable<ListDetailPageState> {
 

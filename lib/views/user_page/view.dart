@@ -615,27 +615,31 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               ),
             ),
           ),
-
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                    Icons.receipt,
-                    color: Colors.pink
-                ),
-                SizedBox(
-                  height: Adapt.px(10.0),
-                ),
-                Text(
-                  '觀看記錄',
-                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                      fontSize: 12
+          GestureDetector(
+            onTap: (){
+              dispatch(UserPageActionCreator.onWatchLogTapped());
+            },
+            child: Container(
+              margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
+              width: width,
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                      Icons.receipt,
+                      color: Colors.pink
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: Adapt.px(10.0),
+                  ),
+                  Text(
+                    '觀看記錄',
+                    style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+                        fontSize: 12
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(
@@ -693,7 +697,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
     return d == null ? Container() : Container(
       color: Colors.white,
       width: Adapt.screenW(),
-      height: 160,
+      height: 180,
       alignment: Alignment.center,
       child: Column(
         children: <Widget>[
@@ -819,7 +823,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
             children: <Widget>[
               Container(
                 width: Adapt.screenW(),
-                height: 150,
+                height: 80,
                 color: Color.fromRGBO(50, 50, 50, 1),
               ),
               Card(

@@ -17,7 +17,8 @@ Effect<UserPageState> buildEffect() {
     UserPageAction.cellTapped: _cellTapped,
     UserPageAction.sortChanged: _sortChanged,
     UserPageAction.shopping: _shopping,
-    UserPageAction.favoritesTapped: _favoritesTapped
+    UserPageAction.favoritesTapped: _favoritesTapped,
+    UserPageAction.watchLogTapped: _watchLogTapped
   });
 }
 
@@ -99,8 +100,16 @@ void _shopping(Action action, Context<UserPageState> ctx) async {
 //  });
 }
 
+//我的收藏
 void _favoritesTapped(Action action, Context<UserPageState> ctx) async {
   await Navigator.of(ctx.context).pushNamed('CollectPage', arguments: {
+    'uid': ApiHelper.uid
+  });
+}
+
+//观看记录
+void _watchLogTapped(Action action, Context<UserPageState> ctx) async {
+  await Navigator.of(ctx.context).pushNamed('WatchLogPage', arguments: {
     'uid': ApiHelper.uid
   });
 }

@@ -5,7 +5,17 @@ import 'package:movie/models/listdetailmodel.dart';
 import 'package:movie/models/sortcondition.dart';
 
 //TODO replace with your own action
-enum UserPageAction { action,setListDetail,cellTapped,loadMore,sortChanged,setSort,screenShot, shopping, favoritesTapped }
+enum UserPageAction { action,
+  setListDetail,
+  cellTapped,
+  loadMore,
+  sortChanged,
+  setSort,
+  screenShot,
+  shopping,
+  favoritesTapped,
+  watchLogTapped
+}
 
 class UserPageActionCreator {
   static Action onAction() {
@@ -34,5 +44,8 @@ class UserPageActionCreator {
   }
   static Action onFavoritesTapped() {
     return Action(UserPageAction.favoritesTapped);
+  }
+  static Action onWatchLogTapped() {
+    return Action(UserPageAction.watchLogTapped);
   }
 }

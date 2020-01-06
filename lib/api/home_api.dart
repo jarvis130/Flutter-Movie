@@ -28,7 +28,9 @@ class HomeApi {
 
   ///热播视频
   static Future<HomeModel> home(String uid, {int page = 1}) async {
-    FormData formData = new FormData.from({});
+    FormData formData = new FormData.from({
+
+    });
 
     var response = await HttpUtil().post('ecapi.home.video.list', data: formData);
     Map map = json.decode(response.toString());

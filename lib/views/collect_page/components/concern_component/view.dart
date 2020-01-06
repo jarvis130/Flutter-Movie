@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/UserListModel.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/actions/Adapt.dart';

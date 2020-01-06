@@ -23,6 +23,7 @@ import 'package:movie/views/search_page/page.dart';
 import 'package:movie/views/splash_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
 import 'package:movie/views/user_page/page.dart';
+import 'package:movie/views/watchlog_page/page.dart';
 import 'package:movie/views/webview_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,8 +33,6 @@ import 'globalbasestate/state.dart';
 import 'globalbasestate/store.dart';
 import 'views/moremedia_page/page.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'package:movie/views/detail_page/page.dart' as detail;
 import 'package:device_info/device_info.dart';
 
 //启动标识
@@ -50,7 +49,7 @@ Future _init() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   SharedPreferencesUtil.initPrefsInstance(prefs);
   String token = SharedPreferencesUtil.prefsInstance.getString('token');
-  if (token == null) {
+//  if (token == null) {
     //获取设备信息
     String uuid;
     DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
@@ -66,7 +65,7 @@ Future _init() async {
     prefs.setString('client', os);
     // 设备码登录
     UserApi.loginByMobileDevice(uuid, os);
-  }
+//  }
 
   startFlag = prefs.getString('tip') == null ? '0' : '1';
   if(startFlag == '0'){
@@ -89,7 +88,6 @@ Future<Widget> createApp() async {
       'MyListsPage': MyListsPage(),
       'ListDetailPage': ListDetailPage(),
       'FavoritesPage': FavoritesPage(),
-      'detailpage': detail.MovieDetailPage(),
       'classifypage': ClassifyPage(),
       'GalleryPage': GalleryPage(),
       'DiscoverPage': DiscoverPage(),
@@ -100,7 +98,8 @@ Future<Widget> createApp() async {
       'reviewPage': ReviewPage(),
       'PayPage': PayPage(),
       'CollectPage': CollectPage(),
-      'Douyin': DouyinPage()
+      'Douyin': DouyinPage(),
+      'WatchLogPage': WatchLogPage()
     },
     visitor: (String path, Page<Object, dynamic> page) {
       if (page.isTypeof<GlobalBaseState>()) {
