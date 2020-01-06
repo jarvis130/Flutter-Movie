@@ -32,7 +32,9 @@ ClassifyPageState _loadMore(ClassifyPageState state, Action action) {
   GoodProducts model=action.payload;
   final ClassifyPageState newState = state.clone();
   if(model != null){
-    newState.productList = model.products;
+
+    newState.productList.addAll(model.products);
+
     newState.total = model.paged.total;
     newState.pages = model.paged.more;
     newState.size = model.paged.size;
