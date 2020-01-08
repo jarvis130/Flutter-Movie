@@ -1,19 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
-import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/videolist.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -318,6 +310,12 @@ Widget buildView(
     );
   }
 
+  Future < void > _onRefresh() async {
+
+    dispatch(HomePageActionCreator.onRefresh());
+
+  }
+
   Widget _getStyle4() {
     return Scaffold(
       backgroundColor: Color.fromRGBO(45, 45, 48, 1),
@@ -328,15 +326,20 @@ Widget buildView(
         automaticallyImplyLeading: false,
         title: _buildSearchBar(),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          viewService.buildComponent('swiper'),
-          _buildHotMovie(),//热门
-          _buildRecommend(),//推荐
-          _buildNewMovieHeader(),
-          viewService.buildComponent('newmovie'),
-        ],
-      ),
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: CustomScrollView(
+          slivers: <Widget>[
+            viewService.buildComponent('swiper'),
+            _buildHotMovie(),//热门
+            _buildRecommend(),//推荐
+            _buildNewMovieHeader(),
+            viewService.buildComponent('newmovie'),
+          ],
+        ),
+      )
+
+
     );
   }
 

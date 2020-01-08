@@ -15,6 +15,7 @@ Effect<HomePageState> buildEffect() {
     HomePageAction.moreTapped: _moreTapped,
     HomePageAction.searchBarTapped: _onSearchBarTapped,
     HomePageAction.cellTapped: _onCellTapped,
+    HomePageAction.onRefresh: _onRefresh,
     Lifecycle.initState: _onInit,
     Lifecycle.dispose: _onDispose,
   });
@@ -30,17 +31,7 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
 
   ctx.state.scrollController = new ScrollController();
 
-  //初始化轮播图
-  BannerModel swiper = await HomeApi.getSwiperList();
-  if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
-  
-  //热门视频
-  var model = await HomeApi.home('');
-  if (model != null){
-    ctx.dispatch(HomePageActionCreator.onInitHot(model.hotProducts));
-    ctx.dispatch(HomePageActionCreator.onInitNew(model.recentlyProducts));
-    ctx.dispatch(HomePageActionCreator.onInitRecommend(model.bestProducts));
-  }
+  _loadMore(action, ctx);
 
 
 //
@@ -61,6 +52,20 @@ Future _onInit(Action action, Context<HomePageState> ctx) async {
 //  if (t != null) ctx.dispatch(HomePageActionCreator.onInitPopularTV(t));
 }
 
+void _loadMore(Action action, Context<HomePageState> ctx) async{
+  //初始化轮播图
+  BannerModel swiper = await HomeApi.getSwiperList();
+  if (swiper != null) ctx.dispatch(HomePageActionCreator.onInitSwiper(swiper));
+
+  //热门视频
+  var model = await HomeApi.home('');
+  if (model != null){
+    ctx.dispatch(HomePageActionCreator.onInitHot(model.hotProducts));
+    ctx.dispatch(HomePageActionCreator.onInitNew(model.recentlyProducts));
+    ctx.dispatch(HomePageActionCreator.onInitRecommend(model.bestProducts));
+  }
+}
+
 void _onDispose(Action action, Context<HomePageState> ctx) {
   ctx.state.animatedController.dispose();
   ctx.state.scrollController.dispose();
@@ -73,6 +78,10 @@ Future _moreTapped(Action action, Context<HomePageState> ctx) async {
 
 Future _onSearchBarTapped(Action action, Context<HomePageState> ctx) async {
   await showSearch(context: ctx.context, delegate: SearchBarDelegate());
+}
+
+void _onRefresh(Action action, Context<HomePageState> ctx) {
+  _loadMore(action, ctx);
 }
 
 Future _onCellTapped(Action action, Context<HomePageState> ctx) async {

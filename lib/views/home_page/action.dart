@@ -1,12 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/moviechange.dart';
-import 'package:movie/models/movielist.dart';
 import 'package:movie/models/searchresult.dart';
-import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 //TODO replace with your own action
@@ -26,6 +22,7 @@ enum HomePageAction {
   initTrending,
   searchBarTapped,
   cellTapped,
+  onRefresh
 }
 
 class HomePageActionCreator {
@@ -89,5 +86,9 @@ class HomePageActionCreator {
       String id, String bgpic, String title, String posterpic, MediaType type) {
     return Action(HomePageAction.cellTapped,
         payload: [id, bgpic, title, posterpic, type]);
+  }
+
+  static Action onRefresh() {
+    return const Action(HomePageAction.onRefresh);
   }
 }
