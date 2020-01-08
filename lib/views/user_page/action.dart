@@ -14,7 +14,8 @@ enum UserPageAction { action,
   screenShot,
   shopping,
   favoritesTapped,
-  watchLogTapped
+  watchLogTapped,
+  onRefresh
 }
 
 class UserPageActionCreator {
@@ -47,5 +48,8 @@ class UserPageActionCreator {
   }
   static Action onWatchLogTapped() {
     return Action(UserPageAction.watchLogTapped);
+  }
+  static Action onRefresh() {
+    return Action(UserPageAction.onRefresh);
   }
 }

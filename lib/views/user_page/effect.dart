@@ -18,7 +18,8 @@ Effect<UserPageState> buildEffect() {
     UserPageAction.sortChanged: _sortChanged,
     UserPageAction.shopping: _shopping,
     UserPageAction.favoritesTapped: _favoritesTapped,
-    UserPageAction.watchLogTapped: _watchLogTapped
+    UserPageAction.watchLogTapped: _watchLogTapped,
+    UserPageAction.onRefresh: _onRefresh
   });
 }
 
@@ -88,6 +89,12 @@ Future _loadData(Action action, Context<UserPageState> ctx) async {
   UserModel model = await UserApi.getUserProfile();
   if (model != null)
     ctx.dispatch(UserPageActionCreator.loadMore(model));
+
+}
+
+Future _onRefresh(Action action, Context<UserPageState> ctx) async {
+
+  _loadData(action, ctx);
 
 }
 

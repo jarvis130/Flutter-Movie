@@ -794,138 +794,147 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
     );
   }
 
+  Future < void > _onRefresh() async {
+
+    dispatch(UserPageActionCreator.onRefresh());
+
+  }
+
   return Scaffold(
-    body: CustomScrollView(
-      controller: state.scrollController,
-      slivers: <Widget>[
-        SliverAppBar(
-          centerTitle: true,
-          backgroundColor: Color.fromRGBO(50, 50, 50, 1),
-          pinned: true,
-          title: Text(
-            '會員中心',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20
+    body: RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: CustomScrollView(
+        controller: state.scrollController,
+        slivers: <Widget>[
+          SliverAppBar(
+            centerTitle: true,
+            backgroundColor: Color.fromRGBO(50, 50, 50, 1),
+            pinned: true,
+            title: Text(
+              '會員中心',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20
+              ),
             ),
+            // expandedHeight: Adapt.px(550),
+            // flexibleSpace: FlexibleSpaceBar(
+            //   background: _buildHeader(),
+            // ),
+            // bottom: PreferredSize(
+            //   preferredSize: Size.fromHeight(Adapt.px(100)),
+            //   child: _buildInfoGroup(),
+            // ),
           ),
-          // expandedHeight: Adapt.px(550),
-          // flexibleSpace: FlexibleSpaceBar(
-          //   background: _buildHeader(),
-          // ),
-          // bottom: PreferredSize(
-          //   preferredSize: Size.fromHeight(Adapt.px(100)),
-          //   child: _buildInfoGroup(),
-          // ),
-        ),
-        SliverToBoxAdapter(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: Adapt.screenW(),
-                height: 80,
-                color: Color.fromRGBO(50, 50, 50, 1),
-              ),
-              Card(
-                margin: EdgeInsets.only(left: 10.0, top: 80.0, right: 10.0, bottom: 10.0),
-                // color: Colors.white,
-                //z轴的高度，设置card的阴影
-                elevation: 5.0,
-                //设置shape，这里设置成了R角
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-                //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-                clipBehavior: Clip.antiAlias,
-                semanticContainer: false,
-                child: _buildHeaderCard(),
-              ),
-              Center(
-                child: Container(
-                  width: 60,
-                  height: 60,
-
-                  decoration: BoxDecoration(
-                    image: DecorationImage(//背景图片 ,不能与背景色同时使用
-                      image: CachedNetworkImageProvider(
-                          userModel.user == null ? '' : userModel.user.avatar
-                      ),
-                      alignment: Alignment.topCenter,
-                      repeat: ImageRepeat.repeatY,//是否重复
-                      fit: BoxFit.cover,//填充模式
-                      colorFilter: ColorFilter.mode(//颜色滤镜
-                          Colors.indigoAccent[400].withOpacity(0.5),
-                          BlendMode.hardLight//混合模式
-                      ),
-                    ),
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 3.0,
-                      style: BorderStyle.solid,
-                    ),
-                    borderRadius: BorderRadius.circular(50)
+          SliverToBoxAdapter(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: Adapt.screenW(),
+                    height: 180,
+                    color: Color.fromRGBO(50, 50, 50, 1),
                   ),
+                  Card(
+                    margin: EdgeInsets.only(left: 10.0, top: 80.0, right: 10.0, bottom: 10.0),
+                    // color: Colors.white,
+                    //z轴的高度，设置card的阴影
+                    elevation: 5.0,
+                    //设置shape，这里设置成了R角
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    ),
+                    //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
+                    clipBehavior: Clip.antiAlias,
+                    semanticContainer: false,
+                    child: _buildHeaderCard(),
+                  ),
+                  Center(
+                      child: Container(
+                        width: 60,
+                        height: 60,
 
-                )
+                        decoration: BoxDecoration(
+                            image: DecorationImage(//背景图片 ,不能与背景色同时使用
+                              image: (userModel.user == null || userModel.user.avatar == null) ? AssetImage('images/empty.png') : CachedNetworkImageProvider(
+                                  userModel.user.avatar
+                              ),
+                              alignment: Alignment.topCenter,
+                              repeat: ImageRepeat.repeatY,//是否重复
+                              fit: BoxFit.cover,//填充模式
+                              colorFilter: ColorFilter.mode(//颜色滤镜
+                                  Colors.indigoAccent[400].withOpacity(0.5),
+                                  BlendMode.hardLight//混合模式
+                              ),
+                            ),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 3.0,
+                              style: BorderStyle.solid,
+                            ),
+                            borderRadius: BorderRadius.circular(50)
+                        ),
+
+                      )
+                  )
+                ],
               )
-            ],
+          ),
+          SliverToBoxAdapter(
+            child: Card(
+              margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
+              // color: Colors.white,
+              //z轴的高度，设置card的阴影
+              elevation: 5.0,
+              //设置shape，这里设置成了R角
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              ),
+              //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
+              clipBehavior: Clip.antiAlias,
+              semanticContainer: false,
+              child: _buildToolsCard(),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Card(
+              margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
+              // color: Colors.white,
+              //z轴的高度，设置card的阴影
+              elevation: 5.0,
+              //设置shape，这里设置成了R角
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+              ),
+              //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
+              clipBehavior: Clip.antiAlias,
+              semanticContainer: false,
+              child: _buildCellCard(),
+            ),
           )
-        ),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
-            // color: Colors.white,
-            //z轴的高度，设置card的阴影
-            elevation: 5.0,
-            //设置shape，这里设置成了R角
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-            clipBehavior: Clip.antiAlias,
-            semanticContainer: false,
-            child: _buildToolsCard(),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Card(
-            margin: EdgeInsets.only(left: 10.0, top: 0.0, right: 10.0, bottom: 10.0),
-            // color: Colors.white,
-            //z轴的高度，设置card的阴影
-            elevation: 5.0,
-            //设置shape，这里设置成了R角
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            ),
-            //对Widget截取的行为，比如这里 Clip.antiAlias 指抗锯齿
-            clipBehavior: Clip.antiAlias,
-            semanticContainer: false,
-            child: _buildCellCard(),
-          ),
-        )
-        
-        // _buildBody(),
-        // SliverToBoxAdapter(
-        //   child: Offstage(
-        //     offstage:
-        //     state.listDetailModel.totalPages == state.listDetailModel.page,
-        //     child: Container(
-        //       height: Adapt.px(80),
-        //       margin: EdgeInsets.only(top: Adapt.px(30)),
-        //       alignment: Alignment.topCenter,
-        //       child: CircularProgressIndicator(
-        //         valueColor: AlwaysStoppedAnimation(Colors.black),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // SliverToBoxAdapter(
-        //   child: SizedBox(
-        //     height: Adapt.px(30),
-        //   ),
-        // )
-      ],
-    ),
+
+          // _buildBody(),
+          // SliverToBoxAdapter(
+          //   child: Offstage(
+          //     offstage:
+          //     state.listDetailModel.totalPages == state.listDetailModel.page,
+          //     child: Container(
+          //       height: Adapt.px(80),
+          //       margin: EdgeInsets.only(top: Adapt.px(30)),
+          //       alignment: Alignment.topCenter,
+          //       child: CircularProgressIndicator(
+          //         valueColor: AlwaysStoppedAnimation(Colors.black),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // SliverToBoxAdapter(
+          //   child: SizedBox(
+          //     height: Adapt.px(30),
+          //   ),
+          // )
+        ],
+      ),
+    )
   );
 
 }
