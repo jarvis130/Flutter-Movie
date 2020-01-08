@@ -18,7 +18,6 @@ import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:parallax_image/parallax_image.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -753,214 +752,218 @@ Widget buildView(
     );
   }
 
-  // Widget _buildMovie(){
+  Future < void > _onRefresh() async {
 
-  // }
+    dispatch(MovieDetailPageActionCreator.onRefresh());
+
+  }
 
   if(model == null){
     return Container();
   }else
   return Scaffold(
     key: state.scaffoldkey,
-    body: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-            controller: state.scrollController,
-            headerSliverBuilder: (BuildContext context, bool de) {
-              return <Widget>[
-                SliverOverlapAbsorber(
-                  handle:
-                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                  child: SliverAppBar( 
-                      pinned: true,
-                      backgroundColor: Colors.black,
-                      expandedHeight: Adapt.px(580),
-                      floating: false,
-                      centerTitle: true,
-                      title: Text(de ? model.product.name ?? '' : ''),
-                      actions: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.more_vert),
-                          color: Colors.white,
-                          iconSize: Adapt.px(50),
-                          onPressed: () =>
-                              dispatch(MovieDetailPageActionCreator.openMenu()),
-                        )
-                      ],
-                      bottom: PreferredSize(
-                        preferredSize: new Size(double.infinity, Adapt.px(60)),
-                        child: Container(
-                            width: Adapt.screenW(),
+    body: RefreshIndicator(
+      onRefresh: _onRefresh,
+      child: DefaultTabController(
+          length: 3,
+          child: NestedScrollView(
+              controller: state.scrollController,
+              headerSliverBuilder: (BuildContext context, bool de) {
+                return <Widget>[
+                  SliverOverlapAbsorber(
+                    handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                    child: SliverAppBar(
+                        pinned: true,
+                        backgroundColor: Colors.black,
+                        expandedHeight: Adapt.px(580),
+                        floating: false,
+                        centerTitle: true,
+                        title: Text(de ? model.product.name ?? '' : ''),
+                        actions: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.more_vert),
                             color: Colors.white,
-                            child: TabBar(
-                              labelColor: Colors.black,
-                              /*indicatorColor:
+                            iconSize: Adapt.px(50),
+                            onPressed: () =>
+                                dispatch(MovieDetailPageActionCreator.openMenu()),
+                          )
+                        ],
+                        bottom: PreferredSize(
+                          preferredSize: new Size(double.infinity, Adapt.px(60)),
+                          child: Container(
+                              width: Adapt.screenW(),
+                              color: Colors.white,
+                              child: TabBar(
+                                labelColor: Colors.black,
+                                /*indicatorColor:
                                   state.palette.lightVibrantColor?.color ??
                                       Colors.black,*/
-                              indicatorColor: state.tabTintColor,
-                              indicatorSize: TabBarIndicatorSize.label,
-                              isScrollable: true,
-                              labelStyle: TextStyle(
-                                  fontSize: Adapt.px(35),
-                                  fontWeight: FontWeight.w600),
-                              tabs: <Widget>[
-                                Tab(text: I18n.of(viewService.context).main),
-                                Tab(text: I18n.of(viewService.context).videos),
+                                indicatorColor: state.tabTintColor,
+                                indicatorSize: TabBarIndicatorSize.label,
+                                isScrollable: true,
+                                labelStyle: TextStyle(
+                                    fontSize: Adapt.px(35),
+                                    fontWeight: FontWeight.w600),
+                                tabs: <Widget>[
+                                  Tab(text: I18n.of(viewService.context).main),
+                                  Tab(text: I18n.of(viewService.context).videos),
 //                                Tab(text: I18n.of(viewService.context).images),
-                                Tab(text: I18n.of(viewService.context).reviews),
-                              ],
-                            )),
-                      ),
-                      flexibleSpace: FlexibleSpaceBar(
-                        centerTitle: true,
+                                  Tab(text: I18n.of(viewService.context).reviews),
+                                ],
+                              )),
+                        ),
+                        flexibleSpace: FlexibleSpaceBar(
+                          centerTitle: true,
 //                         background: _buildHeader(),
-                        // background: viewService.buildComponent('play'),
-                       background: model.product != null ? VideoPlayerItem(
-                         movieid: model.product.id.toString(),
-                         vc: VideoPlayerController.network(model.product.videoUrl),
-                         coverurl: model.product.defaultPhoto.thumb,
-                         showplayer: true,
-                       ) : Container(),
-                    )
-                  ),
-                )
-              ];
-            },
-            body: TabBarView(
-              children: <Widget>[
-                Container(child: Builder(builder: (BuildContext context) {
-                  return CustomScrollView(slivers: <Widget>[
-                    SliverOverlapInjector(
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context),
+                          // background: viewService.buildComponent('play'),
+                          background: model.product != null ? VideoPlayerItem(
+                            movieid: model.product.id.toString(),
+                            vc: VideoPlayerController.network(model.product.videoUrl),
+                            coverurl: model.product.defaultPhoto.thumb,
+                            showplayer: true,
+                          ) : Container(),
+                        )
                     ),
-                    SliverToBoxAdapter(
-                      child: Stack(
-                        children: <Widget>[
-                          Container(
-                            width: Adapt.screenW(),
-                            height: Adapt.px(400),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    colorFilter:
-                                        ColorFilter.mode(dominantColor, BlendMode.color),
-                                    image: CachedNetworkImageProvider(model.product == null
-                                        ? ImageUrl.emptyimage
-                                        : ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w500)),
-                                    fit: BoxFit.cover)),
-                          ), 
-                          Container(
-                            width: Adapt.screenW(),
-                            height: Adapt.px(350),
-                            color: dominantColor.withOpacity(.8),
-                          ),
-                          Container(
-                            alignment: Alignment.bottomLeft,
-                            padding: EdgeInsets.fromLTRB(
-                                Adapt.px(30), Adapt.px(30), Adapt.px(30), Adapt.px(0)),
-                            child: Row(
-                              children: <Widget>[
-                                _getPosterPic(),
-                                SizedBox(
-                                  width: Adapt.px(20),
-                                ),
-                                Container(
-//                                  padding: EdgeInsets.only(top: Adapt.px(10)),
-                                  width: Adapt.screenW() * 0.6,
-                                  child: _getTitle(),
-                                ),
-                              ],
-                            ),
-                          ),   
-                        ],
+                  )
+                ];
+              },
+              body: TabBarView(
+                children: <Widget>[
+                  Container(child: Builder(builder: (BuildContext context) {
+                    return CustomScrollView(slivers: <Widget>[
+                      SliverOverlapInjector(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            context),
                       ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                            Adapt.px(30), Adapt.px(0), Adapt.px(30), 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      SliverToBoxAdapter(
+                        child: Stack(
                           children: <Widget>[
-                            Text(I18n.of(viewService.context).overView,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: Adapt.px(40),
-                                    fontWeight: FontWeight.w800)),
-                            SizedBox(
-                              height: Adapt.px(30),
+                            Container(
+                              width: Adapt.screenW(),
+                              height: Adapt.px(400),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      colorFilter:
+                                      ColorFilter.mode(dominantColor, BlendMode.color),
+                                      image: CachedNetworkImageProvider(model.product == null
+                                          ? ImageUrl.emptyimage
+                                          : ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w500)),
+                                      fit: BoxFit.cover)),
                             ),
-                            _getOverWatch(),
+                            Container(
+                              width: Adapt.screenW(),
+                              height: Adapt.px(350),
+                              color: dominantColor.withOpacity(.8),
+                            ),
+                            Container(
+                              alignment: Alignment.bottomLeft,
+                              padding: EdgeInsets.fromLTRB(
+                                  Adapt.px(30), Adapt.px(30), Adapt.px(30), Adapt.px(0)),
+                              child: Row(
+                                children: <Widget>[
+                                  _getPosterPic(),
+                                  SizedBox(
+                                    width: Adapt.px(20),
+                                  ),
+                                  Container(
+//                                  padding: EdgeInsets.only(top: Adapt.px(10)),
+                                    width: Adapt.screenW() * 0.6,
+                                    child: _getTitle(),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
-                    ),
-                    // SliverToBoxAdapter(
-                    //     child: AnimatedSwitcher(
-                    //         switchInCurve: Curves.easeIn,
-                    //         switchOutCurve: Curves.easeOut,
-                    //         duration: Duration(milliseconds: 600),
-                    //         child: Column(
-                    //           key: ValueKey(state.movieDetailModel.id),
-                    //           crossAxisAlignment: CrossAxisAlignment.start,
-                    //           children: <Widget>[
-                    //             Padding(
-                    //               padding: EdgeInsets.all(Adapt.px(30)),
-                    //               child: Text(
-                    //                   I18n.of(viewService.context)
-                    //                       .topBilledCast,
-                    //                   style: TextStyle(
-                    //                       color: Colors.black,
-                    //                       fontSize: Adapt.px(40),
-                    //                       fontWeight: FontWeight.w800)),
-                    //             ),
-                    //             Container(
-                    //               height: Adapt.px(450),
-                    //               child: _getCreditsCells(),
-                    //             ),
-                    //           ],
-                    //         ))
-                    // ),
-                    // SliverToBoxAdapter(
-                    //   child: viewService.buildComponent('keywords'),
-                    // ),
-                    SliverToBoxAdapter(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.all(Adapt.px(30)),
-                          child: Text(
-                              I18n.of(viewService.context).recommendations,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: Adapt.px(40),
-                                  fontWeight: FontWeight.w800)),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: Adapt.px(30)),
-                          height: Adapt.px(400) * 9 / 16,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: _buildRecommendationBody(),
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              Adapt.px(30), Adapt.px(0), Adapt.px(30), 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(I18n.of(viewService.context).overView,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: Adapt.px(40),
+                                      fontWeight: FontWeight.w800)),
+                              SizedBox(
+                                height: Adapt.px(30),
+                              ),
+                              _getOverWatch(),
+                            ],
                           ),
                         ),
-                      ],
-                    )),
-                    // SliverToBoxAdapter(
-                    //   child: viewService.buildComponent('info'),
-                    // ),
-                  ]);
-                })),
-                Container(child: Builder(builder: (BuildContext context) {
-                  return CustomScrollView(slivers: <Widget>[
-                    SliverOverlapInjector(
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context),
-                    ),
-                    _getVideoBody()
-                  ]);
-                })),
+                      ),
+                      // SliverToBoxAdapter(
+                      //     child: AnimatedSwitcher(
+                      //         switchInCurve: Curves.easeIn,
+                      //         switchOutCurve: Curves.easeOut,
+                      //         duration: Duration(milliseconds: 600),
+                      //         child: Column(
+                      //           key: ValueKey(state.movieDetailModel.id),
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: <Widget>[
+                      //             Padding(
+                      //               padding: EdgeInsets.all(Adapt.px(30)),
+                      //               child: Text(
+                      //                   I18n.of(viewService.context)
+                      //                       .topBilledCast,
+                      //                   style: TextStyle(
+                      //                       color: Colors.black,
+                      //                       fontSize: Adapt.px(40),
+                      //                       fontWeight: FontWeight.w800)),
+                      //             ),
+                      //             Container(
+                      //               height: Adapt.px(450),
+                      //               child: _getCreditsCells(),
+                      //             ),
+                      //           ],
+                      //         ))
+                      // ),
+                      // SliverToBoxAdapter(
+                      //   child: viewService.buildComponent('keywords'),
+                      // ),
+                      SliverToBoxAdapter(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(Adapt.px(30)),
+                                child: Text(
+                                    I18n.of(viewService.context).recommendations,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: Adapt.px(40),
+                                        fontWeight: FontWeight.w800)),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(bottom: Adapt.px(30)),
+                                height: Adapt.px(400) * 9 / 16,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: _buildRecommendationBody(),
+                                ),
+                              ),
+                            ],
+                          )),
+                      // SliverToBoxAdapter(
+                      //   child: viewService.buildComponent('info'),
+                      // ),
+                    ]);
+                  })),
+                  Container(child: Builder(builder: (BuildContext context) {
+                    return CustomScrollView(slivers: <Widget>[
+                      SliverOverlapInjector(
+                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                            context),
+                      ),
+                      _getVideoBody()
+                    ]);
+                  })),
 //                Container(child: Builder(builder: (BuildContext context) {
 //                  return CustomScrollView(slivers: <Widget>[
 //                    SliverOverlapInjector(
@@ -970,8 +973,13 @@ Widget buildView(
 //                    _getImageBody()
 //                  ]);
 //                })),
-                viewService.buildComponent('review'),
-              ],
-            ))),
+                  viewService.buildComponent('review'),
+                ],
+              )
+          )
+      ),
+    )
+
+
   );
 }

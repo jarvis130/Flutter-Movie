@@ -6,7 +6,6 @@ import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/review_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/ProductModel.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/models/review.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'action.dart';
@@ -21,6 +20,7 @@ Effect<MovieDetailPageState> buildEffect() {
     MovieDetailPageAction.showSnackBar: _showSnackBar,
     Lifecycle.initState: _onInit,
     MovieDetailPageAction.reviewMore: _reviewMore,
+    MovieDetailPageAction.onRefresh: _onRefresh,
   });
 }
 
@@ -33,15 +33,10 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
         vsync: ticker, duration: Duration(milliseconds: 1000));
     ctx.state.scrollController = new ScrollController();
 
-    // 视频详情
-    ProductModel r = await MoiveDetailApi.getMovieDetail(ctx.state.movieid);
-    if (r != null) {
-        ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
-        ctx.state.animationController.forward();
-    }
+
 
     //
-
+    _loadMore(action, ctx);
     // 评论
     _reviewMore(action, ctx);
 
@@ -56,6 +51,20 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     // var f = await ApiHelper.getMovieVideo(ctx.state.movieid);
     // if (f != null) ctx.dispatch(MovieDetailPageActionCreator.onSetVideos(f));
   } on Exception catch (e) {}
+}
+
+void _loadMore(Action action, Context<MovieDetailPageState> ctx) async {
+  // 视频详情
+  ProductModel r = await MoiveDetailApi.getMovieDetail(ctx.state.movieid);
+  if (r != null) {
+    ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
+    ctx.state.animationController.forward();
+  }
+}
+
+Future _onRefresh(Action action, Context<MovieDetailPageState> ctx) async {
+  _loadMore(action, ctx);
+  _reviewMore(action, ctx);
 }
 
 Future _onRecommendationTapped(

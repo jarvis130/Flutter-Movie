@@ -2,14 +2,10 @@ import 'dart:ui';
 
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/ProductModel.dart';
-import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/imagemodel.dart';
-import 'package:movie/models/keyword.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
-import 'package:movie/models/videolist.dart';
 import 'package:movie/models/videomodel.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -27,7 +23,8 @@ enum MovieDetailPageAction {
   openMenu,
   showSnackBar,
   setRecommendMovie,
-  reviewMore
+  reviewMore,
+  onRefresh
 }
 
 class MovieDetailPageActionCreator {
@@ -72,5 +69,8 @@ class MovieDetailPageActionCreator {
   }
   static Action onReviewMore(var videoid) {
     return Action(MovieDetailPageAction.reviewMore, payload: videoid);
+  }
+  static Action onRefresh() {
+    return Action(MovieDetailPageAction.onRefresh);
   }
 }
