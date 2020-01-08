@@ -125,6 +125,10 @@ Widget buildView(
     title = title = I18n.of(viewService.context).newMovie;
   }
 
+  Future < void > _onRefresh() async {
+    dispatch(MoreMediaPageActionCreator.onRefresh());
+  }
+
   return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -138,25 +142,30 @@ Widget buildView(
           ),
         ),
       ),
-      body: CustomScrollView(
-        controller: state.scrollController,
-        slivers: <Widget>[
-          SliverGrid.extent(
-              childAspectRatio: 2 / 3,
-              maxCrossAxisExtent: Adapt.screenW() / 2,
-              children: state.goodProducts.map(_buildCell).toList()),
-          SliverToBoxAdapter(
-            child: Offstage(
-              offstage: state.goodProducts.length == state.total,
-              child: Container(
-                height: Adapt.px(120),
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(Colors.black),
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: CustomScrollView(
+          controller: state.scrollController,
+          slivers: <Widget>[
+            SliverGrid.extent(
+                childAspectRatio: 2 / 3,
+                maxCrossAxisExtent: Adapt.screenW() / 2,
+                children: state.goodProducts.map(_buildCell).toList()),
+            SliverToBoxAdapter(
+              child: Offstage(
+                offstage: state.goodProducts.length == state.total,
+                child: Container(
+                  height: Adapt.px(120),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.black),
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
-      ));
+            )
+          ],
+        )
+      )
+
+  );
 }

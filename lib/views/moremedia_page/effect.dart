@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/models/GoodProducts.dart';
@@ -12,6 +11,7 @@ Effect<MoreMediaPageState> buildEffect() {
   return combineEffects(<Object, Effect<MoreMediaPageState>>{
     MoreMediaPageAction.action: _onAction,
     MoreMediaPageAction.cellTapped: _cellTapped,
+    MoreMediaPageAction.onRefresh: _onRefresh,
     Lifecycle.initState: _onInit,
     Lifecycle.build:_onBuild,
     Lifecycle.dispose:_onDispose
@@ -47,20 +47,8 @@ void _onDispose(Action action, Context<MoreMediaPageState> ctx) {
 void _onAction(Action action, Context<MoreMediaPageState> ctx) {}
 
 Future _initLoad(Action action, Context<MoreMediaPageState> ctx) async {
-  GoodProducts model;
-  int currentPage = ctx.state.currentPage + 1;
-  if(currentPage == 1){
-    if (ctx.state.mediaType == MediaType.hot)
-      model = await ProductApi.getList(page: currentPage, is_hot: 1);
-    else if (ctx.state.mediaType == MediaType.recommend)
-      model = await ProductApi.getList(page: currentPage, is_best: 1);
-    else
-      model = await ProductApi.getList(page: currentPage, is_new: 1);
-  }
-
-  if (model != null){
-    ctx.dispatch(MoreMediaPageActionCreator.loadMore(model));
-  }
+  ctx.state.currentPage = 1;
+  _loadMore(action, ctx);
 }
 
 Future _loadMore(Action action, Context<MoreMediaPageState> ctx) async {
@@ -87,4 +75,9 @@ Future _cellTapped(Action action, Context<MoreMediaPageState> ctx) async {
     'title': action.payload[1],
     'posterpic': action.payload[3]
   });
+}
+
+Future _onRefresh(Action action, Context<MoreMediaPageState> ctx) async {
+  ctx.state.currentPage = 0;
+  _loadMore(action, ctx);
 }

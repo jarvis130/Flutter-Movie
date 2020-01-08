@@ -2,7 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/GoodProducts.dart';
 
 //TODO replace with your own action
-enum MoreMediaPageAction { action,loadMore,cellTapped}
+enum MoreMediaPageAction { action,loadMore,cellTapped, onRefresh}
 
 class MoreMediaPageActionCreator {
   static Action onAction() {
@@ -14,5 +14,9 @@ class MoreMediaPageActionCreator {
 
   static Action cellTapped(String id,String title,String bgpic,String posterpic) {
     return Action(MoreMediaPageAction.cellTapped,payload:[id,title,bgpic,posterpic]);
+  }
+
+  static Action onRefresh() {
+    return Action(MoreMediaPageAction.onRefresh);
   }
 }
