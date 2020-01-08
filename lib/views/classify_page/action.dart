@@ -11,7 +11,9 @@ enum ClassifyPageAction {
   cellTapped,
   onUpdateGroupValue,
   updateGroupValue,
-  init
+  init,
+  updatePerformingRequest,
+  onRefresh
 }
 
 class ClassifyActionCreator {
@@ -38,5 +40,11 @@ class ClassifyActionCreator {
   }
   static Action init(Map map) {
     return  Action(ClassifyPageAction.init, payload: map);
+  }
+  static Action updatePerformingRequest(bool b) {
+    return Action(ClassifyPageAction.updatePerformingRequest, payload: b);
+  }
+  static Action onRefresh() {
+    return Action(ClassifyPageAction.onRefresh);
   }
 }

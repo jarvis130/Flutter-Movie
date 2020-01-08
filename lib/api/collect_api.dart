@@ -1,4 +1,5 @@
 
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/UserListModel.dart';
 import 'package:movie/utils/httpUtil.dart';
@@ -13,7 +14,7 @@ class CollectApi {
 
     FormData formData = new FormData.from({
       'page': page,
-      'per_page': per_page,
+      'per_page': GlobalConfig.PageSize,
       "XDEBUG_SESSION_START": 17366
     });
 
@@ -32,7 +33,7 @@ class CollectApi {
 
     FormData formData = new FormData.from({
       'page': page,
-      'per_page': per_page,
+      'per_page': GlobalConfig.PageSize,
       "XDEBUG_SESSION_START": 15576
     });
 

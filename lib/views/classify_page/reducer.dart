@@ -11,7 +11,8 @@ Reducer<ClassifyPageState> buildReducer() {
       ClassifyPageAction.setAccount:_setAccount,
       ClassifyPageAction.loadMore:_loadMore,
       ClassifyPageAction.init: _init,
-      ClassifyPageAction.updateGroupValue: _updateGroupValue
+      ClassifyPageAction.updateGroupValue: _updateGroupValue,
+      ClassifyPageAction.updatePerformingRequest: _updatePerformingRequest
     },
   );
 }
@@ -39,6 +40,8 @@ ClassifyPageState _loadMore(ClassifyPageState state, Action action) {
     newState.pages = model.paged.more;
     newState.size = model.paged.size;
     newState.currentPage = model.paged.page;
+
+    newState.isPerformingRequest = false;
   }
   //保留默认查询条件
 //  newState.atrributionList1 = state.atrributionList1;
@@ -95,5 +98,19 @@ ClassifyPageState _init(ClassifyPageState state, Action action) {
   newState.groupValue1 = 0;
   newState.groupValue2 = 0;
   newState.groupValue3 = 0;
+  newState.currentPage = 0;
+  newState.total = 0;
+  newState.pages = 0;
+  newState.size = 0;
+  newState.productList.clear();
+  return newState;
+}
+
+ClassifyPageState _updatePerformingRequest(ClassifyPageState state, Action action) {
+  bool b = action.payload;
+
+  final ClassifyPageState newState = state.clone();
+  newState.isPerformingRequest = b;
+
   return newState;
 }

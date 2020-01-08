@@ -8,6 +8,7 @@ class ClassifyPageState implements Cloneable<ClassifyPageState> {
   ScrollController scrollController;
   AnimationController animationController;
   AnimationController cellAnimationController;
+  bool isPerformingRequest;
   int currentPage;
   int total;
   int size;
@@ -31,6 +32,8 @@ class ClassifyPageState implements Cloneable<ClassifyPageState> {
     ..animationController=animationController
     ..cellAnimationController=cellAnimationController
 
+    ..isPerformingRequest = isPerformingRequest
+
     ..atrributionList1 = atrributionList1
     ..atrributionList2 = atrributionList2
     ..atrributionList3 = atrributionList3
@@ -51,6 +54,7 @@ class ClassifyPageState implements Cloneable<ClassifyPageState> {
 ClassifyPageState initState(Map<String, dynamic> args) {
   var state = ClassifyPageState();
   state.productList = new List<Products>();
+  state.isPerformingRequest = false;
   state.atrributionList1 = [];
   state.atrributionList2 = [];
   state.atrributionList3 = [];

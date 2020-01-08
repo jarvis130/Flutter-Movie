@@ -13,7 +13,7 @@ class UserApi {
     FormData formData = new FormData.from({
       "device_id": code,
       "os": os,
-      "XDEBUG_SESSION_START": 15977
+      "XDEBUG_SESSION_START": 12474
     });
 
     var response = await HttpUtil().post('ecapi.auth.signinByDevice', data: formData);

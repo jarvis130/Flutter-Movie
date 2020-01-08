@@ -401,6 +401,13 @@ Widget buildView(
     );
   }
 
+  Future < void > _onRefresh() async {
+
+    dispatch(
+        ClassifyActionCreator.onRefresh()
+    );
+  }
+
   return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -415,51 +422,50 @@ Widget buildView(
         brightness: Brightness.light,
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      body: CustomScrollView(
-        controller: state.scrollController,
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: _build1(),
-          ),
-          SliverToBoxAdapter(
-            child: _build2(),
-          ),
-          SliverToBoxAdapter(
-            child: _build3(),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: Adapt.px(20),
+      body: RefreshIndicator(
+        onRefresh: _onRefresh,
+        child: CustomScrollView(
+          controller: state.scrollController,
+          slivers: <Widget>[
+            SliverToBoxAdapter(
+              child: _build1(),
             ),
-          ),
-//          SliverGrid.extent(
-//              crossAxisSpacing: 5.0,
-//              mainAxisSpacing: 5.0,
-//              childAspectRatio: 2 / 3,
-//              maxCrossAxisExtent: Adapt.screenW() / 3,
-//              children: state.productList.map(_buildCell).toList()
-//          )
-          state.productList.length > 0 ? SliverGrid.extent(
-              crossAxisSpacing: 5.0,
-              mainAxisSpacing: 5.0,
-              childAspectRatio: 2 / 3,
-              maxCrossAxisExtent: Adapt.screenW() / 3,
-              children: state.productList.map(_buildCell).toList()
-          ) : _buildShimmerCell(),
-          SliverToBoxAdapter(
-            child: Offstage(
-              offstage: state.productList.length == state.total,
-              child: Container(
-                height: Adapt.px(120),
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation(Colors.black),
-                ),
+            SliverToBoxAdapter(
+              child: _build2(),
+            ),
+            SliverToBoxAdapter(
+              child: _build3(),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: Adapt.px(20),
               ),
             ),
-          )
-        ],
+            state.productList != null ? SliverGrid.extent(
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 5.0,
+                childAspectRatio: 2 / 3,
+                maxCrossAxisExtent: Adapt.screenW() / 3,
+                children: state.productList.map(_buildCell).toList()
+            ) : _buildShimmerCell(),
+
+            SliverToBoxAdapter(
+              child: Offstage(
+                offstage: state.productList.length == state.total,
+                child: Container(
+                  height: Adapt.px(120),
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation(Colors.black),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       )
+
+
   );
 
 }

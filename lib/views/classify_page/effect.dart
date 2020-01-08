@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/api/classify_api.dart';
 import 'package:movie/api/product_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/models/VideoAttributeModel.dart';
@@ -15,12 +16,28 @@ Effect<ClassifyPageState> buildEffect() {
     Lifecycle.dispose: _onDispose,
     ClassifyPageAction.action: _onAction,
     ClassifyPageAction.cellTapped: _cellTapped,
-    ClassifyPageAction.onUpdateGroupValue: _onUpdateGroupValue
+    ClassifyPageAction.onUpdateGroupValue: _onUpdateGroupValue,
+    ClassifyPageAction.onRefresh: _onRefresh
   });
 }
 
 void _onAction(Action action, Context<ClassifyPageState> ctx) {
 }
+
+final List list1 =[
+  {
+    "title": "最近热播",
+    "value":0,
+  },
+  {
+    "title": "最新上架",
+    "value":1
+  },
+  {
+    "title": "热门推荐",
+    "value":2
+  }
+];
 
 Future _onInit(Action action, Context<ClassifyPageState> ctx) async {
   final ticker = ctx.stfState as CustomstfState;
@@ -29,29 +46,13 @@ Future _onInit(Action action, Context<ClassifyPageState> ctx) async {
   ctx.state.cellAnimationController = AnimationController(
       vsync: ticker, duration: Duration(milliseconds: 1000));
   
-  ctx.state.scrollController = ScrollController(keepScrollOffset: false)
+  ctx.state.scrollController = ScrollController(keepScrollOffset: true)
     ..addListener(() async {
-      bool isBottom = ctx.state.scrollController.position.pixels ==
-          ctx.state.scrollController.position.maxScrollExtent;
+      bool isBottom = ctx.state.scrollController.position.pixels == ctx.state.scrollController.position.maxScrollExtent;
       if (isBottom) {
         _loadMore(action, ctx);
       }
     });
-
-  List list1 =[
-    {
-      "title": "最近热播",
-      "value":0,
-    },
-    {
-      "title": "最新上架",
-      "value":1
-    },
-    {
-      "title": "热门推荐",
-      "value":2
-    }
-  ];
 
 //  List list2 =[
 //    {
@@ -134,15 +135,17 @@ void _onDeactivate(Action action, Context<ClassifyPageState> ctx) {
 }
 
 Future _loadMore(Action action, Context<ClassifyPageState> ctx) async {
-  GoodProducts model = await getGoodProducts(action, ctx);
-  if (model != null){
-    ctx.dispatch(ClassifyActionCreator.loadMore(model));
-  }
+
+//    ctx.dispatch(ClassifyActionCreator.updatePerformingRequest(true));
+
+    GoodProducts model = await getGoodProducts(action, ctx);
+    if (model != null){
+      ctx.dispatch(ClassifyActionCreator.loadMore(model));
+    }
 }
 
 Future _cellTapped(Action action, Context<ClassifyPageState> ctx) async {
-//  await Navigator.of(ctx.context)
-//      .pushNamed('DiscoverPage', arguments: {'classifyId': action.payload});
+
   await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
     'movieid': action.payload[0],
     'bgpic': action.payload[2],
@@ -182,6 +185,7 @@ Future<GoodProducts> getGoodProducts(Action action, Context<ClassifyPageState> c
   }
   GoodProducts model = await ProductApi.getList(
     page: currentPage,
+    per_page: GlobalConfig.PageSize,
     is_hot: is_hot,
     is_best: is_best,
     is_new: is_new,
@@ -190,4 +194,18 @@ Future<GoodProducts> getGoodProducts(Action action, Context<ClassifyPageState> c
     is_real: '2'
   );
   return model;
+}
+
+Future _onRefresh(Action action, Context<ClassifyPageState> ctx) async{
+  ctx.state.currentPage = 0;
+  VideoAttributeModel model = await ClassifyApi.getVideoAttribute();
+  if(model != null){
+    Map map = {
+      'list1': list1,
+      'list2': model.videoarea,
+      'list3': model.videotype
+    };
+    ctx.dispatch(ClassifyActionCreator.init(map));
+    _loadMore(action, ctx);
+  }
 }

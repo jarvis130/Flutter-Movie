@@ -2,6 +2,7 @@ import 'dart:convert' show json;
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 import 'package:movie/actions/apihelper.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/utils/httpUtil.dart';
 import 'package:movie/models/searchresult.dart';
