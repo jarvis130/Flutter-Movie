@@ -11,7 +11,8 @@ enum MyAction {
   loadFavoritesMore,
   loadConcernMore,
   setConcernState ,
-  filterChanged
+  filterChanged,
+  onRefresh
 }
 
 class MyActionCreator {
@@ -38,5 +39,8 @@ class MyActionCreator {
   }
   static Action setConcernState(UserListModel d) {
     return Action(MyAction.setConcernState, payload: d);
+  }
+  static Action onRefresh() {
+    return Action(MyAction.onRefresh);
   }
 }

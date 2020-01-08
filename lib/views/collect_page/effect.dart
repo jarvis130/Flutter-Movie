@@ -14,7 +14,8 @@ Effect<CollectState> buildEffect() {
     MyAction.loadFavoritesMore: _loadFavoritesMore,
     MyAction.loadConcernMore: _loadConcernMore,
     MyAction.loadFavorites: _loadFavorites,
-    MyAction.loadConcern: _loadConcern
+    MyAction.loadConcern: _loadConcern,
+    MyAction.onRefresh: _onRefresh
   });
 }
 
@@ -43,6 +44,14 @@ Future _onInit(Action action, Context<CollectState> ctx) async {
 
   await _loadFavorites(action, ctx);
   await _loadConcern(action, ctx);
+}
+
+Future _onRefresh(Action action, Context<CollectState> ctx) async {
+  ctx.state.favorites.paged.page = 1;
+  ctx.state.userListModel.paged.page = 1;
+  await _loadFavorites(action, ctx);
+  await _loadConcern(action, ctx);
+
 }
 
 void _onDispose(Action action, Context<CollectState> ctx) {
