@@ -1,5 +1,6 @@
 
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/CommentModel.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
@@ -53,9 +54,13 @@ MovieDetailPageState _onSetImages(MovieDetailPageState state, Action action) {
   return newState;
 }
 MovieDetailPageState _onSetReviews(MovieDetailPageState state, Action action) {
-  ReviewModel c=action.payload;
+  CommentModel c=action.payload;
   final MovieDetailPageState newState = state.clone();
   newState.reviewModel=c;
+  newState.total = c.paged.total;
+  newState.pages = c.paged.more;
+  newState.size = c.paged.size;
+  newState.currentPage = c.paged.page;
   return newState;
 }
 MovieDetailPageState _onSetVideos(MovieDetailPageState state, Action action) {

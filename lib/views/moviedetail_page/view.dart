@@ -171,11 +171,11 @@ Widget buildView(
     );
   }
 
-  Widget _buildVideoCell(MovieListResult d) {
+  Widget _buildVideoCell(LinkGoods d) {
     double w = Adapt.screenW();
     double h = 150;
     return Container(
-      padding: EdgeInsets.fromLTRB(Adapt.px(30), 0, Adapt.px(30), Adapt.px(30)),
+      padding: EdgeInsets.fromLTRB(Adapt.px(30), Adapt.px(10), Adapt.px(30), Adapt.px(0)),
       child: Card(
         elevation: 2.0,
         child: Column(
@@ -189,7 +189,7 @@ Widget buildView(
           GestureDetector(
             onTap: () {
               dispatch(MovieDetailPageActionCreator.onRecommendationTapped(
-                  d.id, d.thumb_s));
+                  d.goodsId.toString(), d.goodsThumb.thumb));
             },
             child: Container(
               width: w,
@@ -201,10 +201,12 @@ Widget buildView(
                       random.nextInt(255),
                       random.nextDouble()),
                   image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
-                          d.thumb_s
-                      ))),
+                    fit: BoxFit.cover,
+                    image: (d.goodsThumb == null || d.goodsThumb.thumb == null) ? AssetImage('images/empty.png') : CachedNetworkImageProvider(
+                        d.goodsThumb.thumb
+                    ),
+                  )
+              ),
               /*child: ParallaxImage(
                   extent: h,
                   image: CachedNetworkImageProvider(
@@ -215,7 +217,7 @@ Widget buildView(
             Padding(
               padding: EdgeInsets.all(Adapt.px(20)),
               child: Text(
-                d.title,
+                d.goodsName,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: Adapt.px(25),
@@ -404,12 +406,12 @@ Widget buildView(
   }
 
   Widget _getVideoBody() {
-    if (state.recommendMovie.results.length > 0)
+    if ( model.product.linkGoods != null && model.product.linkGoods.length > 0 )
       return SliverList(
           delegate:
               SliverChildBuilderDelegate((BuildContext contxt, int index) {
-        return _buildVideoCell(state.recommendMovie.results[index]);
-      }, childCount: state.recommendMovie.results.length));
+        return _buildVideoCell(model.product.linkGoods[index]);
+      }, childCount: model.product.linkGoods.length));
     else
       return SliverList(
           delegate:
@@ -927,29 +929,29 @@ Widget buildView(
                       // SliverToBoxAdapter(
                       //   child: viewService.buildComponent('keywords'),
                       // ),
-                      SliverToBoxAdapter(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(Adapt.px(30)),
-                                child: Text(
-                                    I18n.of(viewService.context).recommendations,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: Adapt.px(40),
-                                        fontWeight: FontWeight.w800)),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: Adapt.px(30)),
-                                height: Adapt.px(400) * 9 / 16,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: _buildRecommendationBody(),
-                                ),
-                              ),
-                            ],
-                          )),
+//                      SliverToBoxAdapter(
+//                          child: Column(
+//                            crossAxisAlignment: CrossAxisAlignment.start,
+//                            children: <Widget>[
+//                              Padding(
+//                                padding: EdgeInsets.all(Adapt.px(30)),
+//                                child: Text(
+//                                    I18n.of(viewService.context).recommendations,
+//                                    style: TextStyle(
+//                                        color: Colors.black,
+//                                        fontSize: Adapt.px(40),
+//                                        fontWeight: FontWeight.w800)),
+//                              ),
+//                              Container(
+//                                margin: EdgeInsets.only(bottom: Adapt.px(30)),
+//                                height: Adapt.px(400) * 9 / 16,
+//                                child: ListView(
+//                                  scrollDirection: Axis.horizontal,
+//                                  children: _buildRecommendationBody(),
+//                                ),
+//                              ),
+//                            ],
+//                          )),
                       // SliverToBoxAdapter(
                       //   child: viewService.buildComponent('info'),
                       // ),

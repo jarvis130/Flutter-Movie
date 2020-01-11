@@ -1,15 +1,12 @@
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/globalbasestate/state.dart';
+import 'package:movie/models/CommentModel.dart';
 import 'package:movie/models/ProductModel.dart';
-import 'package:movie/models/creditsmodel.dart';
 import 'package:movie/models/imagemodel.dart';
-import 'package:movie/models/keyword.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/models/movielist.dart';
 import 'package:movie/models/review.dart';
 import 'package:movie/models/videomodel.dart';
@@ -27,11 +24,16 @@ class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
   Color tabTintColor;
   PaletteGenerator palette;
   ImageModel imagesmodel;
-  ReviewModel reviewModel;
+  CommentModel reviewModel;
   VideoModel videomodel;
   ScrollController scrollController;
   MediaAccountStateModel accountState;
   AnimationController animationController;
+
+  int currentPage;
+  int total;
+  int size;
+  int pages;
 
   @override
   MovieDetailPageState clone() {
@@ -51,7 +53,11 @@ class MovieDetailPageState implements GlobalBaseState<MovieDetailPageState> {
       ..title = title
       ..scrollController = scrollController
       ..accountState = accountState
-      ..animationController=animationController;
+      ..animationController=animationController
+      ..total = total
+      ..currentPage = currentPage
+      ..size = size
+      ..pages = pages;
   }
 
   @override
@@ -83,12 +89,19 @@ MovieDetailPageState initState(Map<String, dynamic> args) {
   state.imagesmodel = new ImageModel.fromParams(
       posters: List<ImageData>(), backdrops: List<ImageData>());
 
-  state.reviewModel = new ReviewModel.fromParams(commentlist: List<ReviewResult>());
+  state.reviewModel = new CommentModel();
 
-  state.videomodel = new VideoModel.fromParams(results: List<VideoResult>());
+//  state.videomodel = new VideoModel.fromParams(results: List<VideoResult>());
+//
+//  state.accountState =
+//      new MediaAccountStateModel.fromParams(favorite: false, watchlist: false);
 
-  state.accountState =
-      new MediaAccountStateModel.fromParams(favorite: false, watchlist: false);
+  state.scrollController = new ScrollController();
+
+  state.currentPage = 0;
+  state.total = 0;
+  state.size = 0;
+  state.pages = 0;
 
   return state;
 }

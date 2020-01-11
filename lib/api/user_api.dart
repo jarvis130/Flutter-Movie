@@ -18,7 +18,7 @@ class UserApi {
 
     var response = await HttpUtil().post('ecapi.auth.signinByDevice', data: formData);
     Map map = json.decode(response.toString());
-    if(map.length > 0){
+    if(map != null && map.length > 0){
       UserModel model = UserModel.fromJson(map);
       if(model.errorCode == 0){
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -41,7 +41,7 @@ class UserApi {
 
     var response = await HttpUtil().post('ecapi.user.profile.get', data: formData);
     Map map = json.decode(response.toString());
-    if(map.length > 0){
+    if(map != null && map.length > 0){
       UserModel model = UserModel.fromJson(map);
       if(model.errorCode == 0){
         return model;

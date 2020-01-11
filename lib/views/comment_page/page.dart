@@ -5,18 +5,18 @@ import 'reducer.dart';
 import 'state.dart';
 import 'view.dart';
 
-class ReviewPage extends Page<ReviewState, Map<String, dynamic>> {
-  ReviewPage()
+class CommentPage extends Page<CommentState, Map<String, dynamic>> {
+  CommentPage()
       : super(
             initState: initState,
             effect: buildEffect(),
             reducer: buildReducer(),
             view: buildView,
-            dependencies: Dependencies<ReviewState>(
+            dependencies: Dependencies<CommentState>(
                 adapter: null,
-                slots: <String, Dependent<ReviewState>>{
+                slots: <String, Dependent<CommentState>>{
                 }),
-            middleware: <Middleware<ReviewState>>[
+            middleware: <Middleware<CommentState>>[
             ],);
 
 }

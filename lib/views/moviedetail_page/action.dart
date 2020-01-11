@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:fish_redux/fish_redux.dart';
+import 'package:movie/models/CommentModel.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/imagemodel.dart';
 import 'package:movie/models/media_accountstatemodel.dart';
@@ -43,7 +44,7 @@ class MovieDetailPageActionCreator {
     return Action(MovieDetailPageAction.setImages, payload: c);
   }
 
-  static Action onSetReviews(ReviewModel c) {
+  static Action onSetReviews(CommentModel c) {
     return Action(MovieDetailPageAction.setReviews, payload: c);
   }
   static Action onSetVideos(VideoModel c) {

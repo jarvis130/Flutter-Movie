@@ -7,7 +7,7 @@ import '../../customwidgets/text_field_item.dart';
 import 'action.dart';
 import 'state.dart';
 
-Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) {
+Widget buildView(CommentState state, Dispatch dispatch, ViewService viewService) {
 
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 

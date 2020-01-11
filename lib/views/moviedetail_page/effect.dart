@@ -2,11 +2,11 @@ import 'dart:convert' show json;
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/api/review_api.dart';
+import 'package:movie/api/comment_api.dart';
 import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/globalconfig.dart';
+import 'package:movie/models/CommentModel.dart';
 import 'package:movie/models/ProductModel.dart';
-import 'package:movie/models/review.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'action.dart';
 import 'state.dart';
@@ -19,6 +19,7 @@ Effect<MovieDetailPageState> buildEffect() {
     MovieDetailPageAction.openMenu: _openMenu,
     MovieDetailPageAction.showSnackBar: _showSnackBar,
     Lifecycle.initState: _onInit,
+    Lifecycle.dispose: _onDispose,
     MovieDetailPageAction.reviewMore: _reviewMore,
     MovieDetailPageAction.onRefresh: _onRefresh,
   });
@@ -31,8 +32,6 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     final ticker = ctx.stfState as CustomstfState;
     ctx.state.animationController = AnimationController(
         vsync: ticker, duration: Duration(milliseconds: 1000));
-    ctx.state.scrollController = new ScrollController();
-
 
 
     //
@@ -40,16 +39,14 @@ Future _onInit(Action action, Context<MovieDetailPageState> ctx) async {
     // 评论
     _reviewMore(action, ctx);
 
-    // var accountstate = await ApiHelper.getMovieAccountState(ctx.state.movieid);
-    // if (accountstate != null)
-    //   ctx.dispatch(
-    //       MovieDetailPageActionCreator.onSetAccountState(accountstate));
-    // var l = await ApiHelper.getMovieReviews(ctx.state.movieid);
-    // if (l != null) ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(l));
-    // var k = await ApiHelper.getMovieImages(ctx.state.movieid);
-    // if (k != null) ctx.dispatch(MovieDetailPageActionCreator.onSetImages(k));
-    // var f = await ApiHelper.getMovieVideo(ctx.state.movieid);
-    // if (f != null) ctx.dispatch(MovieDetailPageActionCreator.onSetVideos(f));
+//    ctx.state.scrollController = ScrollController()
+//      ..addListener(() {
+//        bool isBottom = ctx.state.scrollController.position.pixels ==
+//            ctx.state.scrollController.position.maxScrollExtent;
+//        if (isBottom) {
+//          _loadMore(action, ctx);
+//        }
+//      });
   } on Exception catch (e) {}
 }
 
@@ -60,6 +57,10 @@ void _loadMore(Action action, Context<MovieDetailPageState> ctx) async {
     ctx.dispatch(MovieDetailPageActionCreator.onInit(r));
     ctx.state.animationController.forward();
   }
+}
+
+Future _onDispose(Action action, Context<MovieDetailPageState> ctx) {
+  ctx.state.scrollController.dispose();
 }
 
 Future _onRefresh(Action action, Context<MovieDetailPageState> ctx) async {
@@ -98,7 +99,11 @@ void _showSnackBar(Action action, Context<MovieDetailPageState> ctx) {
 }
 
 void _reviewMore(Action action, Context<MovieDetailPageState> ctx) async{
-  ReviewModel reviewModel = await ReviewApi.getGetComments(ApiHelper.uid, ctx.state.movieid, page:1);
+  CommentModel reviewModel = await CommentApi.getList(
+    product: int.parse(ctx.state.movieid),
+    page: 1,
+    per_page: GlobalConfig.PageSize
+  );
   if (reviewModel != null) {
     ctx.dispatch(MovieDetailPageActionCreator.onSetReviews(reviewModel));
   }

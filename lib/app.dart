@@ -18,7 +18,7 @@ import 'package:movie/views/moviedetail_page/page.dart';
 import 'package:movie/views/collect_page/page.dart';
 import 'package:movie/views/mylists_page/page.dart';
 import 'package:movie/views/pay_page/page.dart';
-import 'package:movie/views/review_page/page.dart';
+import 'package:movie/views/comment_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
 import 'package:movie/views/splash_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
@@ -95,7 +95,7 @@ Future<Widget> createApp() async {
       'SplashPage': SplashPage(),
       'UserPage': UserPage(),
       'WebPage': WebPage(),
-      'reviewPage': ReviewPage(),
+      'CommentPage': CommentPage(),
       'PayPage': PayPage(),
       'CollectPage': CollectPage(),
       'Douyin': DouyinPage(),

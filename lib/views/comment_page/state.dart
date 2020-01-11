@@ -1,20 +1,20 @@
 import 'package:fish_redux/fish_redux.dart';
 
-class ReviewState implements Cloneable<ReviewState> {
+class CommentState implements Cloneable<CommentState> {
 
   String videoid;
   String content;
 
   @override
-  ReviewState clone() {
-    return ReviewState()
+  CommentState clone() {
+    return CommentState()
     ..videoid = videoid
     ..content = content;
   }
 }
 
-ReviewState initState(Map<String, dynamic> args) {
-  var state = ReviewState();
+CommentState initState(Map<String, dynamic> args) {
+  var state = CommentState();
   state.videoid = args['videoid'];
   return state;
 }

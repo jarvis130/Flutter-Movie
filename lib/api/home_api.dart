@@ -18,7 +18,7 @@ class HomeApi {
 
     var response = await HttpUtil().post('ecapi.banner.list', data: formData);
     Map map = json.decode(response.toString());
-    if(map.length > 0){
+    if(map!=null && map.length > 0){
       BannerModel model = BannerModel.fromJson(map);
       if(model.errorCode == 0){
         return model;
