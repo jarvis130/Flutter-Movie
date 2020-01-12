@@ -22,7 +22,7 @@ void _onInit(Action action, Context<CommentState> ctx) {
 }
 
 void _onSetComment(Action action, Context<CommentState> ctx) async{
-  var videoid = action.payload;
+  int videoid = action.payload;
   await CommentApi.addComment(
     comment_type: 2,
     id_value: videoid,

@@ -3,17 +3,18 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/actions/imageurl.dart';
-import 'package:movie/api/home_api.dart';
-import 'package:movie/models/enums/imagesize.dart';
+import 'package:movie/api/search_api.dart';
+import 'package:movie/globalconfig.dart';
+import 'package:movie/models/SearchModel.dart';
 import 'package:movie/models/searchresult.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchBarDelegate extends SearchDelegate<SearchResult> {
+
   SearchResultModel searchResultModel;
   List<String> searchHistory;
   SharedPreferences prefs;
+
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -38,10 +39,14 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
     );
   }
 
-  Future<SearchResultModel> _getData() async{
-    if (query != '' && query != null)
-      return await HomeApi.searchMulit(query, ApiHelper.uid, page: 1);
-//      return null;
+  Future<SearchModel> _getData() async{
+    if (query != '' && query != null) {
+      return await SearchApi.getList(
+          keyword: query,
+          page: 1,
+          per_page: GlobalConfig.PageSize
+      );
+    }
     else
       return null;
   }
@@ -61,15 +66,15 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
         prefs.setStringList('searchHistory', searchHistory);
       }
     }
-    return FutureBuilder<SearchResultModel>(
+    return FutureBuilder<SearchModel>(
       future: _getData(), // a previously-obtained Future<String> or null
-      builder: (BuildContext context, AsyncSnapshot<SearchResultModel> snapshot) {
-        List<SearchResult> data = snapshot.data == null ? null : snapshot.data.results;
+      builder: (BuildContext context, AsyncSnapshot<SearchModel> snapshot) {
+        List<Products> data = snapshot.data == null ? null : snapshot.data.products;
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return Container(
               child: Center(
-                child: Text('No Result'),
+                child: Text('未搜索到结果'),
               ),
             );
           case ConnectionState.active:
@@ -185,10 +190,10 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return FutureBuilder<SearchResultModel>(
+    return FutureBuilder<SearchModel>(
       future: _getData(), // a previously-obtained Future<String> or null
       builder:
-          (BuildContext context, AsyncSnapshot<SearchResultModel> snapshot) {
+          (BuildContext context, AsyncSnapshot<SearchModel> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return _buildHistoryList();
@@ -204,7 +209,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             return _SuggestionList(
               query: query,
-              suggestions: snapshot.data == null ? [] : snapshot.data.results,
+              suggestions: snapshot.data == null ? [] : snapshot.data.products,
               onSelected: (String suggestion) {
                 query = suggestion;
                 showResults(context);
@@ -232,11 +237,11 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
   }
 }
 
-Widget _buildSuggestionCell(SearchResult s, ValueChanged<String> tapped) {
+Widget _buildSuggestionCell(Products s, ValueChanged<String> tapped) {
 //  IconData iconData = s.mediaType == 'movie'
 //      ? Icons.movie
 //      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
-  String name = s.title;
+  String name = s.name;
   return Container(
       height: Adapt.px(100),
       child: ListTile(
@@ -249,7 +254,7 @@ Widget _buildSuggestionCell(SearchResult s, ValueChanged<String> tapped) {
 class _SuggestionList extends StatelessWidget {
   const _SuggestionList({this.suggestions, this.query, this.onSelected});
 
-  final List<SearchResult> suggestions;
+  final List<Products> suggestions;
   final String query;
   final ValueChanged<String> onSelected;
 
@@ -258,7 +263,7 @@ class _SuggestionList extends StatelessWidget {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (BuildContext context, int i) {
-        final SearchResult suggestion = suggestions[i];
+        final Products suggestion = suggestions[i];
         return _buildSuggestionCell(suggestion, onSelected);
       },
     );
@@ -267,7 +272,7 @@ class _SuggestionList extends StatelessWidget {
 
 Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
-Widget _buildResultCell(SearchResult s, BuildContext ctx) {
+Widget _buildResultCell(Products s, BuildContext ctx) {
 //  IconData iconData = s.mediaType == 'movie'
 //      ? Icons.movie
 //      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
@@ -290,7 +295,7 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(
-                          s.thumb_s
+                          s.defaultPhoto.thumb
                       )
                   )
               ),
@@ -317,7 +322,7 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                     Container(
                       width: Adapt.screenW() - Adapt.px(370),
                       child: Text(
-                        s.title,
+                        s.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
@@ -334,7 +339,7 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
                 Container(
                   width: Adapt.screenW() - Adapt.px(370),
                   child: Text(
-                    s.description,
+                    s.goodsDesc,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(
@@ -392,10 +397,10 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
     onTap: () async {
       await Navigator.of(ctx)
           .pushNamed('moviedetailpage', arguments: {
-        'movieid': s.id,
-        'bgpic': s.thumb_s,
-        'title': s.title,
-        'posterpic': s.thumb_s
+        'movieid': s.id.toString(),
+        'bgpic': s.defaultPhoto.thumb,
+        'title': s.name,
+        'posterpic': s.defaultPhoto.thumb,
       });
 
 //      switch (s.mediaType) {
@@ -431,7 +436,7 @@ Widget _buildResultCell(SearchResult s, BuildContext ctx) {
 class _ResultList extends StatefulWidget {
   const _ResultList({this.results, this.query});
 
-  final List<SearchResult> results;
+  final List<Products> results;
   final String query;
 
   @override
@@ -440,7 +445,7 @@ class _ResultList extends StatefulWidget {
 
 class _ResultListState extends State<_ResultList> {
   ScrollController scrollController;
-  List<SearchResult> results;
+  List<Products> results;
   String query;
   int pageindex;
   int totalpage;
@@ -454,12 +459,17 @@ class _ResultListState extends State<_ResultList> {
         isloading = true;
       });
       pageindex++;
-      var r = await ApiHelper.searchMulit(query, page: pageindex);
+//      var r = await ApiHelper.searchMulit(query, page: pageindex);
+      SearchModel r = await SearchApi.getList(
+          keyword: query,
+          page: pageindex,
+          per_page: GlobalConfig.PageSize
+      );
       if (r != null) {
         setState(() {
-          pageindex = r.page;
-          totalpage = r.total_pages;
-          results.addAll(r.results);
+          pageindex = r.paged.page;
+          totalpage = r.paged.more;
+          results.addAll(r.products);
           isloading = false;
         });
       }

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:movie/customwidgets/custom_stfstate.dart';
 import 'package:movie/customwidgets/searchbar_delegate.dart';
 import 'package:movie/models/BannerModel.dart';
-import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/views/detail_page/page.dart';
 import 'package:movie/api/home_api.dart';
 import 'action.dart';
 import 'state.dart';

@@ -70,8 +70,9 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
           ),
 //          new Divider(),
           Container(
-            padding: EdgeInsets.fromLTRB(Adapt.px(10), Adapt.px(5), Adapt.px(10), Adapt.px(5)),
+            padding: EdgeInsets.fromLTRB(Adapt.px(20), Adapt.px(5), Adapt.px(20), Adapt.px(5)),
             child: _text(comment.content),
+            alignment: Alignment.centerLeft,
           )
         ],
       ),

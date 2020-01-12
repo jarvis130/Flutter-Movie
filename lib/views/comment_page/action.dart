@@ -8,7 +8,7 @@ class ReviewActionCreator {
     return const Action(CommentAction.action);
   }
 
-  static Action onSetComment(String videoid) {
+  static Action onSetComment(int videoid) {
     return  Action(CommentAction.setComment, payload: videoid);
   }
 

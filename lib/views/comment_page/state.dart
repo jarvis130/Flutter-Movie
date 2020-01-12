@@ -2,7 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 
 class CommentState implements Cloneable<CommentState> {
 
-  String videoid;
+  int videoid;
   String content;
 
   @override
