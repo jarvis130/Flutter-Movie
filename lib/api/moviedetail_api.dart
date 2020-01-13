@@ -1,6 +1,5 @@
-import 'package:movie/actions/apihelper.dart';
+
 import 'package:movie/models/ProductModel.dart';
-import 'package:movie/models/moviedetail.dart';
 import 'package:movie/utils/httpUtil.dart';
 import 'dart:convert' show json;
 import 'dart:ui' as ui;

@@ -46,7 +46,7 @@ class Reviews {
   String _username;
   int _grade;
   int _isAnonymous;
-  int _createdAt;
+  String _createdAt;
   int _updatedAt;
   String _avatar_url;
 
@@ -56,7 +56,7 @@ class Reviews {
         String username,
         int grade,
         int isAnonymous,
-        int createdAt,
+        String createdAt,
         int updatedAt,
         String avatar_url}) {
     this._content = content;
@@ -79,8 +79,8 @@ class Reviews {
   set grade(int grade) => _grade = grade;
   int get isAnonymous => _isAnonymous;
   set isAnonymous(int isAnonymous) => _isAnonymous = isAnonymous;
-  int get createdAt => _createdAt;
-  set createdAt(int createdAt) => _createdAt = createdAt;
+  String get createdAt => _createdAt;
+  set createdAt(String createdAt) => _createdAt = createdAt;
   int get updatedAt => _updatedAt;
   set updatedAt(int updatedAt) => _updatedAt = updatedAt;
   String get avatar_url => _avatar_url;

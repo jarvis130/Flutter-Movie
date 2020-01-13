@@ -54,7 +54,7 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
                 )
             ),
             trailing: Text(
-                comment.updatedAt.toString(),
+                comment.createdAt.toString(),
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: Adapt.px(22)

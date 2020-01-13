@@ -34,7 +34,7 @@ class HomeApi {
 
     var response = await HttpUtil().post('ecapi.home.video.list', data: formData);
     Map map = json.decode(response.toString());
-    if(map.length > 0){
+    if(map != null && map.length > 0){
       HomeModel model = HomeModel.fromJson(map);
       if(model.errorCode == 0){
         return model;
