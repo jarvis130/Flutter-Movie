@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'action.dart';
 import 'state.dart';
@@ -416,7 +417,7 @@ Widget buildView(
           '發現',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20
+              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
           ),
         ),
         brightness: Brightness.light,

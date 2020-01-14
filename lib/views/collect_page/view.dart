@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/globalconfig.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -25,7 +26,10 @@ Widget buildView(CollectState state, Dispatch dispatch, ViewService viewService)
             labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
             labelStyle:
-                TextStyle(fontSize: Adapt.px(35), fontWeight: FontWeight.bold),
+                TextStyle(
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION),
+                    fontWeight: FontWeight.bold
+                ),
             unselectedLabelStyle: TextStyle(color: Colors.grey),
             tabs: <Widget>[
               Tab(

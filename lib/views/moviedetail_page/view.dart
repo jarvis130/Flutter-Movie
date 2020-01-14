@@ -782,7 +782,7 @@ Widget buildView(
                         expandedHeight: Adapt.px(580),
                         floating: false,
                         centerTitle: true,
-                        title: Text(de ? model.product.name ?? '' : ''),
+                        title: Text(de ? model.product.name ?? model.product.name : ''),
                         actions: <Widget>[
                           IconButton(
                             icon: Icon(Icons.more_vert),
@@ -806,7 +806,7 @@ Widget buildView(
                                 indicatorSize: TabBarIndicatorSize.label,
                                 isScrollable: true,
                                 labelStyle: TextStyle(
-                                    fontSize: Adapt.px(35),
+                                    fontSize: Adapt.px(30),
                                     fontWeight: FontWeight.w600),
                                 tabs: <Widget>[
                                   Tab(text: I18n.of(viewService.context).main),
@@ -890,7 +890,7 @@ Widget buildView(
                               Text(I18n.of(viewService.context).overView,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: Adapt.px(40),
+                                      fontSize: Adapt.px(36),
                                       fontWeight: FontWeight.w800)),
                               SizedBox(
                                 height: Adapt.px(30),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/customwidgets/share_card.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/listdetailmodel.dart';
@@ -524,7 +525,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '标题',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: 12
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
               trailing: Icon(Icons.chevron_right, color: Colors.pink),
@@ -538,7 +539,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '标题',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: 12
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
               trailing: Icon(Icons.chevron_right, color: Colors.pink),
@@ -552,7 +553,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '标题',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: 12
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
               trailing: Icon(Icons.chevron_right, color: Colors.pink),
@@ -566,7 +567,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '标题',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: 12
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
               trailing: Icon(Icons.chevron_right, color: Colors.pink),
@@ -608,7 +609,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     '我的收藏',
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                        fontSize: 12
+                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
                     ),
                   ),
                 ],
@@ -635,7 +636,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     '觀看記錄',
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                        fontSize: 12
+                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
                     ),
                   ),
                 ],
@@ -658,7 +659,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   '我的訂單',
                   style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      fontSize: 12
+                      fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
                   ),
                 ),
               ],
@@ -680,7 +681,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   '聯繫客服',
                   style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      fontSize: 12
+                      fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
                   ),
                 ),
               ],
@@ -705,11 +706,11 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           Container(
             margin: EdgeInsets.only(left: 0.0, top: 30.0, right: 0.0, bottom: 10.0),
             child: Text(
-              d.rank.name,
+
+              'ID:' + d.username == null ? '' : d.username,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey,
-                  fontSize: 12
+                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
               ),
             ),
           ),
@@ -717,10 +718,11 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           Container(
             margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 20.0),
             child: Text(
-              'ID:' + d.username == null ? '' : d.username,
+              d.rank.name,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14
+                  color: Colors.grey,
+                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
               ),
             ),
           ),
@@ -738,7 +740,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     Text(
                       '每日觀看次數',
                       style: TextStyle(
-                          fontSize: 12,
+                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE),
                           color: Colors.pink
                       ),
                     ),
@@ -750,7 +752,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       d.watchedTimes.toString() + '/' + d.watchTimes.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
+                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                       ),
                     ),
                   ],
@@ -770,7 +772,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       'VIP劵',
                       style: TextStyle(
                           color: Colors.pink,
-                          fontSize: 12
+                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
                       ),
                     ),
                     SizedBox(
@@ -780,7 +782,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       '30 / 30',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18
+                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                       ),
                     ),
                   ],
@@ -814,7 +816,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               '會員中心',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20
+                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
               ),
             ),
             // expandedHeight: Adapt.px(550),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/movielist.dart';
@@ -38,7 +39,7 @@ Widget buildView(
                 children: <Widget>[
                   Text(
                     I18n.of(viewService.context).more,
-                    style: TextStyle(color: Colors.black, fontSize: Adapt.px(20)),
+                    style: TextStyle(color: Colors.black, fontSize: Adapt.px(Adapt.px(GlobalConfig.FONTSIZE_TITLE))),
                   ),
                   Icon(Icons.arrow_forward, size: Adapt.px(35))
                 ]),
@@ -93,7 +94,7 @@ Widget buildView(
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: Adapt.px(20),
+                    fontSize: Adapt.px(Adapt.px(GlobalConfig.FONTSIZE_TITLE)),
                     fontWeight: FontWeight.bold,
                   ),
                 ))
