@@ -518,59 +518,97 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           children: <Widget>[
             ListTile(
               leading: Icon(
-                  Icons.receipt,
+                  Icons.account_balance_wallet,
                   color: Colors.pink
               ),
               title: Text(
-                '标题',
+                '開通賬戶',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                     fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
+              trailing: Text(
+                '30圓/月',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                ),
+              ),
             ),
             ListTile(
               leading: Icon(
-                  Icons.receipt,
+                  Icons.build,
                   color: Colors.pink
               ),
               title: Text(
-                '标题',
+                '賬號綁定',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                     fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
+              trailing: Text(
+                '綁定手機每日觀看次數+5',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                ),
+              ),
             ),
             ListTile(
               leading: Icon(
-                  Icons.receipt,
+                  Icons.share,
                   color: Colors.pink
               ),
               title: Text(
-                '标题',
+                '推廣分享',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                     fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
+              trailing: Text(
+                '推薦好友註冊免費看視頻',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                ),
+              ),
             ),
             ListTile(
               leading: Icon(
-                  Icons.receipt,
+                  Icons.comment,
                   color: Colors.pink
               ),
               title: Text(
-                '标题',
+                '意見反饋',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
                     fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
                 ),
               ),
-              trailing: Icon(Icons.chevron_right, color: Colors.pink),
+
+            ),
+            ListTile(
+              leading: Icon(
+                  Icons.track_changes,
+                  color: Colors.pink
+              ),
+              title: Text(
+                '兌換會員',
+                style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                ),
+              ),
+              trailing: Text(
+                '使用兌換碼',
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                ),
+              ),
             ),
           ],
         ),
