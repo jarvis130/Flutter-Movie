@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/widgets/custom_stfstate.dart';
 
 import 'components/menu_component/component.dart';
 import 'components/menu_component/state.dart';

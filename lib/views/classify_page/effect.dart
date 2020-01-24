@@ -1,7 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/api/classify_api.dart';
 import 'package:movie/api/product_api.dart';
-import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/widgets/custom_stfstate.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:flutter/material.dart' hide Action;

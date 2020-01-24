@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/api/comment_api.dart';
-import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/widgets/custom_stfstate.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/CommentModel.dart';
 import 'package:movie/models/ProductModel.dart';

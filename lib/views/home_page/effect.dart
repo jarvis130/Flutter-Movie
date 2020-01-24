@@ -1,7 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/customwidgets/custom_stfstate.dart';
-import 'package:movie/customwidgets/searchbar_delegate.dart';
+import 'package:movie/widgets/custom_stfstate.dart';
+import 'package:movie/widgets/searchbar_delegate.dart';
 import 'package:movie/models/BannerModel.dart';
 import 'package:movie/api/home_api.dart';
 import 'action.dart';

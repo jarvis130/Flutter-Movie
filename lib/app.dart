@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart' hide Action;
-
+import 'package:fluro/fluro.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/utils/SharedPreferencesUtil.dart';
@@ -34,6 +34,8 @@ import 'globalbasestate/store.dart';
 import 'views/moremedia_page/page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:device_info/device_info.dart';
+import 'routers/application.dart';
+import 'routers/routers.dart';
 
 //启动标识
 String startFlag = '0';
@@ -75,6 +77,10 @@ Future _init() async {
   setLocaleInfo('zh', TimelineInfoCN());
   setLocaleInfo('en', TimelineInfoEN());
   setLocaleInfo('Ja', TimelineInfoJA());
+
+  final router = Router();
+  Routes.configureRoutes(router);
+  Application.router = router;
 }
 
 Future<Widget> createApp() async {

@@ -1,9 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/customwidgets/screen.dart';
+import 'package:movie/widgets/screen.dart';
 import '../../style/styles.dart';
-import '../../customwidgets/text_field_item.dart';
+import '../../widgets/text_field_item.dart';
 import 'action.dart';
 import 'state.dart';
 

@@ -9,7 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/videoplayeritem.dart';
+import 'package:movie/widgets/videoplayeritem.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/creditsmodel.dart';

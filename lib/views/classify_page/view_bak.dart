@@ -3,7 +3,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/models/classify_list_model.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'dart:ui' as ui;

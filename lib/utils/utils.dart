@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'toast.dart';
+import 'package:movie/utils/toast.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:url_launcher/url_launcher.dart';
 

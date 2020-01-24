@@ -4,7 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/share_card.dart';
+import 'package:movie/widgets/share_card.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 

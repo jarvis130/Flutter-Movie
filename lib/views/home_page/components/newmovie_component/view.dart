@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/customwidgets/shimmercell.dart';
+import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/models/GoodProducts.dart';
 
 import 'action.dart';

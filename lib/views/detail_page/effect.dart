@@ -2,7 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/customwidgets/gallery_photoview_wrapper.dart';
+import 'package:movie/widgets/gallery_photoview_wrapper.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';

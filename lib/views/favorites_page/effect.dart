@@ -6,7 +6,7 @@ import 'package:flutter/material.dart' hide Action;
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/custom_stfstate.dart';
+import 'package:movie/widgets/custom_stfstate.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/videolist.dart';
 import 'package:palette_generator/palette_generator.dart';

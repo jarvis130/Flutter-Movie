@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flukit/flukit.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 import 'package:intro_views_flutter/intro_views_flutter.dart';
-import 'package:movie/customwidgets/screen.dart';
+import 'package:movie/widgets/screen.dart';
 
 import 'action.dart';
 import 'state.dart';

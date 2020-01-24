@@ -5,11 +5,15 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
-import 'package:movie/customwidgets/share_card.dart';
+import 'package:movie/routers/fluro_navigator.dart';
+import 'package:movie/views/order/order_router.dart';
+import 'package:movie/views/setting/setting_router.dart';
+import 'package:movie/widgets/share_card.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/listdetailmodel.dart';
+import 'package:movie/views/setting/avatar_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -576,20 +580,20 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(
-                  Icons.comment,
-                  color: Colors.pink
-              ),
-              title: Text(
-                '意見反饋',
-                style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
-                ),
-              ),
-
-            ),
+//            ListTile(
+//              leading: Icon(
+//                  Icons.comment,
+//                  color: Colors.pink
+//              ),
+//              title: Text(
+//                '意見反饋',
+//                style: TextStyle(
+////                      fontWeight: FontWeight.bold,
+//                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+//                ),
+//              ),
+//
+//            ),
             ListTile(
               leading: Icon(
                   Icons.track_changes,
@@ -681,26 +685,31 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-            width: width,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                    Icons.reorder,
-                    color: Colors.pink
-                ),
-                SizedBox(
-                  height: Adapt.px(10.0),
-                ),
-                Text(
-                  '我的訂單',
-                  style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                      fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+          GestureDetector(
+            onTap: (){
+              NavigatorUtils.push(viewService.context, OrderRouter.orderRecordListPage);
+            },
+            child: Container(
+              margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
+              width: width,
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                      Icons.reorder,
+                      color: Colors.pink
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: Adapt.px(10.0),
+                  ),
+                  Text(
+                    '我的訂單',
+                    style: TextStyle(
+        //                      fontWeight: FontWeight.bold,
+                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(
@@ -807,7 +816,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'VIP劵',
+                      'VIP到期時間',
                       style: TextStyle(
                           color: Colors.pink,
                           fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
@@ -817,7 +826,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       height: Adapt.px(10.0),
                     ),
                     Text(
-                      '30 / 30',
+                      '2020年12月01日',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
@@ -840,6 +849,25 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
 
   }
 
+  // 返回每个隐藏的菜单项
+  SelectView(IconData icon, String text, String id) {
+    return new PopupMenuItem<String>(
+        value: id,
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new Icon(icon, color: Colors.pink),
+            new Text(
+              text,
+              style: TextStyle(
+                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_MAINBODY)
+              ),
+            ),
+          ],
+        )
+    );
+  }
+
   return Scaffold(
     body: RefreshIndicator(
       onRefresh: _onRefresh,
@@ -857,6 +885,16 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
               ),
             ),
+            actions: <Widget>[
+
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  NavigatorUtils.push(viewService.context, SettingRouter.settingPage);
+                }
+              ),
+
+            ],
             // expandedHeight: Adapt.px(550),
             // flexibleSpace: FlexibleSpaceBar(
             //   background: _buildHeader(),
@@ -871,11 +909,11 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 children: <Widget>[
                   Container(
                     width: Adapt.screenW(),
-                    height: 180,
+                    height: 120,
                     color: Color.fromRGBO(50, 50, 50, 1),
                   ),
                   Card(
-                    margin: EdgeInsets.only(left: 10.0, top: 80.0, right: 10.0, bottom: 10.0),
+                    margin: EdgeInsets.only(left: 10.0, top: 40.0, right: 10.0, bottom: 10.0),
                     // color: Colors.white,
                     //z轴的高度，设置card的阴影
                     elevation: 5.0,
