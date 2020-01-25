@@ -8,6 +8,7 @@ import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/movielist.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'action.dart';
@@ -39,7 +40,7 @@ Widget buildView(
                 children: <Widget>[
                   Text(
                     I18n.of(viewService.context).more,
-                    style: TextStyle(color: Colors.black, fontSize: Adapt.px(Adapt.px(GlobalConfig.FONTSIZE_TITLE))),
+                    style: TextStyle(color: Colors.black, fontSize: Dimens.font_sp14),
                   ),
                   Icon(Icons.arrow_forward, size: Adapt.px(35))
                 ]),
@@ -94,7 +95,7 @@ Widget buildView(
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: Adapt.px(Adapt.px(GlobalConfig.FONTSIZE_TITLE)),
+                    fontSize: Dimens.font_sp14,
                     fontWeight: FontWeight.bold,
                   ),
                 ))

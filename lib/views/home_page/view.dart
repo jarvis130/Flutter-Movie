@@ -5,8 +5,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/enums/media_type.dart';
+import 'package:movie/style/dimens.dart';
+import 'package:movie/style/resources.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -16,10 +17,10 @@ Widget buildView(
     HomePageState state, Dispatch dispatch, ViewService viewService) {
 
   TextStyle _selectPopStyle = TextStyle(
-      fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE), fontWeight: FontWeight.bold, color: Colors.white);
+      fontSize: Dimens.font_sp18, fontWeight: FontWeight.bold, color: Colors.white);
 
   TextStyle _unselectPopStyle =
-      TextStyle(fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE), color: Colors.grey);
+      TextStyle(fontSize: Dimens.font_sp16, color: Colors.grey);
 
   Widget _buildSearchBar() {
     return GestureDetector(
@@ -42,7 +43,10 @@ Widget buildView(
               ),
               Text(
                 I18n.of(viewService.context).searchbartxt,
-                style: TextStyle(color: Colors.grey, fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)),
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: Dimens.font_sp18
+                ),
               )
             ],
           )),
