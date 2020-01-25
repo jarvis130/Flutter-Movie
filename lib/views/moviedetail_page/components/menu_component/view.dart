@@ -88,8 +88,11 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                         borderRadius: BorderRadius.circular(Adapt.px(60)),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(ImageUrl.getUrl(
-                                model.product.defaultPhoto.thumb, ImageSize.w300)))),
+                            image: CachedNetworkImageProvider(
+                                model.product.defaultPhoto.thumb
+                            )
+                        )
+                    ),
                   ),
                   SizedBox(
                     width: Adapt.px(20),

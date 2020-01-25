@@ -17,10 +17,10 @@ Widget buildView(
     HomePageState state, Dispatch dispatch, ViewService viewService) {
 
   TextStyle _selectPopStyle = TextStyle(
-      fontSize: Dimens.font_sp18, fontWeight: FontWeight.bold, color: Colors.white);
+      fontSize: Dimens.font_sp16, fontWeight: FontWeight.bold, color: Colors.white);
 
   TextStyle _unselectPopStyle =
-      TextStyle(fontSize: Dimens.font_sp16, color: Colors.grey);
+      TextStyle(fontSize: Dimens.font_sp14, color: Colors.grey);
 
   Widget _buildSearchBar() {
     return GestureDetector(
@@ -45,7 +45,7 @@ Widget buildView(
                 I18n.of(viewService.context).searchbartxt,
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: Dimens.font_sp18
+                    fontSize: Dimens.font_sp16
                 ),
               )
             ],

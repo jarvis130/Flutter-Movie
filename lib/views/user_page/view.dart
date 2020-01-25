@@ -770,7 +770,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
-                  fontSize: Dimens.font_sp14
+                  fontSize: Dimens.font_sp12
               ),
             ),
           ),
@@ -800,7 +800,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       d.watchedTimes.toString() + '/' + d.watchTimes.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: Dimens.font_sp16
+                          fontSize: Dimens.font_sp12
                       ),
                     ),
                   ],
@@ -830,7 +830,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       '2020年12月01日',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: Dimens.font_sp16
+                          fontSize: Dimens.font_sp12
                       ),
                     ),
                   ],
