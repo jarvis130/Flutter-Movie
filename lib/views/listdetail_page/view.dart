@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/UserModel.dart';
@@ -345,7 +346,8 @@ Widget buildView(
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
-                                fontSize: Adapt.px(35)),
+                                fontSize: Dimens.font_sp16
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -358,7 +360,8 @@ Widget buildView(
                              style: TextStyle(
                                  color: Colors.white,
                                  fontWeight: FontWeight.bold,
-                                 fontSize: Adapt.px(20)),
+                                 fontSize: Dimens.font_sp12
+                             ),
                            ),
                          )
                       ],
@@ -531,7 +534,7 @@ Widget buildView(
             state?.userDetailModel?.user?.username ?? '',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 20
+                fontSize: Dimens.font_sp18
             ),
           ),
           expandedHeight: Adapt.px(280),

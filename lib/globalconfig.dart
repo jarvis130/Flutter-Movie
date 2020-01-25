@@ -13,9 +13,4 @@ class GlobalConfig {
   static String HEADER_TOKEN_KEY = "X-API-Authorization";
   //分页参数
   static int PageSize = 10;
-  //字体大小
-  static int FONTSIZE_NAVIGATION = 36;//导航
-  static int FONTSIZE_MAINBODY = 28;//正文
-  static int FONTSIZE_TITLE = 34;//标题
-  static int FONTSIZE_SUBTITLE = 24;//副标题
 }

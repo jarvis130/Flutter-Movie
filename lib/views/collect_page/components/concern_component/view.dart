@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/UserListModel.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/widgets/keepalive_widget.dart';
@@ -134,13 +135,16 @@ Widget buildView(
                         d.username ?? '',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: Adapt.px(30),
+                            fontSize: Dimens.font_sp16,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                      Text(d.rank?.name ?? '',
                          style: TextStyle(
-                             color: Colors.grey[700], fontSize: Adapt.px(24))),
+                             color: Colors.grey[700],
+                             fontSize: Dimens.font_sp12
+                         )
+                     ),
                     SizedBox(
                       height: Adapt.px(8),
                     ),

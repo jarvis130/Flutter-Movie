@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:movie/models/CommentModel.dart';
+import 'package:movie/style/dimens.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -11,7 +12,7 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
   CommentModel model = state.reviewModel;
 
   final TextStyle _textStyle = TextStyle(
-      fontSize: Adapt.px(30)
+      fontSize: Dimens.font_sp14
   );
 
   final String _author = '李白。';
@@ -51,14 +52,14 @@ Widget buildView(ReviewState state, Dispatch dispatch, ViewService viewService) 
                 comment.username,
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: Adapt.px(30)
+                    fontSize: Dimens.font_sp16
                 )
             ),
             trailing: Text(
                 comment.createdAt.toString(),
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: Adapt.px(24)
+                    fontSize: Dimens.font_sp12
                 )
             ),
             leading: ClipOval(

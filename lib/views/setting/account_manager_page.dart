@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie/routers/fluro_navigator.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/image_utils.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/click_item.dart';
@@ -23,7 +24,7 @@ class _AccountManagerPageState extends State<AccountManagerPage> {
           '賬號管理',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),

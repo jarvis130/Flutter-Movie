@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
 import 'package:movie/routers/fluro_navigator.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/views/order/order_router.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/share_card.dart';
@@ -529,14 +530,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '開通賬戶',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                    fontSize: Dimens.font_sp16
                 ),
               ),
               trailing: Text(
                 '30圓/月',
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                    fontSize: Dimens.font_sp12
                 ),
               ),
             ),
@@ -549,14 +550,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '賬號綁定',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                    fontSize: Dimens.font_sp16
                 ),
               ),
               trailing: Text(
                 '綁定手機每日觀看次數+5',
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                    fontSize: Dimens.font_sp12
                 ),
               ),
             ),
@@ -569,14 +570,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '推廣分享',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                    fontSize: Dimens.font_sp16
                 ),
               ),
               trailing: Text(
                 '推薦好友註冊免費看視頻',
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                    fontSize: Dimens.font_sp12
                 ),
               ),
             ),
@@ -603,14 +604,14 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                 '兌換會員',
                 style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                    fontSize: Dimens.font_sp16
                 ),
               ),
               trailing: Text(
                 '使用兌換碼',
                 style: TextStyle(
                     color: Colors.grey,
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                    fontSize: Dimens.font_sp12
                 ),
               ),
             ),
@@ -651,7 +652,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     '我的收藏',
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                        fontSize: Dimens.font_sp14
                     ),
                   ),
                 ],
@@ -678,7 +679,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     '觀看記錄',
                     style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                        fontSize: Dimens.font_sp14
                     ),
                   ),
                 ],
@@ -705,7 +706,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     '我的訂單',
                     style: TextStyle(
         //                      fontWeight: FontWeight.bold,
-                        fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                        fontSize: Dimens.font_sp14
                     ),
                   ),
                 ],
@@ -728,7 +729,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                   '聯繫客服',
                   style: TextStyle(
 //                      fontWeight: FontWeight.bold,
-                      fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                      fontSize: Dimens.font_sp14
                   ),
                 ),
               ],
@@ -757,7 +758,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               'ID:' + d.username == null ? '' : d.username,
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                  fontSize: Dimens.font_sp16
               ),
             ),
           ),
@@ -769,7 +770,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
-                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                  fontSize: Dimens.font_sp14
               ),
             ),
           ),
@@ -787,7 +788,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     Text(
                       '每日觀看次數',
                       style: TextStyle(
-                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE),
+                          fontSize: Dimens.font_sp14,
                           color: Colors.pink
                       ),
                     ),
@@ -799,7 +800,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       d.watchedTimes.toString() + '/' + d.watchTimes.toString(),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                          fontSize: Dimens.font_sp16
                       ),
                     ),
                   ],
@@ -819,7 +820,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       'VIP到期時間',
                       style: TextStyle(
                           color: Colors.pink,
-                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_SUBTITLE)
+                          fontSize: Dimens.font_sp14
                       ),
                     ),
                     SizedBox(
@@ -829,7 +830,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                       '2020年12月01日',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)
+                          fontSize: Dimens.font_sp16
                       ),
                     ),
                   ],
@@ -860,7 +861,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
             new Text(
               text,
               style: TextStyle(
-                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_MAINBODY)
+                  fontSize: Dimens.font_sp14
               ),
             ),
           ],
@@ -882,7 +883,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
               '會員中心',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+                  fontSize: Dimens.font_sp18
               ),
             ),
             actions: <Widget>[

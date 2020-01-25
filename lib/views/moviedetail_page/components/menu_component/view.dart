@@ -4,6 +4,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/share_card.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
@@ -17,8 +18,10 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
 
   Widget _buildListTitel(IconData icon, String title, void onTap(),
       {Color iconColor = const Color.fromRGBO(50, 50, 50, 1)}) {
+
     TextStyle titleStyle =
-        TextStyle(color: Color.fromRGBO(50, 50, 50, 1), fontSize: Adapt.px(40));
+        TextStyle(color: Color.fromRGBO(50, 50, 50, 1), fontSize: Dimens.font_sp18);
+
     return ListTile(
       leading: Icon(
         icon,
@@ -97,7 +100,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                         maxLines: 2,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Adapt.px(40),
+                            fontSize: Dimens.font_sp14,
                             fontWeight: FontWeight.bold,
                             shadows: <Shadow>[
                               Shadow(offset: Offset(Adapt.px(1), Adapt.px(1)))
@@ -117,7 +120,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                     maxLines: 5,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Adapt.px(26),
+                        fontSize: Dimens.font_sp14,
                         shadows: <Shadow>[
                           Shadow(
                               offset: Offset(Adapt.px(1), Adapt.px(1)),
@@ -161,7 +164,7 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
                     model.product.name,
                     style: TextStyle(
                         color: Colors.black,
-                        fontSize: Adapt.px(40),
+                        fontSize: Dimens.font_sp18,
                         fontWeight: FontWeight.bold),
                   )),
             ],

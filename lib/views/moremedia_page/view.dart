@@ -7,6 +7,7 @@ import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/enums/media_type.dart';
+import 'package:movie/style/dimens.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -95,7 +96,7 @@ Widget buildView(
                     child: Text(d.goodsName ?? d.goodsName,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Adapt.px(30),
+                            fontSize: Dimens.font_sp14,
                             fontWeight: FontWeight.bold,
                             shadows: <Shadow>[
                               Shadow(
@@ -138,7 +139,7 @@ Widget buildView(
           title,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/selected_image.dart';
 import 'package:movie/widgets/text_field_item.dart';
 import 'package:movie/globalconfig.dart';
@@ -75,7 +76,7 @@ class _AvatarPageState extends State<AvatarPage> {
           '用戶頭像',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+            fontSize: Dimens.font_sp18
           ),
         ),
       ),
@@ -109,7 +110,7 @@ class _AvatarPageState extends State<AvatarPage> {
                       child: Text(
                           '提交',
                           style: TextStyle(
-                            fontSize: Adapt.px(GlobalConfig.FONTSIZE_MAINBODY),
+                            fontSize: Dimens.font_sp18,
                           )
                       ),
                     ),

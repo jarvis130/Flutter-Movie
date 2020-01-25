@@ -21,7 +21,7 @@ class _OrderRecordListPageState extends State<OrderRecordListPage> {
           '訂單明細',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),

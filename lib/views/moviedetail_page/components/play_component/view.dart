@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/widgets/video_widget.dart';
 import 'package:movie/widgets/videoplayeritem.dart';
 import 'package:video_player/video_player.dart';
 import 'action.dart';

@@ -5,8 +5,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -27,7 +27,10 @@ Widget buildView(WatchLogState state, Dispatch dispatch, ViewService viewService
       padding: EdgeInsets.all(Adapt.px(8)),
       child: Text(
         '',
-        style: TextStyle(color: Colors.black87, fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE)),
+        style: TextStyle(
+            color: Colors.black87,
+            fontSize: Dimens.font_sp14
+        ),
       ),
       decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
@@ -140,7 +143,7 @@ Widget buildView(WatchLogState state, Dispatch dispatch, ViewService viewService
                         d.name ?? '',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: Adapt.px(GlobalConfig.FONTSIZE_TITLE),
+                            fontSize: Dimens.font_sp14,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -209,7 +212,7 @@ Widget buildView(WatchLogState state, Dispatch dispatch, ViewService viewService
           '觀看記錄',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),

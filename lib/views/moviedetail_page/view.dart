@@ -9,6 +9,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/actions/imageurl.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/videoplayeritem.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/ProductModel.dart';
@@ -220,7 +221,7 @@ Widget buildView(
                 d.goodsName,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: Adapt.px(25),
+                    fontSize: Dimens.font_sp14,
                     fontWeight: FontWeight.w500),
               ),
             ),
@@ -302,7 +303,10 @@ Widget buildView(
                   Text(
                     'Size:${d.width}x${d.height}',
                     style:
-                        TextStyle(color: Colors.black, fontSize: Adapt.px(30)),
+                        TextStyle(
+                            color: Colors.black,
+                            fontSize: Adapt.px(30)
+                        ),
                   ),
                   IconButton(
                     icon: Icon(Icons.cloud_download),
@@ -806,8 +810,9 @@ Widget buildView(
                                 indicatorSize: TabBarIndicatorSize.label,
                                 isScrollable: true,
                                 labelStyle: TextStyle(
-                                    fontSize: Adapt.px(30),
-                                    fontWeight: FontWeight.w600),
+                                    fontSize: Dimens.font_sp18,
+                                    fontWeight: FontWeight.w600
+                                ),
                                 tabs: <Widget>[
                                   Tab(text: I18n.of(viewService.context).main),
                                   Tab(text: I18n.of(viewService.context).videos),
@@ -890,8 +895,9 @@ Widget buildView(
                               Text(I18n.of(viewService.context).overView,
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: Adapt.px(36),
-                                      fontWeight: FontWeight.w800)),
+                                      fontSize: Dimens.font_sp18,
+                                      fontWeight: FontWeight.w800)
+                              ),
                               SizedBox(
                                 height: Adapt.px(30),
                               ),

@@ -3,8 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/shimmercell.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'action.dart';
 import 'state.dart';
@@ -27,7 +27,7 @@ Widget buildView(
         child: Text(
             val,
             style: TextStyle(
-                fontSize: Adapt.px(28)
+                fontSize: Dimens.font_sp14
             )
         )
     ) : Container(
@@ -44,7 +44,7 @@ Widget buildView(
           child: Text(
               val,
               style: TextStyle(
-                  fontSize: Adapt.px(28)
+                  fontSize: Dimens.font_sp14
               )
           )
       ),
@@ -68,7 +68,7 @@ Widget buildView(
           val,
           style: TextStyle(
               color: Colors.orange,
-              fontSize: Adapt.px(28)
+              fontSize: Dimens.font_sp16
           )
       )
     ) : Container(
@@ -87,7 +87,7 @@ Widget buildView(
               val,
               style: TextStyle(
                   color: Colors.orange,
-                  fontSize: Adapt.px(28)
+                  fontSize: Dimens.font_sp16
               )
           )
       ),
@@ -346,7 +346,7 @@ Widget buildView(
                         maxLines: 1,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Adapt.px(22),
+                            fontSize: Dimens.font_sp14,
                             fontWeight: FontWeight.bold,
                             shadows: <Shadow>[
                               Shadow(
@@ -417,7 +417,7 @@ Widget buildView(
           '發現',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
         brightness: Brightness.light,

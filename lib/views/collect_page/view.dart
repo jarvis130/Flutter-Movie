@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/globalconfig.dart';
+import 'package:movie/style/dimens.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -27,7 +28,7 @@ Widget buildView(CollectState state, Dispatch dispatch, ViewService viewService)
             unselectedLabelColor: Colors.grey,
             labelStyle:
                 TextStyle(
-                    fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION),
+                    fontSize: Dimens.font_sp18,
                     fontWeight: FontWeight.bold
                 ),
             unselectedLabelStyle: TextStyle(color: Colors.grey),

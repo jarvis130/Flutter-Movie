@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:movie/routers/fluro_navigator.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:movie/style/styles.dart';
 import 'package:movie/widgets/click_item.dart';
 import 'package:movie/actions/Adapt.dart';
@@ -25,7 +26,7 @@ class _SettingPageState extends State<SettingPage> {
           '設置',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),

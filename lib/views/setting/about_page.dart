@@ -61,7 +61,7 @@ class _AboutState extends State<About> {
           '關於我們',
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: Adapt.px(GlobalConfig.FONTSIZE_NAVIGATION)
+              fontSize: Dimens.font_sp18
           ),
         ),
       ),
