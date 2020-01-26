@@ -20,8 +20,9 @@ import 'package:movie/views/mylists_page/page.dart';
 import 'package:movie/views/pay_page/page.dart';
 import 'package:movie/views/comment_page/page.dart';
 import 'package:movie/views/search_page/page.dart';
-import 'package:movie/views/splash_page/page.dart';
+//import 'package:movie/views/splash_page/page.dart';
 import 'package:movie/views/classify_page/page.dart';
+import 'package:movie/views/splash/splash_page.dart';
 import 'package:movie/views/user_page/page.dart';
 import 'package:movie/views/watchlog_page/page.dart';
 import 'package:movie/views/webview_page/page.dart';
@@ -98,7 +99,7 @@ Future<Widget> createApp() async {
       'GalleryPage': GalleryPage(),
       'DiscoverPage': DiscoverPage(),
       'GuidePage': GuidePage(),
-      'SplashPage': SplashPage(),
+//      'SplashPage': SplashPage(),
       'UserPage': UserPage(),
       'WebPage': WebPage(),
       'CommentPage': CommentPage(),
@@ -165,7 +166,8 @@ Future<Widget> createApp() async {
     supportedLocales: I18n.delegate.supportedLocales,
     localeResolutionCallback:
         I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
-    home: startFlag == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
+//    home: startFlag == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
+    home: SplashPage(),
     onGenerateRoute: (RouteSettings settings) {
       return MaterialPageRoute<Object>(builder: (BuildContext context) {
         return routes.buildPage(settings.name, settings.arguments);
