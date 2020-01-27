@@ -11,6 +11,46 @@ class OrderRecordListPage extends StatefulWidget {
 }
 
 class _OrderRecordListPageState extends State<OrderRecordListPage> {
+
+  ScrollController _scrollController = new ScrollController();
+
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    this._getMoreData();
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _getMoreData() async {
+    if (!isLoading) {
+      setState(() {
+        isLoading = true;
+      });
+
+//      final response = await dio.get(nextPage);
+//
+//      nextPage = response.data['next'];
+
+      setState(() {
+        isLoading = false;
+//        names.addAll(response.data['results']);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

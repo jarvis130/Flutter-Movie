@@ -661,7 +661,8 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
           ),
           GestureDetector(
             onTap: (){
-              dispatch(UserPageActionCreator.onWatchLogTapped());
+//              dispatch(UserPageActionCreator.onWatchLogTapped());
+              NavigatorUtils.push(viewService.context, SettingRouter.watchRecordListPage);
             },
             child: Container(
               margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),

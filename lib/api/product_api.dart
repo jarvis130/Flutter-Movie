@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:movie/actions/apihelper.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/WatchLogModel.dart';
 import 'package:movie/utils/httpUtil.dart';
 import 'package:movie/models/searchresult.dart';
 
@@ -36,7 +37,7 @@ class ProductApi {
   }
 
   ///观看记录
-  static Future<GoodProducts> getWatchLog({int page = 1, int per_page = 20}) async {
+  static Future<WatchLogModel> getWatchLog({int page = 1, int per_page = 20}) async {
 
     FormData formData = new FormData.from({
       'page': page,
@@ -47,7 +48,7 @@ class ProductApi {
     var response = await HttpUtil().post('ecapi.video.getWatchLog', data: formData);
     Map map = json.decode(response.toString());
     if(map.length > 0){
-      GoodProducts model = GoodProducts.fromJson(map);
+      WatchLogModel model = WatchLogModel.fromJson(map);
       if(model.errorCode == 0){
         return model;
       }

@@ -29,10 +29,10 @@ Future _onInit(Action action, Context<WatchLogState> ctx) {
         GoodProducts model;
         int currentPage = ctx.state.currentPage + 1;
         if(currentPage == 1){
-          model = await ProductApi.getWatchLog(page: currentPage);
-          if (model != null){
-            ctx.dispatch(WatchLogActionCreator.loadMore(model));
-          }
+//          model = await ProductApi.getWatchLog(page: currentPage);
+//          if (model != null){
+//            ctx.dispatch(WatchLogActionCreator.loadMore(model));
+//          }
         }
       }
     });
@@ -48,14 +48,14 @@ void _onDispose(Action action, Context<WatchLogState> ctx) {
 Future _loadData(Action action, Context<WatchLogState> ctx) async {
 
   //视频信息
-  GoodProducts model;
-  int currentPage = ctx.state.currentPage + 1;
-  if(currentPage == 1){
-    model = await ProductApi.getWatchLog(page: currentPage, per_page: GlobalConfig.PageSize);
-    if (model != null){
-      ctx.dispatch(WatchLogActionCreator.loadMore(model));
-    }
-  }
+//  GoodProducts model;
+//  int currentPage = ctx.state.currentPage + 1;
+//  if(currentPage == 1){
+//    model = await ProductApi.getWatchLog(page: currentPage, per_page: GlobalConfig.PageSize);
+//    if (model != null){
+//      ctx.dispatch(WatchLogActionCreator.loadMore(model));
+//    }
+//  }
 
 }
 
