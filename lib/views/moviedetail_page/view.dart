@@ -514,22 +514,9 @@ Widget buildView(
                       blurRadius: 2.0,
                       color: Colors.black,
                     ),
-                  ])),
-          // TextSpan(
-          //     text: s.title == null
-          //         ? ' (-)'
-          //         : ' (${DateTime.tryParse(s.release_date)?.year.toString()})',
-          //     style: TextStyle(
-          //         fontWeight: FontWeight.w700,
-          //         fontSize: Adapt.px(30),
-          //         color: Colors.grey[400],
-          //         shadows: <Shadow>[
-          //           Shadow(
-          //             offset: Offset(2.0, 2.0),
-          //             blurRadius: 2.0,
-          //             color: Colors.black,
-          //           ),
-          //         ])),
+                  ]
+              )
+          ),
         ]),
       );
   }
@@ -838,149 +825,131 @@ Widget buildView(
               },
               body: TabBarView(
                 children: <Widget>[
-                  Container(child: Builder(builder: (BuildContext context) {
-                    return CustomScrollView(slivers: <Widget>[
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Stack(
-                          children: <Widget>[
-                            Container(
-                              width: Adapt.screenW(),
-                              height: Adapt.px(400),
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      colorFilter:
-                                      ColorFilter.mode(dominantColor, BlendMode.color),
-                                      image: CachedNetworkImageProvider(model.product == null
-                                          ? ImageUrl.emptyimage
-                                          : ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w500)),
-                                      fit: BoxFit.cover)),
-                            ),
-                            Container(
-                              width: Adapt.screenW(),
-                              height: Adapt.px(350),
-                              color: dominantColor.withOpacity(.8),
-                            ),
-                            Container(
-                              alignment: Alignment.bottomLeft,
-                              padding: EdgeInsets.fromLTRB(
-                                  Adapt.px(30), Adapt.px(30), Adapt.px(30), Adapt.px(0)),
-                              child: Row(
-                                children: <Widget>[
-                                  _getPosterPic(),
-                                  SizedBox(
-                                    width: Adapt.px(20),
-                                  ),
-                                  Container(
-//                                  padding: EdgeInsets.only(top: Adapt.px(10)),
-                                    width: Adapt.screenW() * 0.6,
-                                    child: _getTitle(),
-                                  ),
-                                ],
+                  Container(
+                      child: Builder(builder: (BuildContext context) {
+                        return CustomScrollView(
+                            slivers: <Widget>[
+                              SliverOverlapInjector(
+                                handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                    context),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(
-                              Adapt.px(30), Adapt.px(0), Adapt.px(30), 0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(I18n.of(viewService.context).overView,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Dimens.font_sp18,
-                                      fontWeight: FontWeight.w800)
-                              ),
-                              SizedBox(
-                                height: Adapt.px(30),
-                              ),
-                              _getOverWatch(),
-                            ],
-                          ),
-                        ),
-                      ),
-                      // SliverToBoxAdapter(
-                      //     child: AnimatedSwitcher(
-                      //         switchInCurve: Curves.easeIn,
-                      //         switchOutCurve: Curves.easeOut,
-                      //         duration: Duration(milliseconds: 600),
-                      //         child: Column(
-                      //           key: ValueKey(state.movieDetailModel.id),
-                      //           crossAxisAlignment: CrossAxisAlignment.start,
-                      //           children: <Widget>[
-                      //             Padding(
-                      //               padding: EdgeInsets.all(Adapt.px(30)),
-                      //               child: Text(
-                      //                   I18n.of(viewService.context)
-                      //                       .topBilledCast,
-                      //                   style: TextStyle(
-                      //                       color: Colors.black,
-                      //                       fontSize: Adapt.px(40),
-                      //                       fontWeight: FontWeight.w800)),
-                      //             ),
-                      //             Container(
-                      //               height: Adapt.px(450),
-                      //               child: _getCreditsCells(),
-                      //             ),
-                      //           ],
-                      //         ))
-                      // ),
-                      // SliverToBoxAdapter(
-                      //   child: viewService.buildComponent('keywords'),
-                      // ),
-//                      SliverToBoxAdapter(
-//                          child: Column(
-//                            crossAxisAlignment: CrossAxisAlignment.start,
-//                            children: <Widget>[
-//                              Padding(
-//                                padding: EdgeInsets.all(Adapt.px(30)),
-//                                child: Text(
-//                                    I18n.of(viewService.context).recommendations,
-//                                    style: TextStyle(
-//                                        color: Colors.black,
-//                                        fontSize: Adapt.px(40),
-//                                        fontWeight: FontWeight.w800)),
-//                              ),
-//                              Container(
-//                                margin: EdgeInsets.only(bottom: Adapt.px(30)),
-//                                height: Adapt.px(400) * 9 / 16,
-//                                child: ListView(
-//                                  scrollDirection: Axis.horizontal,
-//                                  children: _buildRecommendationBody(),
+
+//                              SliverToBoxAdapter(
+//                                child: Stack(
+//                                  children: <Widget>[
+//                                    Container(
+//                                      width: Adapt.screenW(),
+//                                      height: Adapt.px(400),
+//                                      decoration: BoxDecoration(
+//                                          image: DecorationImage(
+//                                              colorFilter:
+//                                              ColorFilter.mode(dominantColor, BlendMode.color),
+//                                              image: CachedNetworkImageProvider(model.product == null
+//                                                  ? ImageUrl.emptyimage
+//                                                  : ImageUrl.getUrl(model.product.defaultPhoto.thumb, ImageSize.w500)),
+//                                              fit: BoxFit.cover)),
+//                                    ),
+//                                    Container(
+//                                      width: Adapt.screenW(),
+//                                      height: Adapt.px(350),
+//                                      color: dominantColor.withOpacity(.8),
+//                                    ),
+//                                    Container(
+//                                      alignment: Alignment.bottomLeft,
+//                                      padding: EdgeInsets.fromLTRB(
+//                                          Adapt.px(30), Adapt.px(30), Adapt.px(30), Adapt.px(0)),
+//                                      child: Row(
+//                                        children: <Widget>[
+//                                          _getPosterPic(),
+//                                          SizedBox(
+//                                            width: Adapt.px(20),
+//                                          ),
+//                                          Container(
+//        //                                  padding: EdgeInsets.only(top: Adapt.px(10)),
+//                                            width: Adapt.screenW() * 0.6,
+//                                            child: _getTitle(),
+//                                          ),
+//                                        ],
+//                                      ),
+//                                    ),
+//                                  ],
 //                                ),
 //                              ),
-//                            ],
-//                          )),
-                      // SliverToBoxAdapter(
-                      //   child: viewService.buildComponent('info'),
-                      // ),
-                    ]);
-                  })),
+
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      Adapt.px(0), Adapt.px(20), Adapt.px(0), Adapt.px(10)),
+                                  child: model.product != null ? ListTile(
+//                                  leading: new Icon(Icons.cake),
+                                    title: Text(
+                                      state.title,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: Dimens.font_sp26,
+//
+                                      ),
+                                    ),
+                                    subtitle: Text(
+                                      model.product.breadcrumb,
+                                      style: TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: Dimens.font_sp16,
+//
+                                      ),
+                                    ),
+                                    trailing: Text(
+                                      '播放量 ' + (model.product.playTotal).toString(),
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: Dimens.font_sp14
+                                      ),
+                                    ),
+                                  )  : Container(),
+                                ),
+                              ),
+
+                              SliverToBoxAdapter(
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(
+                                      Adapt.px(30), Adapt.px(0), Adapt.px(30), 0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(I18n.of(viewService.context).overView,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: Dimens.font_sp18,
+                                              fontWeight: FontWeight.w800)
+                                      ),
+                                      SizedBox(
+                                        height: Adapt.px(30),
+                                      ),
+                                      _getOverWatch(),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                            ]
+                          );
+                        }
+                      )
+                  ),
                   Container(child: Builder(builder: (BuildContext context) {
-                    return CustomScrollView(slivers: <Widget>[
-                      SliverOverlapInjector(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                      ),
-                      _getVideoBody()
-                    ]);
-                  })),
-//                Container(child: Builder(builder: (BuildContext context) {
-//                  return CustomScrollView(slivers: <Widget>[
-//                    SliverOverlapInjector(
-//                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-//                          context),
-//                    ),
-//                    _getImageBody()
-//                  ]);
-//                })),
+                    return CustomScrollView(
+                        slivers: <Widget>[
+                          SliverOverlapInjector(
+                            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                context),
+                          ),
+                        _getVideoBody()
+                      ]
+                    );
+                  }
+                  )
+                  ),
+
                   viewService.buildComponent('review'),
                 ],
               )
