@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/actions/Adapt.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/WatchLogModel.dart';
+import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/resources.dart';
 import 'package:movie/api/product_api.dart';
 
@@ -18,7 +19,7 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
 
   bool isLoading = false;
 
-  List<Products> list = new List();
+  List<Products> _list = new List();
 
   int currentPage;
   int total;
@@ -31,14 +32,24 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
     total = 0;
     size = 0;
     pages = 0;
+
     this._getMoreData();
+
     super.initState();
+
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
         _getMoreData();
       }
     });
+
+//    var position = _scrollController.position;
+//    // 小于50px时，触发上拉加载；
+//    if (position.maxScrollExtent - position.pixels < 50) {
+//      _getMoreData();
+//    }
+
   }
 
   @override
@@ -49,26 +60,50 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
 
   void _getMoreData() async {
     if (!isLoading) {
-      setState(() {
-        isLoading = true;
-      });
-
+//      setState(() {
+//        isLoading = true;
+//      });
+      isLoading = true;
       //视频信息
       currentPage = currentPage + 1;
 
       WatchLogModel model = await ProductApi.getWatchLog(page: currentPage, per_page: GlobalConfig.PageSize);
       if (model != null){
         setState(() {
-          list = model.products;
+          _list.addAll(model.products);
           total = model.paged.total;
           pages = model.paged.more;
           size = model.paged.size;
           currentPage = model.paged.page;
-          isLoading = false;
         });
       }
+      isLoading = false;
 
+    }
+  }
 
+  Future<void> _refresh() async {
+
+    if (!isLoading) {
+//      setState(() {
+//        isLoading = true;
+//      });
+      isLoading = true;
+      //视频信息
+      currentPage = 1;
+
+      WatchLogModel model = await ProductApi.getWatchLog(page: currentPage, per_page: GlobalConfig.PageSize);
+      if (model != null){
+        setState(() {
+          _list.clear();
+          _list.addAll(model.products);
+          total = model.paged.total;
+          pages = model.paged.more;
+          size = model.paged.size;
+          currentPage = model.paged.page;
+        });
+      }
+      isLoading = false;
     }
   }
 
@@ -79,6 +114,34 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
         child: new Opacity(
           opacity: isLoading ? 1.0 : 00,
           child: new CircularProgressIndicator(),
+        ),
+      ),
+    );
+  }
+
+  Widget _getMoreWidget() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              width: 20,
+              height: 20,
+              child: CircularProgressIndicator(
+                strokeWidth: 4.0,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+              child: Text(
+                '加载中...',
+                style: TextStyle(fontSize: 16.0),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -98,17 +161,23 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
           ),
         ),
       ),
-      body: ListView.builder(
-        controller: _scrollController,
-        itemCount: list.length + 1,
-        itemBuilder: (_, index){
-          if (index == list.length) {
-            return _buildProgressIndicator();
-          } else {
-            return _buildItem(list[index], index);
-          }
-        },
-      ),
+      body: RefreshIndicator(
+//        color: Colors.deepOrangeAccent,
+//        backgroundColor: Colors.white,
+        child: ListView.builder(
+          physics: AlwaysScrollableScrollPhysics(),
+          controller: _scrollController,
+          itemCount:  _list.length + 1,
+          itemBuilder: (_, index){
+            if (index == _list.length) {
+              return _buildProgressIndicator();
+            } else {
+              return _buildItem(_list[index], index);
+            }
+          },
+        ),
+        onRefresh: _refresh,
+      )
     );
   }
 
@@ -138,6 +207,15 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
                 fontSize: Dimens.font_sp14
             )
         ),
+        onTap: () {
+//          NavigatorUtils.push(context, '/moviedetail_page/moviedetailpage?movieid=${model.goods.id}');
+           Navigator.of(context).pushNamed('moviedetailpage', arguments: {
+            'movieid': model.goods.id.toString(),
+            'bgpic': model.goods.defaultPhoto.thumb,
+             'posterpic': model.goods.defaultPhoto.thumb,
+             'title': model.goods.name
+          });
+        },
       );
 
   }
