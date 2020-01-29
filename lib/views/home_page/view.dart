@@ -332,6 +332,8 @@ Widget buildView(
         title: _buildSearchBar(),
       ),
       body: RefreshIndicator(
+        color: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
         onRefresh: _onRefresh,
         child: CustomScrollView(
           slivers: <Widget>[

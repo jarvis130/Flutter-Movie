@@ -424,6 +424,8 @@ Widget buildView(
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: RefreshIndicator(
+        color: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
         onRefresh: _onRefresh,
         child: CustomScrollView(
           controller: state.scrollController,

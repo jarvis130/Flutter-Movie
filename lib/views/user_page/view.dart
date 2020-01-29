@@ -560,6 +560,9 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     fontSize: Dimens.font_sp12
                 ),
               ),
+              onTap: (){
+                NavigatorUtils.push(viewService.context, SettingRouter.bindingPhonePage);
+              },
             ),
             ListTile(
               leading: Icon(
@@ -872,6 +875,8 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
 
   return Scaffold(
     body: RefreshIndicator(
+      color: Colors.deepOrangeAccent,
+      backgroundColor: Colors.white,
       onRefresh: _onRefresh,
       child: CustomScrollView(
         controller: state.scrollController,

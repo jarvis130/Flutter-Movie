@@ -69,4 +69,21 @@ class UserApi {
     }
   }
 
+  ///绑定手机号
+  static Future<Map> bindingPhone({String mobile = '', String code = '', String password = ''}) async {
+
+    FormData formData = new FormData.from({
+      'mobile': mobile,
+      'code': code,
+      'password': password,
+      "XDEBUG_SESSION_START": 16116
+    });
+
+    var response = await HttpUtil().post('ecapi.auth.mobile.binding', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+        return map;
+    }
+  }
+
 }

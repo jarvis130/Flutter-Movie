@@ -162,8 +162,8 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
         ),
       ),
       body: RefreshIndicator(
-//        color: Colors.deepOrangeAccent,
-//        backgroundColor: Colors.white,
+        color: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
         child: ListView.builder(
           physics: AlwaysScrollableScrollPhysics(),
           controller: _scrollController,
