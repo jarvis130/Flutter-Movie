@@ -72,7 +72,7 @@ class _BindingPhonePageState extends State<BindingPhonePage> {
       }else if(map['error_code'] == 'message.member.mobile.code.verify_errord'){
         Toast.show("验证码错误");
       }else{
-//        NavigatorUtils.goBack(context);
+        NavigatorUtils.goBack(context);
         Toast.show("绑定成功");
       }
     }

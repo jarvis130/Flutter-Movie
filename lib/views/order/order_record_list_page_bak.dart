@@ -1,11 +1,10 @@
 
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/style/resources.dart';
-import 'package:sticky_headers/sticky_headers.dart';
+import 'package:movie/actions/Adapt.dart';
 import 'package:movie/api/order_api.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/OrderListModel.dart';
-import 'package:common_utils/common_utils.dart';
 import 'package:movie/style/resources.dart';
 import 'package:movie/utils/date_utils.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -152,47 +151,34 @@ class _OrderRecordListPageState extends State<OrderRecordListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(50, 50, 50, 1),
-        centerTitle: true,
-        title: Text(
-          '我的訂單',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: Dimens.font_sp18
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(50, 50, 50, 1),
+          centerTitle: true,
+          title: Text(
+            '我的訂單',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: Dimens.font_sp18
+            ),
           ),
         ),
-      ),
-      body: RefreshIndicator(
-        color: Colors.deepOrangeAccent,
-        backgroundColor: Colors.white,
-        onRefresh: _refresh,
-        child: ListView.builder(
-          physics: AlwaysScrollableScrollPhysics(),
-          controller: _scrollController,
-          itemCount:  _list.length + 1,
-          itemBuilder: (_, index){
-            if (index == _list.length) {
-              return _buildProgressIndicator();
-            } else {
-              Orders order = _list[index];
-
-              return StickyHeader(
-                header: Container(
-                  alignment: Alignment.centerLeft,
-                  width: double.infinity,
-                  color: Color(0xFFFAFAFA),
-                  padding: const EdgeInsets.only(left: 16.0),
-                  height: 34.0,
-                  child: Text('订单编号: '+order.sn),
-                ),
-                content: _buildItem(order, index),
-              );
-            }
-
-          },
-        ),
-      )
+        body: RefreshIndicator(
+          color: Colors.deepOrangeAccent,
+          backgroundColor: Colors.white,
+          child: ListView.builder(
+            physics: AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            itemCount:  _list.length + 1,
+            itemBuilder: (_, index){
+              if (index == _list.length) {
+                return _buildProgressIndicator();
+              } else {
+                return _buildItem(_list[index], index);
+              }
+            },
+          ),
+          onRefresh: _refresh,
+        )
     );
   }
 
@@ -203,49 +189,58 @@ class _OrderRecordListPageState extends State<OrderRecordListPage> {
     String createTime = order.createdAt.toString() + '000';
     DateTime createDateTime = DateTime.fromMillisecondsSinceEpoch(int.parse(createTime));
     createTime = DateUtil.formatDate(createDateTime);
-
-      return Container(
-        height: 72.0,
-        width: double.infinity,
-        padding: const EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-            border: Border(
-              bottom: Divider.createBorderSide(context, color: Colours.line, width: 0.8),
-            )
-        ),
-        child: Stack(
+    return ListTile(
+      leading: Container(
+          child: Image.network(product.photos[0].thumb, fit: BoxFit.cover),
+          width: 60,
+          height: 60,
+          color: Colors.grey),
+      title: Text(
+          product.name,
+          style: TextStyle(
+              fontSize: Dimens.font_sp16
+          )
+      ),
+      subtitle: Text(
+          createTime,
+          style: TextStyle(
+              fontSize: Dimens.font_sp14
+          )
+      ),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        verticalDirection: VerticalDirection.down,
+        // textDirection:,
+        textBaseline: TextBaseline.alphabetic,
           children: <Widget>[
             Text(
-                product.name,
-                style: TextStyles.textDark14
+              order.total.toString() + '元',
+              style: TextStyle(
+                color: Colours.text_red,
+                fontSize: Dimens.font_sp16
+              )
             ),
-            Positioned(
-                top: 0.0,
-                right: 0.0,
-                child: Text(product.price, style: TextStyle(
-                    color: Colours.text_red,
-                    fontWeight: FontWeight.bold
-                ))
-            ),
-            Positioned(
-                bottom: 0.0,
-                left: 0.0,
-                child: Text(createTime, style: TextStyles.textGray12)
-            ),
-            Positioned(
-                bottom: 0.0,
-                right: 0.0,
-                child: Text(
-                    "× 1",
-                    style: TextStyles.textGray12
+            Text(
+                '× 1',
+                style: TextStyle(
+                  color: Colours.text_gray,
+                  fontSize: Dimens.font_sp14
                 )
             ),
           ],
-        ),
-      );
+      ),
+//      trailing: Text(
+//          order.total.toString(),
+//          style: TextStyle(
+//              fontSize: Dimens.font_sp14
+//          )
+//      ),
+      onTap: () {
 
-//    return Column(
-//        children: list
-//    );
+      },
+    );
+
   }
 }
