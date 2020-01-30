@@ -8,6 +8,7 @@ import 'package:movie/actions/imageurl.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/views/order/order_router.dart';
+import 'package:movie/views/setting/order_confirm_dialog.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/share_card.dart';
 import 'package:movie/globalconfig.dart';
@@ -540,6 +541,13 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
                     fontSize: Dimens.font_sp12
                 ),
               ),
+              onTap: (){
+                showDialog(
+                    context: viewService.context,
+                    barrierDismissible: false,
+                    builder: (_) => OrderConfirmDialog()
+                );
+              }
             ),
             ListTile(
               leading: Icon(
