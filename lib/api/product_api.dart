@@ -1,8 +1,6 @@
 import 'dart:convert' show json;
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/WatchLogModel.dart';
 import 'package:movie/utils/httpUtil.dart';
@@ -12,7 +10,7 @@ class ProductApi {
 
   ///商品列表
   static Future<GoodProducts> getList({int page = 1, int per_page = 20, int is_hot = 0, int is_best = 0, int is_new = 0, String attr_value1 = '', String attr_value2 = '', String is_real = '-1', int pub_id = 0}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "page": page,
       "per_page": per_page,
       "is_hot": is_hot,
@@ -39,7 +37,7 @@ class ProductApi {
   ///观看记录
   static Future<WatchLogModel> getWatchLog({int page = 1, int per_page = 20}) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'page': page,
       'per_page': per_page,
       "XDEBUG_SESSION_START": 16116
@@ -58,10 +56,10 @@ class ProductApi {
   ///搜索
   static Future<SearchResultModel> searchMulit(String query, var uid, {int page = 1, bool searchadult = false}) async {
     SearchResultModel model;
-    String param = 'service=Home.VideoSearch&key=$query&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null)
-      model = SearchResultModel(r);
+//    String param = 'service=Home.VideoSearch&key=$query&uid=$uid&p=$page';
+//    var r = await ApiHelper.httpGet(param, cached: false);
+//    if (r != null)
+//      model = SearchResultModel(r);
     return model;
   }
 }

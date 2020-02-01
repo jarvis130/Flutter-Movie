@@ -1,9 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/api/classify_api.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/videolist.dart';
 import 'action.dart';
 import 'state.dart';
 

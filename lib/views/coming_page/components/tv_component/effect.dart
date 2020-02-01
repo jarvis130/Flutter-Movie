@@ -1,5 +1,4 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/actions/apihelper.dart';
 import 'action.dart';
 import 'state.dart';
 

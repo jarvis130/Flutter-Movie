@@ -28,7 +28,7 @@ import 'package:movie/views/watchlog_page/page.dart';
 import 'package:movie/views/webview_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'actions/timeline.dart';
+import 'utils/timeline.dart';
 import 'generated/i18n.dart';
 import 'globalbasestate/state.dart';
 import 'globalbasestate/store.dart';

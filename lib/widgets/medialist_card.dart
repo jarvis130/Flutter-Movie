@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/apihelper.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/listmediaitem.dart';
 import 'package:movie/models/mylistmodel.dart';
@@ -23,68 +22,68 @@ class MediaListCardDialogState extends State<MediaListCardDialog> {
   int _page;
 
   Future _loadMore() async {
-    MyListModel model = await lists;
-    if (model != null || _accountid == null) {
-      int page = model.page + 1;
-      if (page <= model.totalPages) {
-        var r = await ApiHelper.getAccountListsV4(_accountid, page: page);
-        if (r != null)
-          setState(() {
-            model.page = r.page;
-            model.results.addAll(r.results);
-          });
-      }
-    }
+//    MyListModel model = await lists;
+//    if (model != null || _accountid == null) {
+//      int page = model.page + 1;
+//      if (page <= model.totalPages) {
+//        var r = await ApiHelper.getAccountListsV4(_accountid, page: page);
+//        if (r != null)
+//          setState(() {
+//            model.page = r.page;
+//            model.results.addAll(r.results);
+//          });
+//      }
+//    }
   }
 
   Future<MyListModel> _loadData() async {
-    MyListModel list;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _accountid = prefs.getString('accountIdV4');
-    if (_accountid == null) {
-      var token = await ApiHelper.createRequestTokenV4();
-      if (token != null) {
-        var url = 'https://www.themoviedb.org/auth/access?request_token=$token';
-        await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              title: Text(
-                'User Permission',
-                style: TextStyle(color: Colors.black),
-              ),
-              brightness: Brightness.light,
-              iconTheme: IconThemeData(color: Colors.black),
-            ),
-            body: WebView(
-              initialUrl: url,
-            ),
-          );
-        }));
-        var result = await ApiHelper.createtoken(token);
-        if (result)
-          _accountid = prefs.getString('accountIdV4');
-        else
-          return null;
-      }
-    }
-    var r = await ApiHelper.getAccountListsV4(_accountid);
-    if (r != null) list = r;
-    return list;
+//    MyListModel list;
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    _accountid = prefs.getString('accountIdV4');
+//    if (_accountid == null) {
+//      var token = await ApiHelper.createRequestTokenV4();
+//      if (token != null) {
+//        var url = 'https://www.themoviedb.org/auth/access?request_token=$token';
+//        await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+//          return Scaffold(
+//            appBar: AppBar(
+//              backgroundColor: Colors.white,
+//              title: Text(
+//                'User Permission',
+//                style: TextStyle(color: Colors.black),
+//              ),
+//              brightness: Brightness.light,
+//              iconTheme: IconThemeData(color: Colors.black),
+//            ),
+//            body: WebView(
+//              initialUrl: url,
+//            ),
+//          );
+//        }));
+//        var result = await ApiHelper.createtoken(token);
+//        if (result)
+//          _accountid = prefs.getString('accountIdV4');
+//        else
+//          return null;
+//      }
+//    }
+//    var r = await ApiHelper.getAccountListsV4(_accountid);
+//    if (r != null) list = r;
+//    return list;
   }
 
   Future _submit() async {
-    Navigator.of(context).pop();
-    MyListModel model = await lists;
-    if (model != null) {
-      MyListResult selected = model.results?.singleWhere((f) => f.selected);
-      if (selected != null) {
-        List<ListMediaItem> items = List<ListMediaItem>()
-          ..add(ListMediaItem(
-              widget.type == MediaType.movie ? 'movie' : 'tv', widget.mediaId));
-        var r = await ApiHelper.addToList(selected.id, items);
-      }
-    }
+//    Navigator.of(context).pop();
+//    MyListModel model = await lists;
+//    if (model != null) {
+//      MyListResult selected = model.results?.singleWhere((f) => f.selected);
+//      if (selected != null) {
+//        List<ListMediaItem> items = List<ListMediaItem>()
+//          ..add(ListMediaItem(
+//              widget.type == MediaType.movie ? 'movie' : 'tv', widget.mediaId));
+//        var r = await ApiHelper.addToList(selected.id, items);
+//      }
+//    }
   }
 
   Widget _buildListCell(MyListResult d) {

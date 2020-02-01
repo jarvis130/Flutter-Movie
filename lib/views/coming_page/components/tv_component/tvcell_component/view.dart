@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/models/enums/genres.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/videolist.dart';
-import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
+import 'package:movie/utils/Adapt.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -31,7 +30,10 @@ Widget buildView(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider(
-                            ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
+                            ''
+                        )
+                    )
+                ),
               ),
               SizedBox(
                 width: Adapt.px(20),

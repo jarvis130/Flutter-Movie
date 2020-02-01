@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
+import 'package:movie/utils/Adapt.dart';
+import 'package:movie/utils/imageurl.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/imagemodel.dart';
 

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/api/search_api.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/SearchModel.dart';

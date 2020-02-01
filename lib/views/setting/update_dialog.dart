@@ -169,7 +169,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
         },
       );
     }catch (e){
-      Toast.show("下载失败!");
+      ToastUtils.show("下载失败", context);
       print(e);
     }
   }

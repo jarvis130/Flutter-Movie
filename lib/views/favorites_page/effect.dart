@@ -3,9 +3,8 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/actions/imageurl.dart';
+import 'package:movie/utils/Adapt.dart';
+import 'package:movie/utils/imageurl.dart';
 import 'package:movie/widgets/custom_stfstate.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/videolist.dart';
@@ -25,23 +24,23 @@ Effect<FavoritesPageState> buildEffect() {
 void _onAction(Action action, Context<FavoritesPageState> ctx) {}
 
 Future _onInit(Action action, Context<FavoritesPageState> ctx) async {
-  final ticker = ctx.stfState as CustomstfState;
-  ctx.state.animationController =
-      AnimationController(vsync: ticker, duration: Duration(milliseconds: 600));
-  int accountid = ctx.state.accountId;
-  if (accountid != null) {
-    var movie = await ApiHelper.getFavoriteMovies(accountid);
-    if (movie != null) {
-      ctx.dispatch(FavoritesPageActionCreator.setFavoriteMovies(movie));
-      if (movie.results.length > 0)
-        ctx.dispatch(FavoritesPageActionCreator.setBackground(
-            movie.results[0], Colors.black));
-      ctx.state.animationController.forward(from: 0.0);
-      //ctx.dispatch(FavoritesPageActionCreator.setColor(r.results[0].poster_path));
-    }
-    var tv = await ApiHelper.getFavoriteTVShows(accountid);
-    if (tv != null) ctx.dispatch(FavoritesPageActionCreator.setFavoriteTV(tv));
-  }
+//  final ticker = ctx.stfState as CustomstfState;
+//  ctx.state.animationController =
+//      AnimationController(vsync: ticker, duration: Duration(milliseconds: 600));
+//  int accountid = ctx.state.accountId;
+//  if (accountid != null) {
+//    var movie = await ApiHelper.getFavoriteMovies(accountid);
+//    if (movie != null) {
+//      ctx.dispatch(FavoritesPageActionCreator.setFavoriteMovies(movie));
+//      if (movie.results.length > 0)
+//        ctx.dispatch(FavoritesPageActionCreator.setBackground(
+//            movie.results[0], Colors.black));
+//      ctx.state.animationController.forward(from: 0.0);
+//      //ctx.dispatch(FavoritesPageActionCreator.setColor(r.results[0].poster_path));
+//    }
+//    var tv = await ApiHelper.getFavoriteTVShows(accountid);
+//    if (tv != null) ctx.dispatch(FavoritesPageActionCreator.setFavoriteTV(tv));
+//  }
 }
 
 void _onDispose(Action action, Context<FavoritesPageState> ctx) {

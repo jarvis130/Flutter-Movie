@@ -1,5 +1,4 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/comment_api.dart';
 import 'package:movie/views/moviedetail_page/action.dart';
 

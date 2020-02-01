@@ -5,7 +5,7 @@ import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/image_utils.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/click_item.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/globalconfig.dart';
 
 class AccountManagerPage extends StatefulWidget {

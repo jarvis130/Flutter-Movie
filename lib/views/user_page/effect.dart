@@ -2,7 +2,6 @@ import 'package:fish_redux/fish_redux.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/widgets.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/listdetailmodel.dart';
@@ -99,9 +98,9 @@ Future _onRefresh(Action action, Context<UserPageState> ctx) async {
 }
 
 void _shopping(Action action, Context<UserPageState> ctx) async {
-  await Navigator.of(ctx.context).pushNamed('WebPage', arguments: {
-    'uid': ApiHelper.uid
-  });
+//  await Navigator.of(ctx.context).pushNamed('WebPage', arguments: {
+//    'uid': ApiHelper.uid
+//  });
 //  await Navigator.of(ctx.context).pushNamed('PayPage', arguments: {
 //    'uid': ApiHelper.uid
 //  });
@@ -109,14 +108,14 @@ void _shopping(Action action, Context<UserPageState> ctx) async {
 
 //我的收藏
 void _favoritesTapped(Action action, Context<UserPageState> ctx) async {
-  await Navigator.of(ctx.context).pushNamed('CollectPage', arguments: {
-    'uid': ApiHelper.uid
-  });
+//  await Navigator.of(ctx.context).pushNamed('CollectPage', arguments: {
+//    'uid': ApiHelper.uid
+//  });
 }
 
 //观看记录
 void _watchLogTapped(Action action, Context<UserPageState> ctx) async {
-  await Navigator.of(ctx.context).pushNamed('WatchLogPage', arguments: {
-    'uid': ApiHelper.uid
-  });
+//  await Navigator.of(ctx.context).pushNamed('WatchLogPage', arguments: {
+//    'uid': ApiHelper.uid
+//  });
 }

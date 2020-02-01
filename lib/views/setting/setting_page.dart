@@ -4,7 +4,7 @@ import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/style/styles.dart';
 import 'package:movie/widgets/click_item.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/globalconfig.dart';
 import 'update_dialog.dart';
 import 'exit_dialog.dart';

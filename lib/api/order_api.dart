@@ -7,7 +7,7 @@ class OrderApi {
 
   /// 订单列表
   static Future<OrderListModel> orderList({int page = 1, int per_page = 20, int status = 0}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'page': page,
       'per_page': per_page,
       "status": status
@@ -23,7 +23,7 @@ class OrderApi {
 
   /// 下单
   static Future<Map> orderConfirm({int shop=1, int consignee = 1, int shipping = 1, var cart_good_id }) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "shop": shop,// 店铺ID
       'consignee': consignee,// 收货人ID
       'shipping': shipping,// 快递ID

@@ -44,10 +44,10 @@ class _OrderConfirmDialog extends State<OrderConfirmDialog>{
     );
     if(map != null){
       if(map['error_code'] == 400){
-        Toast.show(map['error_desc']);
+        ToastUtils.show(map['error_desc'], context);
       }else{
+//        ToastUtils.show("绑定成功", context);
         NavigatorUtils.goBack(context);
-        Toast.show("绑定成功");
       }
     }
 

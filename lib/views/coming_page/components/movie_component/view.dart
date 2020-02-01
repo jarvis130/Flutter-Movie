@@ -3,8 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
-import 'package:movie/actions/imageurl.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/keepalive_widget.dart';
 import 'package:movie/models/enums/genres.dart';
 import 'package:movie/models/enums/imagesize.dart';
@@ -114,7 +113,8 @@ Widget buildView(
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
-                              ImageUrl.getUrl(d.thumb_s, ImageSize.w300)))),
+                              ''
+                          ))),
                 ),
                 SizedBox(
                   width: Adapt.px(20),

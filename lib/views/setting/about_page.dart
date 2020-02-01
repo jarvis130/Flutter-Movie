@@ -5,7 +5,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:movie/style/resources.dart';
 import 'package:movie/widgets/click_item.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/globalconfig.dart';
 
 class About extends StatefulWidget {

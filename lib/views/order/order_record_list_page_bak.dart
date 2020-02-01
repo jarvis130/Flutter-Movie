@@ -1,7 +1,7 @@
 
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/api/order_api.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/OrderListModel.dart';

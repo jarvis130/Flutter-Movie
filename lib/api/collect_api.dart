@@ -12,7 +12,7 @@ class CollectApi {
   ///收藏列表
   static Future<GoodProducts> getFavoritesList({int page = 1, int per_page = 20}) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'page': page,
       'per_page': GlobalConfig.PageSize,
       "XDEBUG_SESSION_START": 17366
@@ -31,7 +31,7 @@ class CollectApi {
   ///关注列表
   static Future<UserListModel> getFollowsList({int page = 1, int per_page = 20}) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'page': page,
       'per_page': GlobalConfig.PageSize,
       "XDEBUG_SESSION_START": 15576

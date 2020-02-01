@@ -10,7 +10,7 @@ class MoiveDetailApi {
   ///视频详情
   static Future<ProductModel> getMovieDetail(var movieId) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'product': movieId,
       "XDEBUG_SESSION_START": 12891
     });
@@ -28,7 +28,7 @@ class MoiveDetailApi {
   ///检查观看次数
    static Future<Map> checkWatchTimes() async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "XDEBUG_SESSION_START": 15902
     });
 
@@ -41,7 +41,7 @@ class MoiveDetailApi {
 
     ///增加观看次数
    static Future<Map> addWatchLog(var videoid) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'video_id': videoid,
       "XDEBUG_SESSION_START": 10482
     });
@@ -56,7 +56,7 @@ class MoiveDetailApi {
   ///收藏
   static Future<Map> setLike(var videoid) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'product': videoid,
       "XDEBUG_SESSION_START": 10482
     });
@@ -71,7 +71,7 @@ class MoiveDetailApi {
   ///取消收藏
   static Future<Map> unLike(var videoid) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'product': videoid,
       "XDEBUG_SESSION_START": 10482
     });
@@ -86,7 +86,7 @@ class MoiveDetailApi {
     ///关注
   static Future<Map> setAttention(var userId) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'att_user_id': userId,
       "XDEBUG_SESSION_START": 12124
     });
@@ -101,7 +101,7 @@ class MoiveDetailApi {
   ///取消关注
   static Future<Map> setUnAttention(var userId) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'att_user_id': userId,
       "XDEBUG_SESSION_START": 17829
     });
@@ -116,7 +116,7 @@ class MoiveDetailApi {
   ///查询是否关注
   static Future<Map> getAttention(var userId) async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       'att_user_id': userId,
       "XDEBUG_SESSION_START": 10482
     });

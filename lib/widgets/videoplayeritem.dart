@@ -1,13 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:movie/api/moviedetail_api.dart';
-import 'package:movie/actions/apihelper.dart';
-import 'package:movie/models/moviedetail.dart';
 
 class VideoPlayerItem extends StatefulWidget {
   final String movieid;
@@ -49,9 +47,8 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                     child: Text('同意'),
                     onPressed: (){
                       Navigator.of(context).pop();
-                      Navigator.of(context).pushNamed('WebPage', arguments: {
-    'uid': ApiHelper.uid
-  });
+//                      Navigator.of(context).pushNamed('WebPage', arguments: {'uid': ApiHelper.uid
+//  });
                     },
                   ),
                 ],

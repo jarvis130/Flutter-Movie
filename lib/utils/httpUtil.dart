@@ -5,6 +5,7 @@ import 'package:movie/globalconfig.dart';
 import 'dart:convert' show json;
 
 import 'package:movie/utils/SharedPreferencesUtil.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class HttpUtil {
   static HttpUtil instance;
@@ -37,7 +38,7 @@ class HttpUtil {
         "version": "1.0.0"
       },
       //请求的Content-Type，默认值是[ContentType.json]. 也可以用ContentType.parse("application/x-www-form-urlencoded")
-      contentType: ContentType.json,
+//      contentType: ContentType.json,
       //表示期望以那种格式(方式)接受响应数据。接受四种类型 `json`, `stream`, `plain`, `bytes`. 默认值是 `json`,
       responseType: ResponseType.plain,
     );
@@ -45,7 +46,7 @@ class HttpUtil {
     dio = Dio(options);
 
     //Cookie管理
-    dio.interceptors.add(CookieManager(CookieJar()));
+//    dio.interceptors.add(CookieManager(CookieJar()));
 
     //添加拦截器
     dio.interceptors
@@ -107,7 +108,7 @@ class HttpUtil {
     Response response;
     try {
       response = await dio.post(url,
-          queryParameters: data, options: options, cancelToken: cancelToken);
+          data: data, options: options, cancelToken: cancelToken);
       print('post success---------${response.data}');
     } on DioError catch (e) {
       print('post error---------$e');

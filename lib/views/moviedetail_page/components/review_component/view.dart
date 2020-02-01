@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:movie/models/CommentModel.dart';
 import 'package:movie/style/dimens.dart';

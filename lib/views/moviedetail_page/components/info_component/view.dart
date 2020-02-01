@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/releasedatetype.dart';

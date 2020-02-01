@@ -3,7 +3,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/style/dimens.dart';

@@ -10,7 +10,7 @@ class SearchApi {
 
   /// 搜索
   static Future<SearchModel> getList({String keyword='', int page = 1, int per_page = 20}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "XDEBUG_SESSION_START": 12175,
       'page': page,
       'per_page': per_page,

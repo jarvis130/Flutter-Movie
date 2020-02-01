@@ -1,10 +1,9 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/gallery_photoview_wrapper.dart';
 import 'package:movie/models/enums/imagesize.dart';
-import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'action.dart';
@@ -53,41 +52,41 @@ void _onDispose(Action action, Context<DetailPageState> ctx) {
 
 Future _playTrailer(Action action, Context<DetailPageState> ctx) async {
   // var _model = ctx.state?.detail?.results?.results ?? [];
-  var _model;
-  if (_model.length > 0)
-    await showGeneralDialog(
-        barrierLabel: 'Trailer',
-        barrierDismissible: true,
-        barrierColor: Colors.black87,
-        transitionDuration: Duration(milliseconds: 300),
-        context: ctx.context,
-        pageBuilder: (_, __, ___) {
-          return Center(
-            child: Material(
-              child: Container(
-                width: Adapt.screenW(),
-                height: Adapt.screenW() * 9 / 16,
-                child: YoutubePlayer(
-                  context: ctx.context,
-                  videoId: _model[0].key,
-                  flags: YoutubePlayerFlags(
-                    mute: false,
-                    autoPlay: true,
-                    forceHideAnnotation: true,
-                    showVideoProgressIndicator: true,
-                  ),
-                  videoProgressIndicatorColor: Colors.red,
-                  progressColors: ProgressColors(
-                    playedColor: Colors.red,
-                    handleColor: Colors.redAccent,
-                  ),
-                ),
-              ),
-            ),
-          );
-        });
-  else
-    Toast.show('no video', ctx.context);
+//  var _model;
+//  if (_model.length > 0)
+//    await showGeneralDialog(
+//        barrierLabel: 'Trailer',
+//        barrierDismissible: true,
+//        barrierColor: Colors.black87,
+//        transitionDuration: Duration(milliseconds: 300),
+//        context: ctx.context,
+//        pageBuilder: (_, __, ___) {
+//          return Center(
+//            child: Material(
+//              child: Container(
+//                width: Adapt.screenW(),
+//                height: Adapt.screenW() * 9 / 16,
+//                child: YoutubePlayer(
+//                  context: ctx.context,
+//                  videoId: _model[0].key,
+//                  flags: YoutubePlayerFlags(
+//                    mute: false,
+//                    autoPlay: true,
+//                    forceHideAnnotation: true,
+//                    showVideoProgressIndicator: true,
+//                  ),
+//                  videoProgressIndicatorColor: Colors.red,
+//                  progressColors: ProgressColors(
+//                    playedColor: Colors.red,
+//                    handleColor: Colors.redAccent,
+//                  ),
+//                ),
+//              ),
+//            ),
+//          );
+//        });
+//  else
+//    Toast.show('no video', ctx.context);
 }
 
 Future _onExternalTapped(

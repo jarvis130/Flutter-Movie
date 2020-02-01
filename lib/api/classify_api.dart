@@ -10,7 +10,7 @@ class ClassifyApi {
   /// 视频属性
   static Future getVideoAttribute() async {
 
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
     });
 
     var response = await HttpUtil().post('ecapi.attr.getVideoAttribute', data: formData);

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/models/UserListModel.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/keepalive_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'action.dart';

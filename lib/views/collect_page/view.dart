@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/style/dimens.dart';

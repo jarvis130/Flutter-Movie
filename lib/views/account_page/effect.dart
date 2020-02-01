@@ -1,6 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/widgets/custom_stfstate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'action.dart';
@@ -49,8 +48,8 @@ void _onDispose(Action action, Context<AccountPageState> ctx) {
 }
 
 Future _onLogout(Action action, Context<AccountPageState> ctx) async {
-  var q = await ApiHelper.deleteSession();
-  if (q) await _onInit(action, ctx);
+//  var q = await ApiHelper.deleteSession();
+//  if (q) await _onInit(action, ctx);
 } 
 
 Future _navigatorPush(Action action, Context<AccountPageState> ctx) async {

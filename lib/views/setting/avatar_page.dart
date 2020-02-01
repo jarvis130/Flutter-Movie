@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/routers/fluro_navigator.dart';
+import 'package:movie/utils/Adapt.dart';
+import 'package:movie/api/user_api.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/selected_image.dart';
-import 'package:movie/widgets/text_field_item.dart';
-import 'package:movie/globalconfig.dart';
-import '../../utils/toast.dart';
+import 'package:movie/utils/toast.dart';
 
 class AvatarPage extends StatefulWidget {
   @override
@@ -30,7 +30,7 @@ class _AvatarPageState extends State<AvatarPage> {
       _imageFile = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 800, maxHeight: 95);
       setState(() {});
     } catch (e) {
-      Toast.show("没有权限，无法打开相册！");
+      ToastUtils.show("没有权限，无法打开相册", context);
     }
   }
 
@@ -99,6 +99,8 @@ class _AvatarPageState extends State<AvatarPage> {
                 disabledTextColor: Color(0xFFD4E2FA),
                 disabledColor: Color(0xFF96BBFA),
                 onPressed: (){
+                  _updateAvatar(_imageFile);
+                  print('111');
 //                  NavigatorUtils.push(context, StoreRouter.auditResultPage);
                 },
                 child: Column(
@@ -214,4 +216,45 @@ class _AvatarPageState extends State<AvatarPage> {
       },
     );
   }
+
+  void _updateAvatar(File file) async {
+    Map map = await UserApi.updateAvatar(file: file);
+    if(map != null){
+      ToastUtils.show('设置成功', context);
+      NavigatorUtils.goBack(context);
+    }
+  }
+
+  Future dialog() {
+    return showDialog(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('提示'),
+          content:Text('今日免费观看次数已经结束，是否前往购买时长？'),
+          actions:<Widget>[
+            FlatButton(
+              child: Text('取消'),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            ),
+            FlatButton(
+              child: Text('同意'),
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+          // backgroundColor:Colors.yellowAccent,
+          elevation: 20,
+          // semanticLabel:'哈哈哈哈',
+          // 设置成 圆角
+          shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        );
+      },
+    );
+  }
+
 }

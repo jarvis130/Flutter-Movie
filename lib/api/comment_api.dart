@@ -8,7 +8,7 @@ class CommentApi {
 
   /// 评论列表
   static Future<CommentModel> getList({int product=0, int page = 1, int per_page = 20}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "XDEBUG_SESSION_START": 12175,
       'page': page,
       'per_page': per_page,
@@ -25,7 +25,7 @@ class CommentApi {
 
   /// 评论
   static Future<Map> addComment({int comment_type = 0, int id_value = 0, String content='', int status = 0}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
       "XDEBUG_SESSION_START": 12175,
       'comment_type': comment_type,
       'id_value': id_value,

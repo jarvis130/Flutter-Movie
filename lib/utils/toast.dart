@@ -1,16 +1,17 @@
 
-import 'package:oktoast/oktoast.dart';
-
-class Toast {
-  static show(String msg, {duration = 2000}) {
-    showToast(
+import 'package:toast/toast.dart';
+class ToastUtils {
+  static show(String msg, context, {duration = 2000}) {
+    Toast.show(
         msg,
-        duration: Duration(milliseconds: duration),
-        dismissOtherToast: true
+        context,
+        duration: Toast.LENGTH_SHORT,
+        gravity:  Toast.CENTER,
+        backgroundRadius: 5
     );
   }
 
   static cancelToast() {
-    dismissAllToast();
+//    dismissAllToast();
   }
 }

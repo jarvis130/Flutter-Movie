@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movie/actions/Adapt.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/HomeModel.dart';

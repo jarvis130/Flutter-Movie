@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie/utils/toast.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,7 +13,7 @@ class Utils {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      Toast.show('拨号失败！');
+//      Toast.show('拨号失败！', context, duration: Toast.LENGTH_SHORT, gravity:  Toast.CENTER);
     }
   }
 

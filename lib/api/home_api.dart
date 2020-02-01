@@ -1,12 +1,9 @@
 import 'dart:convert' show json;
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
-import 'package:movie/actions/apihelper.dart';
 import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/HomeModel.dart';
 import 'package:movie/utils/httpUtil.dart';
-import 'package:movie/models/movielist.dart';
-import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/searchresult.dart';
 
 class HomeApi {
@@ -14,7 +11,7 @@ class HomeApi {
   ///轮播图
   static Future getSwiperList() async {
 
-    FormData formData = new FormData.from({});
+    FormData formData = new FormData.fromMap({});
 
     var response = await HttpUtil().post('ecapi.banner.list', data: formData);
     Map map = json.decode(response.toString());
@@ -28,7 +25,7 @@ class HomeApi {
 
   ///热播视频
   static Future<HomeModel> home(String uid, {int page = 1}) async {
-    FormData formData = new FormData.from({
+    FormData formData = new FormData.fromMap({
 
     });
 
@@ -45,10 +42,10 @@ class HomeApi {
   ///搜索
   static Future<SearchResultModel> searchMulit(String query, var uid, {int page = 1, bool searchadult = false}) async {
     SearchResultModel model;
-    String param = 'service=Home.VideoSearch&key=$query&uid=$uid&p=$page';
-    var r = await ApiHelper.httpGet(param, cached: false);
-    if (r != null)
-      model = SearchResultModel(r);
+//    String param = 'service=Home.VideoSearch&key=$query&uid=$uid&p=$page';
+//    var r = await ApiHelper.httpGet(param, cached: false);
+//    if (r != null)
+//      model = SearchResultModel(r);
     return model;
   }
 }

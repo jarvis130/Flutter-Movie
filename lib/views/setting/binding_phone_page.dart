@@ -68,12 +68,12 @@ class _BindingPhonePageState extends State<BindingPhonePage> {
     );
     if(map != null){
       if(map['error_code'] == 'message.member.mobile.bind'){
-        Toast.show("绑定失败");
+        ToastUtils.show("绑定失败", context);
       }else if(map['error_code'] == 'message.member.mobile.code.verify_errord'){
-        Toast.show("验证码错误");
+        ToastUtils.show("验证码错误", context);
       }else{
         NavigatorUtils.goBack(context);
-        Toast.show("绑定成功");
+        ToastUtils.show("绑定成功", context);
       }
     }
 
