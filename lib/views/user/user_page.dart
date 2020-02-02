@@ -580,26 +580,26 @@ class _UserPageState extends State<UserPage> {
 //              ),
 //
 //            ),
-          ListTile(
-            leading: Icon(
-                Icons.track_changes,
-                color: Colors.pink
-            ),
-            title: Text(
-              '兌換會員',
-              style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                  fontSize: Dimens.font_sp16
-              ),
-            ),
-            trailing: Text(
-              '使用兌換碼',
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: Dimens.font_sp12
-              ),
-            ),
-          ),
+//          ListTile(
+//            leading: Icon(
+//                Icons.track_changes,
+//                color: Colors.pink
+//            ),
+//            title: Text(
+//              '兌換會員',
+//              style: TextStyle(
+////                      fontWeight: FontWeight.bold,
+//                  fontSize: Dimens.font_sp16
+//              ),
+//            ),
+//            trailing: Text(
+//              '使用兌換碼',
+//              style: TextStyle(
+//                  color: Colors.grey,
+//                  fontSize: Dimens.font_sp12
+//              ),
+//            ),
+//          ),
         ],
       ),
     );
