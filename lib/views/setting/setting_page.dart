@@ -41,18 +41,18 @@ class _SettingPageState extends State<SettingPage> {
 //            content: "23.5MB",
 //            onTap: (){}
 //          ),
-          ClickItem(
-            title: "檢查更新",
-            onTap: (){
-              _showUpdateDialog();
-            }
-          ),
-          ClickItem(
-            title: "意見反饋",
-            onTap: (){
-//              NavigatorUtils.push(context, SettingRouter.aboutPage);
-            }
-          ),
+//          ClickItem(
+//            title: "檢查更新",
+//            onTap: (){
+//              _showUpdateDialog();
+//            }
+//          ),
+//          ClickItem(
+//            title: "意見反饋",
+//            onTap: (){
+//
+//            }
+//          ),
 //          ClickItem(
 //            title: "退出當前賬號",
 //            onTap: (){
