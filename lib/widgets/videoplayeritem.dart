@@ -64,7 +64,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
  
 
   Future playButtonClicked() async {
-    UserModel model = await UserApi.getUserProfile();
+    UserModel model = await UserApi.getUserProfile(context);
     if(model != null){
       if(model.user.rank.id > 1){
         //vip用户直接播放

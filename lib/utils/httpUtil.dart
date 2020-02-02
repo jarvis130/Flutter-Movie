@@ -51,7 +51,6 @@ class HttpUtil {
     //添加拦截器
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
-//      print("请求之前");
 
       if(SharedPreferencesUtil.prefsInstance != null){
         String token = SharedPreferencesUtil.prefsInstance.getString('token');

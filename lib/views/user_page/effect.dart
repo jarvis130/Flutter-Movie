@@ -85,7 +85,7 @@ Future _sortChanged(Action action, Context<UserPageState> ctx) async {
 
 Future _loadData(Action action, Context<UserPageState> ctx) async {
 
-  UserModel model = await UserApi.getUserProfile();
+  UserModel model = await UserApi.getUserProfile(ctx.context);
   if (model != null)
     ctx.dispatch(UserPageActionCreator.loadMore(model));
 

@@ -5,6 +5,7 @@ import 'package:movie/views/order/order_router.dart';
 import 'package:movie/views/setting/setting_page.dart';
 import 'package:movie/routers/router_init.dart';
 import 'package:movie/views/setting/setting_router.dart';
+import 'package:movie/views/user/user_router.dart';
 import 'package:movie/widgets/webview_page.dart';
 import 'package:movie/widgets/404.dart';
 
@@ -42,7 +43,7 @@ class Routes {
 //    _listRouter.add(AccountRouter());
     _listRouter.add(SettingRouter());
 //    _listRouter.add(StatisticsRouter());
-  
+    _listRouter.add(UserRouter());
     /// 初始化路由
     _listRouter.forEach((routerProvider){
       routerProvider.initRouter(router);

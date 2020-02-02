@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:movie/provider/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/image_utils.dart';
@@ -7,6 +8,7 @@ import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/click_item.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/globalconfig.dart';
+import 'package:provider/provider.dart';
 
 class AccountManagerPage extends StatefulWidget {
   @override
@@ -14,8 +16,12 @@ class AccountManagerPage extends StatefulWidget {
 }
 
 class _AccountManagerPageState extends State<AccountManagerPage> {
+  
   @override
   Widget build(BuildContext context) {
+    
+    String avatar = Provider.of<UserState>(context).avatar != null ? Provider.of<UserState>(context).avatar : '0';
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(50, 50, 50, 1),
@@ -42,21 +48,21 @@ class _AccountManagerPageState extends State<AccountManagerPage> {
                 top: 8.0,
                 bottom: 8.0,
                 right: 40.0,
-                child: loadAssetImage("shop/tx", width: 34.0),
+                child: Provider.of<UserState>(context).avatar == null ? loadAssetImage("shop/tx", width: 34.0) : loadNetworkImage(Provider.of<UserState>(context).avatar, width: 34.0, height: 34.0),
               )
             ],
           ),
-          ClickItem(
-              title: "修改密碼",
-              content: "用於密碼登錄",
-              onTap: (){
+//          ClickItem(
+//              title: "修改密碼",
+//              content: "用於密碼登錄",
+//              onTap: (){
 //                NavigatorUtils.push(context, LoginRouter.updatePasswordPage);
-              }
-          ),
-          ClickItem(
-              title: "綁定賬號",
-              content: "15000000000",
-          ),
+//              }
+//          ),
+//          ClickItem(
+//              title: "綁定賬號",
+//              content: "15000000000",
+//          ),
         ],
       ),
     );

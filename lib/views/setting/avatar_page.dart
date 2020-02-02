@@ -10,6 +10,8 @@ import 'package:movie/api/user_api.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/selected_image.dart';
 import 'package:movie/utils/toast.dart';
+import 'package:provider/provider.dart';
+import 'package:movie/provider/user_state.dart';
 
 class AvatarPage extends StatefulWidget {
   @override
@@ -220,6 +222,8 @@ class _AvatarPageState extends State<AvatarPage> {
   void _updateAvatar(File file) async {
     Map map = await UserApi.updateAvatar(file: file);
     if(map != null){
+      String avatar = map['user']['avatar'];
+      Provider.of<UserState>(context).setAvatar(avatar);
       ToastUtils.show('设置成功', context);
       NavigatorUtils.goBack(context);
     }

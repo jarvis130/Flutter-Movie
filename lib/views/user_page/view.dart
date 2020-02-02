@@ -11,11 +11,9 @@ import 'package:movie/views/order/order_router.dart';
 import 'package:movie/views/setting/order_confirm_dialog.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:movie/widgets/share_card.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:movie/models/listdetailmodel.dart';
-import 'package:movie/views/setting/avatar_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'action.dart';
@@ -857,9 +855,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
   }
 
   Future < void > _onRefresh() async {
-
     dispatch(UserPageActionCreator.onRefresh());
-
   }
 
   // 返回每个隐藏的菜单项

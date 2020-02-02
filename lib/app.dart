@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:movie/provider/user_state.dart';
+import 'package:provider/provider.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart' hide Action;
 import 'package:fluro/fluro.dart';
@@ -39,46 +41,40 @@ import 'routers/application.dart';
 import 'routers/routers.dart';
 
 //启动标识
-String startFlag = '0';
+//String startFlag = '0';
 
 Future _init() async {
 
   if (Platform.isAndroid)
     Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler()
-            .requestPermissions([PermissionGroup.contacts]);
+    await PermissionHandler()
+        .requestPermissions([PermissionGroup.contacts]);
 
-  String os = '';
   SharedPreferences prefs = await SharedPreferences.getInstance();
   SharedPreferencesUtil.initPrefsInstance(prefs);
-  String token = SharedPreferencesUtil.prefsInstance.getString('token');
-//  if (token == null) {
-    //获取设备信息
-    String uuid;
-    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
-    if(Platform.isIOS){
-      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-      uuid = iosDeviceInfo.identifierForVendor;
-      os = '2';
-    }else if(Platform.isAndroid){
-      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-      uuid = androidDeviceInfo.id;
-      os = '1';
-    }
-    prefs.setString('client', os);
-    // 设备码登录
-    UserApi.loginByMobileDevice(uuid, os);
-//  }
-
-  startFlag = prefs.getString('tip') == null ? '0' : '1';
-  if(startFlag == '0'){
-    prefs.setString('tip', '1');
+//  String token = SharedPreferencesUtil.prefsInstance.getString('token');
+  //获取设备信息
+  String deviceId;
+  String os;
+  DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
+  if(Platform.isIOS){
+    IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+    deviceId = iosDeviceInfo.identifierForVendor;
+    os = '2';
+  }else if(Platform.isAndroid){
+    AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+    deviceId = androidDeviceInfo.id;
+    os = '1';
   }
+  prefs.setString('os', os);
+  prefs.setString('deviceId', deviceId);
 
+  //
   setLocaleInfo('zh', TimelineInfoCN());
   setLocaleInfo('en', TimelineInfoEN());
   setLocaleInfo('Ja', TimelineInfoJA());
 
+  //fluro路由
   final router = Router();
   Routes.configureRoutes(router);
   Application.router = router;
@@ -152,28 +148,41 @@ Future<Widget> createApp() async {
 
   await _init();
 
-  return MaterialApp(
-    title: 'Movie',
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      primarySwatch: Colors.blue,
-    ),
-    localizationsDelegates: [
-      I18n.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
+  return MultiProvider(
+    providers: [
+      //这里是关键注册通知吧
+      ChangeNotifierProvider(create: (_) => UserState()),
     ],
-    supportedLocales: I18n.delegate.supportedLocales,
-    localeResolutionCallback:
-        I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
-//    home: startFlag == '1' ? routes.buildPage('SplashPage', null) : routes.buildPage('GuidePage', null),
-    home: SplashPage(),
-    onGenerateRoute: (RouteSettings settings) {
-      return MaterialPageRoute<Object>(builder: (BuildContext context) {
-        return routes.buildPage(settings.name, settings.arguments);
-      });
-    },
+    child: Container(
+      child: MaterialApp(
+        title: 'Movie',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        localizationsDelegates: [
+          I18n.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: I18n.delegate.supportedLocales,
+        localeResolutionCallback: I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
+        home: Builder(
+          builder: (context) {
+            // 设备码登录
+            UserApi.loginByMobileDevice(context);
+            return SplashPage();
+          },
+        ),
+        onGenerateRoute: (RouteSettings settings) {
+          return MaterialPageRoute<Object>(builder: (BuildContext context) {
+            return routes.buildPage(settings.name, settings.arguments);
+          });
+        },
+      )
+    ),
   );
+
 }
 
 EffectMiddleware<T> _pageAnalyticsMiddleware<T>({String tag = 'redux'}) {

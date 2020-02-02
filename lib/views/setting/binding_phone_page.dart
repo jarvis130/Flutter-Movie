@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:movie/api/user_api.dart';
+import 'package:movie/provider/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/utils.dart';
+import 'package:provider/provider.dart';
 import '../../utils/toast.dart';
 import 'package:movie/style/styles.dart';
 import 'package:movie/widgets/text_field.dart';
@@ -72,8 +74,9 @@ class _BindingPhonePageState extends State<BindingPhonePage> {
       }else if(map['error_code'] == 'message.member.mobile.code.verify_errord'){
         ToastUtils.show("验证码错误", context);
       }else{
-        NavigatorUtils.goBack(context);
+        Provider.of<UserState>(context).setUsername(_nameController.text);
         ToastUtils.show("绑定成功", context);
+        NavigatorUtils.goBack(context);
       }
     }
 

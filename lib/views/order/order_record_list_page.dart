@@ -6,9 +6,6 @@ import 'package:movie/api/order_api.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/OrderListModel.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:movie/style/resources.dart';
-import 'package:movie/utils/date_utils.dart';
-import 'package:sticky_headers/sticky_headers.dart';
 
 class OrderRecordListPage extends StatefulWidget {
   @override
