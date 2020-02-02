@@ -1,9 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/utils/Adapt.dart';
-import 'package:movie/widgets/screen.dart';
-import '../../style/styles.dart';
-import '../../widgets/text_field_item.dart';
+import 'package:movie/style/resources.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -11,36 +8,79 @@ Widget buildView(CommentState state, Dispatch dispatch, ViewService viewService)
 
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
 
+//  _buildBody(){
+//    return Padding(
+//      padding: const EdgeInsets.all(10.0),
+//      child: Form(
+//        key: _formKey,
+//        child: Column(
+//          crossAxisAlignment: CrossAxisAlignment.start,
+//          children: <Widget>[
+//            SizedBox(height: 5),
+//            TextFormField(
+//              maxLines: null,
+//              decoration: InputDecoration(
+//                  hintText: "内容",
+//                  hintStyle: TextStyle(
+//                    color: Colors.grey,
+//                  ),
+//                  border: InputBorder.none,
+//              ),
+//              style: TextStyle(
+//                color: Colors.white,
+//              ),
+//              onSaved: (value) {
+//                state.content = value;
+//              },
+//            ),
+//          ],
+//        ),
+//      )
+//    );
+//  }
+
   _buildBody(){
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 5),
-            TextFormField(
-              maxLines: null,
-              decoration: InputDecoration(
-//                labelText: "密码",
-                  hintText: "内容",
+        padding: const EdgeInsets.all(10.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(height: 5),
+              TextFormField(
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: "请输入内容",
                   hintStyle: TextStyle(
                     color: Colors.grey,
                   ),
                   border: InputBorder.none,
-//                prefixIcon: Icon(Icons.lock)
+                ),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                onSaved: (value) {
+                  state.content = value;
+                },
               ),
-              style: TextStyle(
-                color: Colors.white,
-              ),
-              onSaved: (value) {
-                state.content = value;
-              },
-            ),
-          ],
-        ),
-      )
+
+//              TextField(
+//                  maxLength: 30,
+//                  maxLines: 5,
+//                  autofocus: true,
+//                  controller: _controller,
+//                  keyboardType: widget.keyboardType,
+//                  decoration: InputDecoration(
+//                      hintText: "请输入内容",
+//                      border: InputBorder.none,
+//                      hintStyle: TextStyles.textGrayC14
+//                  ),
+//              ),
+
+            ],
+          ),
+        )
     );
   }
 
