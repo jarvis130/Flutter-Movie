@@ -175,27 +175,27 @@ class ShareCardState extends State<ShareCard> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      GestureDetector(
-                          onTap: () {},
-                          child: SizedBox(
-                            width: Adapt.px(200),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(Icons.file_download),
-                                Text(
-                                  '下载',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: Adapt.px(30),
-                                      fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          )),
-                      SizedBox(
-                        width: Adapt.px(30),
-                      ),
+//                      GestureDetector(
+//                          onTap: () {},
+//                          child: SizedBox(
+//                            width: Adapt.px(200),
+//                            child: Row(
+//                              mainAxisAlignment: MainAxisAlignment.center,
+//                              children: <Widget>[
+//                                Icon(Icons.file_download),
+//                                Text(
+//                                  '下载',
+//                                  style: TextStyle(
+//                                      color: Colors.black,
+//                                      fontSize: Adapt.px(30),
+//                                      fontWeight: FontWeight.bold),
+//                                )
+//                              ],
+//                            ),
+//                          )),
+//                      SizedBox(
+//                        width: Adapt.px(30),
+//                      ),
                       GestureDetector(
                           onTap: shareTapped,
                           child: SizedBox(

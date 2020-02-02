@@ -216,10 +216,10 @@ Widget buildView(MenuState state, Dispatch dispatch, ViewService viewService) {
         //     iconColor: state.accountState.isRated == true
         //         ? Colors.amber
         //         : Color.fromRGBO(50, 50, 50, 1)),
-        Divider(
-          height: Adapt.px(10),
-        ),
-        _buildListTitel(Icons.share, '分享', _share),
+//        Divider(
+//          height: Adapt.px(10),
+//        ),
+//        _buildListTitel(Icons.share, '分享', _share),
         Divider(
           height: Adapt.px(10),
         ),

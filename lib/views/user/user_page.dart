@@ -9,6 +9,10 @@ import 'package:movie/views/order/order_router.dart';
 import 'package:movie/views/setting/order_confirm_dialog.dart';
 import 'package:movie/views/setting/setting_router.dart';
 import 'package:provider/provider.dart';
+import 'package:movie/widgets/share_card.dart';
+import 'package:movie/utils/imageurl.dart';
+import 'package:movie/style/dimens.dart';
+import 'package:movie/models/enums/imagesize.dart';
 
 class UserPage extends StatefulWidget {
   @override
@@ -456,7 +460,7 @@ class _UserPageState extends State<UserPage> {
               ),
               GestureDetector(
                 onTap: (){
-                  NavigatorUtils.push(context, SettingRouter.linkPage);
+                  NavigatorUtils.push(context, SettingRouter.kefuSettingsPage);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
@@ -565,6 +569,9 @@ class _UserPageState extends State<UserPage> {
                   fontSize: Dimens.font_sp12
               ),
             ),
+            onTap: (
+                _share
+            )
           ),
 //            ListTile(
 //              leading: Icon(
@@ -607,5 +614,87 @@ class _UserPageState extends State<UserPage> {
 
   Future < void > _onRefresh() async {
 //    dispatch(UserPageActionCreator.onRefresh());
+  }
+
+  Future < void > _share() {
+    String username = Provider.of<UserState>(context).username != null ? Provider.of<UserState>(context).username : '';
+    String avatar = Provider.of<UserState>(context).avatar != null ? Provider.of<UserState>(context).avatar : AssetImage('images/empty.png');
+
+//    Navigator.of(context).pop();
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
+          var height = ((width - Adapt.px(40)) / 2).floorToDouble();
+          return ShareCard(
+            backgroundImage: ImageUrl.getUrl(avatar, ImageSize.w300),
+            qrValue:
+            'https://www.themoviedb.org/movie/1?language=zh',
+            headerHeight: height,
+            header: Column(children: <Widget>[
+              SizedBox(
+                height: Adapt.px(20),
+              ),
+              Row(
+                children: <Widget>[
+                  SizedBox(
+                    width: Adapt.px(20),
+                  ),
+                  Container(
+                    width: Adapt.px(120),
+                    height: Adapt.px(120),
+                    decoration: BoxDecoration(
+                        border:
+                        Border.all(color: Colors.white, width: Adapt.px(5)),
+                        borderRadius: BorderRadius.circular(Adapt.px(60)),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: CachedNetworkImageProvider(
+                                avatar
+                            )
+                        )
+                    ),
+                  ),
+                  SizedBox(
+                    width: Adapt.px(20),
+                  ),
+                  Container(
+                    width: width - Adapt.px(310),
+                    child: Text(
+                        username,
+                        maxLines: 2,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: Dimens.font_sp14,
+                            fontWeight: FontWeight.bold,
+                            shadows: <Shadow>[
+                              Shadow(offset: Offset(Adapt.px(1), Adapt.px(1)))
+                            ])),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: Adapt.px(20),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: Adapt.px(20)),
+                width: width - Adapt.px(40),
+                height: height - Adapt.px(170),
+                child: Text(
+                    '分享APP獲取積分',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 5,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: Dimens.font_sp14,
+                        shadows: <Shadow>[
+                          Shadow(
+                              offset: Offset(Adapt.px(1), Adapt.px(1)),
+                              blurRadius: 3)
+                        ])),
+              )
+            ]),
+          );
+        });
   }
 }
