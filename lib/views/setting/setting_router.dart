@@ -4,6 +4,7 @@ import 'package:movie/routers/router_init.dart';
 import 'package:movie/views/collect_page/page.dart';
 import 'package:movie/views/setting/avatar_page.dart';
 import 'package:movie/views/setting/binding_phone_page.dart';
+import 'package:movie/views/setting/link_page.dart';
 import 'package:movie/views/setting/watch_record_list_page.dart';
 
 import 'about_page.dart';
@@ -18,6 +19,7 @@ class SettingRouter implements IRouterProvider{
   static String avatarPage = "/views/setting/avatar_page";
   static String watchRecordListPage = "/views/setting/watch_record_list_page";
   static String bindingPhonePage = "/views/setting/binding_phone_page";
+  static String linkPage = "/views/setting/link_page";
 
   @override
   void initRouter(Router router) {
@@ -27,7 +29,7 @@ class SettingRouter implements IRouterProvider{
     router.define(avatarPage, handler: Handler(handlerFunc: (_, params) => AvatarPage()));
     router.define(watchRecordListPage, handler: Handler(handlerFunc: (_, params) => WatchRecordListPage()));
     router.define(bindingPhonePage, handler: Handler(handlerFunc: (_, params) => BindingPhonePage()));
-
+    router.define(linkPage, handler: Handler(handlerFunc: (_, params) => LinkPage()));
   }
 
 }

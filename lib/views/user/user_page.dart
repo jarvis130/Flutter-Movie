@@ -454,28 +454,34 @@ class _UserPageState extends State<UserPage> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
-                width: width,
-                child: Column(
-                  children: <Widget>[
-                    Icon(
-                        Icons.phone,
-                        color: Colors.pink
-                    ),
-                    SizedBox(
-                      height: Adapt.px(10.0),
-                    ),
-                    Text(
-                      '聯繫客服',
-                      style: TextStyle(
-//                      fontWeight: FontWeight.bold,
-                          fontSize: Dimens.font_sp14
+              GestureDetector(
+                onTap: (){
+                  NavigatorUtils.push(context, SettingRouter.linkPage);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
+                  width: width,
+                  child: Column(
+                    children: <Widget>[
+                      Icon(
+                          Icons.phone,
+                          color: Colors.pink
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: Adapt.px(10.0),
+                      ),
+                      Text(
+                        '聯繫客服',
+                        style: TextStyle(
+//                      fontWeight: FontWeight.bold,
+                            fontSize: Dimens.font_sp14
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
+
 
             ]
         )

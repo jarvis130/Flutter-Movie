@@ -208,7 +208,6 @@ class _WatchRecordListPageState extends State<WatchRecordListPage> {
             )
         ),
         onTap: () {
-//          NavigatorUtils.push(context, '/moviedetail_page/moviedetailpage?movieid=${model.goods.id}');
            Navigator.of(context).pushNamed('moviedetailpage', arguments: {
             'movieid': model.goods.id.toString(),
             'bgpic': model.goods.defaultPhoto.thumb,
