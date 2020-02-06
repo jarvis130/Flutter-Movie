@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart' as prefix0;
 import 'package:movie/provider/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:common_utils/common_utils.dart';
@@ -40,47 +41,8 @@ import 'package:device_info/device_info.dart';
 import 'routers/application.dart';
 import 'routers/routers.dart';
 
-//启动标识
-//String startFlag = '0';
+class MyApp extends StatelessWidget {
 
-Future _init() async {
-
-  if (Platform.isAndroid)
-    Map<PermissionGroup, PermissionStatus> permissions =
-    await PermissionHandler()
-        .requestPermissions([PermissionGroup.contacts]);
-
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  SharedPreferencesUtil.initPrefsInstance(prefs);
-//  String token = SharedPreferencesUtil.prefsInstance.getString('token');
-  //获取设备信息
-  String deviceId;
-  String os;
-  DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
-  if(Platform.isIOS){
-    IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
-    deviceId = iosDeviceInfo.identifierForVendor;
-    os = '2';
-  }else if(Platform.isAndroid){
-    AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
-    deviceId = androidDeviceInfo.id;
-    os = '1';
-  }
-  prefs.setString('os', os);
-  prefs.setString('deviceId', deviceId);
-
-  //
-  setLocaleInfo('zh', TimelineInfoCN());
-  setLocaleInfo('en', TimelineInfoEN());
-  setLocaleInfo('Ja', TimelineInfoJA());
-
-  //fluro路由
-  final router = Router();
-  Routes.configureRoutes(router);
-  Application.router = router;
-}
-
-Future<Widget> createApp() async {
   final AbstractRoutes routes = PageRoutes(
     pages: <String, Page<Object, dynamic>>{
       'mainpage': MainPage(),
@@ -108,7 +70,7 @@ Future<Widget> createApp() async {
       if (page.isTypeof<GlobalBaseState>()) {
         page.connectExtraStore<GlobalState>(
           GlobalStore.store,
-          (Object pagestate, GlobalState appState) {
+              (Object pagestate, GlobalState appState) {
             final GlobalBaseState p = pagestate;
             if (p.themeColor != appState.themeColor) {
               if (pagestate is Cloneable) {
@@ -146,54 +108,98 @@ Future<Widget> createApp() async {
     },
   );
 
-  await _init();
-
-  return MultiProvider(
-    providers: [
-      //这里是关键注册通知吧
-      ChangeNotifierProvider(create: (_) => UserState()),
-    ],
-    child: Container(
-      child: MaterialApp(
-        title: 'Movie',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        localizationsDelegates: [
-          I18n.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: I18n.delegate.supportedLocales,
-        localeResolutionCallback: I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
-        home: Builder(
-          builder: (context) {
-            // 设备码登录
-            UserApi.loginByMobileDevice(context);
-            return SplashPage();
-          },
-        ),
-        onGenerateRoute: (RouteSettings settings) {
-          return MaterialPageRoute<Object>(builder: (BuildContext context) {
-            return routes.buildPage(settings.name, settings.arguments);
-          });
-        },
-      )
-    ),
-  );
-
-}
-
-EffectMiddleware<T> _pageAnalyticsMiddleware<T>({String tag = 'redux'}) {
-  return (AbstractLogic<dynamic> logic, Store<T> store) {
-    return (Effect<dynamic> effect) {
-      return (Action action, Context<dynamic> ctx) {
-        if (logic is Page<dynamic, dynamic> && action.type is Lifecycle) {
-          print('${logic.runtimeType} ${action.type.toString()} ');
-        }
-        return effect?.call(action, ctx);
+  EffectMiddleware<T> _pageAnalyticsMiddleware<T>({String tag = 'redux'}) {
+    return (AbstractLogic<dynamic> logic, Store<T> store) {
+      return (Effect<dynamic> effect) {
+        return (Action action, Context<dynamic> ctx) {
+          if (logic is Page<dynamic, dynamic> && action.type is Lifecycle) {
+            print('${logic.runtimeType} ${action.type.toString()} ');
+          }
+          return effect?.call(action, ctx);
+        };
       };
     };
-  };
+  }
+
+  Future _init() async {
+
+    if (Platform.isAndroid)
+      Map<PermissionGroup, PermissionStatus> permissions =
+      await PermissionHandler()
+          .requestPermissions([PermissionGroup.contacts]);
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferencesUtil.initPrefsInstance(prefs);
+//  String token = SharedPreferencesUtil.prefsInstance.getString('token');
+    //获取设备信息
+    String deviceId;
+    String os;
+    DeviceInfoPlugin deviceInfo = new DeviceInfoPlugin();
+    if(Platform.isIOS){
+      IosDeviceInfo iosDeviceInfo = await deviceInfo.iosInfo;
+      deviceId = iosDeviceInfo.identifierForVendor;
+      os = '2';
+    }else if(Platform.isAndroid){
+      AndroidDeviceInfo androidDeviceInfo = await deviceInfo.androidInfo;
+      deviceId = androidDeviceInfo.id;
+      os = '1';
+    }
+    prefs.setString('os', os);
+    prefs.setString('deviceId', deviceId);
+
+    //
+    setLocaleInfo('zh', TimelineInfoCN());
+    setLocaleInfo('en', TimelineInfoEN());
+    setLocaleInfo('Ja', TimelineInfoJA());
+
+    //fluro路由
+    final router = Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
+
+  MyApp()  {
+    _init();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    return MultiProvider(
+      providers: [
+        //这里是关键注册通知吧
+        ChangeNotifierProvider(create: (_) => UserState()),
+      ],
+      child: Container(
+          child: MaterialApp(
+            title: 'Movie',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            localizationsDelegates: [
+              I18n.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: I18n.delegate.supportedLocales,
+            localeResolutionCallback: I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
+            home: Builder(
+              builder: (context) {
+                //
+                return SplashPage();
+              },
+            ),
+            onGenerateRoute: (RouteSettings settings) {
+              return MaterialPageRoute<Object>(builder: (BuildContext context) {
+                return routes.buildPage(settings.name, settings.arguments);
+              });
+            },
+          )
+      ),
+    );
+  }
 }
+
+
+

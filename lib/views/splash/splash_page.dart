@@ -1,11 +1,17 @@
 
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:movie/api/user_api.dart';
 import 'package:movie/common/common.dart';
+import 'package:movie/models/UserModel.dart';
+import 'package:movie/provider/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/utils/image_utils.dart';
 import 'package:movie/utils/utils.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flustars/flustars.dart';
@@ -18,6 +24,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
 
   int _status = 0;
+  String ip;
 //  List<String> _guideList = [
 //    "app_start_1",
 //    "app_start_2",
@@ -36,10 +43,52 @@ class _SplashPageState extends State<SplashPage> {
     "因为在意，所以用心",
   ];
   StreamSubscription _subscription;
-  
+
+  _getIPAddress() async {
+    var url = 'https://httpbin.org/ip';
+    var httpClient = new HttpClient();
+
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      if (response.statusCode == HttpStatus.OK) {
+        var json = await response.transform(utf8.decoder).join();
+        var data = jsonDecode(json);
+        ip = data['origin'];
+        // 设备码登录
+        UserModel model = await UserApi.loginByMobileDevice(context, ip);
+        if(model != null){
+          _setState(model, context);
+        }
+      } else {
+        ip =
+        'Error getting IP address:\nHttp status ${response.statusCode}';
+      }
+    } catch (exception) {
+      ip = 'Failed getting IP address';
+    }
+  }
+
+  _setState(UserModel model, BuildContext context){
+    if(model.user.id != null)
+      Provider.of<UserState>(context).setUserId(model.user.id);
+    if(model.user.username != null)
+      Provider.of<UserState>(context).setUsername(model.user.username);
+    if(model.user.rank.name != null)
+      Provider.of<UserState>(context).setRank(model.user.rank.name);
+    if(model.user.avatar != null)
+      Provider.of<UserState>(context).setAvatar(model.user.avatar);
+    if(model.user.watchedTimes != null)
+      Provider.of<UserState>(context).setWatchedTimes(model.user.watchedTimes.toString());
+    if(model.user.watchTimes != null)
+      Provider.of<UserState>(context).setWatchTimes(model.user.watchTimes.toString());
+  }
+
   @override
   void initState() {
     super.initState();
+    _getIPAddress();
+
     _initSplash();
   }
   

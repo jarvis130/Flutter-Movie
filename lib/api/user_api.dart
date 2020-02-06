@@ -1,8 +1,8 @@
 import 'dart:convert' show json;
 import 'dart:io';
+import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
-import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/provider/user_state.dart';
@@ -13,14 +13,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserApi {
 
   /// 根据设备编码获取token
-  static Future loginByMobileDevice(BuildContext context) async {
+  static Future loginByMobileDevice(BuildContext context, String ip) async {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String os = prefs.getString('os');
     String deviceId = prefs.getString('deviceId');
+
     FormData formData = new FormData.fromMap({
       "device_id": deviceId,
       "os": os,
+      "ip": ip,
       "XDEBUG_SESSION_START": 12474
     });
 
@@ -29,8 +31,8 @@ class UserApi {
     if(map != null && map.length > 0){
       UserModel model = UserModel.fromJson(map);
       if(model.errorCode == 0){
-        _setState(model, context);
         prefs.setString('token', model.token);
+        return model;
       }
     }
   }
@@ -47,25 +49,9 @@ class UserApi {
     if(map != null && map.length > 0){
       UserModel model = UserModel.fromJson(map);
       if(model.errorCode == 0){
-        _setState(model, context);
         return model;
       }
     }
-  }
-
-  static void _setState(UserModel model, BuildContext context){
-    if(model.user.id != null)
-      Provider.of<UserState>(context).setUserId(model.user.id);
-    if(model.user.username != null)
-      Provider.of<UserState>(context).setUsername(model.user.username);
-    if(model.user.rank.name != null)
-      Provider.of<UserState>(context).setRank(model.user.rank.name);
-    if(model.user.avatar != null)
-      Provider.of<UserState>(context).setAvatar(model.user.avatar);
-    if(model.user.watchedTimes != null)
-      Provider.of<UserState>(context).setWatchedTimes(model.user.watchedTimes.toString());
-    if(model.user.watchTimes != null)
-      Provider.of<UserState>(context).setWatchTimes(model.user.watchTimes.toString());
   }
 
   ///用户详情

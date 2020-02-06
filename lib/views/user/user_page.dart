@@ -1,6 +1,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/globalconfig.dart';
 import 'package:movie/provider/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/resources.dart';
@@ -138,7 +139,6 @@ class _UserPageState extends State<UserPage> {
 
   @override
   Widget build(BuildContext context) {
-    String avatar = Provider.of<UserState>(context).avatar != null ? Provider.of<UserState>(context).avatar : AssetImage('images/empty.png');
 
     return Scaffold(
         body: RefreshIndicator(
@@ -199,9 +199,9 @@ class _UserPageState extends State<UserPage> {
 
                             decoration: BoxDecoration(
                                 image: DecorationImage(//背景图片 ,不能与背景色同时使用
-                                  image: CachedNetworkImageProvider(
-                                      avatar
-                                  ),
+                                  image: Provider.of<UserState>(context).avatar != null ? CachedNetworkImageProvider(
+                                      Provider.of<UserState>(context).avatar
+                                  ) : AssetImage('images/empty.png'),
                                   alignment: Alignment.topCenter,
                                   repeat: ImageRepeat.repeatY,//是否重复
                                   fit: BoxFit.cover,//填充模式
@@ -617,19 +617,17 @@ class _UserPageState extends State<UserPage> {
   }
 
   Future < void > _share() {
+    String userId = Provider.of<UserState>(context).userId != null ? Provider.of<UserState>(context).userId.toString() : '0';
     String username = Provider.of<UserState>(context).username != null ? Provider.of<UserState>(context).username : '';
-    String avatar = Provider.of<UserState>(context).avatar != null ? Provider.of<UserState>(context).avatar : AssetImage('images/empty.png');
 
-//    Navigator.of(context).pop();
     showDialog(
         context: context,
         builder: (ctx) {
           var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
           var height = ((width - Adapt.px(40)) / 2).floorToDouble();
           return ShareCard(
-            backgroundImage: ImageUrl.getUrl(avatar, ImageSize.w300),
-            qrValue:
-            'https://www.themoviedb.org/movie/1?language=zh',
+            backgroundImage: Provider.of<UserState>(context).avatar != null ?  ImageUrl.getUrl(Provider.of<UserState>(context).avatar, ImageSize.w300) : ImageUrl.getUrl('images/empty.png', ImageSize.w300),
+            qrValue: GlobalConfig.shareUrl +'?id='+userId,
             headerHeight: height,
             header: Column(children: <Widget>[
               SizedBox(
@@ -649,9 +647,9 @@ class _UserPageState extends State<UserPage> {
                         borderRadius: BorderRadius.circular(Adapt.px(60)),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: CachedNetworkImageProvider(
-                                avatar
-                            )
+                            image: Provider.of<UserState>(context).avatar != null ? CachedNetworkImageProvider(
+                                Provider.of<UserState>(context).avatar
+                            ) : AssetImage('images/empty.png'),
                         )
                     ),
                   ),
