@@ -172,7 +172,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Container(
           child: MaterialApp(
-            title: 'Movie',
+            title: '秘秀Slices',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.blue,

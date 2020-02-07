@@ -201,7 +201,7 @@ class _UserPageState extends State<UserPage> {
                                 image: DecorationImage(//背景图片 ,不能与背景色同时使用
                                   image: Provider.of<UserState>(context).avatar != null ? CachedNetworkImageProvider(
                                       Provider.of<UserState>(context).avatar
-                                  ) : AssetImage('images/empty.png'),
+                                  ) : AssetImage('assets/images/logo.png'),
                                   alignment: Alignment.topCenter,
                                   repeat: ImageRepeat.repeatY,//是否重复
                                   fit: BoxFit.cover,//填充模式
@@ -618,7 +618,6 @@ class _UserPageState extends State<UserPage> {
 
   Future < void > _share() {
     String userId = Provider.of<UserState>(context).userId != null ? Provider.of<UserState>(context).userId.toString() : '0';
-    String username = Provider.of<UserState>(context).username != null ? Provider.of<UserState>(context).username : '';
 
     showDialog(
         context: context,
@@ -626,7 +625,7 @@ class _UserPageState extends State<UserPage> {
           var width = (Adapt.screenW() - Adapt.px(60)).floorToDouble();
           var height = ((width - Adapt.px(40)) / 2).floorToDouble();
           return ShareCard(
-            backgroundImage: Provider.of<UserState>(context).avatar != null ?  ImageUrl.getUrl(Provider.of<UserState>(context).avatar, ImageSize.w300) : ImageUrl.getUrl('images/empty.png', ImageSize.w300),
+            backgroundImage: ImageUrl.getUrl('assets/images/logo.png', ImageSize.w300),
             qrValue: GlobalConfig.shareUrl +'?id='+userId,
             headerHeight: height,
             header: Column(children: <Widget>[
@@ -647,9 +646,7 @@ class _UserPageState extends State<UserPage> {
                         borderRadius: BorderRadius.circular(Adapt.px(60)),
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: Provider.of<UserState>(context).avatar != null ? CachedNetworkImageProvider(
-                                Provider.of<UserState>(context).avatar
-                            ) : AssetImage('images/empty.png'),
+                            image: AssetImage('assets/images/logo.png'),
                         )
                     ),
                   ),
@@ -659,11 +656,11 @@ class _UserPageState extends State<UserPage> {
                   Container(
                     width: width - Adapt.px(310),
                     child: Text(
-                        username,
+                        '秘秀Slices',
                         maxLines: 2,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: Dimens.font_sp14,
+                            fontSize: Dimens.font_sp22,
                             fontWeight: FontWeight.bold,
                             shadows: <Shadow>[
                               Shadow(offset: Offset(Adapt.px(1), Adapt.px(1)))
@@ -679,12 +676,12 @@ class _UserPageState extends State<UserPage> {
                 width: width - Adapt.px(40),
                 height: height - Adapt.px(170),
                 child: Text(
-                    '分享APP獲取積分',
+                    '带给你最好的福利视频',
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 5,
+                    maxLines: 2,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: Dimens.font_sp14,
+                        fontSize: Dimens.font_sp16,
                         shadows: <Shadow>[
                           Shadow(
                               offset: Offset(Adapt.px(1), Adapt.px(1)),

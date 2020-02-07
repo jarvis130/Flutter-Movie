@@ -13,5 +13,5 @@ class GlobalConfig {
   static String HEADER_TOKEN_KEY = "X-API-Authorization";
   //分页参数
   static int PageSize = 10;
-  static String shareUrl = "http://221.229.197.4:8001/download/#/download";
+  static String shareUrl = "http://221.229.197.4:8003/#/download";
 }
