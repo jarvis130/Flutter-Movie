@@ -28,12 +28,14 @@ class ItemCountTitle extends StatelessWidget {
                     ? Dimens.font_sp20
                     : fontSize,
                 fontWeight: FontWeight.bold,
-                color: Colours.colorDefaultTitle),
+                color: Colors.white
+            ),
           )),
           Text(
             '全部 ${count == null ? 0 : count} > ',
             style: TextStyle(
-                fontSize: 12, color: Colors.grey, ),
+                fontSize: 12, color: Colours.text_gray_c,
+            ),
           )
         ],
       ),

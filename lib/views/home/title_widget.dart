@@ -74,12 +74,8 @@ class _TextImgWidget extends StatelessWidget {
             text,
             style: TextStyle(
                 fontSize: 13,
-                color: Color.fromARGB(
-                  255,
-                  128,
-                  128,
-                  128,
-                )),
+                color: Colors.white
+            ),
           )
         ],
       ),

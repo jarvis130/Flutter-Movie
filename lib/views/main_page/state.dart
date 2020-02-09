@@ -1,8 +1,8 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/globalbasestate/state.dart';
-import 'package:movie/views/classify_page/page.dart';
 import 'package:movie/views/collect_page/page.dart';
+import 'package:movie/views/discover/discover_page.dart';
 import 'package:movie/views/home/home_page.dart';
 import 'package:movie/views/user/user_page.dart';
 
@@ -11,8 +11,8 @@ class MainPageState implements GlobalBaseState<MainPageState> {
   List<Widget> pages=new List<Widget>()
 //  ..add(HomePage().buildPage(Map<String,String>()))
   ..add(HomePage())
-//  ..add(DiscoverPage().buildPage(Map<String,String>()))
-  ..add(ClassifyPage().buildPage(Map<String,String>()))
+  ..add(DiscoverPage())
+//  ..add(ClassifyPage().buildPage(Map<String,String>()))
 
 //  ..add(DouyinPage().buildPage(Map<String,String>()))
 
