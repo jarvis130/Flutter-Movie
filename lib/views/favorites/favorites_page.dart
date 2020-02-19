@@ -387,15 +387,20 @@ class _SliverContainerState extends State<SliverContainer> {
 //    }
     return Scaffold(
         backgroundColor: Color.fromRGBO(50, 50, 50, 1),
-        body: Padding(
-          padding: EdgeInsets.only(top: 80.0, left: 15.0, right: 15.0),
-          child: CustomScrollView(
-            physics: const BouncingScrollPhysics(),
-            shrinkWrap: true,
-            slivers: <Widget>[
-              getCommonSliverGrid(context, beans),
-            ],
-          ),
+        body: RefreshIndicator(
+            color: Colors.deepOrangeAccent,
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.only(top: 80.0, left: 15.0, right: 15.0),
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                slivers: <Widget>[
+                  getCommonSliverGrid(context, beans),
+                ],
+              ),
+            ),
+            onRefresh: requestAPI
         )
     );
   }
@@ -482,13 +487,18 @@ class _SliverContainerState extends State<SliverContainer> {
 //    }
     return Scaffold(
         backgroundColor: Color.fromRGBO(50, 50, 50, 1),
-        body: Padding(
-          padding: EdgeInsets.only(top: 50.0, left: 15.0, right: 15.0),
-          child: ListView(
-              controller: attentionController,
-              cacheExtent: Adapt.px(180),
-              children: beans.map(_buildCell).toList()
-          ),
+        body: RefreshIndicator(
+            color: Colors.deepOrangeAccent,
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.only(top: 50.0, left: 15.0, right: 15.0),
+              child: ListView(
+                  controller: attentionController,
+                  cacheExtent: Adapt.px(180),
+                  children: beans.map(_buildCell).toList()
+              ),
+            ),
+            onRefresh: requestAPI
         )
     );
   }

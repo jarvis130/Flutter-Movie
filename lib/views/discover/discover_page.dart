@@ -226,36 +226,47 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
       comingSoonChildAspectRatio = (377.0 / 742.0);
     }
 
+    _onRefresh() async {
+      requestAPI();
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(45, 45, 48, 1),
       body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                centerTitle: true,
-                backgroundColor: Color.fromRGBO(50, 50, 50, 1),
-                pinned: true,
-                title: Text(
-                  '發現',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: Dimens.font_sp18
+              headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    centerTitle: true,
+                    backgroundColor: Color.fromRGBO(50, 50, 50, 1),
+                    pinned: true,
+                    title: Text(
+                      '發現',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: Dimens.font_sp18
+                      ),
+                    ),
+                    actions: <Widget>[],
                   ),
-                ),
-                actions: <Widget>[],
+                ];
+              },
+              body: RefreshIndicator(
+                  color: Colors.deepOrangeAccent,
+                  backgroundColor: Colors.white,
+                  onRefresh: _onRefresh,
+                  child: Stack(
+                    children: <Widget>[
+                      containerBody(),
+                      Offstage(
+                        child: LoadingWidget.getLoading(backgroundColor: Colors.transparent),
+                        offstage: !loading,
+                      )
+                    ],
+                  )
               ),
-            ];
-          },
-          body: Stack(
-            children: <Widget>[
-              containerBody(),
-              Offstage(
-                child: LoadingWidget.getLoading(backgroundColor: Colors.transparent),
-                offstage: !loading,
-              )
-            ],
-          )
-      ),
+
+      )
+
     );
   }
 
