@@ -26,12 +26,12 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
   int f=action.payload;
 
   if(f == 1){
-    Map r = await MoiveDetailApi.unLike(ctx.state.model.product.id);
+    Map r = await MovieDetailApi.unLike(ctx.state.model.product.id);
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('取消收藏'));
 //    ctx.broadcast(MyActionCreator.onLoadFavorites());
     f = 0;
   }else{
-    Map r = await MoiveDetailApi.setLike(ctx.state.model.product.id);
+    Map r = await MovieDetailApi.setLike(ctx.state.model.product.id);
     ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('收藏成功！'));
 //    ctx.broadcast(MyActionCreator.onLoadFavorites());
     f = 1;
@@ -42,7 +42,7 @@ Future _setFavorite(Action action, Context<MenuState> ctx) async{
 Future _setAttention(Action action, Context<MenuState> ctx) async{
   int userId=action.payload;
   int f = 0;
-  Map map = await MoiveDetailApi.setAttention(userId);
+  Map map = await MovieDetailApi.setAttention(userId);
   if(map != null){
     if(map['is_attention'] == false){
       ctx.broadcast(MovieDetailPageActionCreator.showSnackBar('取消关注'));

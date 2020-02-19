@@ -5,7 +5,7 @@ import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/gallery_photoview_wrapper.dart';
 import 'package:movie/models/enums/imagesize.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+//import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'action.dart';
 import 'state.dart';
 

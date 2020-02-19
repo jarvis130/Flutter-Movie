@@ -11,7 +11,7 @@ import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/selected_image.dart';
 import 'package:movie/utils/toast.dart';
 import 'package:provider/provider.dart';
-import 'package:movie/provider/user_state.dart';
+import 'package:movie/store/user_state.dart';
 
 class AvatarPage extends StatefulWidget {
   @override

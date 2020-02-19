@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'app.dart';
 
 Future main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 
   // 透明状态栏

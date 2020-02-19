@@ -1,7 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart' as prefix0;
-import 'package:movie/provider/user_state.dart';
+import 'package:movie/store/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart' hide Action;
@@ -30,7 +29,6 @@ import 'package:movie/views/user_page/page.dart';
 import 'package:movie/views/watchlog_page/page.dart';
 import 'package:movie/views/webview_page/page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'utils/timeline.dart';
 import 'generated/i18n.dart';
 import 'globalbasestate/state.dart';
@@ -148,9 +146,9 @@ class MyApp extends StatelessWidget {
     prefs.setString('deviceId', deviceId);
 
     //
-    setLocaleInfo('zh', TimelineInfoCN());
-    setLocaleInfo('en', TimelineInfoEN());
-    setLocaleInfo('Ja', TimelineInfoJA());
+//    setLocaleInfo('zh', TimelineInfoCN());
+//    setLocaleInfo('en', TimelineInfoEN());
+//    setLocaleInfo('Ja', TimelineInfoJA());
 
     //fluro路由
     final router = Router();
@@ -172,18 +170,18 @@ class MyApp extends StatelessWidget {
       ],
       child: Container(
           child: MaterialApp(
-            title: '秘秀Slices',
+            title: '秘秀',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            localizationsDelegates: [
-              I18n.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: I18n.delegate.supportedLocales,
-            localeResolutionCallback: I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
+//            localizationsDelegates: [
+//              I18n.delegate,
+//              GlobalMaterialLocalizations.delegate,
+//              GlobalWidgetsLocalizations.delegate,
+//            ],
+//            supportedLocales: I18n.delegate.supportedLocales,
+//            localeResolutionCallback: I18n.delegate.resolution(fallback: new Locale("zh", "CN")),
             home: Builder(
               builder: (context) {
                 //

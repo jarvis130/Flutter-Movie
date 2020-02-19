@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:movie/api/user_api.dart';
-import 'package:movie/provider/user_state.dart';
+import 'package:movie/store/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/utils.dart';

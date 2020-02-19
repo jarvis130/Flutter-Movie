@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/models/enums/media_type.dart';
-import 'package:movie/models/listmediaitem.dart';
 import 'package:movie/models/mylistmodel.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class MediaListCardDialog extends StatefulWidget {
   final MediaType type;

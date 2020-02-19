@@ -71,6 +71,7 @@ class Product {
   int _isAttention;
   int _play_total;
   String _breadcrumb;
+  String _goodsBrief;
 
   Product(
       {String goodsSn,
@@ -114,7 +115,8 @@ class Product {
         int isCollect,
         int isAttention,
         int playTotal,
-        String breadcrumb}) {
+        String breadcrumb,
+        String goodsBrief}) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
     this._goodsNumber = goodsNumber;
@@ -157,6 +159,7 @@ class Product {
     this._isAttention = isAttention;
     this._play_total = playTotal;
     this._breadcrumb = breadcrumb;
+    this._goodsBrief = goodsBrief;
   }
 
   String get goodsSn => _goodsSn;
@@ -247,6 +250,9 @@ class Product {
   String get breadcrumb => _breadcrumb;
   set breadcrumb(String breadcrumb) => _breadcrumb = breadcrumb;
 
+  String get goodsBrief => _goodsBrief;
+  set goodsBrief(String goodsBrief) => _goodsBrief = goodsBrief;
+
   Product.fromJson(Map<String, dynamic> json) {
     _goodsSn = json['goods_sn'];
     _goodsName = json['goods_name'];
@@ -307,6 +313,7 @@ class Product {
     _isAttention = json['is_attention'];
     _play_total = json['play_total'];
     _breadcrumb = json['breadcrumb'];
+    _goodsBrief = json['goods_brief'];
   }
 
   Map<String, dynamic> toJson() {
@@ -362,6 +369,7 @@ class Product {
     data['is_attention'] = this._isAttention;
     data['play_total'] = this._play_total;
     data['breadcrumb'] = this._breadcrumb;
+    data['goodsBrief'] = this._goodsBrief;
     return data;
   }
 }
@@ -566,9 +574,9 @@ class LinkGoods {
 class Photos {
   int _goodsId;
   String _goodsName;
-  DefaultPhoto _goodsThumb;
+  String _goodsThumb;
 
-  Photos({int goodsId, String goodsName, DefaultPhoto goodsThumb}) {
+  Photos({int goodsId, String goodsName, String goodsThumb}) {
     this._goodsId = goodsId;
     this._goodsName = goodsName;
     this._goodsThumb = goodsThumb;
@@ -578,15 +586,13 @@ class Photos {
   set goodsId(int goodsId) => _goodsId = goodsId;
   String get goodsName => _goodsName;
   set goodsName(String goodsName) => _goodsName = goodsName;
-  DefaultPhoto get goodsThumb => _goodsThumb;
-  set goodsThumb(DefaultPhoto goodsThumb) => _goodsThumb = goodsThumb;
+  String get goodsThumb => _goodsThumb;
+  set goodsThumb(String goodsThumb) => _goodsThumb = goodsThumb;
 
   Photos.fromJson(Map<String, dynamic> json) {
     _goodsId = json['goods_id'];
     _goodsName = json['goods_name'];
-    _goodsThumb = json['goods_thumb'] != null
-        ? new DefaultPhoto.fromJson(json['goods_thumb'])
-        : null;
+    _goodsThumb = json['large'];
   }
 
   Map<String, dynamic> toJson() {
@@ -594,7 +600,7 @@ class Photos {
     data['goods_id'] = this._goodsId;
     data['goods_name'] = this._goodsName;
     if (this._goodsThumb != null) {
-      data['goods_thumb'] = this._goodsThumb.toJson();
+      data['goods_thumb'] = this._goodsThumb;
     }
     return data;
   }

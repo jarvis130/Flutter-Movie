@@ -10,8 +10,10 @@ import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/HomeModel.dart';
 import 'package:movie/models/VideoAttributeModel.dart';
+import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/Adapt.dart';
+import 'package:movie/views/detail/detail_router.dart';
 import 'package:movie/widgets/image/cache_img_radius.dart';
 import 'package:movie/widgets/loading_widget.dart';
 import 'package:movie/widgets/rating_bar.dart';
@@ -493,12 +495,14 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
         ),
       ),
       onTap: () {
-        Navigator.of(context).pushNamed('moviedetailpage', arguments: {
-          'movieid': bean.id.toString(),
-          'bgpic': bean.defaultPhoto.thumb,
-          'title': bean.name,
-          'posterpic': bean.defaultPhoto.thumb,
-        });
+//        Navigator.of(context).pushNamed('moviedetailpage', arguments: {
+//          'movieid': bean.id.toString(),
+//          'bgpic': bean.defaultPhoto.thumb,
+//          'title': bean.name,
+//          'posterpic': bean.defaultPhoto.thumb,
+//        });
+
+        NavigatorUtils.push(context, '${DetailRouter.detailPage}?subjectId=${bean.id.toString()}&id=${bean.id.toString()}');
       },
     );
   }

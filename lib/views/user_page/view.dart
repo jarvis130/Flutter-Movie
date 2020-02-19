@@ -944,7 +944,7 @@ Widget buildView(UserPageState state, Dispatch dispatch, ViewService viewService
 
                         decoration: BoxDecoration(
                             image: DecorationImage(//背景图片 ,不能与背景色同时使用
-                              image: (userModel.user == null || userModel.user.avatar == null) ? AssetImage('images/empty.png') : CachedNetworkImageProvider(
+                              image: (userModel.user == null || userModel.user.avatar == null) ? AssetImage('assets/images/empty.png') : CachedNetworkImageProvider(
                                   userModel.user.avatar
                               ),
                               alignment: Alignment.topCenter,

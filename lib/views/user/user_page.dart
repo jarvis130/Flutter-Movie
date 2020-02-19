@@ -2,10 +2,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/globalconfig.dart';
-import 'package:movie/provider/user_state.dart';
+import 'package:movie/store/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/resources.dart';
 import 'package:movie/utils/Adapt.dart';
+import 'package:movie/views/favorites/favorites_router.dart';
 import 'package:movie/views/order/order_router.dart';
 import 'package:movie/views/setting/order_confirm_dialog.dart';
 import 'package:movie/views/setting/setting_router.dart';
@@ -378,8 +379,7 @@ class _UserPageState extends State<UserPage> {
             children: <Widget>[
               GestureDetector(
                 onTap: (){
-//                  dispatch(UserPageActionCreator.onFavoritesTapped());
-                  Navigator.of(context).pushNamed('CollectPage');
+                  NavigatorUtils.push(context, FavoritesRouter.favoritesPage);
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 0.0, top: 0.0, right: 0.0, bottom: 0.0),
@@ -656,7 +656,7 @@ class _UserPageState extends State<UserPage> {
                   Container(
                     width: width - Adapt.px(310),
                     child: Text(
-                        '秘秀Slices',
+                        '秘秀',
                         maxLines: 2,
                         style: TextStyle(
                             color: Colors.white,

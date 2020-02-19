@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:movie/style/dimens.dart';
 import 'package:share/share.dart';
 //import 'package:flutter_app/widget/loading_indicator.dart';
 
@@ -15,7 +16,7 @@ class WebScene extends StatefulWidget {
 
 class _WebSceneState extends State<WebScene> {
   bool isDataReady = false;
-//  PageState pageState = PageState.Loading;
+  bool loading = true;
 
   @override
   void initState() {
@@ -24,9 +25,9 @@ class _WebSceneState extends State<WebScene> {
   }
 
   Future<void> fetchData() async {
-//    await Future.delayed(Duration(milliseconds: 2000), () {
-//      pageState = PageState.Content;
-//    });
+    await Future.delayed(Duration(milliseconds: 2000), () {
+      loading = false;
+    });
 
     setState(() {
       isDataReady = true;
@@ -35,12 +36,6 @@ class _WebSceneState extends State<WebScene> {
 
   @override
   Widget build(BuildContext context) {
-//    if (!isDataReady) {
-//      return LoadingIndicator(
-//        pageState,
-//      );
-//    }
-
     return WebviewScaffold(
       url: this.widget.url,
       appBar: AppBar(
@@ -48,7 +43,7 @@ class _WebSceneState extends State<WebScene> {
           this.widget.title,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20
+              fontSize: Dimens.font_sp18
           ),
         ),
         centerTitle: true,
@@ -58,14 +53,14 @@ class _WebSceneState extends State<WebScene> {
           icon: new Icon(Icons.close),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        actions: <Widget>[
-          GestureDetector(
-            onTap: () {
-              Share.share('https://github.com/ZDfordream/FlutterTianYue');
-            },
-            child: Image.asset('images/icon_menu_share.png'),
-          ),
-        ],
+//        actions: <Widget>[
+//          GestureDetector(
+//            onTap: () {
+//              Share.share('https://github.com/ZDfordream/FlutterTianYue');
+//            },
+//            child: Image.asset('images/icon_menu_share.png'),
+//          ),
+//        ],
       ),
     );
   }

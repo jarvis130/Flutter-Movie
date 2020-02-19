@@ -28,11 +28,11 @@ Widget buildView(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home, size: Adapt.px(44)),
-          title: Text(I18n.of(viewService.context).home),
+          title: Text('首頁'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.movie_creation, size: Adapt.px(44)),
-          title: Text(I18n.of(viewService.context).discover),
+          title: Text('發現'),
         ),
 //        BottomNavigationBarItem(
 //          icon: Icon(Icons.music_video, size: Adapt.px(44)),
@@ -40,14 +40,14 @@ Widget buildView(
 //        ),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_today, size: Adapt.px(44)),
-          title: Text(I18n.of(viewService.context).concern),
+          title: Text('收藏'),
         ),
         BottomNavigationBarItem(
           icon: Icon(
             Icons.account_circle,
             size: Adapt.px(44),
           ),
-          title: Text(I18n.of(viewService.context).account),
+          title: Text('賬號'),
         ),
       ],
       currentIndex: state.selectedIndex,

@@ -1,11 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' hide Action;
-import 'package:movie/widgets/custom_stfstate.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'action.dart';
 import 'state.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 Effect<MyListsPageState> buildEffect() {
   return combineEffects(<Object, Effect<MyListsPageState>>{

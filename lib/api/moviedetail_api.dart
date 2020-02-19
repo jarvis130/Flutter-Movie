@@ -5,7 +5,7 @@ import 'dart:convert' show json;
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
 
-class MoiveDetailApi {
+class MovieDetailApi {
 
   ///视频详情
   static Future<ProductModel> getMovieDetail(var movieId) async {

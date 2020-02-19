@@ -6,6 +6,8 @@ import 'package:movie/views/setting/avatar_page.dart';
 import 'package:movie/views/setting/binding_phone_page.dart';
 import 'package:movie/views/setting/kefu_settings_page.dart';
 import 'package:movie/views/setting/watch_record_list_page.dart';
+import 'package:movie/widgets/web_scene.dart';
+import 'package:movie/widgets/webview_page.dart';
 
 import 'about_page.dart';
 import 'account_manager_page.dart';

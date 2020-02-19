@@ -117,7 +117,7 @@ Widget buildView(
                   fit: BoxFit.cover,
                   width: Adapt.px(400),
                   height: Adapt.px(400) * 9 / 16,
-                  placeholder: 'images/CacheBG.jpg',
+                  placeholder: 'assets/images/CacheBG.jpg',
                   // image: ImageUrl.getUrl(
                   //     d.backdrop_path ?? '/eIkFHNlfretLS1spAcIoihKUS62.jpg',
                   //     ImageSize.w400),

@@ -27,6 +27,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
   bool showplayer = true;
   String coverurl;
   String movieid;
+  bool showControls = true;
 
   Future dialog() {
     return showDialog(
@@ -68,16 +69,16 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
     if(model != null){
       if(model.user.rank.id > 1){
         //vip用户直接播放
-        await MoiveDetailApi.addWatchLog(movieid);
+        await MovieDetailApi.addWatchLog(movieid);
         play();
 
       }else{
-        Map r = await MoiveDetailApi.checkWatchTimes();
+        Map r = await MovieDetailApi.checkWatchTimes();
         if (r != null) {
           if (r['times'] == 0) {
             dialog();
           } else {
-            await MoiveDetailApi.addWatchLog(movieid);
+            await MovieDetailApi.addWatchLog(movieid);
             play();
           }
         }
@@ -106,11 +107,11 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
       vc.play();
     } 
     else {
+      vc.pause();
       setState(() {
         showplayer = true;
         coverurl = widget.coverurl;
-      });                 
-        vc.pause();                  
+      });
     }
   }
 
@@ -124,6 +125,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
     vc = widget.vc;
     chewieController = new ChewieController(
       videoPlayerController: vc,
+      showControls: this.showControls,
       aspectRatio: 16 / 9,
       // 拖动条样式颜色
       materialProgressColors: new ChewieProgressColors(
@@ -155,7 +157,7 @@ class VideoPlayerItemState extends State<VideoPlayerItem> {
                 child: new FittedBox(
                     fit: BoxFit.cover,
                     child: FadeInImage.assetNetwork(
-                      placeholder: 'images/CacheBG.jpg',
+                      placeholder: 'assets/images/CacheBG.jpg',
                       image: coverurl,
                     )),
               ),

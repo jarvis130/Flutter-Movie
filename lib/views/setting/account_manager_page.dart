@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:movie/provider/user_state.dart';
+import 'package:movie/store/user_state.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/image_utils.dart';

@@ -1,6 +1,5 @@
 
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flustars/flustars.dart';
@@ -11,6 +10,7 @@ import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/version_utils.dart';
 import 'package:movie/utils/toast.dart';
 import 'package:movie/utils/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class UpdateDialog extends StatefulWidget {
@@ -71,7 +71,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                  child: Text("1.又双叒修复了一大推bug。\n\n2.祭天了多名程序猿。", style: TextStyles.textDark14),
+                  child: Text("1.更新收藏页面。\n\n2.祭天了多名程序猿。\n\n3.新增版本检查页面。", style: TextStyles.textDark14),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15.0, left: 15.0, right: 15.0 , top: 5.0),
@@ -111,15 +111,21 @@ class _UpdateDialogState extends State<UpdateDialog> {
                         height: 36.0,
                         child: FlatButton(
                           onPressed: (){
-                            if (defaultTargetPlatform == TargetPlatform.iOS){
-                              NavigatorUtils.goBack(context);
-                              VersionUtils.jumpAppStore();
-                            }else{
-                              setState(() {
-                                _isDownload = true;
-                              });
-                              _download();
-                            }
+//                            if (defaultTargetPlatform == TargetPlatform.iOS){
+//                              NavigatorUtils.goBack(context);
+//                              VersionUtils.jumpAppStore();
+//                            }else{
+//                              setState(() {
+//                                _isDownload = true;
+//                              });
+//                              _download();
+//                            }
+                            NavigatorUtils.goBack(context);
+//                            String title = '下載頁面';
+                            String url = 'http://221.229.197.4:8003/#/download';
+//                            NavigatorUtils.goWebViewPage(context, title, url);
+
+                            _launchURL(url);
                           },
                           textColor: Colors.white,
                           color: Colours.app_main,
@@ -144,15 +150,23 @@ class _UpdateDialogState extends State<UpdateDialog> {
       ),
     );
   }
+
+  _launchURL(apkUrl) async {
+    if (await canLaunch(apkUrl)) {
+      await launch(apkUrl);
+    } else {
+      throw 'Could not launch $apkUrl';
+    }
+  }
   
   ///下载apk
   _download() async {
     try {
       await DirectoryUtil.getInstance();
       DirectoryUtil.createStorageDirSync(category: 'apk');
-      String path = DirectoryUtil.getStoragePath(fileName: 'deer', category: 'apk', format: 'apk');
+      String path = DirectoryUtil.getStoragePath(fileName: 'movie', category: 'apk', format: 'apk');
       File file = File(path);
-      await Dio().download("http://oss.pgyer.com/094e0de740d62b7e95ba5d5f65ed3e99.apk?auth_key=1565257974-a4efb6d2f1f192f992c1bbcbe5097af8-0-aaa223d92592e2c753e522e028cc2fc0&response-content-disposition=attachment%3B+filename%3Dapp-release.apk",
+      await Dio().download("http://221.229.197.4:8003/app-release.apk",
         file.path,
         cancelToken: _cancelToken,
         onReceiveProgress: (int count, int total){
@@ -164,6 +178,7 @@ class _UpdateDialogState extends State<UpdateDialog> {
             if (count == total){
               NavigatorUtils.goBack(context);
               VersionUtils.install(path);
+              ToastUtils.show("安装成功", context);
             }
           }
         },

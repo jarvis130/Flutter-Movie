@@ -77,7 +77,7 @@ Widget buildView(
                 imageUrl: d.defaultPhoto.thumb,
                 placeholder: (ctx, s) {
                   return Image.asset(
-                    'images/CacheBG.jpg',
+                    'assets/images/CacheBG.jpg',
                     fit: BoxFit.cover,
                     width: Adapt.px(250),
                     height: Adapt.px(350),

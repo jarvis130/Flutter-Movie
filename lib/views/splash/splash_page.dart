@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/models/UserModel.dart';
-import 'package:movie/provider/user_state.dart';
-import 'package:movie/routers/fluro_navigator.dart';
-import 'package:movie/utils/image_utils.dart';
+import 'package:movie/store/user_state.dart';
 import 'package:movie/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
@@ -31,10 +29,10 @@ class _SplashPageState extends State<SplashPage> {
 //    "app_start_3",
 //  ];
   List<String> _guideList = [
-    'images/guide1.png',
-    'images/guide2.png',
-    'images/guide3.png',
-    'images/guide4.png',
+    'assets/images/guide1.png',
+    'assets/images/guide2.png',
+    'assets/images/guide3.png',
+    'assets/images/guide4.png',
   ];
   List<String> _guideInfoList = [
     "陪你每一个夜晚",

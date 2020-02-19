@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/globalbasestate/state.dart';
 import 'package:movie/views/collect_page/page.dart';
 import 'package:movie/views/discover/discover_page.dart';
+import 'package:movie/views/favorites/favorites_page.dart';
 import 'package:movie/views/home/home_page.dart';
 import 'package:movie/views/user/user_page.dart';
 
@@ -16,8 +17,8 @@ class MainPageState implements GlobalBaseState<MainPageState> {
 
 //  ..add(DouyinPage().buildPage(Map<String,String>()))
 
-  ..add(CollectPage().buildPage(Map<String,String>()))
-
+//  ..add(CollectPage().buildPage(Map<String,String>()))
+    ..add(FavoritesPage())
 //  ..add(AccountPage().buildPage(Map<String,String>()));
 //  ..add(UserPage().buildPage(Map<String,String>()));
 //  ..add(WebPage().buildPage(Map<String,String>()));

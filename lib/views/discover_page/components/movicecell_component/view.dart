@@ -24,7 +24,7 @@ Widget buildView(
                 height: Adapt.px(400),
                 child: FadeInImage.assetNetwork(
                   fit: BoxFit.cover,
-                  placeholder: 'images/CacheBG.jpg',
+                  placeholder: 'assets/images/CacheBG.jpg',
                   image: ImageUrl.getUrl(
                       d.thumb_s ?? '/lrzvimkeL72qxHN1FaSmjIoztvj.jpg',
                       ImageSize.w300),

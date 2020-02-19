@@ -5,7 +5,6 @@ import 'package:movie/globalconfig.dart';
 import 'dart:convert' show json;
 
 import 'package:movie/utils/SharedPreferencesUtil.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class HttpUtil {
   static HttpUtil instance;
@@ -85,7 +84,7 @@ class HttpUtil {
     try {
       response = await dio.get(url,
           queryParameters: data, options: options, cancelToken: cancelToken);
-      print('get success---------${response.statusCode}');
+//      print('get success---------${response.statusCode}');
       print('get success---------${response.data}');
 
 //      response.data; 响应体
