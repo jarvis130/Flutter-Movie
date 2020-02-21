@@ -631,4 +631,6 @@ class _DetailPageState extends State<DetailPage> {
       child: body,
     );
   }
+
+
 }

@@ -1,12 +1,13 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/media_type.dart';
 
 class MoreMediaPageState implements Cloneable<MoreMediaPageState> {
 
 MediaType mediaType;
-List<Products> goodProducts;
+List<Product> goodProducts;
 int currentPage;
 int total;
 int size;
@@ -30,7 +31,7 @@ AnimationController animationController;
 
 MoreMediaPageState initState(Map<String, dynamic> args) {
   MoreMediaPageState state=MoreMediaPageState();
-  state.goodProducts=args['list']??new List<Products>();
+  state.goodProducts=args['list']??new List<Product>();
   state.mediaType=args['type']??MediaType.movie;
   state.currentPage = 0;
   state.total = 0;

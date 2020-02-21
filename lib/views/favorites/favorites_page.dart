@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/api/collect_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/UserListModel.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
@@ -92,7 +93,7 @@ class SliverContainer extends StatefulWidget {
 class _SliverContainerState extends State<SliverContainer> {
 
   bool loading = true;
-  List<Products> favoritesList;
+  List<Product> favoritesList;
   List<Users> attentionList;
   ScrollController attentionController;
 
@@ -296,7 +297,7 @@ class _SliverContainerState extends State<SliverContainer> {
     );
   }
 
-  getItemCenterImg(Products item) {
+  getItemCenterImg(Product item) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -377,7 +378,7 @@ class _SliverContainerState extends State<SliverContainer> {
   var imgSize;
 
   ///收藏TAB
-  _favoritesContainer(BuildContext context, List<Products> beans) {
+  _favoritesContainer(BuildContext context, List<Product> beans) {
     if (itemW == null || imgSize <= 0) {
       MediaQuery.of(context);
       var w = MediaQuery.of(context).size.width;
@@ -418,7 +419,7 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   ///图片+订阅+名称+星标
-  SliverGrid getCommonSliverGrid(BuildContext context, List<Products> beans) {
+  SliverGrid getCommonSliverGrid(BuildContext context, List<Product> beans) {
     return SliverGrid(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return _getHotMovieItem(context, beans[index], itemW);
@@ -431,11 +432,11 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   ///影院热映item
-  Widget _getHotMovieItem(BuildContext context, Products bean, var itemW) {
+  Widget _getHotMovieItem(BuildContext context, Product bean, var itemW) {
     if (bean == null) {
       return Container();
     }
-    bool markAdd = bean.isCollect == 1 ? true : false;
+    bool markAdd = bean.isLiked == 1 ? true : false;
     return GestureDetector(
       child: Container(
         child: Column(
@@ -467,7 +468,7 @@ class _SliverContainerState extends State<SliverContainer> {
               ),
             ),
             RatingBar(
-              math.Random.secure().nextInt(5),
+              bean.goodsGrade == null ? 0 : bean.goodsGrade,
               size: 12.0,
             )
           ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movie/api/comment_api.dart';
 import 'package:movie/api/moviedetail_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/views/detail/look_confirm_button.dart';
+import 'package:movie/widgets/dialogratingbar.dart';
 
 class DetailTitleWidget extends StatefulWidget {
   final Product bean;
@@ -94,6 +96,7 @@ class _DetailTitleWidgetState extends State<DetailTitleWidget> {
                         iconAsset: Icons.star_border,
                         defaultColor: Colors.white,
                         pressedColor: btnPressedColor,
+                        onPressed: _rateIt,
                       ),
                     )
                   ],
@@ -103,6 +106,27 @@ class _DetailTitleWidgetState extends State<DetailTitleWidget> {
           ),
         )
       ],
+    );
+  }
+
+  void _rateIt() {
+//    Navigator.of(context).pop();
+    showDialog(
+        context: context,
+        builder: (ctx) {
+          double rate = 0;
+          return DialogRatingBar(
+            rating: rate,
+            submit: (d) async{
+              await CommentApi.addRate(
+                  comment_type: 1,
+                  id_value: widget.bean.id,
+                  comment_rank: d,
+                  status: 1
+              );
+            },
+          );
+        }
     );
   }
 

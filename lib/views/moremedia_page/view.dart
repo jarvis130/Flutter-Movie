@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/style/dimens.dart';
 import 'action.dart';
@@ -16,9 +17,9 @@ Widget buildView(
 
   Random random = Random(DateTime.now().millisecondsSinceEpoch);
 
-  List<Products> goodProducts = state.goodProducts;
+  List<Product> goodProducts = state.goodProducts;
 
-  Widget _buildCell(Products d) {
+  Widget _buildCell(Product d) {
 
     int index = goodProducts.indexOf(d);
     double w = Adapt.screenW() / 2;

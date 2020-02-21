@@ -6,6 +6,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -99,7 +100,7 @@ Widget buildView(WatchLogState state, Dispatch dispatch, ViewService viewService
     );
   }
 
-  Widget _buildCell(Products d) {
+  Widget _buildCell(Product d) {
     return InkWell(
       onTap: () {
         dispatch(WatchLogActionCreator.cellTapped(d));

@@ -1,19 +1,14 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart';
-import 'package:movie/utils/Adapt.dart';
 import 'package:movie/models/BannerModel.dart';
-import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/HomeModel.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/searchresult.dart';
-import 'package:movie/models/swiperlist.dart';
-import 'package:movie/models/videolist.dart';
 
 class HomePageState implements Cloneable<HomePageState> {
   BannerModel swiper;
-  List<Products> hotModel;
-  List<Products> newModel;
-  List<Products> recommendModel;
+  List<Product> hotModel;
+  List<Product> newModel;
+  List<Product> recommendModel;
 
   SearchResultModel trending;
   ScrollController scrollController;
@@ -37,9 +32,9 @@ HomePageState initState(Map<String, dynamic> args) {
 
   state.swiper = new BannerModel();
 
-  state.hotModel = List<Products>();
-  state.newModel = List<Products>();
-  state.recommendModel = List<Products>();
+  state.hotModel = List<Product>();
+  state.newModel = List<Product>();
+  state.recommendModel = List<Product>();
 
   return state;
 }

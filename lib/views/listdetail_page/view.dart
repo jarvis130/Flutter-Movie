@@ -7,6 +7,7 @@ import 'package:movie/utils/Adapt.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -453,7 +454,7 @@ Widget buildView(
       return _buildShimmerHeader();
   }
 
-  Widget _buildListCell(Products videos) {
+  Widget _buildListCell(Product videos) {
     return GestureDetector(
       onTap: () {
          dispatch(ListDetailPageActionCreator.cellTapped(videos));

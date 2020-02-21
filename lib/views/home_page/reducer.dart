@@ -1,11 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/BannerModel.dart';
-import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/HomeModel.dart';
-import 'package:movie/models/moviedetail.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/searchresult.dart';
-import 'package:movie/models/swiperlist.dart';
 import 'package:movie/models/videolist.dart';
 
 import 'action.dart';
@@ -43,21 +39,21 @@ HomePageState _onInitSwiper(HomePageState state, Action action) {
 }
 
 HomePageState _onInitHot(HomePageState state, Action action) {
-  final List<Products> model = action.payload ?? null;
+  final List<Product> model = action.payload ?? null;
   final HomePageState newState = state.clone();
   newState.hotModel = model;
   return newState;
 }
 
 HomePageState _onInitRecommend(HomePageState state, Action action) {
-  final List<Products> model = action.payload ?? null;
+  final List<Product> model = action.payload ?? null;
   final HomePageState newState = state.clone();
   newState.recommendModel = model;
   return newState;
 }
 
 HomePageState _onInitNew(HomePageState state, Action action) {
-  final List<Products> model = action.payload ?? null;
+  final List<Product> model = action.payload ?? null;
   final HomePageState newState = state.clone();
   newState.newModel = model;
   return newState;

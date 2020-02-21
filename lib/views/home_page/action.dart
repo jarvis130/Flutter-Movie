@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/BannerModel.dart';
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/enums/media_type.dart';
 import 'package:movie/models/searchresult.dart';
 import 'package:movie/models/videolist.dart';
@@ -34,15 +34,15 @@ class HomePageActionCreator {
     return Action(HomePageAction.initSwiper, payload: swiper);
   }
 
-  static Action onInitHot(List<Products> hot) {
+  static Action onInitHot(List<Product> hot) {
     return Action(HomePageAction.initHot, payload: hot);
   }
 
-  static Action onInitNew(List<Products> list) {
+  static Action onInitNew(List<Product> list) {
     return Action(HomePageAction.initNew, payload: list);
   }
 
-  static Action onInitRecommend(List<Products> list) {
+  static Action onInitRecommend(List<Product> list) {
     return Action(HomePageAction.initRecommend, payload: list);
   }
 
@@ -70,7 +70,7 @@ class HomePageActionCreator {
     return Action(HomePageAction.headerFilterChanged, payload: e);
   }
 
-  static Action onMoreTapped(List<Products> model, MediaType t) {
+  static Action onMoreTapped(List<Product> model, MediaType t) {
     return Action(HomePageAction.moreTapped, payload: [model, t]);
   }
 

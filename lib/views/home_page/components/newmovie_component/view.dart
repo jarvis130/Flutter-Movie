@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/shimmercell.dart';
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -12,9 +12,9 @@ import 'state.dart';
 Widget buildView(
     NewMovieState state, Dispatch dispatch, ViewService viewService) {
 
-  List<Products> list = state.newMovie;
+  List<Product> list = state.newMovie;
 
-  Widget _buildListCell(Products d) {
+  Widget _buildListCell(Product d) {
     return GestureDetector(
           onTap: () => dispatch(NewMovieActionCreator.onCellTapped(
               d.id.toString(),

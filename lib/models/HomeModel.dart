@@ -1,15 +1,15 @@
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 
 class HomeModel {
-  List<Products> _hotProducts;
-  List<Products> _recentlyProducts;
-  List<Products> _bestProducts;
+  List<Product> _hotProducts;
+  List<Product> _recentlyProducts;
+  List<Product> _bestProducts;
   int _errorCode;
 
   HomeModel(
-      {List<Products> hotProducts,
-        List<Products> recentlyProducts,
-        List<Products> bestProducts,
+      {List<Product> hotProducts,
+        List<Product> recentlyProducts,
+        List<Product> bestProducts,
         int errorCode}) {
     this._hotProducts = hotProducts;
     this._recentlyProducts = recentlyProducts;
@@ -17,34 +17,34 @@ class HomeModel {
     this._errorCode = errorCode;
   }
 
-  List<Products> get hotProducts => _hotProducts;
-  set hotProducts(List<Products> hotProducts) => _hotProducts = hotProducts;
-  List<Products> get recentlyProducts => _recentlyProducts;
-  set recentlyProducts(List<Products> recentlyProducts) =>
+  List<Product> get hotProducts => _hotProducts;
+  set hotProducts(List<Product> hotProducts) => _hotProducts = hotProducts;
+  List<Product> get recentlyProducts => _recentlyProducts;
+  set recentlyProducts(List<Product> recentlyProducts) =>
       _recentlyProducts = recentlyProducts;
-  List<Products> get bestProducts => _bestProducts;
-  set bestProducts(List<Products> bestProducts) =>
+  List<Product> get bestProducts => _bestProducts;
+  set bestProducts(List<Product> bestProducts) =>
       _bestProducts = bestProducts;
   int get errorCode => _errorCode;
   set errorCode(int errorCode) => _errorCode = errorCode;
 
   HomeModel.fromJson(Map<String, dynamic> json) {
     if (json['hot_products'] != null) {
-      _hotProducts = new List<Products>();
+      _hotProducts = new List<Product>();
       json['hot_products'].forEach((v) {
-        _hotProducts.add(new Products.fromJson(v));
+        _hotProducts.add(new Product.fromJson(v));
       });
     }
     if (json['recently_products'] != null) {
-      _recentlyProducts = new List<Products>();
+      _recentlyProducts = new List<Product>();
       json['recently_products'].forEach((v) {
-        _recentlyProducts.add(new Products.fromJson(v));
+        _recentlyProducts.add(new Product.fromJson(v));
       });
     }
     if (json['best_products'] != null) {
-      _bestProducts = new List<Products>();
+      _bestProducts = new List<Product>();
       json['best_products'].forEach((v) {
-        _bestProducts.add(new Products.fromJson(v));
+        _bestProducts.add(new Product.fromJson(v));
       });
     }
     _errorCode = json['error_code'];

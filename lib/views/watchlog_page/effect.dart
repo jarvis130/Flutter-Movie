@@ -2,9 +2,8 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/widgets.dart' hide Action;
-import 'package:movie/api/product_api.dart';
-import 'package:movie/globalconfig.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -60,7 +59,7 @@ Future _loadData(Action action, Context<WatchLogState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<WatchLogState> ctx) async {
-  Products d = action.payload;
+  Product d = action.payload;
 
   await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
     'movieid': d.id.toString(),

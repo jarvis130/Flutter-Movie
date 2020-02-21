@@ -2,13 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie/api/classify_api.dart';
-import 'package:movie/api/home_api.dart';
 import 'package:movie/api/product_api.dart';
-import 'package:movie/common/common.dart';
 import 'package:movie/globalconfig.dart';
-import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/HomeModel.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/VideoAttributeModel.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
@@ -35,7 +32,7 @@ class DiscoverPage extends StatefulWidget {
 class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveClientMixin {
   bool loading = true;
 
-  List<Products> productList = new List<Products>();
+  List<Product> productList = new List<Product>();
   ScrollController scrollController;
   AnimationController animationController;
   AnimationController cellAnimationController;
@@ -466,11 +463,11 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
   }
 
   ///影院热映item
-  Widget _getHotMovieItem(Products bean, var itemW) {
+  Widget _getHotMovieItem(Product bean, var itemW) {
     if (bean == null) {
       return Container();
     }
-    bool markAdd = bean.isCollect == 1 ? true : false;
+    bool markAdd = bean.isLiked == 1 ? true : false;
     return GestureDetector(
       child: Container(
         child: Column(
@@ -502,7 +499,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
               ),
             ),
             RatingBar(
-              math.Random.secure().nextInt(5),
+              bean.goodsGrade == null ? 0 : bean.goodsGrade,
               size: 12.0,
             )
           ],
@@ -522,7 +519,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
   }
 
   ///图片+订阅+名称+星标
-  SliverGrid getCommonSliverGrid(List<Products> beans) {
+  SliverGrid getCommonSliverGrid(List<Product> beans) {
     return SliverGrid(
         delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
           return _getHotMovieItem(beans[index], itemW);

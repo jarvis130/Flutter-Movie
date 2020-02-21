@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/widgets/shimmercell.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'action.dart';
@@ -14,7 +15,7 @@ Widget buildView(FavoritesState state, Dispatch dispatch, ViewService viewServic
 
  GoodProducts goods =  state.favoritesList;
 
- Widget _buildListCell(Products d) {
+ Widget _buildListCell(Product d) {
     return GestureDetector(
         onTap: () {
           dispatch(FavoritesActionCreator.onCellTapped(d.id.toString(), d.defaultPhoto.thumb, d.name, d.defaultPhoto.thumb));

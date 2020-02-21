@@ -36,13 +36,13 @@ class DialogRatingBarState extends State<DialogRatingBar> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlutterRatingBar(
-                initialRating: rating / 2,
+                initialRating: rating,
                 fillColor: Colors.amber,
                 borderColor: Colors.black.withAlpha(50),
                 allowHalfRating: true,
                 onRatingUpdate: (rated) {
                   setState(() {
-                    rating = rated * 2;
+                    rating = rated;
                   });
                 },
               ),
@@ -65,9 +65,9 @@ class DialogRatingBarState extends State<DialogRatingBar> {
         Container(
           height: Adapt.px(40),
           child: FlatButton(
-            child: Text('ok',
+            child: Text('提交',
                 style: TextStyle(
-                    color: Colors.blueAccent, fontSize: Adapt.px(35))),
+                    color: Colors.blueAccent, fontSize: Adapt.px(30))),
             onPressed: () {
               submit(rating);
               Navigator.of(context).pop();

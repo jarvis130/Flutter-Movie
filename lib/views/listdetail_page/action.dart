@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/models/enums/screenshot_type.dart';
 import 'package:movie/models/listdetailmodel.dart';
@@ -15,7 +16,7 @@ class ListDetailPageActionCreator {
   static Action setListDetail(ListDetailModel d) {
     return Action(ListDetailPageAction.setListDetail,payload: d);
   }
-  static Action cellTapped(Products videos) {
+  static Action cellTapped(Product videos) {
     return Action(ListDetailPageAction.cellTapped,payload: videos);
   }
   static Action loadMore(GoodProducts d) {

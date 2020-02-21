@@ -1,12 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:movie/models/GoodProducts.dart';
-import 'package:movie/models/HomeModel.dart';
-import 'package:movie/models/movielist.dart';
+import 'package:movie/models/ProductModel.dart';
 import '../../state.dart';
 
 class HotMovieState implements Cloneable<HotMovieState> {
 
-  List<Products> hotMovie;
+  List<Product> hotMovie;
 
   @override
   HotMovieState clone() {

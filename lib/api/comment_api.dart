@@ -24,16 +24,35 @@ class CommentApi {
   }
 
   /// 评论
-  static Future<Map> addComment({int comment_type = 0, int id_value = 0, String content='', int status = 0}) async {
+  static Future<Map> addComment({int comment_type = 0, int id_value = 0, String content='', int status = 0, double comment_rank = 0}) async {
     FormData formData = new FormData.fromMap({
       "XDEBUG_SESSION_START": 12175,
       'comment_type': comment_type,
       'id_value': id_value,
       'content': content,
+      'comment_rank': comment_rank,
       'status': status
     });
 
     var response = await HttpUtil().post('ecapi.comment.create', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      return map;
+    }
+  }
+
+  /// 评论
+  static Future<Map> addRate({int comment_type = 0, int id_value = 0, String content='', int status = 0, double comment_rank = 0}) async {
+    FormData formData = new FormData.fromMap({
+      "XDEBUG_SESSION_START": 12175,
+      'comment_type': comment_type,
+      'id_value': id_value,
+      'content': content,
+      'comment_rank': comment_rank,
+      'status': status
+    });
+
+    var response = await HttpUtil().post('ecapi.comment.createRate', data: formData);
     Map map = json.decode(response.toString());
     if(map != null && map.length > 0){
       return map;

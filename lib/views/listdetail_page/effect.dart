@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart' hide Action;
 import 'package:movie/api/product_api.dart';
 import 'package:movie/api/user_api.dart';
 import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/UserModel.dart';
 import 'package:movie/views/moviedetail_page/components/menu_component/action.dart';
 import 'package:movie/models/sortcondition.dart';
@@ -43,7 +44,7 @@ Future _onInit(Action action, Context<ListDetailPageState> ctx) async {
 }
 
 Future _cellTapped(Action action, Context<ListDetailPageState> ctx) async {
-  Products d = action.payload;
+  Product d = action.payload;
 
   await Navigator.of(ctx.context).pushNamed('moviedetailpage', arguments: {
         'movieid': d.id.toString(),

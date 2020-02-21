@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/generated/i18n.dart';
 import 'package:movie/globalconfig.dart';
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:movie/models/enums/media_type.dart';
@@ -16,7 +16,7 @@ import '../../action.dart';
 Widget buildView(
     RecommendMovieState state, Dispatch dispatch, ViewService viewService) {
 
-  List<Products> list = state.recommendMovie;
+  List<Product> list = state.recommendMovie;
 
   Widget _buildMoreCell() {
     return GestureDetector(
@@ -43,7 +43,7 @@ Widget buildView(
     );
   }
 
-  Widget _buildCell(Products d) {
+  Widget _buildCell(Product d) {
     return Padding(
       key: ValueKey(d.id),
       padding: EdgeInsets.only(left: Adapt.px(20)),

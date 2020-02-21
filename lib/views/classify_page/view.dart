@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/widgets/shimmercell.dart';
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -287,7 +287,7 @@ Widget buildView(
 //    );
 //  }
 
-  Widget _buildCell(Products d) {
+  Widget _buildCell(Product d) {
 
     double w = Adapt.screenW() / 3;
     double h = w * 1.5;

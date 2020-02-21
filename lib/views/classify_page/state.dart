@@ -1,10 +1,10 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/models/GoodProducts.dart';
+import 'package:movie/models/ProductModel.dart';
 
 class ClassifyPageState implements Cloneable<ClassifyPageState> {
 
-  List<Products> productList;
+  List<Product> productList;
   ScrollController scrollController;
   AnimationController animationController;
   AnimationController cellAnimationController;
@@ -53,7 +53,7 @@ class ClassifyPageState implements Cloneable<ClassifyPageState> {
 
 ClassifyPageState initState(Map<String, dynamic> args) {
   var state = ClassifyPageState();
-  state.productList = new List<Products>();
+  state.productList = new List<Product>();
   state.isPerformingRequest = false;
   state.atrributionList1 = [];
   state.atrributionList2 = [];

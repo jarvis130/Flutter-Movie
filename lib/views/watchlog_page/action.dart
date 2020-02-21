@@ -1,6 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:movie/models/GoodProducts.dart';
-
+import 'package:movie/models/ProductModel.dart';
 //TODO replace with your own action
 enum WatchLogAction {
   action,
@@ -13,7 +13,7 @@ class WatchLogActionCreator {
     return const Action(WatchLogAction.action);
   }
 
-  static Action cellTapped(Products videos) {
+  static Action cellTapped(Product videos) {
     return Action(WatchLogAction.cellTapped,payload: videos);
   }
 

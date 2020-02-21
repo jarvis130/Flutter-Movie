@@ -72,6 +72,7 @@ class Product {
   int _play_total;
   String _breadcrumb;
   String _goodsBrief;
+  double _goodsGrade;
 
   Product(
       {String goodsSn,
@@ -116,7 +117,8 @@ class Product {
         int isAttention,
         int playTotal,
         String breadcrumb,
-        String goodsBrief
+        String goodsBrief,
+        double goodsGrade
       }) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
@@ -161,6 +163,7 @@ class Product {
     this._play_total = playTotal;
     this._breadcrumb = breadcrumb;
     this._goodsBrief = goodsBrief;
+    this._goodsGrade = goodsGrade;
   }
 
   String get goodsSn => _goodsSn;
@@ -254,6 +257,9 @@ class Product {
   String get goodsBrief => _goodsBrief;
   set goodsBrief(String goodsBrief) => _goodsBrief = goodsBrief;
 
+  double get goodsGrade => _goodsGrade;
+  set goodsGrade(double goodsBrief) => _goodsGrade = goodsGrade;
+
   Product.fromJson(Map<String, dynamic> json) {
     _goodsSn = json['goods_sn'];
     _goodsName = json['goods_name'];
@@ -315,6 +321,7 @@ class Product {
     _play_total = json['play_total'];
     _breadcrumb = json['breadcrumb'];
     _goodsBrief = json['goods_brief'];
+    _goodsGrade = json['goods_grade'];
   }
 
   Map<String, dynamic> toJson() {
@@ -371,6 +378,7 @@ class Product {
     data['play_total'] = this._play_total;
     data['breadcrumb'] = this._breadcrumb;
     data['goodsBrief'] = this._goodsBrief;
+    data['goodsGrade'] = this._goodsGrade;
     return data;
   }
 }
