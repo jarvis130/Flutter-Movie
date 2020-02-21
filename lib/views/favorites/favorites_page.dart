@@ -101,30 +101,26 @@ class _SliverContainerState extends State<SliverContainer> {
     super.initState();
 
     ///请求动态数据
-//    if (favoritesList == null || favoritesList.isEmpty) {
-//      if (_tabs[0] == widget.name) {
-        requestAPI();
-//      }
-//    }
+
+    _requestFavoritesAPI();
+
+    _requestAttentionAPI();
+
+    setState(() {
+      loading = false;
+    });
   }
 
-  void requestAPI() async {
-//    var _request = HttpRequest(API.BASE_URL);
-//    int start = math.Random().nextInt(220);
-//    final Map result = await _request.get(API.TOP_250 + '?start=$start&count=30');
-//    var resultList = result['subjects'];
-
-//    var _request = MockRequest();
-//    var result = await _request.get(API.TOP_250);
-//    var resultList = result['subjects'];
-//    list = resultList.map<Subject>((item) => Subject.fromMap(item)).toList();
-
+  _requestFavoritesAPI() async {
     GoodProducts model = await CollectApi.getFavoritesList(page: 1);
     if(model != null){
       setState(() {
         favoritesList = model.products;
       });
     }
+  }
+
+  _requestAttentionAPI() async {
 
     UserListModel userListModel = await CollectApi.getFollowsList(page: 1);
     if(userListModel != null){
@@ -132,7 +128,23 @@ class _SliverContainerState extends State<SliverContainer> {
         attentionList = userListModel.users;
       });
     }
+  }
 
+  Future<void> _onRefresherFavorites() async {
+    setState(() {
+      loading = true;
+    });
+    _requestFavoritesAPI();
+    setState(() {
+      loading = false;
+    });
+  }
+
+  Future<void>  _onRefresherAttention() async {
+    setState(() {
+      loading = true;
+    });
+    _requestAttentionAPI();
     setState(() {
       loading = false;
     });
@@ -400,7 +412,7 @@ class _SliverContainerState extends State<SliverContainer> {
                 ],
               ),
             ),
-            onRefresh: requestAPI
+            onRefresh: _onRefresherFavorites
         )
     );
   }
@@ -413,8 +425,8 @@ class _SliverContainerState extends State<SliverContainer> {
         }, childCount: math.min(beans.length, 6)),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 10.0,
-            mainAxisSpacing: 0.0,
+            mainAxisSpacing: 0.0, //主轴(竖直)方向间距
+            crossAxisSpacing: 10.0, //纵轴(水平)方向间距
             childAspectRatio: hotChildAspectRatio));
   }
 
@@ -423,6 +435,7 @@ class _SliverContainerState extends State<SliverContainer> {
     if (bean == null) {
       return Container();
     }
+    bool markAdd = bean.isCollect == 1 ? true : false;
     return GestureDetector(
       child: Container(
         child: Column(
@@ -430,6 +443,8 @@ class _SliverContainerState extends State<SliverContainer> {
             SubjectMarkImageWidget(
               bean.defaultPhoto.thumb,
               width: itemW,
+              markAdd: markAdd,
+              id: bean.id
             ),
             Padding(
               padding: EdgeInsets.only(top: 5.0),
@@ -498,7 +513,7 @@ class _SliverContainerState extends State<SliverContainer> {
                   children: beans.map(_buildCell).toList()
               ),
             ),
-            onRefresh: requestAPI
+            onRefresh: _onRefresherAttention
         )
     );
   }

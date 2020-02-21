@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:movie/store/favorites_state.dart';
 import 'package:movie/store/user_state.dart';
 import 'package:provider/provider.dart';
 import 'package:common_utils/common_utils.dart';
@@ -167,6 +168,7 @@ class MyApp extends StatelessWidget {
       providers: [
         //这里是关键注册通知吧
         ChangeNotifierProvider(create: (_) => UserState()),
+        ChangeNotifierProvider(create: (_) => FavoritesState()),
       ],
       child: Container(
           child: MaterialApp(

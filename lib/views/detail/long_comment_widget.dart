@@ -138,7 +138,7 @@ class _LongCommentTabViewState extends State<LongCommentTabView>
                     const EdgeInsets.only(top: 10.0, bottom: 7.0, right: 5.0),
                 child: CircleAvatar(
                   radius: 10.0,
-                  backgroundImage: NetworkImage(review.avatar_url),
+                  backgroundImage: review.avatar_url != null ? NetworkImage(review.avatar_url) : AssetImage('assets/images/logo.png'),
                   backgroundColor: Colors.white,
                 ),
               ),

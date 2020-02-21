@@ -116,7 +116,8 @@ class Product {
         int isAttention,
         int playTotal,
         String breadcrumb,
-        String goodsBrief}) {
+        String goodsBrief
+      }) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
     this._goodsNumber = goodsNumber;

@@ -567,7 +567,6 @@ class _DetailPageState extends State<DetailPage> {
             floating: false,  //不随着滑动隐藏标题
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-//              title: Text('我是一个FlexibleSpaceBar'),
               background:  _product != null ? VideoPlayerItem(
                 movieid: _product.id.toString(),
                 vc: VideoPlayerController.network(_product.videoUrl),

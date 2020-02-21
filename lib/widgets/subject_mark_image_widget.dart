@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/api/moviedetail_api.dart';
 //import 'package:doubanapp/widgets/image/cached_network_image.dart';
 //import 'package:connectivity/connectivity.dart';
 
@@ -9,33 +10,35 @@ typedef BoolCallback = void Function(bool markAdded);
 ///点击图片变成订阅状态的缓存图片控件
 class SubjectMarkImageWidget extends StatefulWidget {
   final imgNetUrl;
-  final BoolCallback markAdd;
+  final bool markAdd;
   var height;
   final width;
+  final id;
   ///360 x 513
 
   SubjectMarkImageWidget(this.imgNetUrl,
-      {Key key, this.markAdd, this.width = 150.0})
+      {Key key, this.markAdd, this.width = 150.0, this.id})
       : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
     height = this.width / 150.0 * 210.0;
-    return _SubjectMarkImageState(imgNetUrl, markAdd, width, height);
+    return _SubjectMarkImageState(imgNetUrl, markAdd, width, height, id);
   }
 }
 
 class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
-  var markAdded = false;
+  var markAdded = null;
   String imgLocalPath, imgNetUrl;
-  final BoolCallback markAdd;
+  final bool markAdd;
   var markAddedIcon, defaultMarkIcon;
   var loadImg;
   var imgWH = 28.0;
   var height;
   var width;
+  var id;
 
-  _SubjectMarkImageState(this.imgNetUrl, this.markAdd, this.width, this.height);
+  _SubjectMarkImageState(this.imgNetUrl, this.markAdd, this.width, this.height, this.id);
 
   @override
   void initState() {
@@ -73,18 +76,32 @@ class _SubjectMarkImageState extends State<SubjectMarkImageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if(markAdded == null){
+      setState(() {
+        markAdded = markAdd;
+      });
+    }
     return Stack(
       children: <Widget>[
         loadImg,
         GestureDetector(
-          child: markAdded ? markAddedIcon : defaultMarkIcon,
-          onTap: () {
-            if (markAdd != null) {
-              markAdd(markAdded);
+          child: markAdded == true ? markAddedIcon : defaultMarkIcon,
+          onTap: () async{
+//            if (markAdd != null) {
+//              markAdd(markAdded);
+//            }
+            if(markAdded){
+              await MovieDetailApi.unLike(id);
+              setState(() {
+                markAdded = false;
+              });
+            }else{
+              await MovieDetailApi.setLike(id);
+              setState(() {
+                markAdded = true;
+              });
             }
-            setState(() {
-              markAdded = !markAdded;
-            });
+
           },
         ),
       ],

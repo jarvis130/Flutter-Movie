@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:movie/api/moviedetail_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/views/detail/look_confirm_button.dart';
 
-class DetailTitleWidget extends StatelessWidget {
+class DetailTitleWidget extends StatefulWidget {
   final Product bean;
   final Color shadowColor;
 
   DetailTitleWidget(this.bean, this.shadowColor, {Key key}) : super(key: key);
+
+  @override
+  _DetailTitleWidgetState createState() => new _DetailTitleWidgetState();
+}
+
+class _DetailTitleWidgetState extends State<DetailTitleWidget> {
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class DetailTitleWidget extends StatelessWidget {
 //    var durations = list2String(bean.durations);
     //将按下的颜色设置较为浅色
     var btnPressedColor =
-        Color.fromARGB(100, shadowColor.red, shadowColor.red, shadowColor.red);
+        Color.fromARGB(100, widget.shadowColor.red, widget.shadowColor.red, widget.shadowColor.red);
     return Row(
       children: <Widget>[
         Card(
@@ -28,11 +35,11 @@ class DetailTitleWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(6.0)),
           ),
-          color: shadowColor,
+          color: widget.shadowColor,
           clipBehavior: Clip.antiAlias,
           elevation: 10.0,
           child: Image.network(
-            bean.defaultPhoto.thumb,
+            widget.bean.defaultPhoto.thumb,
             width: imgW,
             height: imgH,
             fit: BoxFit.cover,
@@ -46,7 +53,7 @@ class DetailTitleWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  bean.name,
+                  widget.bean.name,
                   style: TextStyle(
                       fontSize: 22.0,
                       color: Colors.white,
@@ -63,7 +70,7 @@ class DetailTitleWidget extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 5.0),
                   child: Text(
 //                    '$countries/$genres/上映时间：$pubdates/片长：$durations',
-                    bean.breadcrumb,
+                    widget.bean.breadcrumb,
                     style: TextStyle(fontSize: 12.0, color: Colors.white70),
                   ),
                 ),
@@ -71,10 +78,11 @@ class DetailTitleWidget extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: LookConfirmButton(
-                        btnText: '關注',
-                        iconAsset: 'assets/images/ic_info_wish.png',
+                        btnText: widget.bean.isCollect == 1 ? '已收藏' : '收藏',
+                        iconAsset: widget.bean.isCollect == 1 ? Icons.favorite : Icons.favorite_border,
                         defaultColor: Colors.white,
                         pressedColor: btnPressedColor,
+                        onPressed: _setFavorites,
                       ),
                     ),
                     Padding(
@@ -83,7 +91,7 @@ class DetailTitleWidget extends StatelessWidget {
                     Expanded(
                       child: LookConfirmButton(
                         btnText: '評分',
-                        iconAsset: 'assets/images/ic_info_done.png',
+                        iconAsset: Icons.star_border,
                         defaultColor: Colors.white,
                         pressedColor: btnPressedColor,
                       ),
@@ -105,4 +113,21 @@ class DetailTitleWidget extends StatelessWidget {
     }
     return tmp;
   }
+
+  _setFavorites() async{
+    if(widget.bean.isCollect == 1){
+      await MovieDetailApi.unLike(widget.bean.id);
+      setState(() {
+        widget.bean.isCollect = 0;
+      });
+
+    }else{
+      await MovieDetailApi.setLike(widget.bean.id);
+      setState(() {
+        widget.bean.isCollect = 1;
+      });
+    }
+
+  }
+
 }

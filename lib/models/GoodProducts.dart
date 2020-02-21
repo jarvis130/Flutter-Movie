@@ -79,6 +79,12 @@ class Products {
   List<Null> _promos;
   List<Properties> _properties;
 
+  int _isCollect;
+  int _isAttention;
+  int _play_total;
+  String _breadcrumb;
+  String _goodsBrief;
+
   Products(
       {String goodsSn,
         String goodsName,
@@ -116,7 +122,13 @@ class Products {
         int createdAt,
         int updatedAt,
         List<Null> promos,
-        List<Properties> properties}) {
+        List<Properties> properties,
+        int isCollect,
+        int isAttention,
+        int playTotal,
+        String breadcrumb,
+        String goodsBrief
+      }) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
     this._goodsNumber = goodsNumber;
@@ -154,6 +166,12 @@ class Products {
     this._updatedAt = updatedAt;
     this._promos = promos;
     this._properties = properties;
+
+    this._isCollect = isCollect;
+    this._isAttention = isAttention;
+    this._play_total = playTotal;
+    this._breadcrumb = breadcrumb;
+    this._goodsBrief = goodsBrief;
   }
 
   String get goodsSn => _goodsSn;
@@ -231,6 +249,20 @@ class Products {
   List<Properties> get properties => _properties;
   set properties(List<Properties> properties) => _properties = properties;
 
+  int get isCollect => _isCollect;
+  set isCollect(int isCollect) => _isCollect = isCollect;
+  int get isAttention => _isAttention;
+  set isAttention(int isAttention) => _isAttention = isAttention;
+
+  int get playTotal => _play_total;
+  set playTotal(int playTotal) => _play_total = playTotal;
+
+  String get breadcrumb => _breadcrumb;
+  set breadcrumb(String breadcrumb) => _breadcrumb = breadcrumb;
+
+  String get goodsBrief => _goodsBrief;
+  set goodsBrief(String goodsBrief) => _goodsBrief = goodsBrief;
+
   Products.fromJson(Map<String, dynamic> json) {
     _goodsSn = json['goods_sn'];
     _goodsName = json['goods_name'];
@@ -286,6 +318,12 @@ class Products {
         _properties.add(new Properties.fromJson(v));
       });
     }
+
+    _isCollect = json['is_collect'];
+    _isAttention = json['is_attention'];
+    _play_total = json['play_total'];
+    _breadcrumb = json['breadcrumb'];
+    _goodsBrief = json['goods_brief'];
   }
 
   Map<String, dynamic> toJson() {
@@ -335,6 +373,13 @@ class Products {
     if (this._properties != null) {
       data['properties'] = this._properties.map((v) => v.toJson()).toList();
     }
+
+    data['is_collect'] = this._isCollect;
+    data['is_attention'] = this._isAttention;
+    data['play_total'] = this._play_total;
+    data['breadcrumb'] = this._breadcrumb;
+    data['goodsBrief'] = this._goodsBrief;
+
     return data;
   }
 }

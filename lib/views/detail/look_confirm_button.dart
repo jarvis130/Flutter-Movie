@@ -6,7 +6,7 @@ typedef VoidCallback = void Function();
 ///想看、看过的按钮
 class LookConfirmButton extends StatefulWidget {
   final String btnText;
-  final String iconAsset;
+  final IconData iconAsset;
   final Color pressedColor;
   final VoidCallback onPressed;
   final Color defaultColor;
@@ -49,10 +49,14 @@ class _State extends State<LookConfirmButton> {
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(right: 5.0),
-              child: Image.asset(
+//              child: Image.asset(
+//                widget.iconAsset,
+//                width: 22.0,
+//                height: 22.0,
+//              ),
+            child: Icon(
                 widget.iconAsset,
-                width: 22.0,
-                height: 22.0,
+                color: Colors.pink
               ),
             ),
             Text(

@@ -470,6 +470,7 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
     if (bean == null) {
       return Container();
     }
+    bool markAdd = bean.isCollect == 1 ? true : false;
     return GestureDetector(
       child: Container(
         child: Column(
@@ -477,6 +478,8 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
             SubjectMarkImageWidget(
               bean.defaultPhoto.thumb,
               width: itemW,
+              markAdd: markAdd,
+              id: bean.id
             ),
             Padding(
               padding: EdgeInsets.only(top: 5.0),
@@ -526,8 +529,8 @@ class _DiscoverPageState extends State<DiscoverPage>  with AutomaticKeepAliveCli
         }, childCount: math.min(beans.length, 6)),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 10.0,
-            mainAxisSpacing: 0.0,
+            mainAxisSpacing: 0.0, //主轴(竖直)方向间距
+            crossAxisSpacing: 10.0, //纵轴(水平)方向间距
             childAspectRatio: hotChildAspectRatio));
   }
 
