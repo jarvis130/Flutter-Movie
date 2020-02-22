@@ -1,13 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/api/actor_api.dart';
 import 'package:movie/api/collect_api.dart';
 import 'package:movie/common/common.dart';
+import 'package:movie/models/ActorAttentionModel.dart';
 import 'package:movie/models/GoodProducts.dart';
 import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/UserListModel.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/style/dimens.dart';
 import 'package:movie/utils/Adapt.dart';
+import 'package:movie/views/actor/actor_router.dart';
 import 'package:movie/views/detail/detail_router.dart';
 import 'package:movie/widgets/image/radius_img.dart';
 import 'package:movie/widgets/rating_bar.dart';
@@ -94,7 +97,7 @@ class _SliverContainerState extends State<SliverContainer> {
 
   bool loading = true;
   List<Product> favoritesList;
-  List<Users> attentionList;
+  List<ActorAttention> attentionList;
   ScrollController attentionController;
 
   @override
@@ -123,10 +126,10 @@ class _SliverContainerState extends State<SliverContainer> {
 
   _requestAttentionAPI() async {
 
-    UserListModel userListModel = await CollectApi.getFollowsList(page: 1);
-    if(userListModel != null){
+    ActorAttentionModel actorListModel = await ActorApi.getActorList(page: 1);
+    if(actorListModel != null){
       setState(() {
-        attentionList = userListModel.users;
+        attentionList = actorListModel.actorAttention;
       });
     }
   }
@@ -481,7 +484,7 @@ class _SliverContainerState extends State<SliverContainer> {
   }
 
   ///关注TAB
-  _attentionContainer(BuildContext context, List<Users> beans) {
+  _attentionContainer(BuildContext context, List<ActorAttention> beans) {
     if (itemW == null || imgSize <= 0) {
       MediaQuery.of(context);
       var w = MediaQuery.of(context).size.width;
@@ -519,12 +522,10 @@ class _SliverContainerState extends State<SliverContainer> {
     );
   }
 
-  Widget _buildCell(Users d) {
+  Widget _buildCell(ActorAttention d) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed('ListDetailPage', arguments: {
-          'userid': d.id.toString()
-        });
+        NavigatorUtils.push(context, '${ActorRouter.actorPage}?actorId=${d.actorId}');
       },
       child: Column(
         // key: ValueKey<int>(d.userinfo['id']),
@@ -538,12 +539,15 @@ class _SliverContainerState extends State<SliverContainer> {
                   height: Adapt.px(100),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Adapt.px(50)),
-                      image: d.avatar != null ? DecorationImage(
+                      image: d.actorInfo.actorAvatar != "" ? DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
-                              d.avatar
+                              d.actorInfo.actorAvatar
                           )
-                      ) : null
+                      ) : DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/images/logo.png'),
+                      )
                   ),
                 ),
                 SizedBox(
@@ -554,16 +558,16 @@ class _SliverContainerState extends State<SliverContainer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: Adapt.px(450),
+                      width: Adapt.px(400),
                       child: Text(
-                        d.username ?? '',
+                        d.actorInfo.actorName ?? '',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: Dimens.font_sp16,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Text(d.rank?.name ?? '',
+                    Text(d.actorInfo.country ?? '',
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: Dimens.font_sp12
@@ -574,30 +578,30 @@ class _SliverContainerState extends State<SliverContainer> {
                     ),
                   ],
                 ),
-//                Expanded(
-//                  child: Column(
-//                    mainAxisAlignment: MainAxisAlignment.center,
-//                    crossAxisAlignment: CrossAxisAlignment.start,
-//                    children: <Widget>[
-//                      Container(
-//                        width: Adapt.px(500),
-//                        child: Text(
-//                          "视频数量",
-//                          style: TextStyle(
-//                              color: Colors.grey[700],
-//                              fontSize: Adapt.px(24),
-//                              fontWeight: FontWeight.bold),
-//                        ),
-//                      ),
-//                      Text(d?.workVideos ?? '0',
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: Adapt.px(500),
+                        child: Text(
+                          "作品" + d?.actorInfo.actinTotal.toString() ?? '0'+'部',
+                          style: TextStyle(
+                              color: Colors.grey[700],
+                              fontSize: Dimens.font_sp12,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+//                      Text(d?.actorInfo.actinTotal.toString() ?? '0',
 //                         style: TextStyle(
 //                             color: Colors.grey[700], fontSize: Adapt.px(24))),
 //                      SizedBox(
 //                        height: Adapt.px(8),
 //                      ),
-//                    ],
-//                  ),
-//                )
+                    ],
+                  ),
+                )
               ],
             ),
           ),

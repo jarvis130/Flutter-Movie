@@ -1,6 +1,8 @@
 import 'dart:convert' show json;
 import 'dart:ui' as ui;
 import 'package:dio/dio.dart';
+import 'package:movie/globalconfig.dart';
+import 'package:movie/models/ActorAttentionModel.dart';
 import 'package:movie/models/ActorModel.dart';
 import 'package:movie/models/BannerModel.dart';
 import 'package:movie/models/HomeModel.dart';
@@ -56,6 +58,23 @@ class ActorApi {
     Map map = json.decode(response.toString());
     if(map != null && map.length > 0){
       return map;
+    }
+  }
+
+  ///关注列表
+  static Future<ActorAttentionModel> getActorList({int page = 1, int per_page = 20}) async {
+
+    FormData formData = new FormData.fromMap({
+      'page': page,
+      'per_page': GlobalConfig.PageSize,
+      "XDEBUG_SESSION_START": 15576
+    });
+
+    var response = await HttpUtil().post('ecapi.actor.attentioned.list', data: formData);
+    Map map = json.decode(response.toString());
+    if(map != null && map.length > 0){
+      ActorAttentionModel list = ActorAttentionModel.fromJson(map);
+      return list;
     }
   }
 

@@ -7,8 +7,8 @@ class GlobalConfig {
   static bool isDebug = true;
   static bool dark = false;
   static Color fontColor = Colors.black54;
-  static String BASE_URL = "http://192.168.1.101:8084/v2/";//172.31.21.53
-//  static String BASE_URL = "http://221.229.197.4:8002/v2/";
+//  static String BASE_URL = "http://192.168.1.101:8084/v2/";//172.31.21.53
+  static String BASE_URL = "http://221.229.197.4:8002/v2/";
   //请求头参数
   static String HEADER_TOKEN_KEY = "X-API-Authorization";
   //分页参数
