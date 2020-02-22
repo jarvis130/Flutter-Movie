@@ -72,7 +72,8 @@ class Product {
   int _play_total;
   String _breadcrumb;
   String _goodsBrief;
-  double _goodsGrade;
+  int _goodsGrade;
+  List<Actor> _actors;
 
   Product(
       {String goodsSn,
@@ -118,7 +119,8 @@ class Product {
         int playTotal,
         String breadcrumb,
         String goodsBrief,
-        double goodsGrade
+        int goodsGrade,
+        List<Actor> actors
       }) {
     this._goodsSn = goodsSn;
     this._goodsName = goodsName;
@@ -164,6 +166,7 @@ class Product {
     this._breadcrumb = breadcrumb;
     this._goodsBrief = goodsBrief;
     this._goodsGrade = goodsGrade;
+    this._actors = actors;
   }
 
   String get goodsSn => _goodsSn;
@@ -257,8 +260,11 @@ class Product {
   String get goodsBrief => _goodsBrief;
   set goodsBrief(String goodsBrief) => _goodsBrief = goodsBrief;
 
-  double get goodsGrade => _goodsGrade;
-  set goodsGrade(double goodsBrief) => _goodsGrade = goodsGrade;
+  int get goodsGrade => _goodsGrade;
+  set goodsGrade(int goodsBrief) => _goodsGrade = goodsGrade;
+
+  List<Actor> get actors => _actors;
+  set actors(List<Actor> actors) => _actors = actors;
 
   Product.fromJson(Map<String, dynamic> json) {
     _goodsSn = json['goods_sn'];
@@ -322,6 +328,13 @@ class Product {
     _breadcrumb = json['breadcrumb'];
     _goodsBrief = json['goods_brief'];
     _goodsGrade = json['goods_grade'];
+
+    if (json['actors'] != null) {
+      _actors = new List<Actor>();
+      json['actors'].forEach((v) {
+        _actors.add(new Actor.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -379,6 +392,9 @@ class Product {
     data['breadcrumb'] = this._breadcrumb;
     data['goodsBrief'] = this._goodsBrief;
     data['goodsGrade'] = this._goodsGrade;
+    if (this._actors != null) {
+      data['actors'] = this._actors.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -611,6 +627,51 @@ class Photos {
     if (this._goodsThumb != null) {
       data['goods_thumb'] = this._goodsThumb;
     }
+    return data;
+  }
+}
+
+class Actor{
+  int _actorId;
+  String _actorName;
+  String _country;
+  String _actorDesc;
+  String _actorAvatar;
+
+  Actor({int actorId, String actorName, String country, String actorDesc, String actorAvatar}) {
+    this._actorId = actorId;
+    this._actorName = actorName;
+    this._country = country;
+    this._actorDesc = actorDesc;
+    this._actorAvatar = actorAvatar;
+  }
+
+  int get actorId => _actorId;
+  set actorId(int actorId) => _actorId = actorId;
+  String get actorName => _actorName;
+  set actorName(String actorName) => _actorName = actorName;
+  String get country => _country;
+  set country(String country) => _country = country;
+  String get actorDesc => _actorDesc;
+  set actorDesc(String actorDesc) => _actorDesc = actorDesc;
+  String get actorAvatar => _actorAvatar;
+  set actorAvatar(String actorAvatar) => _actorAvatar = actorAvatar;
+
+  Actor.fromJson(Map<String, dynamic> json) {
+    _actorId = json['actor_id'];
+    _actorName = json['actor_name'];
+    _country = json['country'];
+    _actorDesc = json['actor_desc'];
+    _actorAvatar = json['actor_avatar'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['actor_id'] = this._actorId;
+    data['actor_name'] = this._actorName;
+    data['country'] = this._country;
+    data['actor_desc'] = this._actorDesc;
+    data['actor_avatar'] = this._actorAvatar;
     return data;
   }
 }

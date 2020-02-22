@@ -14,7 +14,7 @@ class RatingBar extends StatelessWidget {
     stars = stars * 1.0;
     List<Widget> startList = [];
     //实心星星
-    var startNumber = stars ~/ 2;
+    var startNumber = stars ~/ 1;
     //半实心星星
     var startHalf = 0;
     if (stars.toString().contains('.')) {

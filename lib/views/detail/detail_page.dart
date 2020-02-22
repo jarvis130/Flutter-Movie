@@ -6,6 +6,7 @@ import 'package:movie/api/moviedetail_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/CommentModel.dart';
+import 'package:movie/utils/Adapt.dart';
 import 'package:movie/views/detail/detail_title_widget.dart';
 import 'dart:math' as math;
 import 'package:movie/widgets/animal_photo.dart';
@@ -179,32 +180,32 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   ///演职员
-//  SliverToBoxAdapter sliverCasts() {
-//    return SliverToBoxAdapter(
-//      child: getPadding(Column(
-//        children: <Widget>[
-//          Padding(
-//            padding: EdgeInsets.only(top: 25.0, bottom: 10.0),
-//            child: Row(
-//              children: <Widget>[
-//                Expanded(
-//                    child: Text('演职员',
-//                        style: TextStyle(
-//                            fontSize: 17.0,
-//                            color: Colors.white,
-//                            fontWeight: FontWeight.bold))),
+  SliverToBoxAdapter sliverCasts() {
+    return SliverToBoxAdapter(
+      child: getPadding(Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                    child: Text('演职员',
+                        style: TextStyle(
+                            fontSize: 17.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold))),
 //                Text(
 //                  '全部 ${_movieDetailBean.casts.length} >',
 //                  style: TextStyle(fontSize: 12.0, color: Colors.white70),
 //                )
-//              ],
-//            ),
-//          ),
-//          Container(
-//            height: 150.0,
-//            child: ListView.builder(
-//              itemBuilder: ((BuildContext context, int index) {
-//                if (index == 0 && _movieDetailBean.directors.isNotEmpty) {
+              ],
+            ),
+          ),
+          Container(
+            height: 85.0,
+            child: ListView.builder(
+              itemBuilder: ((BuildContext context, int index) {
+//                if (index == 0 && _product.isNotEmpty) {
 //                  //第一个显示导演
 //                  Director director = _movieDetailBean.directors[0];
 //                  if (director.avatars == null) {
@@ -213,58 +214,69 @@ class _DetailPageState extends State<DetailPage> {
 //                  return getCast(
 //                      director.id, director.avatars.large, director.name);
 //                } else {
-//                  Cast cast = _movieDetailBean.casts[index - 1];
-//                  if (cast.avatars == null) {
-//                    return Container();
-//                  }
-//                  return getCast(cast.id, cast.avatars.large, cast.name);
+                  Actor cast = _product.actors[index];
+                  if (cast.actorAvatar == null) {
+                    return Container();
+                  }
+                  return getCast(cast.actorId.toString(), cast.actorAvatar, cast.actorName);
 //                }
-//              }),
-//              itemCount: math.min(9, _movieDetailBean.casts.length + 1),
-//              //最多显示9个演员
-//              scrollDirection: Axis.horizontal,
-//            ),
-//          )
-//        ],
-//      )),
-//    );
-//  }
+              }),
+              itemCount: math.min(9, _product.actors.length),
+              //最多显示9个演员
+              scrollDirection: Axis.horizontal,
+            ),
+          )
+        ],
+      )),
+    );
+  }
 
   ///演职表图片
-//  Widget getCast(String id, String imgUrl, String name) {
-//    return Hero(
-//        tag: imgUrl,
-//        child: Material(
-//          color: Colors.transparent,
-//          child: InkWell(
-//            child: Column(
-//              crossAxisAlignment: CrossAxisAlignment.start,
-//              children: <Widget>[
-//                Padding(
-//                  padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
-//                  child: ClipRRect(
-//                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-//                    child: Image.network(
-//                      imgUrl,
-//                      height: 120.0,
-//                      width: 80.0,
-//                      fit: BoxFit.cover,
-//                    ),
-//                  ),
-//                ),
-//                Text(
-//                  name,
-//                  style: TextStyle(fontSize: 13.0, color: Colors.white),
-//                ),
-//              ],
-//            ),
-//            onTap: () {
+  Widget getCast(String id, String imgUrl, String name) {
+    return Hero(
+        tag: imgUrl,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    child: imgUrl != "" ? Image.network(
+                      imgUrl,
+                      height: 120.0,
+                      width: 80.0,
+                      fit: BoxFit.cover,
+                    ) : Container(
+                      width: Adapt.px(80),
+                      height: Adapt.px(120),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: Adapt.px(5)),
+//                          borderRadius: BorderRadius.circular(Adapt.px(60)),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/images/logo.png'),
+                          )
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  name,
+                  style: TextStyle(fontSize: 13.0, color: Colors.white),
+                ),
+              ],
+            ),
+            onTap: () {
 //              Router.push(context, Router.personDetailPage,
 //                  {'personImgUrl': imgUrl, 'id': id});
-//            },
-//          ),
-//        ));
-//  }
+            },
+          ),
+        ));
+  }
 
   ///预告片、剧照 727x488
   trailers(BuildContext context) {
@@ -275,7 +287,7 @@ class _DetailPageState extends State<DetailPage> {
       child: getPadding(Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+            padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -601,7 +613,7 @@ class _DetailPageState extends State<DetailPage> {
 //        ),
 //        sliverTags(),
         sliverSummary(),
-//        sliverCasts(),
+        sliverCasts(),
         trailers(context),
 //        sliverComments(),
         SliverToBoxAdapter(
