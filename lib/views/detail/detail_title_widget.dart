@@ -80,8 +80,8 @@ class _DetailTitleWidgetState extends State<DetailTitleWidget> {
                   children: <Widget>[
                     Expanded(
                       child: LookConfirmButton(
-                        btnText: widget.bean.isCollect == 1 ? '已收藏' : '收藏',
-                        iconAsset: widget.bean.isCollect == 1 ? Icons.favorite : Icons.favorite_border,
+                        btnText: widget.bean.isLiked == 1 ? '已收藏' : '收藏',
+                        iconAsset: widget.bean.isLiked == 1 ? Icons.favorite : Icons.favorite_border,
                         defaultColor: Colors.white,
                         pressedColor: btnPressedColor,
                         onPressed: _setFavorites,

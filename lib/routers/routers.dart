@@ -1,6 +1,7 @@
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/views/actor/actor_router.dart';
 import 'package:movie/views/detail/detail_router.dart';
 import 'package:movie/views/favorites/favorites_router.dart';
 import 'package:movie/views/order/order_router.dart';
@@ -56,6 +57,7 @@ class Routes {
     _listRouter.add(DetailRouter());
     _listRouter.add(FavoritesRouter());
     _listRouter.add(SearchRouter());
+    _listRouter.add(ActorRouter());
     /// 初始化路由
     _listRouter.forEach((routerProvider){
       routerProvider.initRouter(router);

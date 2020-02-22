@@ -6,7 +6,9 @@ import 'package:movie/api/moviedetail_api.dart';
 import 'package:movie/common/common.dart';
 import 'package:movie/globalconfig.dart';
 import 'package:movie/models/CommentModel.dart';
+import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/utils/Adapt.dart';
+import 'package:movie/views/actor/actor_router.dart';
 import 'package:movie/views/detail/detail_title_widget.dart';
 import 'dart:math' as math;
 import 'package:movie/widgets/animal_photo.dart';
@@ -46,10 +48,12 @@ class _DetailPageState extends State<DetailPage> {
   // 请求数据
   void requestAPI() async {
     ProductModel model = await MovieDetailApi.getMovieDetail(this.subjectId);
+    if(model != null){
+      setState(() {
+        _product = model.product;
+      });
+    }
 
-    setState(() {
-      _product = model.product;
-    });
     CommentModel reviewModel = await CommentApi.getList(
         product: int.parse(this.subjectId),
         page: 1,
@@ -233,49 +237,48 @@ class _DetailPageState extends State<DetailPage> {
 
   ///演职表图片
   Widget getCast(String id, String imgUrl, String name) {
-    return Hero(
-        tag: imgUrl,
-        child: Material(
+    return Material(
           color: Colors.transparent,
           child: InkWell(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    child: imgUrl != "" ? Image.network(
-                      imgUrl,
-                      height: 120.0,
-                      width: 80.0,
-                      fit: BoxFit.cover,
-                    ) : Container(
-                      width: Adapt.px(80),
-                      height: Adapt.px(120),
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white, width: Adapt.px(5)),
+            child: GestureDetector(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 5.0, right: 14.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      child: imgUrl != "" ? Image.network(
+                        imgUrl,
+                        height: 120.0,
+                        width: 80.0,
+                        fit: BoxFit.cover,
+                      ) : Container(
+                        width: Adapt.px(80),
+                        height: Adapt.px(120),
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: Adapt.px(5)),
 //                          borderRadius: BorderRadius.circular(Adapt.px(60)),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/logo.png'),
-                          )
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/images/logo.png'),
+                            )
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Text(
-                  name,
-                  style: TextStyle(fontSize: 13.0, color: Colors.white),
-                ),
-              ],
-            ),
-            onTap: () {
-//              Router.push(context, Router.personDetailPage,
-//                  {'personImgUrl': imgUrl, 'id': id});
-            },
+                  Text(
+                    name,
+                    style: TextStyle(fontSize: 13.0, color: Colors.white),
+                  ),
+                ],
+              ),
+              onTap: () {
+                NavigatorUtils.push(context, '${ActorRouter.actorPage}?actorId=${id}');
+              },
+            )
           ),
-        ));
+        );
   }
 
   ///预告片、剧照 727x488
