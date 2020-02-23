@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/utils/Adapt.dart';
 import 'package:movie/api/search_api.dart';
 import 'package:movie/globalconfig.dart';
@@ -69,7 +70,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
     return FutureBuilder<SearchModel>(
       future: _getData(), // a previously-obtained Future<String> or null
       builder: (BuildContext context, AsyncSnapshot<SearchModel> snapshot) {
-        List<Products> data = snapshot.data == null ? null : snapshot.data.products;
+        List<Product> data = snapshot.data == null ? null : snapshot.data.product;
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return Container(
@@ -209,7 +210,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
             return _SuggestionList(
               query: query,
-              suggestions: snapshot.data == null ? [] : snapshot.data.products,
+              suggestions: snapshot.data == null ? [] : snapshot.data.product,
               onSelected: (String suggestion) {
                 query = suggestion;
                 showResults(context);
@@ -237,7 +238,7 @@ class SearchBarDelegate extends SearchDelegate<SearchResult> {
   }
 }
 
-Widget _buildSuggestionCell(Products s, ValueChanged<String> tapped) {
+Widget _buildSuggestionCell(Product s, ValueChanged<String> tapped) {
 //  IconData iconData = s.mediaType == 'movie'
 //      ? Icons.movie
 //      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
@@ -254,7 +255,7 @@ Widget _buildSuggestionCell(Products s, ValueChanged<String> tapped) {
 class _SuggestionList extends StatelessWidget {
   const _SuggestionList({this.suggestions, this.query, this.onSelected});
 
-  final List<Products> suggestions;
+  final List<Product> suggestions;
   final String query;
   final ValueChanged<String> onSelected;
 
@@ -263,7 +264,7 @@ class _SuggestionList extends StatelessWidget {
     return ListView.builder(
       itemCount: suggestions.length,
       itemBuilder: (BuildContext context, int i) {
-        final Products suggestion = suggestions[i];
+        final Product suggestion = suggestions[i];
         return _buildSuggestionCell(suggestion, onSelected);
       },
     );
@@ -272,7 +273,7 @@ class _SuggestionList extends StatelessWidget {
 
 Random _random = Random(DateTime.now().millisecondsSinceEpoch);
 
-Widget _buildResultCell(Products s, BuildContext ctx) {
+Widget _buildResultCell(Product s, BuildContext ctx) {
 //  IconData iconData = s.mediaType == 'movie'
 //      ? Icons.movie
 //      : s.mediaType == 'tv' ? Icons.live_tv : Icons.person;
@@ -436,7 +437,7 @@ Widget _buildResultCell(Products s, BuildContext ctx) {
 class _ResultList extends StatefulWidget {
   const _ResultList({this.results, this.query});
 
-  final List<Products> results;
+  final List<Product> results;
   final String query;
 
   @override
@@ -445,7 +446,7 @@ class _ResultList extends StatefulWidget {
 
 class _ResultListState extends State<_ResultList> {
   ScrollController scrollController;
-  List<Products> results;
+  List<Product> results;
   String query;
   int pageindex;
   int totalpage;
@@ -469,7 +470,7 @@ class _ResultListState extends State<_ResultList> {
         setState(() {
           pageindex = r.paged.page;
           totalpage = r.paged.more;
-          results.addAll(r.products);
+          results.addAll(r.product);
           isloading = false;
         });
       }

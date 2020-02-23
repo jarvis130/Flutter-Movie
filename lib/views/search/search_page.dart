@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movie/api/search_api.dart';
 import 'package:movie/globalconfig.dart';
+import 'package:movie/models/ProductModel.dart';
 import 'package:movie/models/SearchModel.dart';
-import 'package:movie/models/searchresult.dart';
 import 'package:movie/routers/fluro_navigator.dart';
 import 'package:movie/views/detail/detail_router.dart';
 import 'package:movie/views/search/search_result_entity.dart';
+import 'package:movie/widgets/rating_bar.dart';
 import 'package:movie/widgets/search_text_field_widget.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -39,6 +40,7 @@ class _SearchPageState extends State<SearchPage> {
 //      _searchResultEntity.products.sort((a, b) => (b.year.compareTo(a.year)));
 //    }
     return Scaffold(
+      backgroundColor: Color.fromRGBO(45, 45, 48, 1),
       body: SafeArea(
           child: showLoading
               ? Center(
@@ -52,8 +54,8 @@ class _SearchPageState extends State<SearchPage> {
                         Expanded(
                           child: ListView.builder(
                             itemBuilder: (BuildContext context, int index) {
-                              Products bean =
-                                  _searchResultEntity.products[index];
+                              Product bean =
+                                  _searchResultEntity.product[index];
                               return Padding(
                                 padding: EdgeInsets.all(10.0),
                                 child: GestureDetector(
@@ -65,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                                 ),
                               );
                             },
-                            itemCount: _searchResultEntity.products.length,
+                            itemCount: _searchResultEntity.product.length,
                           ),
                         )
                       ],
@@ -142,7 +144,7 @@ class _SearchPageState extends State<SearchPage> {
               padding: EdgeInsets.only(left: 10.0),
               child: Text(
                 '取消',
-                style: getStyle(Colors.green, 17.0),
+                style: getStyle(Colors.pink, 15.0),
               ),
             ),
             onTap: () {
@@ -154,7 +156,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _getItem(Products bean, int index) {
+  Widget _getItem(Product bean, int index) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -179,16 +181,26 @@ class _SearchPageState extends State<SearchPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
 //              Text(
-//                getType(bean.subtype),
+//                getType(bean.),
 //                style: getStyle(Colors.grey, 12.0),
 //              ),
               Text(bean.name,
-                  style: getStyle(Colors.black, 15.0, bold: true)
+                  style: getStyle(Colors.white, 15.0, bold: true)
+              ),
+              SizedBox(
+                height: 15,
               ),
 //              Text(
 //                  '${bean.rating.average} 分 / ${listConvertString(bean.pubdates)} / ${listConvertString(bean.genres)} / ${listConvertString2(bean.directors)}',
 //                  style: getStyle(Colors.grey, 13.0)
 //              )
+              Text(bean.breadcrumb ?? '不詳',
+                  style: getStyle(Colors.grey, 10.0, bold: true)
+              ),
+              RatingBar(
+                bean.goodsGrade == null ? 0 : bean.goodsGrade,
+                size: 12.0,
+              )
             ],
           ),
         )
